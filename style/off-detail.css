@@ -120,11 +120,18 @@ div#arrowRight {
     right: 0;
 }
 /* 슬라이드쇼 방향키 끝 */
-
 /* div#slide 끝 */
 
+/* 디테일 페이지 시작 */
+div#detail{
+    width: 1000px;
+    height: 500px;
+    text-align: center;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
 
-
+/* 디테일 페이지 종료 */
 
 /* footer#footer 시작 */
 footer#footer {
