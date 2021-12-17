@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+/* div#pageMenu 시작 */
+#pageMenu ul#myPageMenu {
+    justify-content: center;
+}
+
+#pageMenu #myPageMenu li.myPageMenuLi:not(:first-child) {
+    width: 150px;
+    height: 150px;
+    padding: 50px 0 0;
+
+    text-align: center;
+    
+    display: inline-block;
+}
+
+#pageMenu #myPageMenu li.myPageMenuLi:first-child {
+    margin-right: 50px;
+}
+
+#pageMenu #myPageMenu li.myPageMenuLi:nth-child(2) {
+    margin-right: 100px;
+}
+
+#pageMenu #myPageMenu .myPageMenuLi Strong {
+    display: block;
+}
+
+#pageMenu #myPageMenu .myPageMenuLi Strong {
+    margin-bottom: 10px;
+}
+
+#pageMenu #myPageMenu .myPageMenuLi button {
+    width: 100%;    
+    
+    background-color: #fff;
+    cursor: pointer;
+}
+/* div#pageMenu 끝 */
+
+/* main#main 시작 */
+main#main {
+    width:80%;
+    margin: 30px auto;
+}
+
+#main #mainNav ul#mainMenu {
+    
+    text-align: center;
+    
+    justify-content: center;
+}
+
+#main #mainNav #mainMenu li.mainLi {
+    width: 100%;
+    height: 100%;
+    padding-top: 30px;
+    
+    display: inline-block;
+}
+
+#main #mainNav #mainMenu li.mainLi>a {
+    width: 100%;
+    padding: 10px 0;
+    border: 1px solid #000;
+
+    display: inline-block;
+}
+
+#main #mainNav #mainMenu li.mainLi:nth-child(2)>a{
+    border-left: none;
+    border-right: none;
+}
+
+#main #mainNav #mainMenu .mainLi div.subContainer {
+    display: none;
+}
+
+#main #mainNav #mainMenu .mainLi .subContainer ul.subMenu {
+    border: 1px solid #000;
+    border-top: none;
+}
+
+#main #mainNav #mainMenu .mainLi .subContainer .subMenu li.subMenuLi {
+    width: 100%;
+}
+
+#main #mainNav #mainMenu .mainLi .subContainer .subMenu li.subMenuLi a {
+    padding: 10px 0;
+    display: inline-block;
+}
+
+#main #mainNav #mainMenu .mainLi .subContainer .subMenu li.subMenuLi:first-child{
+    border-right: 1px solid #000;
+}
+/* main#main 끝 */
