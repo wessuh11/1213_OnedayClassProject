@@ -35,10 +35,8 @@ nav#gnb {
 }
 
 nav#gnb ul {
-    width: 1000px;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
 }
 
 nav#gnb ul li {
@@ -46,7 +44,7 @@ nav#gnb ul li {
     display: inline-block;
 }
 
-nav#gnb ul li.active  {
+nav#gnb ul li.active {
     border-bottom: 3px solid #000;
 }
 
@@ -55,82 +53,76 @@ nav#gnb ul li:hover a {
 }
 /* nav#gnb 끝 */
 
-/* div#slide 시작 */
-
-div#slide {    /* 이미지 1개의 크기를 적용 */
-    width: 780px;
-    height: 350px;
-    margin: 20px auto;
-    overflow: hidden; 
-         /* 부모요소 영역보다 더 큰 자식요소의 
-         범람한 외부영역을 숨겨줌*/
-
-
-    /* 슬라이드쇼 방향키의 위치기준을 
-    적용하기 위한 포지션 */
-    position: relative;   
-
-
+/* 상세페이지 contents 시작*/
+div#onlineclass{
+    width: 100%;
+    
 }
-
-div#shuttleFrame {    /* 이미지 전체의 폭 */
-    width: 2360px;
-    height: 350px;
+div#contetns{
+    margin: 50px 0;
+    justify-content: center;
 }
-
-#slide a {
-    position: relative;
+div#Ccategory {
+    display: inline-block;
 }
-
-#slide a span {
-    color: #000;
-    font-size: 24px;
+ul#Ccategory li {
+    padding: 8px;
+    margin-bottom: 10px;
+}
+div#content{
+    margin-left: 100px;
+}
+div#price{
+    font-size: 18px;
+    font-weight: bold;
+    text-align: right;
+    padding-top: 60px;
+}
+div#cartPay{
+    margin-top: 10px;
+    justify-content: space-evenly;
+}
+div#cart{
+    border: 2px solid #ff2e2e;
+}
+div#cart a {
+   padding: 12px;
+}
+div#Capply {
+    border: 2px solid #ff2e2e;
+   
+}
+div#Capply a {
+    font-size:20px;
     font-weight: bold;
     text-align: center;
     padding: 20px;
-    border: 4px solid #aaa;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.8);
-
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
 }
 
-/* 슬라이드쇼 방향키 시작 */
-div.arrowMark {
-    color: rgba(221, 221, 221, 0.61);
-    font-size: 60px;
-    margin: 0 30px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-
-    user-select: none;
+hr{
+    width: 55%;
+    margin: 0 auto;
 }
-div.arrowMark:hover {
-    color: #e1e1e1;
-    cursor: pointer;
+div#abc ul {
+    margin-top: 20px;
+    justify-content: center;
+    font-size: 24px;
 }
-div.arrowMark:active {    
-    color: #f9f9f9;
+div#abc ul li:nth-child(2n){
+    width: 1px;
+    height: 16px;
+    background-color: #555;
+    margin: 0 14px;
+    transform: translateY(2px);
 }
-div#arrowRight {
-    right: 0;
-}
-/* 슬라이드쇼 방향키 끝 */
-
-/* div#slide 끝 */
-
-
+/* 상세페이지 contents  끝 */
 
 
 /* footer#footer 시작 */
+
 footer#footer {
-    width: 1000px;
+    width: 100%;
     margin: 0 auto;
-    /* border: 1px solid #000; */
 }
 
 /* div#footerTop 시작 */

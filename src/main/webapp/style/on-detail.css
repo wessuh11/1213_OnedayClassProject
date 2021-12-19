@@ -69,8 +69,6 @@ div#slide {    /* 이미지 1개의 크기를 적용 */
     /* 슬라이드쇼 방향키의 위치기준을 
     적용하기 위한 포지션 */
     position: relative;   
-
-
 }
 
 div#shuttleFrame {    /* 이미지 전체의 폭 */
@@ -120,8 +118,64 @@ div#arrowRight {
     right: 0;
 }
 /* 슬라이드쇼 방향키 끝 */
-
 /* div#slide 끝 */
+
+
+
+/* 디테일 페이지 시작 */
+div#detail{
+    width: 1000px;
+    height: 350px;
+    text-align: center;
+    margin: 0 auto;
+    border: 1px solid #000;
+}
+
+div#detail_img{
+    width: 400px;
+    height: 250px;
+    border: 1px solid #000;
+    margin: 40px;
+}
+
+div#detail_name{
+    width: 600px;
+    height: 250px;
+    border: 1px solid #000;
+    margin: 40px;
+}
+
+div#detail_ex{
+    width: 1000px;
+    height: 500px;
+    border: 1px solid #000;
+    margin: 0 auto;
+}
+
+div#detail_expage{
+    width: 1000px;
+    height: 100px;
+    border: 1px solid #000;
+    font-size: 40px;
+}
+
+div#detail_expage>ul>li{
+    margin: 20px auto;
+    justify-content: center;
+}
+
+div#detail_expage ul li {
+    display: inline-block;
+}
+
+div#detail_expage ul li.active  {
+    color: #f80;
+}
+
+div#detail_expage ul li:hover a {
+    color: #f80;
+}
+/* 디테일 페이지 종료 */
 
 
 
