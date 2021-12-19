@@ -101,6 +101,17 @@ $(function () {
     });
 
 ///////////////////////////// 서브메뉴 끝 ///////////////////////////////
+	$("#onlineBtn").click(function() {
+        // $("#detailedContent").stop().slideDown(800);
+		$("#detailedContent").css({"display" : "block"});
+    });
 
+    /*$("#onlineBtn").click(function(){
+        // $("#detailedContent").stop().slideUp(500);
+		$("#detailedContent").css({"display" : "none"});
+    });*/
+///////////////////////////// 메인BBS 시작 ///////////////////////////////
+
+///////////////////////////// 메인BBS 끝 ///////////////////////////////
 });
     
