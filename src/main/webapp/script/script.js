@@ -48,10 +48,7 @@ $(function () {
             );
     
         }
-        
-    
-    
-    
+
         // 마우스를 올리면(mouseover) 슬라이드 멈춤
         $("div#slide").mouseover(function () {
             // setInterval 중지방법
@@ -79,5 +76,4 @@ $(function () {
             fnSlidePrev();
         });
     
-    });
-    
+});
