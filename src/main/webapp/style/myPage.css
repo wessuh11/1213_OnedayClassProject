@@ -99,14 +99,14 @@ main#main {
 
 /* 메인 bbs 시작 */
 
-/*  main#main div#detailedContent  시작 */
 #main div#detailedContent {
-    /* padding: 25px 28px; */
-    /* border: 1px solid #ddd; */
-    border-top: 2px solid #3e7b0e;
+    width: 100%;
     margin-bottom: 30px;
+	display: none;
 }    
 #main div#detailedContent  table {
+	width: 100%;
+	margin: 0 auto;
     border-collapse: collapse;
 }
 
@@ -159,14 +159,6 @@ main#main {
     padding-left: 28px;
     padding-right: 28px;
 }
-/*  main#main div#detailedContent  끝 */
-
-/* BBS 숨김 및 js 적용 관련 시작 */
-#main div#detailedContent {
-	margin: 0 auto;
-	display: none;
-}
-/* BBS 숨김 및 js 적용 관련 끝*/
 
 /* 메인 bbs 끝 */
 
