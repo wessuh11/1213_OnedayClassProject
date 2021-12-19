@@ -163,6 +163,7 @@ main#main {
 
 /* BBS 숨김 및 js 적용 관련 시작 */
 #main div#detailedContent {
+	margin: 0 auto;
 	display: none;
 }
 /* BBS 숨김 및 js 적용 관련 끝*/
