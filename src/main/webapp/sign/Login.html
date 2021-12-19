@@ -4,22 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style/style.css">
+    <title>로그인</title>
+    <link rel="stylesheet" href="../style/sign.css">
 </head>
 <body>
-    
     <div id="wrap">
         <header id="header" class="flex-container">
             <div id="headerLogo">
-                <a href="#"><img src="img/logo.png" alt="로고"></a>
+                <a href="#"><img src="../img/logo.png" alt="로고"></a>
             </div>
 
             <div id="headerRight">
                 <ul class="flex-container">
-                    <li><a href="sign/Login.html">Sign In</a></li>
+                    <li><a href="Login.html">Sign In</a></li>
                     <li></li>
-                    <li><a href="sign/Member.html">Sign Up</a></li>
+                    <li><a href="Member.html">Sign Up</a></li>
                     <li></li>
                     <li>
                         <div id="headerCart">
@@ -29,47 +28,46 @@
                 </ul>
             </div>
         </header>
-
+        <!-- 네비시작 -->
         <nav id="gnb">
             <ul class="flex-container">
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="./on-shop.html">Online</a></li>
-                <li><a href="./off-shop.html">Offline</a></li>
-                <li><a href="#">Contact</a></li>
+                <li class="active"><a href="../index.html">Home</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="#">Online</a></li>
+                <li><a href="#">Offline</a></li>
+                <li><a href="./contact.html">Contact</a></li>
             </ul>
         </nav>
-
-        <div id="slide">
-
-            <div id="shuttleFrame" class="flex-container">
-                <!-- 가로형에서는 이미지전체개수의 폭-->
-                <!-- 셔틀프레임이 좌우로 이동하면서 슬라이드쇼가 구현된다 -->
-
-                <a href="#">   <!-- pos: r -->
-                    <img src="img/slide/slide1.jpg" alt="슬라이드 이미지1">
-                    <span>떠나요! 남도맛축제!</span>  <!-- pos: a + C -->
-                </a>
-
-                <a href="#">
-                    <img src="img/slide/slide2.jpg" alt="슬라이드 이미지2">
-                    <span>메타세콰이어길을 걸어요!</span>
-                </a>
-
-                <a href="#">
-                    <img src="img/slide/slide3.jpg" alt="슬라이드 이미지3">
-                    <span>테마기행과 함께 즐겨요!</span>
-                </a>
-
-            </div> <!-- div#shuttleFrame, 빨강색 테두리선 -->
-
-            <!-- 슬라이드쇼 방향키 시작 -->
-            <div id="arrowLeft" class="arrowMark">&lt;</div>
-            <div id="arrowRight" class="arrowMark">&gt;</div>
-            <!-- 슬라이드쇼 방향키 끝 -->
-
+        <!-- 네비끝 -->
+        <!-- 로그인시작 -->
+        <div id="signin">
+        <form action="LoginProc.jsp" id="loginFrm" name="loginFrm">
+			<table>
+				<caption><hr><h3>로그인</h3></caption>
+				<tbody>
+					<tr>
+						<td>
+							<input type="text" class="loginInput" name="uId" id="uId" autofocus size="30"
+                            placeholder="아이디">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="password" class="loginInput" name="uPw" id="uPw" size="30"
+                            placeholder="비밀번호">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">						
+							<button type="button" id="loginBtn">로그인</button>
+							<button type="button" id="joinBtn">회원가입</button>
+						</td>						
+					</tr>
+				</tbody>
+			</table>
+		</form>
         </div>
-
+        <!-- 로그인끝 -->
         <footer id="footer">
 
             <div id="footerTop" class="flex-container">
@@ -103,8 +101,8 @@
         </footer>
         <!-- footer#footer -->
     </div>
-
-    <script src="script/jquery-3.6.0.min.js"></script>
-    <script src="script/script.js"></script>
 </body>
+<script src="script/jquery-3.6.0.min.js"></script>
+<script src="script/script.js"></script>
+<script src="../script/sign.js"></script>
 </html>
