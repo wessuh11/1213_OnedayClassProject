@@ -1,3 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<%
+request.setCharacterEncoding("UTF-8");
+String uId = (String)session.getAttribute("idKey");
+%>  
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -6,6 +14,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
     <link rel="stylesheet" href="../style/sign.css">
+    <script src="../script/jquery-3.6.0.min.js"></script>
+	<script src="../script/script.js"></script>
+	<script src="../script/Login.js"></script>
 </head>
 <body>
     <div id="wrap">
@@ -16,9 +27,9 @@
 
             <div id="headerRight">
                 <ul class="flex-container">
-                    <li><a href="Login.html">Sign In</a></li>
+                    <li><a href="../sign/Login.jsp">Sign In</a></li>
                     <li></li>
-                    <li><a href="Meㅍmber.html">Sign Up</a></li>
+                    <li><a href="../sign/Member.jsp">Sign Up</a></li>
                     <li></li>
                     <li>
                         <div id="headerCart">
@@ -40,6 +51,17 @@
         </nav>
         <!-- 네비끝 -->
         <!-- 로그인시작 -->
+        	<% if (uId != null) {   // 현재 로그인 상태라면  %>
+		
+		 <h1><%=uId %></h1>
+		 <p>님 환영합니다.</p>
+		 
+		 <a href="../Index.jsp">메인으로</a>
+		 <a href="Logout.jsp">로그아웃</a>	
+		 <a href="Member_Mod.jsp">회원정보수정</a>		
+		 <a href="Member_Del.jsp">회원탈퇴</a>		
+		
+		<% } else { %>
         <div id="signin">
         <form action="LoginProc.jsp" id="loginFrm" name="loginFrm">
 			<table>
@@ -66,10 +88,11 @@
 				</tbody>
 			</table>
 		</form>
+		   <% } %>
         </div>
         <!-- 로그인끝 -->
         <footer id="footer">
-
+	
             <div id="footerTop" class="flex-container">
                 <nav id="footerLnbArea">
                     <ul id="footermainMenu" class="flex-container">
@@ -102,7 +125,5 @@
         <!-- footer#footer -->
     </div>
 </body>
-<script src="script/jquery-3.6.0.min.js"></script>
-<script src="script/script.js"></script>
-<script src="../script/sign.js"></script>
+
 </html>
