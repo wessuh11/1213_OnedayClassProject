@@ -32,7 +32,7 @@ public class MemberMgr {
 
 		try {
 			objConn = pool.getConnection();
-			sql = "select uId from tblMember where uId=?";
+			sql = "select uId from memberlist where uId=?";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setString(1, uId);
 
@@ -54,7 +54,8 @@ public class MemberMgr {
 
 ///////////////////////////////////////////////////////////////////	
 ///////////// ZipCheck.jsp 우편번호 검색 시작 ////////////////////
-///////////////////////////////////////////////////////////////////	
+///////////////////////////////////////////////////////////////////
+	/*
 	public Vector<ZipCodeBean> zipCodeRead(String area3) {
 
 		Vector<ZipCodeBean> vList = new Vector<>();
@@ -99,6 +100,7 @@ public class MemberMgr {
 
 		return vList;
 	}
+	*/
 ///////////////////////////////////////////////////////////////////	
 ///////////// ZipCheck.jsp 우편번호 검색 끝 //////////////////////
 ///////////////////////////////////////////////////////////////////	
@@ -115,43 +117,26 @@ public class MemberMgr {
 
 		try {
 			objConn = pool.getConnection();
-			sql = "insert into tblMember ";
-			sql += "(uId, uPw, uName, uGender, ";
-			sql += "uBirthday, uEmail, uZip, ";
-			sql += "uAddr, uHobby, uJob) ";
+			sql = "insert into memberlist ";
+			sql += "(uId, uPw, uName, uPhone, ";
+			sql += "address1, address2, address3, ";
+			sql += "uEmail, m_Grade, store_Name, m_Sns) ";
 			sql += "values ";
-			sql += "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			sql += "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setString(1, bean.getuId());
 			objPstmt.setString(2, bean.getuPw());
 			objPstmt.setString(3, bean.getuName());
-			objPstmt.setString(4, bean.getuGender());
-			objPstmt.setString(5, bean.getuBirthday());
-			objPstmt.setString(6, bean.getuEmail());
-			objPstmt.setString(7, bean.getuZip());
-			objPstmt.setString(8, bean.getuAddr());
+			objPstmt.setString(4, bean.getuPhone());
 
-			String[] hobby = bean.getuHobby();
-			// Member.jsp에서 취미에서 선택한 체크기호의 값이 필드에 저장됨
-			// {"인터넷", "게임", "영화"};
-
-			String[] strList = { "인터넷", "여행", "게임", "영화", "운동" };
-			char[] hobbyList = { '0', '0', '0', '0', '0' };
-
-			for (int i = 0; i < hobby.length; i++) {
-				// hobby.length => 3
-				for (int j = 0; j < strList.length; j++) {
-					// strList.length => 5
-					if (hobby[i].equals(strList[j])) {
-						hobbyList[j] = '1';
-					}
-				}
-
-			}
-
-			objPstmt.setString(9, new String(hobbyList));
-
-			objPstmt.setString(10, bean.getuJob());
+			objPstmt.setString(5, bean.getAddress1());
+			objPstmt.setString(6, bean.getAddress2());
+			objPstmt.setString(7, bean.getAddress3());
+			objPstmt.setString(8, bean.getuEmail());
+			objPstmt.setInt(9, bean.getM_Grade());
+			objPstmt.setString(10, bean.getStore_Name());
+			objPstmt.setString(11, bean.getM_Sns());
+			
 			int cnt = objPstmt.executeUpdate();
 			if (cnt > 0)
 				flag = true; // insert가 정상실행되었음을 의미
@@ -186,7 +171,7 @@ public class MemberMgr {
 
 		try {
 			objConn = pool.getConnection();
-			sql = "select uId from tblMember where uId=? and uPw=?";
+			sql = "select uId from memberlist where uId=? and uPw=?";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setString(1, uId);
 			objPstmt.setString(2, uPw);
@@ -223,7 +208,7 @@ public class MemberMgr {
 
 		try {
 			objConn = pool.getConnection();
-			sql = "select * from tblMember where uId=?";
+			sql = "select * from memberlist where uId=?";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setString(1, uId);
 
@@ -237,25 +222,15 @@ public class MemberMgr {
 					memBean.setuId(objRs.getString("uId"));
 					memBean.setuPw(objRs.getString("uPw"));
 					memBean.setuName(objRs.getString("uName"));
+					memBean.setuPhone(objRs.getString("uPhone"));
+					memBean.setAddress1(objRs.getString("address1"));
+					memBean.setAddress2(objRs.getString("address2"));
+					memBean.setAddress3(objRs.getString("address3"));
 					memBean.setuEmail(objRs.getString("uEmail"));
-					memBean.setuGender(objRs.getString("uGender"));
-					memBean.setuBirthday(objRs.getString("uBirthday"));
-					memBean.setuZip(objRs.getString("uZip"));
-					memBean.setuAddr(objRs.getString("uAddr"));
-
-					// DB에서 반환받은 셀의 데이터를 String[] 자료형으로 변경후 필드에 대입 시작
-					String str = objRs.getString("uHobby");
-					String[] hobbyList = { "0", "0", "0", "0", "0" };
-					char ch = '0';
-					for (int i = 0; i < str.length(); i++) {
-						ch = str.charAt(i);
-						hobbyList[i] = Character.toString(ch);
-					}
-					memBean.setuHobby(hobbyList);
-					// DB에서 반환받은 셀의 데이터를 String[] 자료형으로 변경후 필드에 대입 끝
-
-					memBean.setuJob(objRs.getString("uJob"));
-
+					memBean.setM_Grade(objRs.getInt("m_Grade"));
+					memBean.setStore_Name(objRs.getString("store_Name"));
+					memBean.setM_Sns(objRs.getString("m_Sns"));
+					
 					vList.add(memBean);
 
 				}
@@ -278,7 +253,8 @@ public class MemberMgr {
 
 ///////////////////////////////////////////////////////////////////	
 /////// Member_ModProc.jsp 회원정보 수정 시작 /////////////
-///////////////////////////////////////////////////////////////////	
+///////////////////////////////////////////////////////////////////
+	/*
 	public boolean modifyMember(String uPw, String uName, String uJob, String uId) {
 
 		Connection objConn = null;
@@ -289,7 +265,7 @@ public class MemberMgr {
 		try {
 			objConn = pool.getConnection();
 
-			sql = "update tblMember set ";
+			sql = "update memberlist set ";
 			sql += "uPw=?, uName=?, uJob=? ";
 			sql += "where uId = ?";
 			objPstmt = objConn.prepareStatement(sql);
@@ -312,7 +288,7 @@ public class MemberMgr {
 
 		return flag;
 	}
-
+	*/
 ///////////////////////////////////////////////////////////////////	
 /////// Member_ModProc.jsp 회원정보 수정 끝 /////////////
 ///////////////////////////////////////////////////////////////////
@@ -332,7 +308,7 @@ public class MemberMgr {
 		try {
 			objConn = pool.getConnection();
 
-			sql = "delete from tblMember where uId = ?";
+			sql = "delete from memberlist where uId = ?";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setString(1, uId);
 

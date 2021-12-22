@@ -2,16 +2,18 @@ package pack_Member;
 
 public class MemberBean {
 
-	private String uId;
-	private String uPw;
-	private String uName;
-	private String uGender;
-	private String uBirthday;
-	private String uEmail;
-	private String uZip;
-	private String uAddr;
-	private String[] uHobby;   
-	private String uJob;
+	private String uId; //아이디
+	private String uPw; //비밀번호
+	private String uName; //이름
+	private String uPhone; //핸펀
+	private String address1; //주소1
+	private String address2; //주소2
+	private String address3; //주소3
+	private String uEmail; //유저이메일
+	private int m_Grade; //등급
+	private String store_Name; //상호명
+	private String m_Sns; //모바일 sns
+	
 	public String getuId() {
 		return uId;
 	}
@@ -30,17 +32,29 @@ public class MemberBean {
 	public void setuName(String uName) {
 		this.uName = uName;
 	}
-	public String getuGender() {
-		return uGender;
+	public String getuPhone() {
+		return uPhone;
 	}
-	public void setuGender(String uGender) {
-		this.uGender = uGender;
+	public void setuPhone(String uPhone) {
+		this.uPhone = uPhone;
 	}
-	public String getuBirthday() {
-		return uBirthday;
+	public String getAddress1() {
+		return address1;
 	}
-	public void setuBirthday(String uBirthday) {
-		this.uBirthday = uBirthday;
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+	public String getAddress2() {
+		return address2;
+	}
+	public void setAddress2(String address2) {
+		this.address2 = address2;
+	}
+	public String getAddress3() {
+		return address3;
+	}
+	public void setAddress3(String address3) {
+		this.address3 = address3;
 	}
 	public String getuEmail() {
 		return uEmail;
@@ -48,30 +62,22 @@ public class MemberBean {
 	public void setuEmail(String uEmail) {
 		this.uEmail = uEmail;
 	}
-	public String getuZip() {
-		return uZip;
+	public int getM_Grade() {
+		return m_Grade;
 	}
-	public void setuZip(String uZip) {
-		this.uZip = uZip;
+	public void setM_Grade(int m_Grade) {
+		this.m_Grade = m_Grade;
 	}
-	public String getuAddr() {
-		return uAddr;
+	public String getStore_Name() {
+		return store_Name;
 	}
-	public void setuAddr(String uAddr) {
-		this.uAddr = uAddr;
+	public void setStore_Name(String store_Name) {
+		this.store_Name = store_Name;
 	}
-	public String[] getuHobby() {
-		return uHobby;  
+	public String getM_Sns() {
+		return m_Sns;
 	}
-	public void setuHobby(String[] uHobby) {
-		this.uHobby = uHobby;
+	public void setM_Sns(String m_Sns) {
+		this.m_Sns = m_Sns;
 	}
-	public String getuJob() {
-		return uJob;
-	}
-	public void setuJob(String uJob) {
-		this.uJob = uJob;
-	}
-	
-
 }

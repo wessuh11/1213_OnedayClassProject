@@ -6,26 +6,29 @@
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>회원가입</title>
+	<title>원데이 클래스</title>
 	<style>
 	* {
 		box-sizing: border-box;
 	}
+	<!--
 	div#wrap {
-		width: 660px;
+		width: 550px;
 		padding: 10px;
-		border: 1px solid #000;
+/*		border: 1px solid #000;*/
 		margin: 10px auto;
 	}
 	
 	table {
 		width: 100%;
-		/*border: 1px solid #000;*/
+/*		border: 1px solid #000;*/
 	}
-	th, td {
-		padding: 10px 6px;
-/*		border: 1px solid #000;  */
+	
+	tr, td {
+		padding: 5px 6px;
+/*		border: 1px solid #000;*/
 	}
+	
 	table>caption {
 		font-size: 24px;
 		font-weight: bold;
@@ -36,22 +39,26 @@
 	tr:last-child td {
 		text-align: center;
 	}
+	
 	td:first-child {
 		width: 120px;
 		text-align: right;
 	}
+	
 	input {
+		height: 50px;
 		font-size: 15px;
 		padding: 4px 10px;
 	}
-	input.uAddr {
-		border: none;
-		border-bottom: 1px solid #ddd;
-		outline: none;
+	
+	tr.slide{
+		font-size: 11px;
+		color: #e7223d;
 	}
-	td#hobbyArea span:hover {
-		color: #555;
-		cursor: pointer;
+	
+	th{
+		width: 200px;
+		text-align: left;
 	}
 	
 	td.req::after {   /* 입력 필수 */
@@ -61,7 +68,20 @@
 	}
 	
 	button {
+		height: 50px;
 		font-size: 14px;
+		font-weight: bold;
+		padding: 4px 10px;
+		cursor: pointer;
+		transform: translateY(1px);
+	}
+	
+	button#joinBtn {
+		width: 500px;
+		height: 50px;
+		background-color: #08f;
+		font-size: 20px;
+		color : #fff;
 		font-weight: bold;
 		padding: 4px 10px;
 		cursor: pointer;
@@ -71,7 +91,6 @@
 	select {
 		font-size: 18px;
 		transform: translateY(2px);
-		
 	}
 	
 	
@@ -116,35 +135,10 @@
 			});
 			//////////////  아이디 중복 검사 끝 //////////////////////
 			
-			
-			//////////////  우편번호 찾기 시작 //////////////////////
-			function zipCheck() {
-				let url = "ZipCheck.jsp?zipChk=y";
 
-				let w = screen.width;
-				let popW = 540;
-				let leftP = (w-popW)/2;
-				let h = screen.height;
-				let popH = 400;
-				let topP = (h-popH)/2;
-				//alert("w : " + w + "\nh : " + h);
-				
-				window.open(url, "zipCodeSearch", "width="+popW+", height="+popH+", left="+leftP+", top="+topP);
-				
-				
-			}
-			
-			$("#zipBtn").click(function(){
-				zipCheck();
-			});
-			//////////////  우편번호 찾기 끝 //////////////////////
-			
-			
 			////////////// 유효성 검사 시작 //////////////////////
-			
 			$("#joinBtn").click(function(){
-				
-								
+							
 				let uIdBtnClickChk = $("#uIdBtnClickChk").val();
 				let uPw = $("#uPw").val();
 				let uPw_Re = $("#uPw_Re").val();
@@ -188,21 +182,7 @@
 				
 			});
 			////////////// 유효성 검사 끝 //////////////////////
-			
-
-			///////////  로그인 페이지 이동 시작 ////////////////
-			$("#loginBtn").click(function(){
-				location.href = "Login.jsp";
-			});
-
-			///////////  메인 페이지 이동 시작 ////////////////
-			$("#mainBtn").click(function(){
-				location.href = "../Index.jsp";
-			});
-			
-			
-			
-			
+	
 		});	
 	</script>
 </head>
@@ -212,70 +192,98 @@
 	<form name="regFrm" id="regFrm" action="MemberProc.jsp" method="get">
 	
 		<table>
-			<caption>회원가입</caption>
+			<caption>
+			<img src="../img/member/logo.png" alt="" width ="250">
+			</caption>
+			
 			<tbody>
+			
 				<tr>
 					<td class="req">아이디</td>
 					<td>
-						<input type="text" id="uId" name="uId" size="15" 
+						<input type="text" id="uId" name="uId" size="24" 
 								maxlength="20" autofocus>
-						<button type="button" id="idChkBtn">ID중복확인</button>
+						<button type="button" id="idChkBtn">체크</button>
 						<input type="hidden" name="uIdBtnClickChk" id="uIdBtnClickChk" value="0">
 					</td>
-					<td>5~20글자, 영어/숫자/_</td>
-				</tr> 
+				</tr>
+				
+				<tr class="slide">
+					<td></td>
+					<th>ID는 영어, 숫자, 특수기호(_), 5글자 이상 20글자 이하</th>
+				</tr>
+				
 				<tr>
 					<td class="req">패스워드</td>
 					<td>
-						<input type="password" name="uPw" id="uPw" size="15">
+						<input type="password" name="uPw" id="uPw" size="32">
 					</td>
-					<td>패스워드를 적어주세요</td>
 				</tr>
+				
+				<tr class="slide">
+					<td></td>
+					<th>비밀번호를 입력하세요.</th>
+					<td></td>
+				</tr>
+				
 				<tr>
 					<td>패스워드 확인</td>
 					<td>
-						<input type="password" id="uPw_Re" size="15">
+						<input type="password" id="uPw_Re" size="32">
 					</td>
-					<td>패스워드를 확인합니다.</td>
 				</tr>
+				
+				<tr class="slide">
+					<td></td>
+					<th>비밀번호를 다시입력해주세요.</th>
+					<td></td>
+				</tr>
+				
 				<tr>
 					<td class="req">이름</td>
 					<td>
-						<input type="text" name="uName" id="uName" size="15">
+						<input type="text" name="uName" id="uName" size="32">
 					</td>
-					<td>이름을 적어주세요.</td>
 				</tr>
+				
+				<tr class="slide">
+					<td></td>
+					<th>이름을 입력하세요</th>
+				</tr>
+				
+				<tr>
+					<td class="req">휴대폰</td>
+					<td>
+						<input type="text" name="uPhone" id="uPhone" size="32">
+					</td>
+				</tr>
+				
+				<tr class="slide">
+					<td></td>
+					<th>휴대폰번호(-제외)</th>
+				</tr>
+				
 				<tr>
 					<td class="req">Email</td>
 					<td>
-						<input type="text" name="uEmail" id="uEmail" size="26">
+						<input type="text" name="uEmail" id="uEmail" size="32">
 					</td>
-					<td>이메일을 적어주세요.</td>
 				</tr>
+				
+				<tr class="slide">
+					<td></td>
+					<th>이메일을 입력해주세요.</th>
+				</tr>
+				
 				<tr>
 					<td colspan="3" style="border-bottom: 2px solid #ddd;"></td>
-				</tr>				
-				<tr>
-					<td>성별</td>
-					<td>
-					 	<label>남 <input type="radio" name="uGender" value="1" checked></label>
-					 	<label>여 <input type="radio" name="uGender" value="0"></label>
-					</td>
-					<td>성별을 선택하세요.</td>
 				</tr>
-				<tr>
-					<td>생년월일</td>
-					<td>
-						<input type="text" name="uBirthday" id="uBirthday" size="6">
-						ex) 830815
-					</td>
-					<td>생년월일을 적어주세요.</td>
-				</tr>
+				<!--
 				<tr>
 					<td>우편번호</td>
 					<td>
-						<input type="text" name="uZip" id="uZip" size="7" 
-						class="uAddr" readonly>
+						<input type="text" name="getAddress1" id="getAddress1" size="7" 
+						class="uAddr">
 						<button type="button" id="zipBtn">우편번호찾기</button>
 					</td>
 					<td>우편번호를 검색하세요.</td>
@@ -283,61 +291,33 @@
 				<tr>
 					<td>주소</td>
 					<td>
-						<input type="text" class="uAddr" id="uAddr1" name="uAddr1" size="26">
+						<input type="text" class="getAddress2" id="getAddress2" name="getAddress2" size="26">
 					</td>
 					<td></td>
 				</tr>
 				<tr>
 					<td></td>
 					<td>
-						<input type="text" id="uAddr2" name="uAddr2" size="26">
+						<input type="text" id="getAddress3" name="getAddress3" size="26">
 						<input type="hidden" id="uAddr" name="uAddr">
 					</td>
 					<td>나머지 주소 기재</td>
 				</tr>
+				
 				<tr>
-					<td>취미</td>
-					<td id="hobbyArea">
-						<label><span>인터넷</span><input type="checkbox" name="uHobby" value="인터넷"></label>
-						<label><span>여행</span><input type="checkbox" name="uHobby" value="여행"></label>
-						<label><span>게임</span><input type="checkbox" name="uHobby" value="게임"></label>
-						<label><span>영화</span><input type="checkbox" name="uHobby" value="영화"></label>
-						<label><span>운동</span><input type="checkbox" name="uHobby" value="운동"></label>
-					</td>
-					<td>취미를 선택하세요.</td>
+					<td colspan="3" style="border-bottom: 2px solid #ddd;"></td>
 				</tr>
-				<tr>
-					<td>직업</td>
-					<td>
-						<select name="uJob" id="uJob">
-							<option value="0" selected>-선택하세요-</option>
-							<option value="회사원">회사원</option>
-							<option value="연구전문직">연구전문직</option>
-							<option value="교수학생">교수학생</option>
-							<option value="일반자영업">일반자영업</option>
-							<option value="공무원">공무원</option>
-							<option value="의료인">의료인</option>
-							<option value="법조인">법조인</option>
-							<option value="주부">주부</option>
-							<option value="기타">기타</option>
-						</select>
-					</td>
-					<td>직업을 선택하세요.</td>
-				</tr>
+				-->			
 				<tr>
 					<td colspan="3">
-						<button type="button" id="joinBtn">회원가입</button>
-						<button type="reset">다시쓰기</button>
-						<button type="button" id="mainBtn">메인으로</button>		
-						<button type="button" id="loginBtn">로그인</button>					
+						<button type="button" id="joinBtn">동의하고 가입하기</button>			
 					</td>
 				</tr>
+				
 			</tbody>
 		</table>
-	
 	</form>
 	<!-- document.regFrm -->
-
 
 	</div>
 	<!-- div#wrap -->
