@@ -12,20 +12,18 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 <% if (sessionUId != null) {   // 현재 로그인 상태라면  %>
 <!-- ////////////////  로그인 상태 시작  ////////////////// -->
 
-
 	<%
 	MemberBean memBean = (MemberBean)vList.get(0);
 	String uId = memBean.getuId();
 	String uPw = memBean.getuPw();
 	String uName = memBean.getuName();
+	String uPhone = memBean.getuPhone();
+	String address1 = memBean.getAddress1();
+	String address2 = memBean.getAddress2();
+	String address3 = memBean.getAddress3();
 	String uEmail = memBean.getuEmail();
-	String uGender = memBean.getuGender();
-	String uBirthday = memBean.getuBirthday();
-	String uZip = memBean.getuZip();
-	String uAddr = memBean.getuAddr();
-	String[] uHobby = memBean.getuHobby();
-	
-	String uJob = memBean.getuJob();
+	String store_Name = memBean.getStore_Name();
+	String m_Sns = memBean.getM_Sns();
 	%>
 
 
@@ -44,13 +42,13 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 	div#wrap {
 		width: 680px;
 		padding: 10px;
-		border: 1px solid #000;
+/*		border: 1px solid #000;  */
 		margin: 10px auto;
 	}
 	
 	table {
 		width: 100%;
-		/*border: 1px solid #000;*/
+/*		border: 1px solid #000;  */
 	}
 	th, td {
 		padding: 10px 6px;
@@ -103,10 +101,10 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 		transform: translateY(2px);
 		
 	}
-	
-	
+
 	</style>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 		$(function(){
 			
@@ -144,10 +142,8 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 
 			///////////  메인 페이지 이동 시작 ////////////////
 			$("#mainBtn").click(function(){
-				location.href = "../Index.jsp";
+				location.href = "../index.jsp";
 			});
-			
-			
 			
 		});	
 	</script>
@@ -158,7 +154,9 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 	<form name="modFrm" id="modFrm" action="Member_ModProc.jsp" method="get">
 	
 		<table>
-			<caption>회원정보 수정</caption>
+			<caption>
+				<img src="../img/member/logo.png" alt="" width ="250">
+			</caption>
 			<tbody>
 				<tr>
 					<td class="req">아이디</td>
@@ -180,7 +178,7 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 					<td>패스워드를 확인합니다.</td>
 				</tr>
 				<tr>
-					<td class="req">이름</td>
+					<td>이름</td>
 					<td>
 						<input type="text" name="uName" id="uName" size="15"
 						   value="<%=uName%>">
@@ -188,93 +186,64 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 					<td>이름을 적어주세요.</td>
 				</tr>
 				<tr>
+					<td class="req">핸드폰</td>
+					<td>
+						<input type="text" name="uPhone" id="uPhone" size="15"
+						 value="<%=uPhone%>">
+					</td>
+					<td>(-제외)</td>
+				</tr>
+				<tr>
 					<td class="req">Email</td>
 					<td>
-						<%=uEmail%>
+						<input type="text" name="uEmail" id="uName" size="15"
+						 value="<%=uEmail%>">
 					</td>
 					<td>이메일을 적어주세요.</td>
 				</tr>
 				<tr>
-					<td colspan="3" style="border-bottom: 2px solid #ddd;"></td>
-				</tr>				
-				<tr>
-					<td>성별</td>
-					<td>
-					 	<label>남 
-					 		<input type="radio" name="uGender" value="1"   disabled
-					 		<% if (uGender.equals("1")) out.print("checked"); %>>
-					 	</label>
-					 	<label>여 
-					 		<input type="radio" name="uGender" value="0"  disabled
-					 		<% if (uGender.equals("0")) out.print("checked"); %>>
-					 		</label>
-					</td>
-					<td>성별을 선택하세요.</td>
-				</tr>
-				<tr>
-					<td>생년월일</td>
-					<td>
-						<%=uBirthday %>
-					</td>
-					<td>생년월일을 적어주세요.</td>
-				</tr>
-				<tr>
-					<td>우편번호</td>
-					<td><%=uZip%></td>
-					<td>우편번호를 검색하세요.</td>
-				</tr>
-				<tr>
 					<td>주소</td>
-					<td><%=uAddr %></td>
+						<td>
+							<input type="text" name="address1" id="address1" size="20" 
+							class="uAddr" readonly placeholder="우편번호">
+							<button type="button" id="uAddress">우편번호찾기</button>
+						</td>
+					</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="text" class="uAddr" id="address2" name="address2" size="20">
+					</td>
 					<td></td>
 				</tr>
 				<tr>
-					<td>취미</td>
-					<td id="hobbyArea">
-						<label><span>인터넷</span>
-							<input type="checkbox" name="uHobby"  disabled
-							 value="인터넷"  <% if (uHobby[0].equals("1")) out.print("checked"); %>> 
-						</label>
-						<label><span>여행</span>
-							<input type="checkbox" name="uHobby"   disabled
-							value="여행" <% if (uHobby[1].equals("1")) out.print("checked"); %>>
-						</label>
-						<label><span>게임</span>
-							<input type="checkbox" name="uHobby"   disabled
-							value="게임" <% if (uHobby[2].equals("1")) out.print("checked"); %>>
-						</label>
-						<label><span>영화</span>
-							<input type="checkbox" name="uHobby"   disabled
-							value="영화" <% if (uHobby[3].equals("1")) out.print("checked"); %>>
-						</label>
-						<label><span>운동</span>
-							<input type="checkbox" name="uHobby"   disabled
-							value="운동"  <% if (uHobby[4].equals("1")) out.print("checked"); %>>
-						</label>
+					<td></td>
+					<td>
+						<input type="text" id="address3" name="address3" size="30"  placeholder="상세주소">
 					</td>
-					<td>취미를 선택하세요.</td>
+				</tr>			
+				<tr>
+					<td colspan="3" style="border-bottom: 2px solid #ddd;"></td>
 				</tr>
 				<tr>
-					<td>직업</td>
-					
-					<!--  직업 수정 시작 uJob-->
-					
+					<td class="req">상호명</td>
 					<td>
-						<select name="uJob" id="uJob">
-							<option value="0" <% if (uJob.equals("0")) out.print("selected"); %>>-선택하세요-</option>
-							<option value="회사원" <% if (uJob.equals("회사원")) out.print("selected"); %>>회사원</option>
-							<option value="연구전문직" <% if (uJob.equals("연구전문직")) out.print("selected"); %>>연구전문직</option>
-							<option value="교수학생" <% if (uJob.equals("교수학생")) out.print("selected"); %>>교수학생</option>
-							<option value="일반자영업" <% if (uJob.equals("일반자영업")) out.print("selected"); %>>일반자영업</option>
-							<option value="공무원" <% if (uJob.equals("공무원")) out.print("selected"); %>>공무원</option>
-							<option value="의료인" <% if (uJob.equals("의료인")) out.print("selected"); %>>의료인</option>
-							<option value="법조인" <% if (uJob.equals("법조인")) out.print("selected"); %>>법조인</option>
-							<option value="주부" <% if (uJob.equals("주부")) out.print("selected"); %>>주부</option>
-							<option value="기타" <% if (uJob.equals("기타")) out.print("selected"); %>>기타</option>
-						</select>
+						<input type="text" name="store_Name" id="store_Name" size="15"
+						 value="<%=store_Name%>">
 					</td>
-					<td>직업을 선택하세요.</td>
+					<td>선생님만!!</td>
 				</tr>
+				<tr>
+					<td class="req">SNS</td>
+					<td>
+						<input type="text" name="m_Sns" id="m_Sns" size="15"
+						 value="<%=m_Sns%>">
+					</td>
+					<td>선생님만!!</td>
+				</tr>
+				<tr>
+					<td colspan="3" style="border-bottom: 2px solid #ddd;"></td>
+				</tr>				
 				<tr>
 					<td colspan="3">
 						<button type="button" id="modBtn">정보수정</button>
@@ -306,11 +275,28 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 		alert("비정상적인 접속입니다.\n"
 				 +"메인페이지로 이동합니다."); 
 		           // 현재 메인페이지는 없기 때문에 로그인페이지로 이동
-		location.href="../Index.jsp";
+		location.href="../index.jsp"; 
 	
 	</script>
 
 <% } %>
+
+	<script>
+	/////////////////    카카오API      /////////////////
+	window.onload = function(){
+	    document.getElementById("uAddress").addEventListener("click", function(){ //주소입력칸을 클릭하면
+	        //카카오 지도 발생
+	        new daum.Postcode({
+	                oncomplete: function(data) { //선택시 입력값 세팅
+	                document.getElementById("address1").value = data.zonecode;//우편번호
+	                document.getElementById("address2").value = data.address; // 주소 넣기
+	                document.getElementById("address3").focus(); //상세입력 포커싱
+	                }
+	              }).open();
+	       });
+	 } 
+   /////////////////    카카오API      /////////////////
+	</script>
 
 
 

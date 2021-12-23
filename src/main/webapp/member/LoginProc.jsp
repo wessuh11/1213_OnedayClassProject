@@ -13,7 +13,7 @@ boolean res = mMgr.loginMember(uId, uPw);
 if (res) {
 	session.setAttribute("idKey", uId);
 	//msg = "로그인에 성공 하였습니다.";
-	response.sendRedirect("../Index.jsp");
+	response.sendRedirect("../index.jsp");
 } else {
 %>
 

@@ -278,36 +278,6 @@
 				<tr>
 					<td colspan="3" style="border-bottom: 2px solid #ddd;"></td>
 				</tr>
-				<!--
-				<tr>
-					<td>우편번호</td>
-					<td>
-						<input type="text" name="getAddress1" id="getAddress1" size="7" 
-						class="uAddr">
-						<button type="button" id="zipBtn">우편번호찾기</button>
-					</td>
-					<td>우편번호를 검색하세요.</td>
-				</tr>
-				<tr>
-					<td>주소</td>
-					<td>
-						<input type="text" class="getAddress2" id="getAddress2" name="getAddress2" size="26">
-					</td>
-					<td></td>
-				</tr>
-				<tr>
-					<td></td>
-					<td>
-						<input type="text" id="getAddress3" name="getAddress3" size="26">
-						<input type="hidden" id="uAddr" name="uAddr">
-					</td>
-					<td>나머지 주소 기재</td>
-				</tr>
-				
-				<tr>
-					<td colspan="3" style="border-bottom: 2px solid #ddd;"></td>
-				</tr>
-				-->			
 				<tr>
 					<td colspan="3">
 						<button type="button" id="joinBtn">동의하고 가입하기</button>			

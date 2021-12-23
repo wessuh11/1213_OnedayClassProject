@@ -6,5 +6,5 @@ session.invalidate();  // 세션으로 로그인했다면
 %>    
 <script>
 //alert("로그아웃되셨습니다.");
-location.href="../Index.jsp";
+location.href="/Proj_OnedayClass/index.jsp";
 </script>

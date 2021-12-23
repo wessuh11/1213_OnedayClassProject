@@ -53,59 +53,6 @@ public class MemberMgr {
 ///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////	
-///////////// ZipCheck.jsp 우편번호 검색 시작 ////////////////////
-///////////////////////////////////////////////////////////////////
-	/*
-	public Vector<ZipCodeBean> zipCodeRead(String area3) {
-
-		Vector<ZipCodeBean> vList = new Vector<>();
-
-		Connection objConn = null;
-		PreparedStatement objPstmt = null;
-		ResultSet objRs = null;
-
-		String sql = null;
-
-		try {
-			objConn = pool.getConnection();
-			sql = "select * from tblZipCode where area3 like ?";
-			objPstmt = objConn.prepareStatement(sql);
-			objPstmt.setString(1, "%" + area3 + "%");
-
-			objRs = objPstmt.executeQuery();
-
-			if (objRs != null) {
-				while (objRs.next()) {
-
-					ZipCodeBean zipBean = new ZipCodeBean();
-
-					zipBean.setZipCode(objRs.getString("zipCode"));
-					zipBean.setArea1(objRs.getString("area1"));
-					zipBean.setArea2(objRs.getString("area2"));
-					zipBean.setArea3(objRs.getString("area3"));
-					zipBean.setArea4(objRs.getString("area4"));
-
-					vList.add(zipBean);
-
-				}
-			}
-
-		} catch (Exception e) {
-
-			System.out.println("SQL 이슈 : " + e.getMessage());
-
-		} finally {
-			pool.freeConnection(objConn, objPstmt, objRs);
-		}
-
-		return vList;
-	}
-	*/
-///////////////////////////////////////////////////////////////////	
-///////////// ZipCheck.jsp 우편번호 검색 끝 //////////////////////
-///////////////////////////////////////////////////////////////////	
-
-///////////////////////////////////////////////////////////////////	
 ///////////// MemberProc.jsp 회원가입 시작 //////////////////////
 ///////////////////////////////////////////////////////////////////
 	public boolean insertMember(MemberBean bean) {
@@ -128,7 +75,6 @@ public class MemberMgr {
 			objPstmt.setString(2, bean.getuPw());
 			objPstmt.setString(3, bean.getuName());
 			objPstmt.setString(4, bean.getuPhone());
-
 			objPstmt.setString(5, bean.getAddress1());
 			objPstmt.setString(6, bean.getAddress2());
 			objPstmt.setString(7, bean.getAddress3());
@@ -191,6 +137,56 @@ public class MemberMgr {
 ///////////////////////////////////////////////////////////////////	
 ///////////// LoginProc.jsp 로그인 끝 //////////////////////
 ///////////////////////////////////////////////////////////////////
+	
+///////////////////////////////////////////////////////////////////	
+///////////// ZipCheck.jsp 우편번호 검색 시작 ////////////////////
+///////////////////////////////////////////////////////////////////	
+	public Vector<MemberBean> zipCodeRead(String address3) {
+	
+		Vector<MemberBean> vList = new Vector<>();
+			
+		Connection objConn = null;
+		PreparedStatement objPstmt = null;
+		ResultSet objRs = null;
+	
+		String sql = null;
+	
+		try {
+				objConn = pool.getConnection();
+				sql = "select * from memberlist where address3 like ?";
+				objPstmt = objConn.prepareStatement(sql);
+				objPstmt.setString(1, "%" + address3 + "%");
+				
+				objRs = objPstmt.executeQuery();
+				
+				if (objRs != null) {
+				while (objRs.next()) {
+		
+			MemberBean zipBean = new MemberBean();
+		
+			zipBean.setAddress1(objRs.getString("address1"));
+			zipBean.setAddress2(objRs.getString("address2"));
+			zipBean.setAddress3(objRs.getString("address3"));
+			
+			
+			vList.add(zipBean);
+		
+		}
+}
+	
+} catch (Exception e) {
+	
+	System.out.println("SQL 이슈 : " + e.getMessage());
+	
+} finally {
+	pool.freeConnection(objConn, objPstmt, objRs);
+}
+	
+	return vList;
+}
+///////////////////////////////////////////////////////////////////	
+///////////// ZipCheck.jsp 우편번호 검색 끝 //////////////////////
+///////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////	
 /////// Member_Mod.jsp 회원정보 수정 입력폼 시작 /////////////
@@ -227,7 +223,6 @@ public class MemberMgr {
 					memBean.setAddress2(objRs.getString("address2"));
 					memBean.setAddress3(objRs.getString("address3"));
 					memBean.setuEmail(objRs.getString("uEmail"));
-					memBean.setM_Grade(objRs.getInt("m_Grade"));
 					memBean.setStore_Name(objRs.getString("store_Name"));
 					memBean.setM_Sns(objRs.getString("m_Sns"));
 					
@@ -254,8 +249,8 @@ public class MemberMgr {
 ///////////////////////////////////////////////////////////////////	
 /////// Member_ModProc.jsp 회원정보 수정 시작 /////////////
 ///////////////////////////////////////////////////////////////////
-	/*
-	public boolean modifyMember(String uPw, String uName, String uJob, String uId) {
+	public boolean modifyMember
+	(String uPw, String uName, String uPhone, String address1,String address2, String address3, String uEmail, String store_Name, String m_Sns, String uId) {
 
 		Connection objConn = null;
 		PreparedStatement objPstmt = null;
@@ -266,13 +261,20 @@ public class MemberMgr {
 			objConn = pool.getConnection();
 
 			sql = "update memberlist set ";
-			sql += "uPw=?, uName=?, uJob=? ";
+			sql += "uPw=?, uName=?, uPhone=?, address1=?,address2=?,address3=?,uEmail=?,store_Name=?,m_Sns=?";
 			sql += "where uId = ?";
 			objPstmt = objConn.prepareStatement(sql);
+			
 			objPstmt.setString(1, uPw);
 			objPstmt.setString(2, uName);
-			objPstmt.setString(3, uJob);
-			objPstmt.setString(4, uId);
+			objPstmt.setString(3, uPhone);
+			objPstmt.setString(4, address1);
+			objPstmt.setString(5, address2);
+			objPstmt.setString(6, address3);
+			objPstmt.setString(7, uEmail);
+			objPstmt.setString(8, store_Name);
+			objPstmt.setString(9, m_Sns);
+			objPstmt.setString(10, uId);
 
 			int cnt = objPstmt.executeUpdate();
 			if (cnt > 0)
@@ -288,7 +290,6 @@ public class MemberMgr {
 
 		return flag;
 	}
-	*/
 ///////////////////////////////////////////////////////////////////	
 /////// Member_ModProc.jsp 회원정보 수정 끝 /////////////
 ///////////////////////////////////////////////////////////////////

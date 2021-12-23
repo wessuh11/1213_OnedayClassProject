@@ -19,7 +19,7 @@ String uId = (String)session.getAttribute("idKey");
 	div#wrap {
 		width: 460px;
 		padding: 10px;
-		border: 1px solid #000;
+		/*border: 1px solid #000;*/
 		margin: 10px auto;
 	}
 	
@@ -29,7 +29,10 @@ String uId = (String)session.getAttribute("idKey");
 	}
 	th, td {
 		padding: 10px 6px;
-/*		border: 1px solid #000;  */
+		/*border: 1px solid #000;*/
+	}
+	td.loginBtn{
+		border-bottom: 2px solid #ddd;
 	}
 	table>caption {
 		font-size: 24px;
@@ -46,16 +49,22 @@ String uId = (String)session.getAttribute("idKey");
 		text-align: right;
 	}
 	input {
+		width: 300px;
+		height: 50px;
 		font-size: 15px;
 		padding: 4px 10px;
 	}
 	
 	button {
-		font-size: 14px;
+		width: 450px;
+		height: 50px;
+		color : #fff;
+		font-size: 20px;
 		font-weight: bold;
 		padding: 4px 10px;
 		cursor: pointer;
 		transform: translateY(1px);
+		background-color: #08f;
 	}
 	
 	</style>
@@ -92,12 +101,8 @@ String uId = (String)session.getAttribute("idKey");
 			});
 			// 엔터 이벤트 적용 끝
 			
-			
-			$("#mainBtn").click(function(){   // 메인으로 이동				
-				location.href="../Index.jsp";				
-			});
 			$("#joinBtn").click(function(){   // 회원가입으로 이동				
-				location.href="Member.jsp";				
+				location.href="/Proj_OnedayClass/member/Member.jsp";				
 			});
 			
 			
@@ -109,21 +114,26 @@ String uId = (String)session.getAttribute("idKey");
 	<div id="wrap">
 	
 	<% if (uId != null) {   // 현재 로그인 상태라면  %>
-		
-		 <h1><%=uId %></h1>
-		 <p>님 환영합니다.</p>
+		<meta http-equiv="refresh" content="1;url=/Proj_OnedayClass/index.jsp">
 		 
+		 <!--
 		 <a href="../Index.jsp">메인으로</a>
-		 <a href="Logout.jsp">로그아웃</a>	
-		 <a href="Member_Mod.jsp">회원정보수정</a>		
 		 <a href="Member_Del.jsp">회원탈퇴</a>		
+		-->
 		
 	<% } else { %>
 	
 		<form action="LoginProc.jsp" id="loginFrm" name="loginFrm">
 			<table>
-				<caption>로그인</caption>
+				<caption>
+					<img src="../img/member/logo.png" alt="" width ="250">
+				</caption>
 				<tbody>
+					<tr>					
+						<td colspan="3">						
+								
+						</td>				
+					</tr>
 					<tr>
 						<td>아이디</td>
 						<td>
@@ -136,13 +146,21 @@ String uId = (String)session.getAttribute("idKey");
 							<input type="password" class="loginInput" name="uPw" id="uPw">
 						</td>
 					</tr>
-					<tr>
-						<td colspan="2">						
-							<button type="button" id="mainBtn">메인으로</button>
-							<button type="button" id="loginBtn">로그인</button>
-							<button type="button" id="joinBtn">회원가입</button>
-						</td>						
+					<tr>					
+						<td colspan="3">						
+								
+						</td>				
 					</tr>
+					<tr>					
+						<td colspan="3" class="loginBtn">						
+								<button type="button" id="loginBtn">로그인</button>
+						</td>				
+					</tr>			
+					<tr>
+						<td colspan="3">	
+							<button type="button" id="joinBtn">회원가입</button>
+						</td>
+					</tr>	
 				</tbody>
 			</table>
 		

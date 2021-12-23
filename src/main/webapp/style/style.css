@@ -8,6 +8,9 @@ header#header {
     justify-content: space-between;
     align-items: center;
 } 
+#header #headerRight ul#Hello{
+	font-size: 14px;
+}
 
 #header #headerRight ul>li:nth-child(2n) {
     width: 2px;
