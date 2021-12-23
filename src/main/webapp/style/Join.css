@@ -1,0 +1,67 @@
+@charset "UTF-8";
+@import url(style_Reset.css);
+@import url(style.css);
+/*  회원가입 css */
+
+* {
+		box-sizing: border-box;
+	}
+	div#Join {
+		width: 550px;
+		margin : 0px auto;	
+		margin-bottom: 150px;
+	}
+	
+	table {
+		width: 100%;
+		height: 700px;
+		border: 1px solid #000;
+		
+	}
+	th, td {
+		padding: 10px 6px;
+/*		border: 1px solid #000;  */
+	}
+	table>caption {
+		font-size: 30px;
+		font-weight: bold;
+		margin: 30px 0;
+	}
+	tr:last-child td {
+		text-align: center;
+	}
+	td:first-child {
+		width: 120px;
+		text-align: right;
+	}
+	input {
+		font-size: 16px;
+		padding: 4px 10px;
+	}
+	input.uAddr {
+		border: none;
+		border-bottom: 1px solid #ddd;
+		outline: none;
+	}
+
+	
+	td.req::after {   /* 입력 필수 */
+		content: " *";
+		color: #ff0000;
+		font-size: 20px;
+	}
+	
+	button {
+		font-size: 14px;
+		font-weight: bold;
+		padding: 4px 10px;
+		cursor: pointer;
+		transform: translateY(1px);
+	}
+	button#idChkBtn{
+		padding: 5.5px;
+	}
+	button#zipBtn{
+		padding: 5.5px;
+	}
+	
