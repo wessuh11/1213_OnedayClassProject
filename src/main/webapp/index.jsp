@@ -58,17 +58,17 @@ String uId = (String)session.getAttribute("idKey");
 
                 <a href="#">   <!-- pos: r -->
                     <img src="img/slide/slide1.jpg" alt="슬라이드 이미지1">
-                    <span>떠나요! 남도맛축제!!</span>  <!-- pos: a + C -->
+                    <span>떠나요! 남도맛축제!</span>  <!-- pos: a + C -->
                 </a>
 
                 <a href="#">
                     <img src="img/slide/slide2.jpg" alt="슬라이드 이미지2">
-                    <span>메타세콰이어길을 걸어요!!</span>
+                    <span>메타세콰이어길을 걸어요!</span>
                 </a>
 
                 <a href="#">
                     <img src="img/slide/slide3.jpg" alt="슬라이드 이미지3">
-                    <span>테마기행과 함께 즐겨요!!</span>
+                    <span>테마기행과 함께 즐겨요!</span>
                 </a>
 
             </div> <!-- div#shuttleFrame, 빨강색 테두리선 -->
