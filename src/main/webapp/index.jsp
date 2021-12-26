@@ -24,12 +24,10 @@ String uId = (String)session.getAttribute("idKey");
             <div id="headerRight">
                 <ul class="flex-container" id="Hello">
                      <li>
-                     <b><%=uId %>님 환영합니다</b>
+                     <b><a href="/Proj_OnedayClass/myPage/myPage.jsp"><%=uId %>님 환영합니다</a></b>
                      </li>
                     <li></li>
                     <li><a href="/Proj_OnedayClass/member/Logout.jsp">로그아웃</a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/member/Member_Mod.jsp">회원정보수정</a></li>
                     <li></li>
                     <li>
                         <div id="headerCart">

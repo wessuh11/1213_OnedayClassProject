@@ -30,7 +30,7 @@
 		$(function(){
 			
 			$("#mainBtn").click(function(){   // 메인으로 이동				
-				location.href="../Index.jsp";				
+				location.href="Proj_Onedayclass/index.jsp";				
 			});			
 			
 		});
@@ -38,10 +38,10 @@
 </head>
 <body>
 	<div id="wrap">
-		<h1>고맙습니다.</h1>
+		<h1>ㅠㅠㅠㅠㅠㅠㅠ</h1>
 		<p style="font-size: 20px;">
-		  그 동안 저희 사이트를 방문해주셔서 감사합니다. <br>
-		  회원님의 건강을 기원합니다.
+		  우리 사이트를 탈퇴하다니..<br>
+		  회원님 너무하십니다..ㅠㅠ
 		</p>
 		
 		<button type="button" id="mainBtn">메인으로</button>
