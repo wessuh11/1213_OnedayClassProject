@@ -20,7 +20,7 @@ String uId = (String)session.getAttribute("idKey");
         <!-- header#header -->
         <header id="header" class="flex-container">
             <div id="headerLogo">
-                <a href="#"><img src="../img/logo.png" alt="로고"></a>
+                <a href="#"><img src="../img/onedaylogo.png" alt="로고"></a>
             </div>
 
             <div id="headerRight">
@@ -42,10 +42,10 @@ String uId = (String)session.getAttribute("idKey");
 
         <nav id="gnb">
             <ul class="flex-container">
-                <li ><a href="./index.html">Home</a></li>
+                <li ><a href="/Proj_OnedayClass/index.jsp">Home</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="/Proj_OnedayClass/shop/on-shop.html">Online</a></li>
-                <li><a href="/Proj_OnedayClass/shop/off-shop.html">Offline</a></li>
+                <li><a href="/Proj_OnedayClass/shop/on-shop.jsp">Online</a></li>
+                <li><a href="/Proj_OnedayClass/shop/off-shop.jsp">Offline</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </nav>

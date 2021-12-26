@@ -7,22 +7,22 @@ String uId = (String)session.getAttribute("idKey");
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style/style.css">
+    <title>온라인 상세페이지</title>
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/on-detail.css">
 </head>
 <body>
-    <% if (uId != null) {   // 현재 로그인 상태라면  %>
+<% if (uId != null) {   // 현재 로그인 상태라면  %>
     <div id="wrap">
         <header id="header" class="flex-container">
             <div id="headerLogo">
-                <a href="/Proj_OnedayClass/index.jsp"><img src="img/onedaylogo.png" alt="로고"></a>
+                <a href="/Proj_OnedayClass/index.jsp"><img src="/Proj_OnedayClass/img/onedaylogo.png" alt="로고"></a>
             </div>
 
             <div id="headerRight">
-                <ul class="flex-container" id="Hello">
+                <ul class="flex-container">
                      <li>
                      <b><a href="/Proj_OnedayClass/myPage/myPage.jsp"><%=uId %>님 환영합니다</a></b>
                      </li>
@@ -31,7 +31,7 @@ String uId = (String)session.getAttribute("idKey");
                     <li></li>
                     <li>
                         <div id="headerCart">
-                            <a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
+                            <a href="#"><img src="/Proj_OnedayClass/img/cart.png" alt=""> <span>0</span></a>
                         </div>
                     </li>
                 </ul>
@@ -40,43 +40,42 @@ String uId = (String)session.getAttribute("idKey");
 
         <nav id="gnb">
             <ul class="flex-container">
-                <li class="active"><a href="/Proj_OnedayClass/index.jsp">Home</a></li>
+                <li><a href="/Proj_OnedayClass/index.jsp">Home</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="/Proj_OnedayClass/shop/on-shop.jsp">Online</a></li>
+                <li class="active"><a href="/Proj_OnedayClass/shop/on-shop.jsp">Online</a></li>
                 <li><a href="/Proj_OnedayClass/shop/off-shop.jsp">Offline</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </nav>
 
-        <div id="slide">
+        <div id="detail" class="flex-container">
+            <div id="detail_img">
+                원데이클래스 이미지
+            </div>
+            <!-- div#detail_img -->
 
-            <div id="shuttleFrame" class="flex-container">
-                <!-- 가로형에서는 이미지전체개수의 폭-->
-                <!-- 셔틀프레임이 좌우로 이동하면서 슬라이드쇼가 구현된다 -->
-
-                <a href="#">   <!-- pos: r -->
-                    <img src="img/slide/slide1.jpg" alt="슬라이드 이미지1">
-                    <span>떠나요! 남도맛축제!!</span>  <!-- pos: a + C -->
-                </a>
-
-                <a href="#">
-                    <img src="img/slide/slide2.jpg" alt="슬라이드 이미지2">
-                    <span>메타세콰이어길을 걸어요!!</span>
-                </a>
-
-                <a href="#">
-                    <img src="img/slide/slide3.jpg" alt="슬라이드 이미지3">
-                    <span>테마기행과 함께 즐겨요!!</span>
-                </a>
-
-            </div> <!-- div#shuttleFrame, 빨강색 테두리선 -->
-
-            <!-- 슬라이드쇼 방향키 시작 -->
-            <div id="arrowLeft" class="arrowMark">&lt;</div>
-            <div id="arrowRight" class="arrowMark">&gt;</div>
-            <!-- 슬라이드쇼 방향키 끝 -->
+            <div id="detail_name">
+                원데이클래스 상세설명
+            </div>
+            <!-- div#detail_ex -->
 
         </div>
+        <!-- div#detail -->
+        
+        <div id="detail_ex">
+            <div id="detail_expage">
+                <ul class="flex-container">
+                    <li><a href="#">상세페이지</a></li>
+                    <li>/</li>
+                    <li><a href="#">리뷰</a></li>
+                    <li>/</li>
+                    <li><a href="#">판매자문의</a></li>
+                </ul>
+            </div>
+            <!-- div#detail_expage -->
+            <!-- 멀티탭 사용예정 -->
+        </div>
+        <!-- div#detail_ex -->
 
         <footer id="footer">
 
@@ -111,11 +110,11 @@ String uId = (String)session.getAttribute("idKey");
         </footer>
         <!-- footer#footer -->
     </div>
-    <% } else { %>
-        <div id="wrap">
+<% } else { %>
+    <div id="wrap">
         <header id="header" class="flex-container">
             <div id="headerLogo">
-                <a href="#"><img src="img/onedaylogo.png" alt="로고" width></a>
+                <a href="/Proj_OnedayClass/index.jsp"><img src="/Proj_OnedayClass/img/onedaylogo.png" alt="로고"></a>
             </div>
 
             <div id="headerRight">
@@ -126,7 +125,7 @@ String uId = (String)session.getAttribute("idKey");
                     <li></li>
                     <li>
                         <div id="headerCart">
-                            <a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
+                            <a href="#"><img src="/Proj_OnedayClass/img/cart.png" alt=""> <span>0</span></a>
                         </div>
                     </li>
                 </ul>
@@ -135,43 +134,42 @@ String uId = (String)session.getAttribute("idKey");
 
         <nav id="gnb">
             <ul class="flex-container">
-                <li class="active"><a href="./index.jsp">Home</a></li>
+                <li><a href="/Proj_OnedayClass/index.jsp">Home</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="/Proj_OnedayClass/shop/on-shop.html">Online</a></li>
-                <li><a href="/Proj_OnedayClass/shop/off-shop.html">Offline</a></li>
+                <li class="active"><a href="/Proj_OnedayClass/shop/on-shop.jsp">Online</a></li>
+                <li><a href="/Proj_OnedayClass/shop/off-shop.jsp">Offline</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </nav>
 
-        <div id="slide">
+        <div id="detail" class="flex-container">
+            <div id="detail_img">
+                원데이클래스 이미지
+            </div>
+            <!-- div#detail_img -->
 
-            <div id="shuttleFrame" class="flex-container">
-                <!-- 가로형에서는 이미지전체개수의 폭-->
-                <!-- 셔틀프레임이 좌우로 이동하면서 슬라이드쇼가 구현된다 -->
-
-                <a href="#">   <!-- pos: r -->
-                    <img src="img/slide/slide1.jpg" alt="슬라이드 이미지1">
-                    <span>떠나요! 남도맛축제!</span>  <!-- pos: a + C -->
-                </a>
-
-                <a href="#">
-                    <img src="img/slide/slide2.jpg" alt="슬라이드 이미지2">
-                    <span>메타세콰이어길을 걸어요!</span>
-                </a>
-
-                <a href="#">
-                    <img src="img/slide/slide3.jpg" alt="슬라이드 이미지3">
-                    <span>테마기행과 함께 즐겨요!</span>
-                </a>
-
-            </div> <!-- div#shuttleFrame, 빨강색 테두리선 -->
-
-            <!-- 슬라이드쇼 방향키 시작 -->
-            <div id="arrowLeft" class="arrowMark">&lt;</div>
-            <div id="arrowRight" class="arrowMark">&gt;</div>
-            <!-- 슬라이드쇼 방향키 끝 -->
+            <div id="detail_name">
+                원데이클래스 상세설명
+            </div>
+            <!-- div#detail_ex -->
 
         </div>
+        <!-- div#detail -->
+        
+        <div id="detail_ex">
+            <div id="detail_expage">
+                <ul class="flex-container">
+                    <li><a href="#">상세페이지</a></li>
+                    <li>/</li>
+                    <li><a href="#">리뷰</a></li>
+                    <li>/</li>
+                    <li><a href="#">판매자문의</a></li>
+                </ul>
+            </div>
+            <!-- div#detail_expage -->
+            <!-- 멀티탭 사용예정 -->
+        </div>
+        <!-- div#detail_ex -->
 
         <footer id="footer">
 
@@ -206,8 +204,9 @@ String uId = (String)session.getAttribute("idKey");
         </footer>
         <!-- footer#footer -->
     </div>
-	<% } %>
-    <script src="script/jquery-3.6.0.min.js"></script>
-    <script src="script/script.js"></script>
+<% } %>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="/Proj_Ch14_BBS/script/Script.js"></script>    
 </body>
 </html>

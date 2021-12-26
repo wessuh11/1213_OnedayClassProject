@@ -27,7 +27,7 @@ $(function(){
             if (j != 4)  galleryListArea += "<tr>"; 
 
             if (j == 0) {
-                galleryListArea += "<td><a href='on-shop-detail.html'><img src='/Proj_OnedayClass/img/shop/"+ contentArray[i][j] +"' alt='이미지' width='320'></a></td>";
+                galleryListArea += "<td><a href='on-shop-detail.jsp'><img src='/Proj_OnedayClass/img/shop/"+ contentArray[i][j] +"' alt='이미지' width='320'></a></td>";
             } else if (j == 1) {
                 galleryListArea += "<td class='goodsName'>"+contentArray[i][j]+"</td>";
             } else if (j == 2) {
@@ -80,7 +80,7 @@ for (let i = 0; i < contentArray2.length; i++) {
         if (j != 4)  galleryListArea2 += "<tr>"; 
 
         if (j == 0) {
-            galleryListArea2 += "<td><a href='on-shop-detail.html'><img src='/Proj_OnedayClass/img/shop/"+ contentArray2[i][j] +"' alt='이미지' width='320'></a></td>";
+            galleryListArea2 += "<td><a href='on-shop-detail.jsp'><img src='/Proj_OnedayClass/img/shop/"+ contentArray2[i][j] +"' alt='이미지' width='320'></a></td>";
         } else if (j == 1) {
             galleryListArea2 += "<td class='goodsName2'>"+contentArray2[i][j]+"</td>";
         } else if (j == 2) {
