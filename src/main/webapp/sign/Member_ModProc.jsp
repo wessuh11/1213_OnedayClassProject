@@ -10,7 +10,7 @@ String uJob = request.getParameter("uJob");
 <jsp:useBean id="mMgr" class="pack_Member.MemberMgr" scope="page" />
 <%
 String sessionUId = (String)session.getAttribute("idKey");
-boolean res = mMgr.modifyMember(uPw, uName);
+boolean res = mMgr.modifyMember(uPw, uName, uId);
 %>
 
 <script>
@@ -23,5 +23,4 @@ boolean res = mMgr.modifyMember(uPw, uName);
 	alert(msg);
 	history.back();	
 <% } %>
-
 </script>
