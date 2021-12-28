@@ -195,12 +195,12 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 				</tr>			
 				<tr>
 					<td>우편번호</td>
-					<td><%=uZip%></td>
+					<td><%=%></td>
 					<td>우편번호를 검색하세요.</td>
 				</tr>
 				<tr>
 					<td>주소</td>
-					<td><%=uAddr %></td>
+					<td><%=%></td>
 					<td></td>
 				</tr>
 				<tr>
