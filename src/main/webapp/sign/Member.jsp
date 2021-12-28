@@ -14,7 +14,7 @@
         <!-- 헤더 시작 -->
         <header id="header" class="flex-container">
             <div id="headerLogo">
-                <a href="#"><img src="../img/logo.png" alt="로고"></a>
+                <a href="#"><img src="../img/logo.png" width="45%" height="45%" alt="로고"></a>
             </div>
             <div id="headerRight">
                 <ul class="flex-container">
@@ -34,7 +34,7 @@
         <!-- 네비시작 -->
         <nav id="gnb">
             <ul class="flex-container">
-                <li class="active"><a href="../index.html">Home</a></li>
+                <li class="active"><a href="/Proj_OnedayClass/index.jsp">Home</a></li>
                 <li><a href="./about.html">About</a></li>
                 <li><a href="#">Online</a></li>
                 <li><a href="#">Offline</a></li>
@@ -114,15 +114,15 @@
                             <td colspan="2">
                                 <div id="chk" >
                                         <label>
-                                            <input type="checkbox" name="ageChk" id="ageChk">
+                                            <input type="checkbox" id="uChk1">
                                                 <span>만 14세 이상입니다.</span><br>
                                           </label> 
                                         <label>
-                                            <input type="checkbox" name="ageChk" id="ageChk">
+                                            <input type="checkbox" id="uChk2">
                                                 <span>이용약관에 동의합니다.</span><br>
                                         </label>
                                         <label>
-                                            <input type="checkbox" name="ageChk" id="ageChk">
+                                            <input type="checkbox" id="uChk3">
                                                 <span>개인정보수집·이용에 동의합니다.</span>
                                         </label>
                                 </div>        
@@ -130,7 +130,7 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <button type="button" id="joinBtn">회원가입</button>			
+                                <button type="button" id="joinBtn">동의하고 가입하기</button>			
                             </td>
                         </tr>
                     </tbody>
@@ -182,12 +182,13 @@
         //카카오 지도 발생
         new daum.Postcode({
             	oncomplete: function(data) { //선택시 입력값 세팅
-            	document.getElementById('uAddress1').value = data.zonecode;
+            	document.getElementById("uAddress1").value = data.zonecode;//우편번호
                 document.getElementById("uAddress2").value = data.address; // 주소 넣기
                 document.getElementById("uAddress3").focus(); //상세입력 포커싱
-            }
-        }).open();
-    });
-}
+            	}
+       		}).open();
+    	});
+	}
 	</script>
 	</html>
+	

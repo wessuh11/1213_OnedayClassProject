@@ -13,6 +13,7 @@ boolean res = mMgr.insertMember(bean);
 %>
 
 <script>
+
 <% if (res) { %>
 	alert("회원가입을 완료!");
 	location.href = "../sign/Login.jsp";
@@ -21,6 +22,7 @@ boolean res = mMgr.insertMember(bean);
     let msg = "회원가입중에 오류가 발생하였습니다. 다시 시도해주십시오.\n";
          msg += "만일 오류가 계속된다면 관리자에게 연락부탁드립니다.";
 	alert(msg);
-	history.back();	
-<% } %> 
+	history.back();
+<% } %>
+
 </script>

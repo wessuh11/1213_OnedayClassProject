@@ -1,5 +1,4 @@
 $(function(){
-			
 			//////////////  아이디 중복 검사 시작 //////////////////////			
 			function idCheck() {
 				
@@ -38,17 +37,20 @@ $(function(){
 			
 			
 			$("#joinBtn").click(function(){
+
 				
-								
 				let uIdBtnClickChk = $("#uIdBtnClickChk").val();
 				let uPw = $("#uPw").val();
 				let uPw_Re = $("#uPw_Re").val();
 				let uName = $("#uName").val();
 				let uPhone = $("#uPhone").val();
-				//let uAddress1 = $("#uAddress1").val();
-				//let uAddress2 = $("#uAddress2").val();
-				//let uAddress3 = $("#uAddress3").val();
+				let uAddress1 = $("#uAddress1").val();
+				let uAddress3 = $("#uAddress3").val();
 				let uEmail = $("#uEmail").val();
+				let uChk1 = $('#uChk1').is(':checked');
+				let uChk2 = $('#uChk2').is(':checked');
+				let uChk3 = $('#uChk3').is(':checked');
+				
 				
 				if(uIdBtnClickChk == 0) {    	// 아이디 검사 시작
 					alert("ID중복확인 버튼을 클릭하세요.");
@@ -73,12 +75,24 @@ $(function(){
 				} else if (uPhone == "") {     // 전화번호 검사 시작
 					alert("전화번호를 입력하세요.");
 					$("#uPhone").focus();
+				} else if (uAddress1 == "") {     // 주소 1검사 시작
+					alert("주소를 입력하세요.");
+					$("#uAddress1").focus();
+				} else if (uAddress3 == "") {     // 주소 3검사 시작
+					alert("상세주소를 입력하세요.");
+					$("#uAddress3").focus();
 				} else if (uEmail == "") {     // 이메일 검사 시작
 					alert("이메일을 입력하세요.");
 					$("#uEmail").focus();
 				} else if (uEmail.indexOf("@") < 0 || uEmail.indexOf(".") < 0) {     // 이메일 검사 시작
 					alert("이메일주소를 확인하세요.");
 					$("#uEmail").focus();
+				} else if (!uChk1) {     // 체크박스 여부 확인1
+					alert("만 14세 이상 동의 여부를 확인해주세요.");
+				} else if (!uChk2) {     // 체크박스 여부 확인2
+					alert("이용약관 동의 여부를 확인해주세요.");
+				} else if (!uChk3) {     // 체크박스 여부 확인3
+					alert("개인정보 수집 동의 여부를 확인해주세요.");
 				} else {
 					//$("#uAddress1").val(uAddress1);
 					//$("#uAddress2").val(uAddress2);
@@ -99,8 +113,5 @@ $(function(){
 			$("#mainBtn").click(function(){
 				location.href = "../index.jsp";
 			});
-			
-			
-			
 			
 		});	

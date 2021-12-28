@@ -19,9 +19,10 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 	String uPw = memBean.getuPw();
 	String uName = memBean.getuName();
 	String uPhone = memBean.getuPhone();
-	String uZip = memBean.getuZip();
-	String uAddr = memBean.getuAddr();
 	String uEmail = memBean.getuEmail();
+	String uAddress1 = memBean.getuAddress1();
+	String uAddress2 = memBean.getuAddress2();
+	String uAddress3 = memBean.getuAddress3();
 	%>
 
 
@@ -155,7 +156,6 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 	
 		<table>
 			<caption>회원정보 수정</caption>
-			<body>
 				<tr>
 					<td class="req">아이디</td>
 					<td><%=uId %></td>

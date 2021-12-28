@@ -10,7 +10,7 @@ String uJob = request.getParameter("uJob");
 <jsp:useBean id="mMgr" class="pack_Member.MemberMgr" scope="page" />
 <%
 String sessionUId = (String)session.getAttribute("idKey");
-boolean res = mMgr.modifyMember(uPw, uName, uJob, sessionUId);
+boolean res = mMgr.modifyMember(uPw, uName);
 %>
 
 <script>
@@ -22,5 +22,6 @@ boolean res = mMgr.modifyMember(uPw, uName, uJob, sessionUId);
          msg += "만일 오류가 계속된다면 관리자에게 연락부탁드립니다.";
 	alert(msg);
 	history.back();	
-<% } %> 
+<% } %>
+
 </script>

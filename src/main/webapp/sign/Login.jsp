@@ -14,15 +14,12 @@ String uId = (String)session.getAttribute("idKey");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
     <link rel="stylesheet" href="../style/sign.css">
-    <script src="../script/jquery-3.6.0.min.js"></script>
-	<script src="../script/script.js"></script>
-	<script src="../script/Login.js"></script>
 </head>
 <body>
     <div id="wrap">
         <header id="header" class="flex-container">
             <div id="headerLogo">
-                <a href="#"><img src="../img/logo.png" alt="로고"></a>
+                <a href="#"><img src="../img/logo.png" width="45%" height="45%" alt="로고"></a>
             </div>
 
             <div id="headerRight">
@@ -42,7 +39,7 @@ String uId = (String)session.getAttribute("idKey");
         <!-- 네비시작 -->
         <nav id="gnb">
             <ul class="flex-container">
-                <li class="active"><a href="../index.html">Home</a></li>
+                <li class="active"><a href="/Proj_OnedayClass/index.jsp">Home</a></li>
                 <li><a href="./about.html">About</a></li>
                 <li><a href="#">Online</a></li>
                 <li><a href="#">Offline</a></li>
@@ -56,7 +53,7 @@ String uId = (String)session.getAttribute("idKey");
 		 <h1><%=uId %></h1>
 		 <p>님 환영합니다.</p>
 		 
-		 <a href="../Index.jsp">메인으로</a>
+		 <a href="../index.jsp">메인으로</a>
 		 <a href="Logout.jsp">로그아웃</a>	
 		 <a href="Member_Mod.jsp">회원정보수정</a>		
 		 <a href="Member_Del.jsp">회원탈퇴</a>		
@@ -125,5 +122,7 @@ String uId = (String)session.getAttribute("idKey");
         <!-- footer#footer -->
     </div>
 </body>
-
+    <script src="../script/jquery-3.6.0.min.js"></script>
+	<script src="../script/script.js"></script>
+	<script src="../script/Login.js"></script>
 </html>

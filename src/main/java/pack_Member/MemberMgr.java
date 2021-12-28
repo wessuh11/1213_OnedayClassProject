@@ -130,6 +130,9 @@ public class MemberMgr {
 			objPstmt.setString(7, bean.getuAddress3());
 			objPstmt.setString(8, bean.getuEmail());
 			
+			int cnt = objPstmt.executeUpdate();
+			if (cnt > 0)
+				flag = true;
 
 		} catch (Exception e) {
 
@@ -271,7 +274,7 @@ public class MemberMgr {
 			pool.freeConnection(objConn, objPstmt);
 		}
 
-		return flag;
+			return flag;
 	}
 
 ///////////////////////////////////////////////////////////////////	
@@ -296,7 +299,7 @@ public class MemberMgr {
 			sql = "delete from memberlist where uId = ?";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setString(1, uId);
-
+			
 			int cnt = objPstmt.executeUpdate();
 			if (cnt > 0)
 				flag = true; // update가 정상실행되었음을 의미
@@ -311,7 +314,6 @@ public class MemberMgr {
 
 		return flag;
 	}
-
 ///////////////////////////////////////////////////////////////////	
 //////////////Member_Del.jsp 회원탈퇴 끝 ////////////////////
 ///////////////////////////////////////////////////////////////////
