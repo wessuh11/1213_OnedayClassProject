@@ -21,7 +21,7 @@ public class MemberMgr {
 /////////////   Member.jsp ID  중복확인 시작 /////////////////////
 ///////////////////////////////////////////////////////////////////
 
-	public boolean checkId(String uid) {
+	public boolean checkId(String uId) {
 
 		Connection objConn = null;
 		PreparedStatement objPstmt = null;
@@ -32,9 +32,9 @@ public class MemberMgr {
 
 		try {
 			objConn = pool.getConnection();
-			sql = "select uid from memberlist where uid=?";
+			sql = "select uId from memberlist where uId=?";
 			objPstmt = objConn.prepareStatement(sql);
-			objPstmt.setString(1, uid);
+			objPstmt.setString(1, uId);
 
 			flag = objPstmt.executeQuery().next();
 

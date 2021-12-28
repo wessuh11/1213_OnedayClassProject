@@ -29,15 +29,15 @@ window.onload = function(){
     <div id="wrap">
         <header id="header" class="flex-container">
             <div id="headerLogo">
-                <a href="/Proj_OnedayClass/index.html">
+                <a href="/Proj_OnedayClass/index.jsp">
                 <img src="/Proj_OnedayClass/img/onedaylogo.png" alt="로고"></a>
             </div>
 
             <div id="headerRight">
                 <ul class="flex-container">
-                    <li><a href="sign/Login.html">Sign In</a></li>
+                    <li><a href="/Proj_OnedayClass/sign/Login.jsp">Sign In</a></li>
                     <li></li>
-                    <li><a href="sign/Member.html">Sign Up</a></li>
+                    <li><a href="/Proj_OnedayClass/member/Join.jsp">Sign Up</a></li>
                     <li></li>
                     <li>
                         <div id="headerCart">
