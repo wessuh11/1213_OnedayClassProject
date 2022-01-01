@@ -255,7 +255,7 @@ public class MemberMgr {
 			objConn = pool.getConnection();
 
 			sql = "update memberlist set ";
-			sql += "uPw=?, uName=?, uJob=? ";
+			sql += "uPw=?, uName=?, uId=? ";
 			sql += "where uId = ?";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setString(1, uPw);
