@@ -30,10 +30,10 @@ $(function(){
 			
 			
 			$("#mainBtn").click(function(){   // 메인으로 이동				
-				location.href="../index.jsp";				
+				location.href="/Proj_OnedayClass/Index.jsp";				
 			});
 			$("#joinBtn").click(function(){   // 회원가입으로 이동				
-				location.href="../sign/Member.jsp";				
+				location.href="/Proj_OnedayClass/sign/Member.jsp";				
 			});
 			
 			

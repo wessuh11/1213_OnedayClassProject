@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Vector;
 
+import pack_DBCP.DBConnectionMgr;
+
 public class MemberMgr {
 
 	private DBConnectionMgr pool;
@@ -40,7 +42,7 @@ public class MemberMgr {
 
 		} catch (Exception e) {
 
-			System.out.println("SQL 이슈 : " + e.getMessage());
+			System.out.println("SQL 이슈1 : " + e.getMessage());
 
 		} finally {
 			pool.freeConnection(objConn, objPstmt, objRs);
@@ -52,56 +54,6 @@ public class MemberMgr {
 /////////////   Member.jsp ID  중복확인 끝 /////////////////////
 ///////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////	
-///////////// ZipCheck.jsp 우편번호 검색 시작 ////////////////////
-///////////////////////////////////////////////////////////////////	
-	/*public Vector<ZipCodeBean> zipCodeRead(String area3) {
-
-		Vector<ZipCodeBean> vList = new Vector<>();
-
-		Connection objConn = null;
-		PreparedStatement objPstmt = null;
-		ResultSet objRs = null;
-
-		String sql = null;
-
-		try {
-			objConn = pool.getConnection();
-			sql = "select * from tblZipCode where area3 like ?";
-			objPstmt = objConn.prepareStatement(sql);
-			objPstmt.setString(1, "%" + area3 + "%");
-
-			objRs = objPstmt.executeQuery();
-
-			if (objRs != null) {
-				while (objRs.next()) {
-
-					ZipCodeBean zipBean = new ZipCodeBean();
-
-					zipBean.setZipCode(objRs.getString("zipCode"));
-					zipBean.setArea1(objRs.getString("area1"));
-					zipBean.setArea2(objRs.getString("area2"));
-					zipBean.setArea3(objRs.getString("area3"));
-					zipBean.setArea4(objRs.getString("area4"));
-
-					vList.add(zipBean);
-
-				}
-			}
-
-		} catch (Exception e) {
-
-			System.out.println("SQL 이슈 : " + e.getMessage());
-
-		} finally {
-			pool.freeConnection(objConn, objPstmt, objRs);
-		}
-
-		return vList;
-	}*/
-///////////////////////////////////////////////////////////////////	
-///////////// ZipCheck.jsp 우편번호 검색 끝 //////////////////////
-///////////////////////////////////////////////////////////////////	
 
 ///////////////////////////////////////////////////////////////////	
 ///////////// MemberProc.jsp 회원가입 시작 //////////////////////
@@ -117,17 +69,17 @@ public class MemberMgr {
 			objConn = pool.getConnection();
 			sql = "insert into memberlist ";
 			sql += "(uId, uPw, uName, uPhone, ";
-			sql += "uAddress1, uAddress2, uAddress3, uEmail, m_grade, store_Name, m_sns)";
+			sql += "uZip, uAddr1, uAddr2, uEmail, uLevel, sName, sSns)";
 			sql += "values ";
-			sql += "(?, ?, ?, ?, ?, ?, ?, ?, 0, null, null)";
+			sql += "(?, ?, ?, ?, ?, ?, ?, ?, 1, null, null)";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setString(1, bean.getuId());
 			objPstmt.setString(2, bean.getuPw());
 			objPstmt.setString(3, bean.getuName());
 			objPstmt.setString(4, bean.getuPhone());
-			objPstmt.setString(5, bean.getuAddress1());
-			objPstmt.setString(6, bean.getuAddress2());
-			objPstmt.setString(7, bean.getuAddress3());
+			objPstmt.setString(5, bean.getuZip());
+			objPstmt.setString(6, bean.getuAddr1());
+			objPstmt.setString(7, bean.getuAddr2());
 			objPstmt.setString(8, bean.getuEmail());
 			
 			int cnt = objPstmt.executeUpdate();
@@ -136,7 +88,7 @@ public class MemberMgr {
 
 		} catch (Exception e) {
 
-			System.out.println("SQL 이슈 : " + e.getMessage());
+			System.out.println("SQL 이슈2 : " + e.getMessage());
 
 		} finally {
 			pool.freeConnection(objConn, objPstmt);
@@ -148,6 +100,43 @@ public class MemberMgr {
 ///////////////////////////////////////////////////////////////////	
 ///////////// MemberProc.jsp 회원가입 끝 //////////////////////
 ///////////////////////////////////////////////////////////////////
+	
+///////////// 로그인 사용자 이름 반환(Login.jsp) 시작 //////////////////////	
+	
+	public String[] getMemberStat(String uId) {
+
+		String[] uStat = new String[2];
+
+		Connection objConn = null;
+		PreparedStatement objPstmt = null;
+		ResultSet objRs = null;
+
+		String sql = null;
+
+		try {
+		objConn = pool.getConnection();
+		sql = "select uName, uLevel from memberlist where uId=?";
+		objPstmt = objConn.prepareStatement(sql);
+		objPstmt.setString(1, uId);
+
+		objRs = objPstmt.executeQuery();
+		if (objRs.next()) {
+		    uStat[0] = objRs.getNString(1);
+		    uStat[1] = objRs.getNString(2);
+		}
+
+		} catch (Exception e) {
+
+		System.out.println("SQL 이슈 : " + e.getMessage());
+
+		} finally {
+		pool.freeConnection(objConn, objPstmt, objRs);
+		}
+
+		return uStat;
+		}
+
+/////////// 로그인 사용자 이름 반환(Login.jsp) 끝 //////////////////////	
 
 ///////////////////////////////////////////////////////////////////	
 ///////////// LoginProc.jsp 로그인 시작 //////////////////////
@@ -173,7 +162,7 @@ public class MemberMgr {
 
 		} catch (Exception e) {
 
-			System.out.println("SQL 이슈 : " + e.getMessage());
+			System.out.println("SQL 이슈4 : " + e.getMessage());
 
 		} finally {
 			pool.freeConnection(objConn, objPstmt, objRs);
@@ -216,9 +205,9 @@ public class MemberMgr {
 					memBean.setuPw(objRs.getString("uPw"));
 					memBean.setuName(objRs.getString("uName"));
 					memBean.setuPhone(objRs.getString("uPhone"));
-					memBean.setuAddress1(objRs.getString("uAddress1"));
-					memBean.setuAddress2(objRs.getString("uAddress2"));
-					memBean.setuAddress3(objRs.getString("uAddress3"));
+					memBean.setuZip(objRs.getString("uZip"));
+					memBean.setuAddr1(objRs.getString("uAddr1"));
+					memBean.setuAddr2(objRs.getString("uAddr2"));
 					memBean.setuEmail(objRs.getString("uEmail"));
 
 					vList.add(memBean);
@@ -228,7 +217,7 @@ public class MemberMgr {
 
 		} catch (Exception e) {
 
-			System.out.println("SQL 이슈 : " + e.getMessage());
+			System.out.println("SQL 이슈5 : " + e.getMessage());
 
 		} finally {
 			pool.freeConnection(objConn, objPstmt, objRs);
@@ -255,7 +244,7 @@ public class MemberMgr {
 			objConn = pool.getConnection();
 
 			sql = "update memberlist set ";
-			sql += "uPw=?, uName=?, uId=? ";
+			sql += "uPw=?, uName=?";
 			sql += "where uId = ?";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setString(1, uPw);
@@ -268,7 +257,7 @@ public class MemberMgr {
 
 		} catch (Exception e) {
 
-			System.out.println("SQL 이슈 : " + e.getMessage());
+			System.out.println("SQL 이슈6 : " + e.getMessage());
 
 		} finally {
 			pool.freeConnection(objConn, objPstmt);
@@ -306,7 +295,7 @@ public class MemberMgr {
 
 		} catch (Exception e) {
 
-			System.out.println("SQL 이슈 : " + e.getMessage());
+			System.out.println("SQL 이슈7 : " + e.getMessage());
 
 		} finally {
 			pool.freeConnection(objConn, objPstmt);

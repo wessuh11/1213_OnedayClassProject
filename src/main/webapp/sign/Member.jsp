@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%
+request.setCharacterEncoding("UTF-8");
+String uId = (String)session.getAttribute("idKey");
+%>  
+    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -7,20 +13,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
-    <link rel="stylesheet" href="../style/member.css">
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/member.css">
 </head>
 <body>
+
     <div id="wrap">
         <!-- 헤더 시작 -->
         <header id="header" class="flex-container">
             <div id="headerLogo">
-                <a href="#"><img src="../img/logo.png" width="45%" height="45%" alt="로고"></a>
+                <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
             </div>
             <div id="headerRight">
                 <ul class="flex-container">
-                    <li><a href="../sign/Login.jsp">Sign In</a></li>
+                    <li><a href="/Proj_OnedayClass/sign/Login.jsp">Sign In</a></li>
                     <li></li>
-                    <li><a href="../sign/Member.jsp">Sign Up</a></li>
+                    <li><a href="/Proj_OnedayClass/sign/Member.jsp">Sign Up</a></li>
                     <li></li>
                     <li>
                         <div id="headerCart">
@@ -33,12 +40,18 @@
         <!-- 헤더 끝 -->
         <!-- 네비시작 -->
         <nav id="gnb">
-            <ul class="flex-container">
-                <li class="active"><a href="/Proj_OnedayClass/index.jsp">Home</a></li>
+           <ul class="flex-container">
+                <li><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
                 <li><a href="./about.html">About</a></li>
                 <li><a href="#">Online</a></li>
                 <li><a href="#">Offline</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                  <li>
+                <% if (uId == null) { %> 
+					<a href="/Proj_OnedayClass/sign/Login.jsp" onclick="alert('로그인이 필요합니다.');">QnA</a>
+				<%  } else { %> 
+					<a href="/Proj_OnedayClass/bbs/List.jsp">QnA</a>
+				<% } %>
+                </li>
             </ul>
         </nav>
         <!-- 네비끝 -->
@@ -85,20 +98,20 @@
                         <tr><td class="req">주소</td></tr>
                         <tr>
                             <td>
-                                <input type="text" name="uAddress1" id="uAddress1" size="25" 
+                                <input type="text" name="uZip" id="uZip" size="25" 
                                 class="umem" readonly placeholder="우편번호">
                                 <button type="button" id="uAddress">우편번호찾기</button>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" class="umem" id="uAddress2" name="uAddress2" size="40"
+                                <input type="text" class="umem" id="uAddr1" name="uAddr1" size="40"
                                 readonly placeholder="주소">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" class="umem" id="uAddress3" name="uAddress3" size="40"
+                                <input type="text" class="umem" id="uAddr2" name="uAddr2" size="40"
                                 placeholder="상세주소를 입력해주세요.">
               
                             </td>
@@ -113,10 +126,14 @@
                         <tr>
                             <td colspan="2">
                                 <div id="chk" >
+                                		<label>
+                                        	<input type="checkbox" id="allChk">
+                                        		<span>전부 동의합니다.</span><br><br>
+                                    	</label>
                                         <label>
                                             <input type="checkbox" id="uChk1">
                                                 <span>만 14세 이상입니다.</span><br>
-                                          </label> 
+                                          </label>
                                         <label>
                                             <input type="checkbox" id="uChk2">
                                                 <span>이용약관에 동의합니다.</span><br>
@@ -172,9 +189,9 @@
         <!-- footer#footer -->
     </div>
 </body>
-    <script src="../script/jquery-3.6.0.min.js"></script>
-	<script src="../script/script.js"></script>
-    <script src="../script/Member.js"></script>
+    <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
+	<script src="/Proj_OnedayClass/script/script.js"></script>
+    <script src="/Proj_OnedayClass/script/member.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script>
 	window.onload = function(){
@@ -182,9 +199,9 @@
         //카카오 지도 발생
         new daum.Postcode({
             	oncomplete: function(data) { //선택시 입력값 세팅
-            	document.getElementById("uAddress1").value = data.zonecode;//우편번호
-                document.getElementById("uAddress2").value = data.address; // 주소 넣기
-                document.getElementById("uAddress3").focus(); //상세입력 포커싱
+            	document.getElementById("uZip").value = data.zonecode;//우편번호
+                document.getElementById("uAddr1").value = data.address; // 주소 넣기
+                document.getElementById("uAddr2").focus(); //상세입력 포커싱
             	}
        		}).open();
     	});

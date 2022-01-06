@@ -13,20 +13,21 @@ String uId = (String)session.getAttribute("idKey");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
-    <link rel="stylesheet" href="../style/sign.css">
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/sign.css">
 </head>
 <body>
     <div id="wrap">
+    
         <header id="header" class="flex-container">
             <div id="headerLogo">
-                <a href="#"><img src="../img/logo.png" width="45%" height="45%" alt="로고"></a>
+                <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
             </div>
 
             <div id="headerRight">
                 <ul class="flex-container">
-                    <li><a href="../sign/Login.jsp">Sign In</a></li>
+                    <li><a href="/Proj_OnedayClass/sign/Login.jsp">Sign In</a></li>
                     <li></li>
-                    <li><a href="../sign/Member.jsp">Sign Up</a></li>
+                    <li><a href="/Proj_OnedayClass/sign/Member.jsp">Sign Up</a></li>
                     <li></li>
                     <li>
                         <div id="headerCart">
@@ -39,26 +40,22 @@ String uId = (String)session.getAttribute("idKey");
         <!-- 네비시작 -->
         <nav id="gnb">
             <ul class="flex-container">
-                <li class="active"><a href="/Proj_OnedayClass/index.jsp">Home</a></li>
+                <li><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
                 <li><a href="./about.html">About</a></li>
                 <li><a href="#">Online</a></li>
                 <li><a href="#">Offline</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                  <li>
+                <% if (uId == null) { %> 
+					<a href="/Proj_OnedayClass/sign/Login.jsp" onclick="alert('로그인이 필요합니다.');">QnA</a>
+				<%  } else { %> 
+					<a href="/Proj_OnedayClass/bbs/List.jsp">QnA</a>
+				<% } %>
+                </li>
             </ul>
         </nav>
         <!-- 네비끝 -->
         <!-- 로그인시작 -->
-        	<% if (uId != null) {   // 현재 로그인 상태라면  %>
-		
-		 <h1><%=uId %></h1>
-		 <p>님 환영합니다.</p>
-		 
-		 <a href="../index.jsp">메인으로</a>
-		 <a href="Logout.jsp">로그아웃</a>	
-		 <a href="Member_Mod.jsp">회원정보수정</a>		
-		 <a href="Member_Del.jsp">회원탈퇴</a>		
-		
-		<% } else { %>
+       
         <div id="signin">
         <form action="LoginProc.jsp" id="loginFrm" name="loginFrm">
 			<table>
@@ -85,7 +82,6 @@ String uId = (String)session.getAttribute("idKey");
 				</tbody>
 			</table>
 		</form>
-		   <% } %>
         </div>
         <!-- 로그인끝 -->
         <footer id="footer">
@@ -123,6 +119,6 @@ String uId = (String)session.getAttribute("idKey");
     </div>
 </body>
     <script src="../script/jquery-3.6.0.min.js"></script>
-	<script src="../script/script.js"></script>
-	<script src="../script/Login.js"></script>
+	<script src="/Proj_OnedayClass/script/script.js"></script>
+	<script src="/Proj_OnedayClass/script/login.js"></script>
 </html>

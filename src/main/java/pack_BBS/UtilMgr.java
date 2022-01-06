@@ -1,4 +1,4 @@
-package pack_Board;
+package pack_BBS;
 
 public class UtilMgr {
 	

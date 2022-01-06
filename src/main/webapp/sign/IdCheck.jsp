@@ -17,7 +17,7 @@ boolean result = mMgr.checkId(uId);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>ID 중복체크</title>
-    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/sign.css">
     <style>
 	   	div#wrap{
 			width: 100%;
@@ -42,7 +42,6 @@ boolean result = mMgr.checkId(uId);
 		div#wrap button:hover{
 			opacity: 100%;	
 		}
-		
     </style>
     <script>
     function fnClose() {    	
@@ -70,6 +69,6 @@ boolean result = mMgr.checkId(uId);
 	<!-- div#wrap -->
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="../script/script.js"></script>    
+	<script src="/Proj_OnedayClass/script/script.js"></script>  
 </body>
 </html>

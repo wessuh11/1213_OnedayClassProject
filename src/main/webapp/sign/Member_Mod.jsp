@@ -7,25 +7,23 @@
 <%
 String sessionUId = (String)session.getAttribute("idKey");
 Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
+String uName = (String)session.getAttribute("nameKey");
+String uLevel = (String)session.getAttribute("levelKey");
 %>  
 
 <% if (sessionUId != null) {   // 현재 로그인 상태라면  %>
 <!-- ////////////////  로그인 상태 시작  ////////////////// -->
 
-
 	<%
 	MemberBean memBean = (MemberBean)vList.get(0);
 	String uId = memBean.getuId();
 	String uPw = memBean.getuPw();
-	String uName = memBean.getuName();
 	String uPhone = memBean.getuPhone();
 	String uEmail = memBean.getuEmail();
-	String uAddress1 = memBean.getuAddress1();
-	String uAddress2 = memBean.getuAddress2();
-	String uAddress3 = memBean.getuAddress3();
+	String uZip = memBean.getuZip();
+	String uAddr1 = memBean.getuAddr1();
+	String uAddr2 = memBean.getuAddr2();
 	%>
-
-
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -34,124 +32,67 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>회원정보 수정</title>
-	<style>
-	* {
-		box-sizing: border-box;
-	}
-	div#wrap {
-		width: 680px;
-		padding: 10px;
-		border: 1px solid #000;
-		margin: 10px auto;
-	}
-	
-	table {
-		width: 100%;
-		/*border: 1px solid #000;*/
-	}
-	th, td {
-		padding: 10px 6px;
-/*		border: 1px solid #000;  */
-	}
-	table>caption {
-		font-size: 24px;
-		font-weight: bold;
-		padding: 20px;
-		border-bottom: 2px solid #ddd;
-	}
-	
-	tr:last-child td {
-		text-align: center;
-	}
-	td:first-child {
-		width: 120px;
-		text-align: right;
-	}
-	input {
-		font-size: 15px;
-		padding: 4px 10px;
-	}
-	input.uAddr {
-		border: none;
-		border-bottom: 1px solid #ddd;
-		outline: none;
-	}
-	td#hobbyArea span:hover {
-		color: #555;
-		cursor: pointer;
-	}
-	
-	td.req::after {   /* 입력 필수 */
-		content: " *";
-		color: #f80;
-		font-size: 20px;
-	}
-	
-	button {
-		font-size: 14px;
-		font-weight: bold;
-		padding: 4px 10px;
-		cursor: pointer;
-		transform: translateY(1px);
-	}
-	
-	select {
-		font-size: 18px;
-		transform: translateY(2px);
-		
-	}
-	
-	
-	</style>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script>
-		$(function(){
-			
-			
-			////////////// 유효성 검사 시작 //////////////////////
-			
-			$("#modBtn").click(function(){
-				
-				let uPw = $("#uPw").val();
-				let uPw_Re = $("#uPw_Re").val();
-				let uName = $("#uName").val();
-				
-				if (uPw == "") {     // 비밀번호 검사 시작
-					alert("비밀번호를 입력하세요.");
-					$("#uPw").focus();
-				} else if (uPw != uPw_Re) {     // 비밀번호 동일검사 시작
-					alert("비밀번호가 다릅니다. 확인 후 다시 입력하세요.");
-					$("#uPw_Re").val("");
-					$("#uPw").focus();
-				} else if (uName == "") {     // 이름 검사 시작
-					alert("이름을 입력하세요.");
-					$("#uName").focus();
-				} else {
-					$("#modFrm").submit();
-				}
-				
-			});
-			////////////// 유효성 검사 끝 //////////////////////
-			
+	<link rel="stylesheet" href="/Proj_OnedayClass/style/member.css">
 
-			///////////  로그인 페이지 이동 시작 ////////////////
-			$("#logoutBtn").click(function(){
-				location.href = "Logout.jsp";
-			});
-
-			///////////  메인 페이지 이동 시작 ////////////////
-			$("#mainBtn").click(function(){
-				location.href = "../Index.jsp";
-			});
-			
-			
-			
-		});	
-	</script>
 </head>
 <body>
 	<div id="wrap">
-	
+	 <% if (uId != null) {   // 현재 로그인 상태라면  %>
+        <header id="header" class="flex-container">
+            <div id="headerLogo">
+                <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
+            </div>
+
+            <div id="headerRight">
+                <ul class="flex-container">
+                    <li><a href="/Proj_OnedayClass/sign/Member_Mod.jsp"><%=uName %> / 등급 : <%=uLevel %></a></li>
+                    <li></li>
+                    <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
+                    <li></li>
+                    <li>
+                        <div id="headerCart">
+                            <a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+	<% } else { %>
+        <header id="header" class="flex-container">
+            <div id="headerLogo">
+                <a href="/Proj_OnedayClass/index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
+            </div>
+
+            <div id="headerRight">
+                <ul class="flex-container">
+                    <li><a href="/Proj_OnedayClass/sign/Login.jsp">Sign In</a></li>
+                    <li></li>
+                    <li><a href="/Proj_OnedayClass/sign/Member.jsp">Sign Up</a></li>
+                    <li></li>
+                    <li>
+                        <div id="headerCart">
+                            <a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <%} %>
+        <nav id="gnb">
+            <ul class="flex-container">
+                <li class="active"><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
+                <li><a href="./about.html">About</a></li>
+                <li><a href="#">Online</a></li>
+                <li><a href="#">Offline</a></li>
+                  <li>
+                <% if (uId == null) { %> 
+					<a href="/Proj_OnedayClass/sign/Login.jsp" onclick="alert('로그인이 필요합니다.');">QnA</a>
+				<%  } else { %> 
+					<a href="/Proj_OnedayClass/bbs/List.jsp" id="listBtn">QnA</a>
+				<% } %>
+                </li>
+            </ul>
+        </nav>
 	<form name="modFrm" id="modFrm" action="Member_ModProc.jsp" method="get">
 	
 		<table>
@@ -195,13 +136,18 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 				</tr>			
 				<tr>
 					<td>우편번호</td>
-					<td><%=%></td>
+					<td><%=uZip%></td>
 					<td>우편번호를 검색하세요.</td>
 				</tr>
 				<tr>
 					<td>주소</td>
-					<td><%=%></td>
+					<td><%=uAddr1%></td>
 					<td></td>
+				</tr>
+				<tr>
+					<td>상세주소</td>
+					<td><%=uAddr2%></td>
+					<td>우편번호를 검색하세요.</td>
 				</tr>
 				<tr>
 					<td colspan="3">
@@ -222,7 +168,25 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 	<!-- div#wrap -->
 	
 	
-	<script src="script/script.js"></script>    
+    <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
+	<script src="/Proj_OnedayClass/script/script.js"></script>
+	<script src="/Proj_OnedayClass/script/member.js"></script>
+	    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	window.onload = function(){
+    document.getElementById("uAddress").addEventListener("click", function(){ //주소입력칸을 클릭하면
+        //카카오 지도 발생
+        new daum.Postcode({
+            	oncomplete: function(data) { //선택시 입력값 세팅
+            	document.getElementById("uZip").value = data.zonecode;//우편번호
+                document.getElementById("uAddr1").value = data.address; // 주소 넣기
+                document.getElementById("uAddr2").focus(); //상세입력 포커싱
+            	}
+       		}).open();
+    	});
+	}
+	</script>
+	
 </body>
 </html>   
 

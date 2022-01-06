@@ -6,9 +6,9 @@ public class MemberBean {
 	private String uPw;
 	private String uName;
 	private String uPhone;
-	private String uAddress1;
-	private String uAddress2;
-	private String uAddress3;
+	private String uZip;
+	private String uAddr1;
+	private String uAddr2;
 	private String uEmail;
 		
 	public String getuId() {
@@ -39,26 +39,24 @@ public class MemberBean {
 		this.uPhone = uPhone;
 		System.out.println("번호");
 	}
-	public String getuAddress1() {
-		return uAddress1;
+	
+	public String getuZip() {
+		return uZip;
 	}
-	public void setuAddress1(String uAddress1) {
-		this.uAddress1 = uAddress1;
-		System.out.println("주소1");
+	public void setuZip(String uZip) {
+		this.uZip = uZip;
 	}
-	public String getuAddress2() {
-		return uAddress2;
+	public String getuAddr1() {
+		return uAddr1;
 	}
-	public void setuAddress2(String uAddress2) {
-		this.uAddress2 = uAddress2;
-		System.out.println("주소2");
+	public void setuAddr1(String uAddr1) {
+		this.uAddr1 = uAddr1;
 	}
-	public String getuAddress3() {
-		return uAddress3;
+	public String getuAddr2() {
+		return uAddr2;
 	}
-	public void setuAddress3(String uAddress3) {
-		this.uAddress3 = uAddress3;
-		System.out.println("주소3");
+	public void setuAddr2(String uAddr2) {
+		this.uAddr2 = uAddr2;
 	}
 	public String getuEmail() {
 		return uEmail;
