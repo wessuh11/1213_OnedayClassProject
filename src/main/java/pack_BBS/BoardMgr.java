@@ -22,7 +22,7 @@ import pack_DBCP.DBConnectionMgr;
 public class BoardMgr {
 
 	private DBConnectionMgr pool;
-	private static final String SAVEFOLER = "E:/Project/1213_OnedayClassProject/src/main/webapp/bbs/fileUpload";
+	private static final String SAVEFOLER = "E:/IT/Team Project (Oneday Class)/Proj_OnedayClass/src/main/webapp/fileUpload";
 	// 수식어 static final 이 함께 사용된 필드를 상수필드라고함.
 	// 상수필드는 선언과 동시에 반드시 초기화해야 함.
 	// 필드명은 모두 대문자, 단어간 연결은 밑줄

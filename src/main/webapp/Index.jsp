@@ -19,37 +19,23 @@ String uLevel = (String)session.getAttribute("levelKey");
 </head>
 <body>
 	<div id="wrap">
-    <% if (uId != null) {   // 현재 로그인 상태라면  %>
         <header id="header" class="flex-container">
             <div id="headerLogo">
                 <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
             </div>
+            <!-- div#headerLogo -->
 
             <div id="headerRight">
                 <ul class="flex-container">
-                    <li><a href="/Proj_OnedayClass/sign/Member_Mod.jsp"><%=uName %> / 등급 : <%=uLevel %></a></li>
+    <% if (uId != null) {   // 현재 로그인 상태라면  %>
+                    <li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName %> / 등급 : <%=uLevel %></a></li>
                     <li></li>
                     <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-                    <li></li>
-                    <li>
-                        <div id="headerCart">
-                            <a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </header>
 	<% } else { %>
-        <header id="header" class="flex-container">
-            <div id="headerLogo">
-                <a href="/Proj_OnedayClass/index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
-            </div>
-
-            <div id="headerRight">
-                <ul class="flex-container">
-                    <li><a href="/Proj_OnedayClass/sign/Login.jsp">Sign In</a></li>
+					<li><a href="/Proj_OnedayClass/sign/Login.jsp">Sign In</a></li>
                     <li></li>
                     <li><a href="/Proj_OnedayClass/sign/Member.jsp">Sign Up</a></li>
+	<%} %>
                     <li></li>
                     <li>
                         <div id="headerCart">
@@ -58,26 +44,21 @@ String uLevel = (String)session.getAttribute("levelKey");
                     </li>
                 </ul>
             </div>
+            <!-- div#headerRight -->
         </header>
-        <%} %>
+        <!-- header#header -->
+        
         <nav id="gnb">
             <ul class="flex-container">
                 <li class="active"><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
                 <li><a href="./about.html">About</a></li>
                 <li><a href="#">Online</a></li>
                 <li><a href="#">Offline</a></li>
-                  <li>
-                <% if (uId == null) { %> 
-					<a href="/Proj_OnedayClass/sign/Login.jsp" onclick="alert('로그인이 필요합니다.');">QnA</a>
-				<%  } else { %> 
-					<a href="/Proj_OnedayClass/bbs/List.jsp" id="listBtn">QnA</a>
-				<% } %>
-                </li>
             </ul>
         </nav>
+        <!-- nav#gnb -->
 
         <div id="slide">
-
             <div id="shuttleFrame" class="flex-container">
                 <!-- 가로형에서는 이미지전체개수의 폭-->
                 <!-- 셔틀프레임이 좌우로 이동하면서 슬라이드쇼가 구현된다 -->
@@ -105,9 +86,9 @@ String uLevel = (String)session.getAttribute("levelKey");
             <!-- 슬라이드쇼 방향키 끝 -->
 
         </div>
+        <!-- div#slide -->
 
         <footer id="footer">
-
             <div id="footerTop" class="flex-container">
                 <nav id="footerLnbArea">
                     <ul id="footermainMenu" class="flex-container">
@@ -135,6 +116,7 @@ String uLevel = (String)session.getAttribute("levelKey");
                 </nav>
                 <!-- nav#footerArea -->
             </div>
+            <!-- div#footerBottom -->
 
         </footer>
         <!-- footer#footer -->

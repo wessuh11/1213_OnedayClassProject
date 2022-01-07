@@ -6,9 +6,9 @@
     
 <%
 String sessionUId = (String)session.getAttribute("idKey");
-Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
+Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 %>  
 
 <% if (sessionUId != null) {   // 현재 로그인 상태라면  %>
@@ -45,7 +45,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 
             <div id="headerRight">
                 <ul class="flex-container">
-                    <li><a href="/Proj_OnedayClass/sign/Member_Mod.jsp"><%=uName %> / 등급 : <%=uLevel %></a></li>
+                    <li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName %> / 등급 : <%=uLevel %></a></li>
                     <li></li>
                     <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
                     <li></li>
@@ -84,13 +84,6 @@ String uLevel = (String)session.getAttribute("levelKey");
                 <li><a href="./about.html">About</a></li>
                 <li><a href="#">Online</a></li>
                 <li><a href="#">Offline</a></li>
-                  <li>
-                <% if (uId == null) { %> 
-					<a href="/Proj_OnedayClass/sign/Login.jsp" onclick="alert('로그인이 필요합니다.');">QnA</a>
-				<%  } else { %> 
-					<a href="/Proj_OnedayClass/bbs/List.jsp" id="listBtn">QnA</a>
-				<% } %>
-                </li>
             </ul>
         </nav>
 	<form name="modFrm" id="modFrm" action="Member_ModProc.jsp" method="get">
@@ -118,11 +111,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 				</tr>
 				<tr>
 					<td class="req">이름</td>
-					<td>
-						<input type="text" name="uName" id="uName" size="15"
-						   value="<%=uName%>">
-					</td>
-					<td>이름을 적어주세요.</td>
+					<td><%=uName%></td>
 				</tr>
 				<tr>
 					<td class="req">Email</td>
@@ -135,19 +124,23 @@ String uLevel = (String)session.getAttribute("levelKey");
 					<td colspan="3" style="border-bottom: 2px solid #ddd;"></td>
 				</tr>			
 				<tr>
-					<td>우편번호</td>
-					<td><%=uZip%></td>
-					<td>우편번호를 검색하세요.</td>
+					<td>
+						<input type="text" name="uZip" id="uZip" size="25" 
+						class="umem" readonly value="<%=uZip%>">
+						<button type="button" id="uAddress">우편번호찾기</button>
+					</td>
 				</tr>
 				<tr>
-					<td>주소</td>
-					<td><%=uAddr1%></td>
-					<td></td>
+					<td>
+						<input type="text" class="umem" id="uAddr1" name="uAddr1" size="40"
+						readonly value="<%=uAddr1%>">
+					</td>
 				</tr>
 				<tr>
-					<td>상세주소</td>
-					<td><%=uAddr2%></td>
-					<td>우편번호를 검색하세요.</td>
+					<td>
+						<input type="text" class="umem" id="uAddr2" name="uAddr2" size="40"
+						value="<%=uAddr2%>">
+				</td>
 				</tr>
 				<tr>
 					<td colspan="3">
@@ -171,21 +164,7 @@ String uLevel = (String)session.getAttribute("levelKey");
     <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
 	<script src="/Proj_OnedayClass/script/script.js"></script>
 	<script src="/Proj_OnedayClass/script/member.js"></script>
-	    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script>
-	window.onload = function(){
-    document.getElementById("uAddress").addEventListener("click", function(){ //주소입력칸을 클릭하면
-        //카카오 지도 발생
-        new daum.Postcode({
-            	oncomplete: function(data) { //선택시 입력값 세팅
-            	document.getElementById("uZip").value = data.zonecode;//우편번호
-                document.getElementById("uAddr1").value = data.address; // 주소 넣기
-                document.getElementById("uAddr2").focus(); //상세입력 포커싱
-            	}
-       		}).open();
-    	});
-	}
-	</script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 </body>
 </html>   

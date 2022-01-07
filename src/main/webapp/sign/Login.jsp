@@ -44,13 +44,6 @@ String uId = (String)session.getAttribute("idKey");
                 <li><a href="./about.html">About</a></li>
                 <li><a href="#">Online</a></li>
                 <li><a href="#">Offline</a></li>
-                  <li>
-                <% if (uId == null) { %> 
-					<a href="/Proj_OnedayClass/sign/Login.jsp" onclick="alert('로그인이 필요합니다.');">QnA</a>
-				<%  } else { %> 
-					<a href="/Proj_OnedayClass/bbs/List.jsp">QnA</a>
-				<% } %>
-                </li>
             </ul>
         </nav>
         <!-- 네비끝 -->

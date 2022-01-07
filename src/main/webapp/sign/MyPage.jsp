@@ -1,39 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%
 request.setCharacterEncoding("UTF-8");
 String uId = (String)session.getAttribute("idKey");
-%>
+String uName = (String)session.getAttribute("nameKey");
+String uLevel = (String)session.getAttribute("levelKey");
+%>  
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>마이페이지</title>
+    <title>Document</title>
     <link rel="stylesheet" href="/Proj_OnedayClass/style/style.css">
     <link rel="stylesheet" href="/Proj_OnedayClass/style/myPage.css">
 </head>
-<body>
-     <% if (uId != null) {   // 현재 로그인 상태라면  %>
-    <div id="wrap">
-        <!-- header#header -->
+<body>  
+	<div id="wrap">
         <header id="header" class="flex-container">
             <div id="headerLogo">
-                <a href="#"><img src="../img/logo.png" alt="로고"></a>
+                <a href="#"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
             </div>
 
             <div id="headerRight">
-                <ul class="flex-container" id="Hello">
-                     <li>
-                     <b><a href="/Proj_OnedayClass/myPage/myPage.jsp"><%=uId %>님 환영합니다</a></b>
-                     </li>
+                <ul class="flex-container">
+					<% if (uId != null) {   // 현재 로그인 상태라면  %>
+					<li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName %> / 등급 : <%=uLevel %></a></li>
                     <li></li>
-                    <li><a href="/Proj_OnedayClass/member/Logout.jsp">로그아웃</a></li>
+                    <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
                     <li></li>
                     <li>
                         <div id="headerCart">
-                            <a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
+                            <a href="#"><img src="/Proj_OnedayClass/img/cart.png" alt=""> <span>0</span></a>
                         </div>
                     </li>
                 </ul>
@@ -42,10 +43,10 @@ String uId = (String)session.getAttribute("idKey");
 
         <nav id="gnb">
             <ul class="flex-container">
-                <li ><a href="./index.html">Home</a></li>
+                <li class="active"><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
                 <li><a href="#">About</a></li>
-                <li><a href="/Proj_OnedayClass/shop/on-shop.html">Online</a></li>
-                <li><a href="/Proj_OnedayClass/shop/off-shop.html">Offline</a></li>
+                <li><a href="/Proj_OnedayClass/on-shop.html">Online</a></li>
+                <li><a href="/Proj_OnedayClass/off-shop.html">Offline</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </nav>
@@ -53,11 +54,10 @@ String uId = (String)session.getAttribute("idKey");
         <div id="pageMenu">
             <ul id="myPageMenu" class="flex-container">
                 <li class="myPageMenuLi">
-                    <a href="#"><img src="/Proj_OnedayClass/img/myPage/blank-profile.png" alt="프로필 설정" width="150"></a>
+                    <a href="#"><img src="../img/myPage/blank-profile.png" alt="프로필 설정" width="150"></a>
                 </li>
                 <li class="myPageMenuLi">
-                    <Strong id="uName">
-                    <%=uId %></Strong>
+                    <Strong id="uName">쭈피디</Strong>
                     <button type="button" id="profileModBtn">편집</button>
                 </li>
                 <li class="myPageMenuLi">
@@ -95,8 +95,8 @@ String uId = (String)session.getAttribute("idKey");
                         <a href="#">내 정보 관리</a>
                         <div id="subMenu2" class="subContainer">
                             <ul class="subMenu flex-container">
-                                <li class="subMenuLi"><a href="/Proj_OnedayClass/member/Member_Mod.jsp" id="memModBtn">회원 정보 수정</a></li>
-                                <li class="subMenuLi"><a href="/Proj_OnedayClass/member/Member_Del.jsp" id="memDrop">회원 탈퇴</a></li>
+                                <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_PreMod.jsp" id="memModBtn">회원 정보 수정</a></li>
+                                <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Del.jsp" id="memDrop">회원 탈퇴</a></li>
                             </ul>
                         </div>
                     </li>
@@ -236,17 +236,16 @@ String uId = (String)session.getAttribute("idKey");
         </footer>
         <!-- footer#footer -->
     </div>
+
 	<% } else { %>
-	
 	<script>
 		alert("비정상적인 접속입니다.\n"
-				 +"메인페이지로 이동합니다."); 
-		           // 현재 메인페이지는 없기 때문에 로그인페이지로 이동
-		location.href="/Proj_OnedayClass/index.jsp"; 
-	
+			+"메인페이지로 이동합니다."); 
+		// 현재 메인페이지는 없기 때문에 로그인페이지로 이동
+		location.href="/Proj_OnedayClass/Index.jsp";
 	</script>
-	
-	<% } %>
+	<%} %>
+
     <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
     <script src="/Proj_OnedayClass/script/script.js"></script>
 </body>
