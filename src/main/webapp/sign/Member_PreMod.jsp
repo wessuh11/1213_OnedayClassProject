@@ -4,6 +4,8 @@
 <%
 request.setCharacterEncoding("UTF-8");
 String uId = (String)session.getAttribute("idKey");
+String uName = (String)session.getAttribute("nameKey");
+String uLevel = (String)session.getAttribute("levelKey");
 %>  
 
 <!DOCTYPE html>
@@ -25,9 +27,9 @@ String uId = (String)session.getAttribute("idKey");
 
             <div id="headerRight">
                 <ul class="flex-container">
-                    <li><a href="/Proj_OnedayClass/sign/Login.jsp">Sign In</a></li>
+                    <li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName %> / 등급 : <%=uLevel %></a></li>
                     <li></li>
-                    <li><a href="/Proj_OnedayClass/sign/Member.jsp">Sign Up</a></li>
+                    <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
                     <li></li>
                     <li>
                         <div id="headerCart">
@@ -50,15 +52,16 @@ String uId = (String)session.getAttribute("idKey");
         <!-- 로그인시작 -->
        
         <div id="signin">
-        <form action="LoginProc.jsp" id="loginFrm" name="loginFrm">
+        <form action="Member_PreModProc.jsp" id="loginFrm" name="loginFrm">
 			<table>
-				<caption><hr><h3>로그인</h3></caption>
+				<caption><hr><h3>회원정보 확인</h3></caption>
 				<tbody>
 					<tr>
-						<td>
-							<input type="text" class="loginInput" name="uId" id="uId" autofocus size="30"
-                            placeholder="아이디">
-						</td>
+						<th>
+							<%=uId %>
+							<input type="hidden" class="loginInput" name="uId" id="uId" autofocus size="30"
+                            value="<%=uId %>">
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -68,8 +71,7 @@ String uId = (String)session.getAttribute("idKey");
 					</tr>
 					<tr>
 						<td colspan="2">						
-							<button type="button" id="loginBtn">로그인</button>
-							<button type="button" id="signUpBtn">회원가입</button>
+							<button type="button" id="loginBtn">확인</button>
 						</td>						
 					</tr>
 				</tbody>

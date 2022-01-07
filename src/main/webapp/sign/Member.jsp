@@ -58,8 +58,8 @@ String uId = (String)session.getAttribute("idKey");
 		                    <td>
 		                        <input type="text" id="uId" name="uId" size="27" class="umem"
 		                        maxlength="20" autofocus  placeholder="아이디를 입력해주세요.">
-		                <button type="button" id="idChkBtn">ID중복확인</button>
-		                <input type="hidden" name="uIdBtnClickChk" id="uIdBtnClickChk" value="0">
+				                <button type="button" id="idChkBtn">ID중복확인</button>
+				                <input type="hidden" name="uIdBtnClickChk" id="uIdBtnClickChk" value="0">
 		                    </td>
 		                </tr>
 		                <tr><td class="req">패스워드</td></tr>
@@ -92,7 +92,7 @@ String uId = (String)session.getAttribute("idKey");
 		                    <td>
 		                        <input type="text" name="uZip" id="uZip" size="25" 
 		                        class="umem" readonly placeholder="우편번호">
-		                        <button type="button" id="uAddress">우편번호찾기</button>
+		                        <button type="button" id="zipBtn">우편번호찾기</button>
 		                    </td>
 		                </tr>
 		                <tr>

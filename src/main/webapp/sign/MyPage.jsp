@@ -54,10 +54,10 @@ String uLevel = (String)session.getAttribute("levelKey");
         <div id="pageMenu">
             <ul id="myPageMenu" class="flex-container">
                 <li class="myPageMenuLi">
-                    <a href="#"><img src="../img/myPage/blank-profile.png" alt="프로필 설정" width="150"></a>
+                    <a href="#"><img src="/Proj_OnedayClass/img/blank-profile.png" alt="프로필 설정"></a>
                 </li>
                 <li class="myPageMenuLi">
-                    <Strong id="uName">쭈피디</Strong>
+                    <Strong id="uName"><%=uName %></Strong>
                     <button type="button" id="profileModBtn">편집</button>
                 </li>
                 <li class="myPageMenuLi">
@@ -95,7 +95,7 @@ String uLevel = (String)session.getAttribute("levelKey");
                         <a href="#">내 정보 관리</a>
                         <div id="subMenu2" class="subContainer">
                             <ul class="subMenu flex-container">
-                                <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_PreMod.jsp" id="memModBtn">회원 정보 수정</a></li>
+                                <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Mod.jsp" id="memModBtn">회원 정보 수정</a></li>
                                 <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Del.jsp" id="memDrop">회원 탈퇴</a></li>
                             </ul>
                         </div>

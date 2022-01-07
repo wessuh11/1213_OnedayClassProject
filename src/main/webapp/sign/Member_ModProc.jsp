@@ -3,13 +3,17 @@
 <% 
 request.setCharacterEncoding("UTF-8");
 String uPw = request.getParameter("uPw");
-String uName = request.getParameter("uName");
+String uPhone = request.getParameter("uPhone");
+String uZip = request.getParameter("uZip");
+String uAddr1 = request.getParameter("uAddr1");
+String uAddr2 = request.getParameter("uAddr2");
+String uEmail = request.getParameter("uEmail");
 %>   
 
 <jsp:useBean id="mMgr" class="pack_Member.MemberMgr" scope="page" />
 <%
 String sessionUId = (String)session.getAttribute("idKey");
-boolean res = mMgr.modifyMember(uPw, uName, sessionUId);
+boolean res = mMgr.modifyMember(uPw, uPhone, uZip, uAddr1, uAddr2, uEmail, sessionUId);
 %>
 
 <script>

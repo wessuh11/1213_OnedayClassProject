@@ -233,7 +233,7 @@ public class MemberMgr {
 ///////////////////////////////////////////////////////////////////	
 /////// Member_ModProc.jsp 회원정보 수정 시작 /////////////
 ///////////////////////////////////////////////////////////////////	
-	public boolean modifyMember(String uPw, String uName, String uId) {
+	public boolean modifyMember(String uPw, String uPhone, String uZip, String uAddr1, String uAddr2, String uEmail, String uId) {
 
 		Connection objConn = null;
 		PreparedStatement objPstmt = null;
@@ -244,12 +244,17 @@ public class MemberMgr {
 			objConn = pool.getConnection();
 
 			sql = "update memberlist set ";
-			sql += "uPw=?, uName=?";
+			sql += "uPw=?, uPhone=?, uZip=?, ";
+			sql += "uAddr1=?, uAddr2=?, uEmail=? ";
 			sql += "where uId = ?";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setString(1, uPw);
-			objPstmt.setString(2, uName);
-			objPstmt.setString(3, uId);
+			objPstmt.setString(2, uPhone);
+			objPstmt.setString(3, uZip);
+			objPstmt.setString(4, uAddr1);
+			objPstmt.setString(5, uAddr2);
+			objPstmt.setString(6, uEmail);
+			objPstmt.setString(7, uId);
 
 			int cnt = objPstmt.executeUpdate();
 			if (cnt > 0)
