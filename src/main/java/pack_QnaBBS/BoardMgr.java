@@ -398,25 +398,24 @@ public int replyBoard(BoardBean bean) {
 		objConn = pool.getConnection(); // DB연동
 
 
-		sql = "insert into qna_board (";
-		sql += "uIdb, qna_content, qna_title, ";
-		sql += "ref, pos, depth,  ";
-		sql += "regDate, uPw, count) values (";
-		sql += "?, ?, ?, ?, ?, ?,now(), ?, 0)";
+		sql = "insert into qnaBBS (";
+		sql += "qUid, qTitle, qContent, ";
+		sql += "qRef, qPos, qDepth,  ";
+		sql += "qRegDate, qStatus ) values (";
+		sql += "?, ?, ?, ?, ?, ?, now(), ?)";
 
-		int depth = bean.getDepth() + 1;
-		int pos = bean.getPos() + 1;
+		int qDepth = bean.getqDepth() + 1;
+		int qPos = bean.getqPos() + 1;
 		
 		objPstmt = objConn.prepareStatement(sql);
-		objPstmt.setString(1, bean.getuIdb());
-		objPstmt.setString(2, bean.getQna_content());
-		objPstmt.setString(3, bean.getQna_title());
-		objPstmt.setInt(4, bean.getRef());
-		objPstmt.setInt(5, pos);
-		objPstmt.setInt(6, depth);
-		objPstmt.setString(7, bean.getuPw());
+		objPstmt.setString(1, bean.getqUid());
+		objPstmt.setString(2, bean.getqTitle());
+		objPstmt.setString(3, bean.getqContent());
+		objPstmt.setInt(4, bean.getqRef());
+		objPstmt.setInt(5, qPos);
+		objPstmt.setInt(6, qDepth);
+		objPstmt.setInt(7, bean.getqStatus());
 		cnt = objPstmt.executeUpdate();
-
 
 	} catch (Exception e) {
 		System.out.println("SQL이슈8 : " + e.getMessage());
@@ -430,7 +429,7 @@ public int replyBoard(BoardBean bean) {
 
 
 /////////////// 답변글 끼어들기 메서드 시작 ///////////////
-public int replyUpBoard(int ref, int pos) {
+public int replyUpBoard(int qRef, int qPos) {
 
 	Connection objConn = null;
 	PreparedStatement objPstmt = null;
@@ -443,12 +442,12 @@ public int replyUpBoard(int ref, int pos) {
 		objConn = pool.getConnection(); // DB연동
 
 		//////////// 게시글의 파일 삭제 시작 ///////////////
-		sql = "update qna_board set pos = pos + 1 ";
-		sql += "where ref = ? and pos > ?";
+		sql = "update qnaBBS set qPos = qPos + 1 ";
+		sql += "where qRef = ? and qPos > ?";
 		
 		objPstmt = objConn.prepareStatement(sql);
-		objPstmt.setInt(1, ref);
-		objPstmt.setInt(2, pos);
+		objPstmt.setInt(1, qRef);
+		objPstmt.setInt(2, qPos);
 		cnt = objPstmt.executeUpdate();
 
 

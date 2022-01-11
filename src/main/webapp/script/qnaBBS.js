@@ -173,13 +173,13 @@ $(function(){
 	$("td.read>button#replyBtn").click(function(){
 	
 		let nowPage = $("input#nowPage").val().trim();
-		let num = $("input#num").val().trim();
+		let qNum = $("input#qNum").val().trim();
 				
 		let p3 = $("#pKeyField").val().trim();  // p3 : keyField
 	    let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
 	
-		let url = "/Proj_OnedayClass/bbs/Reply.jsp?";
-			url += "num="+num;
+		let url = "/Proj_OnedayClass/qnaBBS/QnaReply.jsp?";
+			url += "qNum="+qNum;
 			url += "&nowPage="+nowPage;
 			url += "&keyField="+p3;
 	     	url += "&keyWord="+p4; 
@@ -193,26 +193,15 @@ $(function(){
 	//////////////// Reply.jsp 에서 답변글 버튼 시작 //////////////////
 	$("td.reply>button#replyBtn").click(function(){
 		
-		let uIdb = $("#uIdb").val().trim();
-		let Qna_title = $("#Qna_title").val().trim();
-		let uPw = $("#uPw").val().trim();
+		let qTitle = $("#qTitle").val().trim();
 		
-		if (uIdb == "") {
-			alert("성명은 필수입력입니다.");
-			$("#uIdb").focus();
-		} else if (Qna_title == "") {
+		if (qTitle == "") {
 			alert("제목은 필수입력입니다.");
-			$("#Qna_title").focus();
-		} else if (uPw == "") {
-			alert("비밀번호는 필수입력입니다.");
-			$("#uPw").focus();
+			$("#qTitle").focus();
 		} else {
-		
 			$("#replyFrm").submit();
 		}
 		
-		
-	
 	});
 	//////////////// Reply.jsp 에서 답변글 버튼 끝 //////////////////		
 	

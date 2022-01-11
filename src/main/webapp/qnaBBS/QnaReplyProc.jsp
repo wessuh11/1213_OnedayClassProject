@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 
-<jsp:useBean id="bMgr" class="pack_BBS.BoardMgr" scope="page" />
-<jsp:useBean id="reBean" class="pack_BBS.BoardBean" scope="page" />
+<jsp:useBean id="bMgr" class="pack_QnaBBS.BoardMgr" scope="page" />
+<jsp:useBean id="reBean" class="pack_QnaBBS.BoardBean" scope="page" />
 <jsp:setProperty name="reBean" property="*" />
 
 <%
-int repUpCnt = bMgr.replyUpBoard(reBean.getRef(), reBean.getPos());
+int repUpCnt = bMgr.replyUpBoard(reBean.getqRef(), reBean.getqPos());
      // 끼어들기가 아닐경우 실행되는 소스 없음.
 int repInsCnt = bMgr.replyBoard(reBean);
 
@@ -18,7 +18,7 @@ String keyWord = request.getParameter("keyWord");
 if(repInsCnt > 0) { 
 	// replayUpBoard( )와 replyBoard( )가 정상실행되었음을 의미함.
 	
-	String url = "List.jsp?nowPage="+nowPage;
+	String url = "QnaList.jsp?nowPage="+nowPage;
 	url += "&keyField="+keyField;
 	url += "&keyWord="+keyWord;
 %>    

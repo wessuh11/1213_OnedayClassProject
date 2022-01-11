@@ -18,6 +18,7 @@ String qContent = bean.getqContent();
 String qRef = String.valueOf(bean.getqRef());
 String qDepth = String.valueOf(bean.getqDepth());
 String qPos = String.valueOf(bean.getqPos());
+
 String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
@@ -30,10 +31,11 @@ String uLevel = (String)session.getAttribute("levelKey");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-    <link rel="stylesheet" href="/Proj_OnedayClass/style/bbs.css">
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/qnaBBS.css">
 </head>
 <body>
-	<header id="header" class="flex-container">
+	<div id="wrap">
+		<header id="header" class="flex-container">
             <div id="headerLogo">
                 <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
             </div>
@@ -81,7 +83,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 			<!--  답변페이지 내용 출력 시작 -->
 			
 			
-			<form name="replyFrm" action="ReplyProc.jsp"
+			<form name="replyFrm" action="QnaReplyProc.jsp"
 					method="get" id="replyFrm">
 		
 				<h2>답변글 작성</h2>
@@ -90,32 +92,39 @@ String uLevel = (String)session.getAttribute("levelKey");
 					<tbody id="replyTblBody">
 						<tr>
 							<td class="req">작성자</td>
-							<td><span class="ori_Txt"><b><%=qUid %></b> 님의 글</span></td>
+							<td>
+								<%=uId %> 님
+								<input type="hidden" name="qUid" id="qUid" value="<%=uId%>">
+								<span class="ori_Txt"><b><%=qUid %></b> 님의 글</span>
+							</td>
 						</tr>
 						<tr>
 							<td class="req">제목</td>
 							<td>
 								<input type="text" name="qTitle" value=""
-									size="50" id="Qna_title">								
-								<span class="ori_Txt">원본 글제목 : <b><%=Qna_title %></b></span>
+									size="50" id="qTitle">								
+								<span class="ori_Txt">원본 글제목 : <b><%=qTitle %></b></span>
+							</td>
+						</tr>
+						<tr>
+							<td>공개여부</td>
+							<td>
+								공개 <input type="radio" name="qStatus"
+									value="2" >									
+								비공개 <input type="radio" name="qStatus"
+									value="1" checked>											
 							</td>
 						</tr>
 						<tr>
 							<td style="vertical-align: top;">내용</td>
 							<td>
-								<textarea name="qna_content" id="Qna_content"  
+								<textarea name="qContent" id="qContent"  
 								cols="89" wrap="hard"></textarea>
 								
 								<span id="ori_SpanTxtArea" class="ori_Txt">원본 글내용</span>
 								<textarea id="ori_TxtArea"  
-								cols="89"><%=Qna_content %></textarea>
+								cols="89" readonly><%=qContent %></textarea>
 								
-							</td>
-						</tr>	
-						<tr>
-							<td class="req">비밀번호</td>
-							<td>
-								<input type="password" name="uPw" id="uPw">								
 							</td>
 						</tr>					
 					</tbody>
@@ -137,15 +146,14 @@ String uLevel = (String)session.getAttribute("levelKey");
 					</tfoot>
 					 
 				</table>
-				<input type="hidden" name="num" value="<%=num%>" id="num">				
+				<input type="hidden" name="qNum" value="<%=qNum%>" id="num">				
 				
-				<input type="hidden" name="ref" value="<%=ref%>">				
-				<input type="hidden" name="depth" value="<%=depth%>">				
-				<input type="hidden" name="pos" value="<%=pos%>">
+				<input type="hidden" name="qRef" value="<%=qRef%>">				
+				<input type="hidden" name="qDepth" value="<%=qDepth%>">				
+				<input type="hidden" name="qPos" value="<%=qPos%>">
 				
 				<input type="hidden" name="nowPage" value="<%=nowPage%>" id="nowPage">
-				<input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
-				
+
 				<!-- 검색어전송 시작 -->
 				<input type="hidden" name="keyField" id="keyField" value="<%=keyField%>">
 				<input type="hidden" name="keyWord" id="keyWord" value="<%=keyWord%>">
@@ -162,6 +170,6 @@ String uLevel = (String)session.getAttribute("levelKey");
 	<!-- div#wrap -->
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="/Proj_OnedayClass/script/bbs.js"></script>    
+	<script src="/Proj_OnedayClass/script/qnaBBS.js"></script>    
 </body>
 </html>
