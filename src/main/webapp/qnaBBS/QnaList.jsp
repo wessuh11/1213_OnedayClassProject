@@ -101,7 +101,7 @@ String uLevel = (String)session.getAttribute("levelKey");
                     <li></li>
                     <li>
                         <div id="headerCart">
-                            <a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
+                            <a href="#"><img src="/Proj_OnedayClass/img/cart.png" alt=""> <span>0</span></a>
                         </div>
                     </li>
                 </ul>
@@ -185,16 +185,23 @@ String uLevel = (String)session.getAttribute("levelKey");
 						int qNum = bean.getqNum();
 						String qUid = bean.getqUid();
 						String qTitle = bean.getqTitle();
-						String regDate = bean.getqRegDate();
+						String qRegDate = bean.getqRegDate();
 						int qDepth = bean.getqDepth();
+						int qStatus = bean.getqStatus();
+						
+						// 비밀글을 확인 할 경우 시작
+						if (uId.equals(qUid) || uLevel.equals("3") || qStatus == 2) {
 				%>
+				
 					<tr class="prnTr" onclick="read('<%=qNum%>', '<%=nowPage%>')">
 					<%
 					//int prnNum = totalRecord - ((nowPage-1) * numPerPage) - i; 
 					// num와 prnNum는 전혀 관계없음
 					%>
 						<td>
-							<% if (qDepth == 0) out.print(qNum);   // 답변글이 아님을 의미함 %>
+							<% 
+							if (qDepth == 0) out.print(qNum);   // 답변글이 아님을 의미함 
+							%>
 						</td>  <!--  num로 변경필! -->
 						<td class="subjectTd">
 							<% 
@@ -203,15 +210,48 @@ String uLevel = (String)session.getAttribute("levelKey");
 										 out.print("&nbsp;&nbsp;&nbsp;&nbsp;");
 									 }
 								 }
-								if (uId.equals(qUid)) {
-									out.print(qTitle);
-								} else {
-									out.print("비밀글 입니다.");
-								}
+								
+								out.print(qTitle);
+								
 							%>
 						</td>
+						
+						<%
+							// 비밀글을 확인 할 경우 끝
+						} else {
+							// 비밀글을 확인 못 할 경우 시작 
+						%>
+						
+						<tr class="prnTr">
+					<%
+					//int prnNum = totalRecord - ((nowPage-1) * numPerPage) - i; 
+					// num와 prnNum는 전혀 관계없음
+					%>
+						<td>
+							<% 
+							if (qDepth == 0) out.print(qNum);   // 답변글이 아님을 의미함 
+							%>
+						</td>  <!--  num로 변경필! -->
+						<td class="subjectTd">
+							<% 
+								 if (qDepth > 0) {    // 답변글을 의미함
+									 for(int blank=0; blank<qDepth; blank++) {
+										 out.print("&nbsp;&nbsp;&nbsp;&nbsp;");
+									 }
+								 }
+								
+							out.print("비밀글 입니다.");
+								
+							%>
+						</td>
+						
+						<%	
+						} 
+						// 비밀글을 확인 못 할 경우 끝
+						%>
+						
 						<td><%=qUid %></td>
-						<td><%=regDate %></td>
+						<td><%=qRegDate %></td>
 					</tr>
 				<%
 					}	// end for
@@ -304,11 +344,11 @@ String uLevel = (String)session.getAttribute("levelKey");
 							
 								<div>
 									<select name="keyField" id="keyField">
-										<option value="Qna_title" 
+										<option value="qTitle" 
 												<% if(keyField.equals("qTitle")) out.print("selected"); %>>제  목</option>
-										<option value="uIdb" 
-												<% if(keyField.equals("uId")) out.print("selected"); %>>아이디</option>
-										<option value="Qna_content" 
+										<option value="qUid" 
+												<% if(keyField.equals("qUid")) out.print("selected"); %>>아이디</option>
+										<option value="qContent" 
 												<% if(keyField.equals("qContent")) out.print("selected"); %>>내  용</option>
 									</select>
 								</div>
@@ -332,7 +372,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 					</tr>
 					<tr>
 						<td colspan="5" class="butcs">						
-							<a href="/Proj_OnedayClass/qnaBBS/Post.jsp">글쓰기</a>
+							<a href="/Proj_OnedayClass/qnaBBS/QnaPost.jsp">글쓰기</a>
 						</td>						
 					</tr>
 					

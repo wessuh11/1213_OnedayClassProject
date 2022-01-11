@@ -7,7 +7,7 @@
 function read(p1, p2) {
     let p3 = $("#pKeyField").val().trim();  // p3 : keyField
     let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
-	let param = "Read.jsp?num="+p1;
+	let param = "QnaRead.jsp?qNum="+p1;
 	     param += "&nowPage="+p2;
 	     param += "&keyField="+p3;
 	     param += "&keyWord="+p4 ; 
@@ -24,7 +24,7 @@ function movePage(p1) {    // 페이지 이동
     let p3 = $("#pKeyField").val().trim();  // p3 : keyField
     let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
 
-	let param = "List.jsp?nowPage="+p1;	    
+	let param = "QnaList.jsp?nowPage="+p1;	    
 	     param += "&keyField="+p3;
 	     param += "&keyWord="+p4 ; 
 	location.href= param;
@@ -41,7 +41,7 @@ function moveBlock(p1, p2) {    // 블럭 이동
     let p3 = $("#pKeyField").val().trim();  // p3 : keyField
     let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
 	
-	let param = "List.jsp?nowPage="+(pagePerBlock*(pageNum-1)+1);
+	let param = "QnaList.jsp?nowPage="+(pagePerBlock*(pageNum-1)+1);
 	     param += "&keyField="+p3;
 	     param += "&keyWord="+p4 ; 
 	location.href=param;
@@ -74,18 +74,11 @@ $(function(){
 	
 	//////////////// 게시글 등록 시작 //////////////////
 	$("#regBtn").click(function(){
-		let Qna_title = $("#Qna_title").val().trim();
-		let uPw = $("#uPw").val().trim();
+		let qTitle = $("#qTitle").val().trim();
 		
-		if (Qna_title == "") {
+		if (qTitle == "") {
 			alert("제목은 필수입력입니다.");
 			$("#subject").focus();			
-		} else if (Qna_title == "") {
-			alert("제목은 필수입력입니다.");
-			$("#subject").focus();
-		} else if (uPw == "") {
-			alert("비밀번호는 필수입력입니다.");
-			$("#uPw").focus();
 		} else {
 			$("#postFrm").submit();
 		}
@@ -99,15 +92,15 @@ $(function(){
 	
 	//////////////// 리스트페이지 이동 시작 //////////////////
 	$("#listBtn").click(function(){
-		location.href="../bbs/List.jsp";		
-		/*let param = $("#nowPage").val().trim();
+		
+		let param = $("#nowPage").val().trim();
 		let p3 = $("#pKeyField").val().trim();  // p3 : keyField
 	    let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
 	     
-		let url = "/Proj_OnedayClass/bbs/List.jsp?nowPage=" + param;		    
+		let url = "/Proj_OnedayClass/qnaBBS/QnaList.jsp?nowPage=" + param;		    
 		    url += "&keyField="+p3;
 	     	url += "&keyWord="+p4 ; 
-		location.href=url;*/
+		location.href=url;
 		
 	});
 	//////////////// 리스트페이지 이동 끝 //////////////////
@@ -133,7 +126,7 @@ $(function(){
 	//////////////// 파일다운로드(Read.jsp) 시작 //////////////////
 	$("span#downloadFile").click(function(){
 		let fName = $("input#hiddenFname").val().trim();
-		location.href="/Proj_OnedayClass/bbs/Download.jsp?fileName=" + fName;
+		location.href="/Proj_OnedayClass/qnaBBS/QnaDownload.jsp?qFileName=" + fName;
 	});
 	//////////////// 파일다운로드(Read.jsp) 끝 //////////////////
 	
@@ -142,13 +135,13 @@ $(function(){
 	//////////////// Read.jsp 에서 게시글 삭제버튼 시작 //////////////////
 	$("button#delBtn").click(function(){
 		let nowPage = $("input#nowPage").val().trim();
-		let num = $("input#num").val().trim();
+		let num = $("input#qNum").val().trim();
 				
 		let p3 = $("#pKeyField").val().trim();  // p3 : keyField
 	    let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
 	    
-		let url = "/Proj_OnedayClass/bbs/Delete.jsp?";
-			url += "num="+num+"&nowPage="+nowPage;
+		let url = "/Proj_OnedayClass/qnaBBS/QnaDelete.jsp?";
+			url += "qNum="+num+"&nowPage="+nowPage;
 			url += "&keyField="+p3;
 			url += "&keyWord="+p4;
 		location.href=url;
@@ -161,13 +154,13 @@ $(function(){
 	$("td.read>button#modBtn").click(function(){
 	
 		let nowPage = $("input#nowPage").val().trim();
-		let num = $("input#num").val().trim();
+		let qNum = $("input#qNum").val().trim();
 				
 		let p3 = $("#pKeyField").val().trim();  // p3 : keyField
 	    let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
 	
-		let url = "/Proj_OnedayClass/bbs/Update.jsp?";
-			url += "num="+num;
+		let url = "/Proj_OnedayClass/qnaBBS/QnaUpdate.jsp?";
+			url += "qNum="+qNum;
 			url += "&nowPage="+nowPage;
 			url += "&keyField="+p3;
 	     	url += "&keyWord="+p4; 
@@ -228,56 +221,21 @@ $(function(){
 	
 	
 	
-	//////////////// Delete.jsp 에서 게시글 삭제실행 시작 //////////////////
-	
-	
-	$("button#delSbmBtn").click(function(){
-		
-		let uPw = $("input#uPw").val().trim();
-		
-		if(uPw == "") {
-			$("input#uPw").focus();
-			return;
-		} else {
-		
-			let delChk = confirm("게시물을 삭제합니다.");
-			if(delChk) {
-				$("#delFrm").submit();
-			} else {
-				alert("삭제를 취소하셨습니다.");
-				return;
-			}
-			
-		}
-		
-	});
-	$("button#backBtn").click(function(){
-		history.back();
-	});
-	//////////////// Delete.jsp 에서 게시글 삭제실행 끝 //////////////////
-	
 	
 	
 	
 	//////////////// Update.jsp 에서 게시글 수정 시작 //////////////////
 	$("td.update>button#modBtn").click(function(){
-		let uIdb = $("#uIdb").val().trim();
-		let Qna_title = $("#Qna_title").val().trim();
-		let uPw = $("#uPw").val().trim();
+
+		let qTitle = $("#qTitle").val().trim();
 		
 		//let keyField = $("#keyField").val().trim();
 		//let keyWord = $("#keyWord").val().trim();
 		
-		if (uIdb == "") {
-			alert("성명은 필수입력입니다.");
-			$("#uIdb").focus();
-		} else if (Qna_title == "") {
+		if (qTitle == "") {
 			alert("제목은 필수입력입니다.");
-			$("#Qna_title").focus();
-		} else if (uPw == "") {
-			alert("비밀번호는 필수입력입니다.");
-			$("#uPw").focus();
-		} else {
+			$("#qTitle").focus();
+		}  else {
 		
 			//alert("keyField : " + keyField + "\nkeyWord : " + keyWord);
 			//return;

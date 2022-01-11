@@ -1,4 +1,4 @@
-package pack_BBS;
+package pack_QnaBBS;
 
 public class UtilMgr {
 	

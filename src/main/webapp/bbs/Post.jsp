@@ -14,7 +14,7 @@ String uLevel = (String)session.getAttribute("levelKey");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>문의 페이지</title>
-    <link rel="stylesheet" href="/Proj_OnedayClass/style/bbs.css">
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/qnaBBS.css">
 </head>
 <body>
 	<div id="wrap">
@@ -127,10 +127,12 @@ String uLevel = (String)session.getAttribute("levelKey");
 							</td>
 						</tr>
 						<tr>
+							<td>
 									<input type="hidden" name="contentType"
 										value="HTML">									
 									<input type="hidden" name="contentType"
-										value="TEXT" checked>						
+										value="TEXT" checked>											
+							</td>
 						</tr>
 					</tbody>
 					<tfoot>
@@ -198,6 +200,6 @@ String uLevel = (String)session.getAttribute("levelKey");
 	<!-- div#wrap -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="/Proj_OnedayClass/script/script.js"></script>
-	<script src="/Proj_OnedayClass/script/bbs.js"></script>        
+	<script src="/Proj_OnedayClass/script/qnaBBS.js"></script>        
 </body>
 </html>
