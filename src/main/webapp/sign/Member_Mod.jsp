@@ -6,9 +6,9 @@
     
 <%
 String sessionUId = (String)session.getAttribute("idKey");
-Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
+Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 %>  
 
 <% if (sessionUId != null) {   // 현재 로그인 상태라면  %>
@@ -37,132 +37,129 @@ String uLevel = (String)session.getAttribute("levelKey");
 </head>
 <body>
 	<div id="wrap">
-	 <% if (uId != null) {   // 현재 로그인 상태라면  %>
         <header id="header" class="flex-container">
             <div id="headerLogo">
                 <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
             </div>
+            <!-- div#headerLogo -->
 
             <div id="headerRight">
                 <ul class="flex-container">
-                    <li><a href="/Proj_OnedayClass/sign/Member_Mod.jsp"><%=uName %> / 등급 : <%=uLevel %></a></li>
+    <% if (uId != null) {   // 현재 로그인 상태라면  %>
+                    <li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName %> / 등급 : <%=uLevel %></a></li>
                     <li></li>
                     <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-                    <li></li>
-                    <li>
-                        <div id="headerCart">
-                            <a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </header>
 	<% } else { %>
-        <header id="header" class="flex-container">
-            <div id="headerLogo">
-                <a href="/Proj_OnedayClass/index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
-            </div>
-
-            <div id="headerRight">
-                <ul class="flex-container">
-                    <li><a href="/Proj_OnedayClass/sign/Login.jsp">Sign In</a></li>
+					<li><a href="/Proj_OnedayClass/sign/Login.jsp">Sign In</a></li>
                     <li></li>
                     <li><a href="/Proj_OnedayClass/sign/Member.jsp">Sign Up</a></li>
+	<%} %>
                     <li></li>
                     <li>
                         <div id="headerCart">
-                            <a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
+                            <a href="#"><img src="/Proj_OnedayClass/img/cart.png" alt=""> <span>0</span></a>
                         </div>
                     </li>
                 </ul>
             </div>
+            <!-- div#headerRight -->
         </header>
-        <%} %>
+        <!-- header#header -->
         <nav id="gnb">
             <ul class="flex-container">
                 <li class="active"><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
                 <li><a href="./about.html">About</a></li>
                 <li><a href="#">Online</a></li>
                 <li><a href="#">Offline</a></li>
-                  <li>
-                <% if (uId == null) { %> 
-					<a href="/Proj_OnedayClass/sign/Login.jsp" onclick="alert('로그인이 필요합니다.');">QnA</a>
-				<%  } else { %> 
-					<a href="/Proj_OnedayClass/bbs/List.jsp" id="listBtn">QnA</a>
-				<% } %>
-                </li>
             </ul>
         </nav>
-	<form name="modFrm" id="modFrm" action="Member_ModProc.jsp" method="get">
-	
-		<table>
-			<caption>회원정보 수정</caption>
-				<tr>
-					<td class="req">아이디</td>
-					<td><%=uId %></td>
-					<td></td>
-				</tr> 
-				<tr>
-					<td class="req">패스워드</td>
-					<td>
-						<input type="text" name="uPw" id="uPw" size="15" value="<%=uPw%>">
-					</td>
-					<td>패스워드를 적어주세요</td>
-				</tr>
-				<tr>
-					<td>패스워드 확인</td>
-					<td>
-						<input type="password" id="uPw_Re" size="15">
-					</td>
-					<td>패스워드를 확인합니다.</td>
-				</tr>
-				<tr>
-					<td class="req">이름</td>
-					<td>
-						<input type="text" name="uName" id="uName" size="15"
-						   value="<%=uName%>">
-					</td>
-					<td>이름을 적어주세요.</td>
-				</tr>
-				<tr>
-					<td class="req">Email</td>
-					<td>
-						<%=uEmail%>
-					</td>
-					<td>이메일을 적어주세요.</td>
-				</tr>
-				<tr>
-					<td colspan="3" style="border-bottom: 2px solid #ddd;"></td>
-				</tr>			
-				<tr>
-					<td>우편번호</td>
-					<td><%=uZip%></td>
-					<td>우편번호를 검색하세요.</td>
-				</tr>
-				<tr>
-					<td>주소</td>
-					<td><%=uAddr1%></td>
-					<td></td>
-				</tr>
-				<tr>
-					<td>상세주소</td>
-					<td><%=uAddr2%></td>
-					<td>우편번호를 검색하세요.</td>
-				</tr>
-				<tr>
-					<td colspan="3">
-						<button type="button" id="modBtn">정보수정</button>
-						<button type="reset">다시쓰기</button>
-						<button type="button" id="mainBtn">메인으로</button>		
-						<button type="button" id="logoutBtn">로그아웃</button>					
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	
-	</form>
-	<!-- document.modFrm -->
-
+        
+        
+        <div id="mod">
+			<form name="modFrm" id="modFrm" action="Member_ModProc.jsp" method="get">
+			
+				<table>
+					<caption><hr><h3>회원 정보 수정</h3></caption>
+					<tbody>
+				  		<tr>
+							<td>아이디</td>
+							<td><%=uId %></td>
+						</tr>
+		                <tr>
+							<td class="req">패스워드</td>
+							<td>
+								<input type="password" class="umem" name="uPw" id="uPw" size="40"
+						        value="<%=uPw %>">
+						        <input type="hidden" id="uPw_bak" value="<%=uPw %>">
+							</td>
+						</tr>
+						<tr>
+							<td>패스워드 확인</td>
+							<td>
+								<input type="password" class="umem" id="uPw_Re" size="40"
+		                    	value="<%=uPw %>">
+							</td>
+						</tr>
+						<tr>
+							<td>이름</td>
+							<td><%=uName %></td>
+						</tr>
+						<tr>
+							<td class="req">전화번호</td>
+							<td>
+						        <input type="text" class="umem" name="uPhone" id="uPhone" size="40"
+						        value="<%=uPhone%>">    
+						        <input type="hidden" id="uPhone_bak" value="<%=uPhone %>">
+							</td>
+						</tr>                      
+		            	<tr>
+		            		<td class="req">주소</td>
+							<td>
+								<input type="text" name="uZip" id="uZip" size="25" 
+								readonly value="<%=uZip%>">
+								<input type="hidden" id="uZip_bak" value="<%=uZip %>">
+								<button type="button" id="zipBtn">우편번호찾기</button>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<input type="text" id="uAddr1" name="uAddr1" size="40"
+								readonly value="<%=uAddr1%>">
+								<input type="hidden" id="uAddr1_bak" value="<%=uAddr1 %>">
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<input type="text" id="uAddr2" name="uAddr2" size="40"
+								value="<%=uAddr2%>">
+								<input type="hidden" id="uAddr2_bak" value="<%=uAddr2 %>">
+							</td>
+						</tr>
+		
+						<tr>
+							<td class="req">이메일</td>
+							<td>
+								<input type="text" class="umem" name="uEmail" id="uEmail" size="40"
+		                     	value="<%=uEmail%>">
+		                     	<input type="hidden" id="uEmail_bak" value="<%=uEmail %>">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<button type="button" id="modBtn">정보수정</button>
+								<button type="reset">다시쓰기</button>
+								<button type="button" id="mainBtn">메인으로</button>		
+								<button type="button" id="logoutBtn">로그아웃</button>					
+							</td>
+						</tr>
+		       		</tbody>
+				</table>
+			</form>
+			<!-- document.modFrm -->
+        </div>
+		<!-- div#mod -->
 
 	</div>
 	<!-- div#wrap -->
@@ -171,21 +168,7 @@ String uLevel = (String)session.getAttribute("levelKey");
     <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
 	<script src="/Proj_OnedayClass/script/script.js"></script>
 	<script src="/Proj_OnedayClass/script/member.js"></script>
-	    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script>
-	window.onload = function(){
-    document.getElementById("uAddress").addEventListener("click", function(){ //주소입력칸을 클릭하면
-        //카카오 지도 발생
-        new daum.Postcode({
-            	oncomplete: function(data) { //선택시 입력값 세팅
-            	document.getElementById("uZip").value = data.zonecode;//우편번호
-                document.getElementById("uAddr1").value = data.address; // 주소 넣기
-                document.getElementById("uAddr2").focus(); //상세입력 포커싱
-            	}
-       		}).open();
-    	});
-	}
-	</script>
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	
 </body>
 </html>   

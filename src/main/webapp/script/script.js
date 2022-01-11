@@ -80,4 +80,43 @@ $(function () {
         });
     
     });
+
+///////////////////////////// 서브메뉴 시작 ///////////////////////////////
+
+    $("#mainLi1").mouseover(function() {
+        $(".mainLi #subMenu1").stop().slideDown(200);
+    });
+
+    $("#mainLi1").mouseout(function(){
+        $(".mainLi #subMenu1").stop().slideUp(100);
+    });
+
+    $("#mainLi2").mouseover(function() {
+        $(".mainLi #subMenu2").stop().slideDown(200);
+    });
+
+    $("#mainLi2").mouseout(function(){
+        $(".mainLi #subMenu2").stop().slideUp(100);
+    });
+
+///////////////////////////// 서브메뉴 끝 ///////////////////////////////
+	$("#onlineBtn").click(function() {
+        // $("#detailedContent").stop().slideDown(800);
+		$("#detailedContent").css({"display" : "block"});
+    });
+
+    /*$("#onlineBtn").click(function(){
+        // $("#detailedContent").stop().slideUp(500);
+		$("#detailedContent").css({"display" : "none"});
+    });*/
     
+    
+//////////////////////////////ad page 메인 메뉴/////////////////////////
+	$("#adMainLi").mouseover(function(){
+        $(".mainAdMenu #subAdMenu").stop().slideDown(200);
+    });
+
+    $("#adMainLi").mouseout(function(){
+        $(".mainAdMenu #subAdMenu").stop().slideUp(100);
+    });
+//////////////////////////////ad page 메인 메뉴 끝/////////////////////////    

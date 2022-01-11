@@ -8,6 +8,10 @@ String nowPage = request.getParameter("nowPage");
 String s = request.getParameter("num");
 int numParam = Integer.parseInt(s);
 
+String uId = (String)session.getAttribute("idKey");
+String uName = (String)session.getAttribute("nameKey");
+String uLevel = (String)session.getAttribute("levelKey");
+
 
 //검색어 수신 시작
 String keyField = request.getParameter("keyField");
@@ -59,15 +63,15 @@ if (request.getParameter("uPwParam") != null) {
 </head>
 <body>
 	<div id="wrap">
-			  <% if (uId != null) {   // 현재 로그인 상태라면  %>
+		 <% if (uId != null) {   // 현재 로그인 상태라면  %>
         <header id="header" class="flex-container">
             <div id="headerLogo">
-                <a href="/Proj_OnedayClass/index.jsp"><img src="/Proj_OnedayClass/img/logo.png" width="45%" height="45%" alt="로고"></a>
+                <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
             </div>
 
             <div id="headerRight">
                 <ul class="flex-container">
-                    <li><a href="/Proj_OnedayClass/sign/myPage.jsp"><%=uId %></a></li>
+                    <li><a href="/Proj_OnedayClass/sign/Member_Mod.jsp"><%=uName %> / 등급 : <%=uLevel %></a></li>
                     <li></li>
                     <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
                     <li></li>
@@ -82,7 +86,7 @@ if (request.getParameter("uPwParam") != null) {
 	<% } else { %>
         <header id="header" class="flex-container">
             <div id="headerLogo">
-                <a href="/Proj_OnedayClass/index.jsp"><img src="/Proj_OnedayClass/img/logo.png" width="45%" height="45%" alt="로고"></a>
+                <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
             </div>
 
             <div id="headerRight">
@@ -102,7 +106,7 @@ if (request.getParameter("uPwParam") != null) {
         <%} %>
         <nav id="gnb">
             <ul class="flex-container">
-                <li><a href="/Proj_OnedayClass/index.jsp">Home</a></li>
+                <li><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
                 <li><a href="./about.html">About</a></li>
                 <li><a href="#">Online</a></li>
                 <li><a href="#">Offline</a></li>

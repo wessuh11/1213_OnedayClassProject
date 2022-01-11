@@ -1,4 +1,4 @@
-package pack_BBS;
+package pack_LevelUpBBS;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -22,7 +22,7 @@ import pack_DBCP.DBConnectionMgr;
 public class BoardMgr {
 
 	private DBConnectionMgr pool;
-	private static final String SAVEFOLER = "E:/IT/Team Project (Oneday Class)/Proj_OnedayClass/src/main/webapp/fileUpload";
+	private static final String SAVEFOLER = "E:/Project/1213_OnedayClassProject/src/main/webapp/lvlFileUpLoad";
 	// 수식어 static final 이 함께 사용된 필드를 상수필드라고함.
 	// 상수필드는 선언과 동시에 반드시 초기화해야 함.
 	// 필드명은 모두 대문자, 단어간 연결은 밑줄
@@ -48,18 +48,18 @@ public class BoardMgr {
 		ResultSet objRs = null;
 		String sql = null;
 		MultipartRequest multi = null;
-		int fileSize = 0;
-		String fileName = null;
+		int lvlFileSize = 0;
+		String lvlFileName = null;
 
 		try {
 			objConn = pool.getConnection();
-			sql = "select max(num) from qna_board";
+			sql = "select max(lvlNum) from levelUpBBS";
 			objPstmt = objConn.prepareStatement(sql);
 			objRs = objPstmt.executeQuery();
 
-			int ref = 1; // 답변글 작성용, 원본글의 글번호(num)와 일치
+			int lvlRef = 1; // 답변글 작성용, 원본글의 글번호(num)와 일치
 			if (objRs.next())
-				ref = objRs.getInt(1) + 1;
+				lvlRef = objRs.getInt(1) + 1;
 			// 현재 DB qna_board에 데이터가 3개(num 컬럼에 1, 2, 3)가
 			// 있다고 가정하면 max(num)는 3을 반환함. 그러므로 새 글번호를
 			// 참조하는 DB의 컬럼 ref는 4가 됨.
@@ -71,34 +71,34 @@ public class BoardMgr {
 
 			multi = new MultipartRequest(req, SAVEFOLER, maxSize, encType, new DefaultFileRenamePolicy());
 
-			if (multi.getFilesystemName("fileName") != null) {
-				fileName = multi.getFilesystemName("fileName");
-				fileSize = (int) multi.getFile("fileName").length();
+			if (multi.getFilesystemName("lvlFileName") != null) {
+				lvlFileName = multi.getFilesystemName("lvlFileName");
+				lvlFileSize = (int) multi.getFile("lvlFileName").length();
 			}
-			String Qna_content = multi.getParameter("Qna_content");
-				
-		
+			String lvlContent = multi.getParameter("lvlContent");
+
 			if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
-				Qna_content = UtilMgr.replace(Qna_content, "<", "&lt;");
+				lvlContent = UtilMgr.replace(lvlContent, "<", "&lt;");
 			}
 
-			sql = "insert into qna_board (";
-			sql += "uIdb, qna_title, qna_content, ref, pos, depth, ";
-			sql += "regDate, uPw, count, fileName, fileSize) values (";
-			sql += "?, ?, ?, ?, 0, 0,     now(), ?, 0, ?, ?)";
+			sql = "insert into levelUpBBS(";
+			sql += " lvlUid, lvlTitle, lvlContent, lvlName, lvlSns, lvlRegDate, lvlPos, ";
+			sql += "lvlRef, lvlDepth, lvlFileName, lvlFileSize, lvlStatus) values (";
+			sql += "?, ?, ?, ?, ?, now(), 0, ?, 0, ?, ?, 1)";
 
 			objPstmt = objConn.prepareStatement(sql);
-			objPstmt.setString(1, multi.getParameter("uIdb"));
-			objPstmt.setString(2, multi.getParameter("Qna_title"));
-			objPstmt.setString(3, Qna_content);
-			objPstmt.setInt(4, ref);
-			objPstmt.setString(5, multi.getParameter("uPw"));
-			objPstmt.setString(6, fileName);
-			objPstmt.setInt(7, fileSize);
+			objPstmt.setString(1, multi.getParameter("lvlUid"));
+			objPstmt.setString(2, multi.getParameter("lvlTitle"));
+			objPstmt.setString(3, lvlContent);
+			objPstmt.setString(4, multi.getParameter("lvlName"));
+			objPstmt.setString(5, multi.getParameter("lvlSns"));
+			objPstmt.setInt(6, lvlRef);
+			objPstmt.setString(7, lvlFileName);
+			objPstmt.setInt(8, lvlFileSize);
 			objPstmt.executeUpdate();
 
 		} catch (SQLException e) {
-			System.out.println("SQL 이슈22 : " + e.getMessage());
+			System.out.println("SQL 이슈2 : " + e.getMessage());
 		} catch (Exception e) {
 			System.out.println("DB 접속이슈2 : " + e.getMessage());
 		} finally {
@@ -106,14 +106,52 @@ public class BoardMgr {
 		}
 
 	}
-///////////////  게시판 입력(PostProc.jsp) 끝    ///////////////	
+///////////////  게시판 입력(PostProc.jsp) 끝    ///////////////
+	
+	
+///////////// levelUpPost cStatus 변환 시작 //////////////////////	
+	
+public String getlevelUpStat(int lvlNum) {
+
+	String lvlStat = "";
+
+Connection objConn = null;
+PreparedStatement objPstmt = null;
+ResultSet objRs = null;
+
+String sql = null;
+
+try {
+objConn = pool.getConnection();
+sql = "select lvlStatus from levelupbbs where lvlNum=?";
+objPstmt = objConn.prepareStatement(sql);
+objPstmt.setInt(1, lvlNum);
+
+objRs = objPstmt.executeQuery();
+if (objRs.next()) {
+    lvlStat = objRs.getNString(1);	
+}
+
+} catch (Exception e) {
+
+System.out.println("SQL 이슈 : " + e.getMessage());
+
+} finally {
+pool.freeConnection(objConn, objPstmt, objRs);
+}
+
+return lvlStat;
+}
+
+/////////// levelUpPost cStatus 변환 끝 //////////////////////
+
 
 ///////////////////////////////////////////////////////////////////
 ///////////////  게시판 리스트 작업관련(List.jsp) 시작  ///////////////
 ///////////////////////////////////////////////////////////////////
 
 ///////////////  게시판 리스트 출력(List.jsp) 시작    ///////////////
-	public Vector<BoardBean> getBoardList(String keyField, String keyWord, int start, int end) {
+	public Vector<BoardBean> getBoardList(String keyField, String keyWord, int start, int end, String uId) {
 
 		Vector<BoardBean> vList = new Vector<>();
 		Connection objConn = null;
@@ -123,39 +161,61 @@ public class BoardMgr {
 		
 		try {
 			objConn = pool.getConnection(); // DB연동
-			
-			
-			if (keyWord.equals("null") || keyWord.equals("")) {
-				// 검색어가 없을 경우
-				sql = "select * from qna_board "
-						+ "order by ref desc, pos asc limit ?, ?";
-				objPstmt = objConn.prepareStatement(sql);
-				objPstmt.setInt(1, start);
-				objPstmt.setInt(2, end);
+
+			if (uId.equals("admin"))  {
+				if (keyWord.equals("null") || keyWord.equals("")) {
+					// 검색어가 없을 경우
+					sql = "select * from levelupbbs "
+							+ "order by lvlRef desc, lvlPos asc limit ?, ?";
+					objPstmt = objConn.prepareStatement(sql);
+					objPstmt.setInt(1, start);
+					objPstmt.setInt(2, end);
+				} else {
+					// 검색어가 있을 경우
+					sql = "select * from levelupbbs "
+							+ "where "+ keyField +" like ? "
+							+ "order by lvlRef desc, lvlPos asc limit ?, ?";
+					objPstmt = objConn.prepareStatement(sql);
+					objPstmt.setString(1, "%"+keyWord+"%");
+					objPstmt.setInt(2, start);
+					objPstmt.setInt(3, end);				
+				}  
 			} else {
-				// 검색어가 있을 경우
-				sql = "select * from qna_board "
-						+ "where "+ keyField +" like ? "
-						+ "order by ref desc, pos asc limit ?, ?";
-				objPstmt = objConn.prepareStatement(sql);
-				objPstmt.setString(1, "%"+keyWord+"%");
-				objPstmt.setInt(2, start);
-				objPstmt.setInt(3, end);				
-			}
-			
+				if (keyWord.equals("null") || keyWord.equals("")) {
+					// 검색어가 없을 경우
+					sql = "select * from levelupbbs where lvlUid = ? AND lvlStatus = 1 "
+							+ "order by lvlRef desc, lvlPos asc limit ?, ?";
+					objPstmt = objConn.prepareStatement(sql);
+					objPstmt.setString(1, uId);
+					objPstmt.setInt(2, start);
+					objPstmt.setInt(3, end);
+				} else {
+					// 검색어가 있을 경우
+					sql = "select * from levelupbbs "
+							+ "where "+ keyField +" like ? AND lvlUid = ? AND lvlStatus = 1 "
+							+ "order by lvlRef desc, lvlPos asc limit ?, ?";
+					objPstmt = objConn.prepareStatement(sql);
+					objPstmt.setString(1, "%"+keyWord+"%");
+					objPstmt.setString(2, uId);
+					objPstmt.setInt(3, start);
+					objPstmt.setInt(4, end);
+				}  
+			} 
 			
 			objRs = objPstmt.executeQuery();
 
 			while (objRs.next()) {
 				BoardBean bean = new BoardBean();
-				bean.setNum(objRs.getInt("num"));
-				bean.setuIdb(objRs.getString("uIdb"));
-				bean.setQna_title(objRs.getString("qna_title"));
-				bean.setPos(objRs.getInt("pos"));
-				bean.setRef(objRs.getInt("ref"));
-				bean.setDepth(objRs.getInt("depth"));
-				bean.setRegDate(objRs.getString("regDate"));
-				bean.setCount(objRs.getInt("count"));
+				bean.setLvlNum(objRs.getInt("lvlNum"));
+				bean.setLvlUid(objRs.getString("lvlUid"));
+				bean.setLvlTitle(objRs.getString("lvlTitle"));
+				bean.setLvlName(objRs.getString("lvlName"));
+				bean.setLvlSns(objRs.getString("lvlSns"));
+				bean.setLvlPos(objRs.getInt("lvlPos"));
+				bean.setLvlRef(objRs.getInt("lvlRef"));
+				bean.setLvlDepth(objRs.getInt("lvlDepth"));
+				bean.setLvlRegDate(objRs.getString("lvlRegDate"));
+				bean.setLvlStatus(objRs.getInt("lvlStatus"));
 				vList.add(bean);
 			}
 		} catch (Exception e) {
@@ -182,10 +242,10 @@ try {
 objConn = pool.getConnection(); // DB연동
 
 if(keyWord.equals("null") || keyWord.equals("")) {
-	sql = "select count(*) from qna_board";
+	sql = "select count(*) from levelupbbs";
 	objPstmt = objConn.prepareStatement(sql);
 } else {
-	sql = "select count(*) from qna_board ";
+	sql = "select count(*) from levelupbbs";
 	sql += "where "+keyField+" like ?";
 	objPstmt = objConn.prepareStatement(sql);
 	objPstmt.setString(1, "%" + keyWord + "%");
@@ -213,7 +273,7 @@ return totalCnt;
 
 ////////  게시판 뷰페이지 출력(Read.jsp, 내용보기 페이지) 시작 ////////
 
-	public void upCount(int num) {
+	/*public void upCount(int num) {
 		// 조회수 증가 시작
 		Connection objConn = null;
 		PreparedStatement objPstmt = null;
@@ -221,20 +281,20 @@ return totalCnt;
 
 		try {
 			objConn = pool.getConnection(); // DB연동
-			sql = "update qna_board set count = count+1 where num=?";
+			sql = "update memberlist set uLevel = 2 where uId=?";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setInt(1, num);
 			objPstmt.executeUpdate();
-
+		
 		} catch (Exception e) {
 			System.out.println("SQL이슈5 : " + e.getMessage());
 		} finally {
 			pool.freeConnection(objConn, objPstmt);
 		}
 
-	} // upCount( ), 조회수 증가 끝
+	} // upCount( ), 조회수 증가 끝*/
 
-	public BoardBean getBoard(int num) {
+	public BoardBean getBoard(int lvlNum) {
 //		뷰페이지 게시글 데이터 반환 시작
 		Connection objConn = null;
 		PreparedStatement objPstmt = null;
@@ -244,24 +304,24 @@ return totalCnt;
 		BoardBean bean = new BoardBean();
 		try {
 			objConn = pool.getConnection(); // DB연동
-			sql = "select * from qna_board where num=?";
+			sql = "select * from levelupbbs where lvlNum=?";
 			objPstmt = objConn.prepareStatement(sql);
-			objPstmt.setInt(1, num);
+			objPstmt.setInt(1, lvlNum);
 			objRs = objPstmt.executeQuery();
 
 			if (objRs.next()) {
-				bean.setNum(objRs.getInt("num"));
-				bean.setuIdb(objRs.getString("uIdb"));
-				bean.setQna_title(objRs.getString("qna_title"));
-				bean.setQna_content(objRs.getString("qna_content"));
-				bean.setPos(objRs.getInt("pos"));
-				bean.setRef(objRs.getInt("ref"));
-				bean.setDepth(objRs.getInt("depth"));
-				bean.setRegDate(objRs.getString("regDate"));
-				bean.setuPw(objRs.getString("uPw"));
-				bean.setCount(objRs.getInt("count"));
-				bean.setFileName(objRs.getString("fileName"));
-				bean.setFileSize(objRs.getInt("fileSize"));
+				bean.setLvlNum(objRs.getInt("lvlNum"));
+				bean.setLvlUid(objRs.getString("lvlUid"));
+				bean.setLvlTitle(objRs.getString("lvlTitle"));
+				bean.setLvlContent(objRs.getString("lvlContent"));
+				bean.setLvlName(objRs.getString("lvlName"));
+				bean.setLvlSns(objRs.getString("lvlSns"));
+				bean.setLvlRegDate(objRs.getString("lvlRegDate"));
+				bean.setLvlPos(objRs.getInt("lvlPos"));
+				bean.setLvlRef(objRs.getInt("lvlRef"));
+				bean.setLvlDepth(objRs.getInt("lvlDepth"));
+				bean.setLvlFileName(objRs.getString("lvlFileName"));
+				bean.setLvlFileSize(objRs.getInt("lvlFileSize"));
 			}
 
 		} catch (Exception e) {
@@ -279,15 +339,15 @@ return totalCnt;
 
 	public static int len;
 	public void downLoad(HttpServletRequest req, HttpServletResponse res, JspWriter out, PageContext pageContext) {
-		String fileName = req.getParameter("fileName"); // 다운로드할 파일 매개변수명 일치
+		String lvlFileName = req.getParameter("lvlFileName"); // 다운로드할 파일 매개변수명 일치
 		try {
-			File file = new File(UtilMgr.con(SAVEFOLER + File.separator + fileName));
+			File file = new File(UtilMgr.con(SAVEFOLER + File.separator + lvlFileName));
 
 			byte[] b = new byte[(int) file.length()];
 			res.setHeader("Accept-Ranges", "bytes");
 			String strClient = req.getHeader("User-Agent");
 			res.setContentType("application/smnet;charset=utf-8");
-			res.setHeader("Content-Disposition", "attachment;fileName=" + fileName + ";");
+			res.setHeader("Content-Disposition", "attachment;lvFileName=" + lvlFileName + ";");
 
 			out.clear();
 			out = pageContext.pushBody();
@@ -313,7 +373,7 @@ return totalCnt;
 //////   게시판 뷰페이지 출력(Read.jsp, 내용보기 페이지) 끝  ////////	
 
 ////////////////// 게시글 삭제(Delete.jsp) 시작 //////////////////
-	public int deleteBoard(int num) {
+	public int deleteBoard(int lvlNum) {
 
 		Connection objConn = null;
 		PreparedStatement objPstmt = null;
@@ -326,9 +386,9 @@ return totalCnt;
 			objConn = pool.getConnection(); // DB연동
 
 			//////////// 게시글의 파일 삭제 시작 ///////////////
-			sql = "select fileName from qna_board where num=?";
+			sql = "select lvlFileName from levelupbbs where lvlNum=?";
 			objPstmt = objConn.prepareStatement(sql);
-			objPstmt.setInt(1, num);
+			objPstmt.setInt(1, lvlNum);
 			objRs = objPstmt.executeQuery();
 
 			if (objRs.next() && objRs.getString(1) != null) {
@@ -345,9 +405,9 @@ return totalCnt;
 			//////////// 게시글의 파일 삭제 끝 ///////////////
 
 			//////////// 게시글 삭제 시작 ///////////////
-			sql = "delete from qna_board where num=?";
+			sql = "delete from levelupbbs where lvlNum=?";
 			objPstmt = objConn.prepareStatement(sql);
-			objPstmt.setInt(1, num);
+			objPstmt.setInt(1, lvlNum);
 			exeCnt = objPstmt.executeUpdate();
 			//////////// 게시글 삭제 끝 ///////////////
 
@@ -372,12 +432,13 @@ return totalCnt;
 
 		try {
 			objConn = pool.getConnection(); // DB연동
-			sql = "update qna_board set uIdb=?, qna_title=?, qna_content=? where num=?";
+			sql = "update levelupbbs set lvlTitle=?, lvlContent=?, lvlName=?, lvlSns=? where lvlNum=?";
 			objPstmt = objConn.prepareStatement(sql);
-			objPstmt.setString(1, bean.getuIdb());
-			objPstmt.setString(2, bean.getQna_title());
-			objPstmt.setString(3, bean.getQna_content());
-			objPstmt.setInt(4, bean.getNum());
+			objPstmt.setString(1, bean.getLvlTitle());
+			objPstmt.setString(2, bean.getLvlContent());
+			objPstmt.setString(3, bean.getLvlName());
+			objPstmt.setString(4, bean.getLvlSns());
+			objPstmt.setInt(5, bean.getLvlNum());
 			exeCnt = objPstmt.executeUpdate();
 			// exeCnt : DB에서 실제 적용된 데이터(=row, 로우)의 개수 저장됨
 

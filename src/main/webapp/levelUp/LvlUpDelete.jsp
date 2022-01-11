@@ -1,28 +1,63 @@
+<%@page import="pack_BBS.BoardBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-    
+    pageEncoding="UTF-8" %>
+<% request.setCharacterEncoding("UTF-8"); %>
+<jsp:useBean id="bMgr" class="pack_LevelUpBBS.BoardMgr" scope="page" />
 <%
-request.setCharacterEncoding("UTF-8");
+String nowPage = request.getParameter("nowPage");
+String s = request.getParameter("lvlNum");
+int numParam = Integer.parseInt(s);
+
+//검색어 수신 시작
+String keyField = request.getParameter("keyField");
+String keyWord = request.getParameter("keyWord");
+//검색어 수신 끝
+
+
 String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
 String str1 = "3";
 String str2 = "2";
-%>
-    
+
+
+
+/* if (request.getParameter("uPwParam") != null) {
+	String uPwParam = request.getParameter("uPwParam");
+	// 사용자가 현재 페이지에서 입력한 확인용 비번
+	BoardBean bean = (BoardBean)session.getAttribute("bean");
+	String uPw = bean.getuPw();    // DB 에 저장되어 있는 실제 비번
+ 	
+	if (uPwParam.equals(uPw)) {  */  // 중첩 IF 시작
+		int exeCnt = bMgr.deleteBoard(numParam);
+	
+		String url = "LvlUpList.jsp?nowPage="+nowPage;
+				 url += "&keyField="+keyField;
+				 url += "&keyWord="+keyWord;
+%>	
+		<script>
+			alert("삭제되었습니다!");
+			location.href = "<%=url%>";
+		</script>
+<%	
+		//String url = "List.jsp";
+
+%>		
+
+
+ 
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>OneDayClass</title>
-	<link rel="stylesheet" href="/Proj_OnedayClass/style/style.css">
+	<title>게시글 삭제</title>
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/lvlUpBBS.css">
 </head>
 <body>
 	<div id="wrap">
-        <header id="header" class="flex-container">
+		  <header id="header" class="flex-container">
             <div id="headerLogo">
                 <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
             </div>
@@ -68,83 +103,81 @@ String str2 = "2";
             </div>
             <!-- div#headerRight -->
         </header>
-        <!-- header#header -->
-        
         <nav id="gnb">
             <ul class="flex-container">
-                <li class="active"><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
+                <li><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
                 <li><a href="./about.html">About</a></li>
                 <li><a href="#">Online</a></li>
                 <li><a href="#">Offline</a></li>
+                  <li class="active">
+                <% if (uId == null) { %> 
+					<a href="/Proj_OnedayClass/sign/Login.jsp" onclick="alert('로그인이 필요합니다.');">QnA</a>
+				<%  } else { %> 
+					<a href="/Proj_OnedayClass/bbs/List.jsp">QnA</a>
+				<% } %>
+                </li>
             </ul>
         </nav>
-        <!-- nav#gnb -->
+		<!--  HTML 템플릿(Template, Templet)  헤더 시작 -->
+		<h1>문의글 삭제</h1>
 
-        <div id="slide">
-            <div id="shuttleFrame" class="flex-container">
-                <!-- 가로형에서는 이미지전체개수의 폭-->
-                <!-- 셔틀프레임이 좌우로 이동하면서 슬라이드쇼가 구현된다 -->
+		<!--  HTML 템플릿(Template, Templet)  헤더 끝 -->
+		
+		
+		<main id="main" class="delete">   <!-- 본문영역 html 템플릿 시작 -->
+				
+			<h2>문의글 삭제페이지(비밀번호 입력)</h2>
+				
+			<form name="delFrm" id="delFrm">	
+				<table id="delTbl">
+					<tbody>
+						<tr>
+							<td>
+								 <b>비밀번호 : </b><input type="password" name="uPwParam" id="uPw"
+								   maxlength="20">
+							</td>
+						</tr>					
+					</tbody>
+					 
+					<tfoot id="readTblFoot">
+						<tr>
+							<td id="hrTd"><hr></td>							
+						</tr>
+						<tr>
+							<td id="btnAreaTd">
+								<button type="button" id="delSbmBtn" class="butcs">삭제하기</button>
+								<button type="reset" class="butcs">다시쓰기</button>
+								<button type="button" id="backBtn" class="butcs">돌아가기</button>								
+							</td>
+						</tr>
+					</tfoot>
+					 
+				</table>
+				
+				<input type="hidden" name="num" value="<%=numParam%>">
+				<input type="hidden" name="nowPage" value="<%=nowPage%>">
+				
+				
+				<!-- 검색어전송 시작 -->
+				<input type="hidden" name="keyField" id="keyField" value="<%=keyField%>">
+				<input type="hidden" name="keyWord" id="keyWord" value="<%=keyWord%>">
+				<!-- 검색어전송 끝 -->
+				
+		  	</form>
+			
+		
+		
+		
+		
+		</main>  <!-- 본문영역 html 템플릿 끝 -->
 
-                <a href="#">   <!-- pos: r -->
-                    <img src="img/slide/slide1.jpg" alt="슬라이드 이미지1">
-                    <span>떠나요! 남도맛축제!</span>  <!-- pos: a + C -->
-                </a>
 
-                <a href="#">
-                    <img src="img/slide/slide2.jpg" alt="슬라이드 이미지2">
-                    <span>메타세콰이어길을 걸어요!</span>
-                </a>
-
-                <a href="#">
-                    <img src="img/slide/slide3.jpg" alt="슬라이드 이미지3">
-                    <span>테마기행과 함께 즐겨요!</span>
-                </a>
-
-            </div> <!-- div#shuttleFrame, 빨강색 테두리선 -->
-
-            <!-- 슬라이드쇼 방향키 시작 -->
-            <div id="arrowLeft" class="arrowMark">&lt;</div>
-            <div id="arrowRight" class="arrowMark">&gt;</div>
-            <!-- 슬라이드쇼 방향키 끝 -->
-
-        </div>
-        <!-- div#slide -->
-
-        <footer id="footer">
-            <div id="footerTop" class="flex-container">
-                <nav id="footerLnbArea">
-                    <ul id="footermainMenu" class="flex-container">
-                        <li class="footerMainLi"><a href="#">서비스이용약관</a></li>
-                        <li class="footerMainLi"></li>
-                        <li class="footerMainLi"><a href="#">개인정보처리방침</a></li>
-                        <li class="footerMainLi"></li>
-                        <li class="footerMainLi"><a href="#">이메일무단수집거부</a></li>
-                        <li class="footerMainLi"></li>
-                        <li class="footerMainLi"><a href="#">인터넷증명발급</a></li>
-                    </ul>
-                </nav>
-                <!-- nav#footerLnbArea -->
-            </div>
-            <!-- div#footerTop 회사 관련 정보 영역 -->
-
-            <div id="footerBottom" class="flex-container">
-                <nav id="footerArea">
-                    <ul id="footerBtm" class="flex-container">
-                        <li class="footerBtmLi"><a href="#">주소</a></li>
-                        <li class="footerBtmLi"><a href="#">대표</a></li>
-                        <li class="footerBtmLi"><a href="#">사업자번호</a></li>
-                        <li class="footerBtmLi"><a href="#">전화번호</a></li>
-                    </ul>
-                </nav>
-                <!-- nav#footerArea -->
-            </div>
-            <!-- div#footerBottom -->
-
-        </footer>
-        <!-- footer#footer -->
-    </div>
-
+	</div>
+	<!-- div#wrap -->
+	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="/Proj_OnedayClass/script/script.js"></script>
+	<script src="/Proj_OnedayClass/script/lvlUpBBS.js"></script>      
 </body>
 </html>
+ 
