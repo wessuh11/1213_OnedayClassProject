@@ -20,6 +20,8 @@
 
 String nowPage = request.getParameter("nowPage");
 
+String uLevel = (String)session.getAttribute("levelKey");
+
 String upUid = upBean.getqUid();   
                      // 사용자가 Update.jsp에서 로그인된 아이디
 String realDBUid = bean.getqUid();   
@@ -36,7 +38,7 @@ String keyWord = request.getParameter("keyWord");
        => 실제 게시글이 DB와 연동하여 수정됨 -->
 <%    
 int exeCnt = 0;
-if(upUid.equals(realDBUid)) {    // 사용자 아이디와 작성자 아이디가 일치할경우
+if(upUid.equals(realDBUid)  || uLevel.equals("3")) {    // 사용자 아이디와 작성자 아이디가 일치할경우
 	exeCnt = bMgr.updateBoard(upBean);
 	
 	if (exeCnt > 0) {

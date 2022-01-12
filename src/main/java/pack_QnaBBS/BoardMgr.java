@@ -19,6 +19,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import pack_DBCP.DBConnectionMgr;
+
 public class BoardMgr {
 
 	private DBConnectionMgr pool;
@@ -76,8 +77,9 @@ public class BoardMgr {
 				qFileSize = (int) multi.getFile("fileName").length();
 			}
 			String qContent = multi.getParameter("qContent");
+			String contentType = "TEXT";
 
-			if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
+			if (contentType.equalsIgnoreCase("TEXT")) {
 				qContent = UtilMgr.replace(qContent, "<", "&lt;");
 			}
 
@@ -94,7 +96,7 @@ public class BoardMgr {
 			objPstmt.setInt(4, qRef);
 			objPstmt.setString(5, qFileName);
 			objPstmt.setInt(6, qFileSize);
-			objPstmt.setInt(7, Integer.parseInt(multi.getParameter("qStatus")));			
+			objPstmt.setInt(7, Integer.parseInt(multi.getParameter("qStatus")));
 			objPstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -120,11 +122,10 @@ public class BoardMgr {
 		PreparedStatement objPstmt = null;
 		ResultSet objRs = null;
 		String sql = null;
-		
+
 		try {
 			objConn = pool.getConnection(); // DB연동
-			
-			
+
 			if (keyWord.equals("null") || keyWord.equals("")) {
 				// 검색어가 없을 경우
 				sql = "select * from qnaBBS where qStatus<3 "
@@ -134,16 +135,15 @@ public class BoardMgr {
 				objPstmt.setInt(2, end);
 			} else {
 				// 검색어가 있을 경우
-				sql = "select * from qnaBBS where qStatus<3 "
-						+ "where "+ keyField +" like ? "
+				sql = "select * from qnaBBS "
+						+ "where " + keyField + " like ? AND qStatus<3 "
 						+ "order by qRef desc, qPos asc limit ?, ?";
 				objPstmt = objConn.prepareStatement(sql);
-				objPstmt.setString(1, "%"+keyWord+"%");
+				objPstmt.setString(1, "%" + keyWord + "%");
 				objPstmt.setInt(2, start);
-				objPstmt.setInt(3, end);				
+				objPstmt.setInt(3, end);
 			}
-			
-			
+
 			objRs = objPstmt.executeQuery();
 
 			while (objRs.next()) {
@@ -154,6 +154,7 @@ public class BoardMgr {
 				bean.setqPos(objRs.getInt("qPos"));
 				bean.setqRef(objRs.getInt("qRef"));
 				bean.setqDepth(objRs.getInt("qDepth"));
+				bean.setqOriUid(objRs.getString("qOriUid"));
 				bean.setqRegDate(objRs.getString("qRegDate"));
 				bean.setqStatus(objRs.getInt("qStatus"));
 				vList.add(bean);
@@ -170,41 +171,41 @@ public class BoardMgr {
 ///////////////  게시판 리스트 출력(List.jsp) 끝    ///////////////
 
 //////////////////총 게시물 수(List.jsp) 시작 //////////////////
-public int getTotalCount(String keyField, String keyWord) {
+	public int getTotalCount(String keyField, String keyWord) {
 
-Connection objConn = null;
-PreparedStatement objPstmt = null;
-ResultSet objRs = null;
-String sql = null;
-int totalCnt = 0;
+		Connection objConn = null;
+		PreparedStatement objPstmt = null;
+		ResultSet objRs = null;
+		String sql = null;
+		int totalCnt = 0;
 
-try {
-objConn = pool.getConnection(); // DB연동
+		try {
+			objConn = pool.getConnection(); // DB연동
 
-if(keyWord.equals("null") || keyWord.equals("")) {
-	sql = "select count(*) from qnaBBS where qStatus<3";
-	objPstmt = objConn.prepareStatement(sql);
-} else {
-	sql = "select count(*) from qnaBBS ";
-	sql += "where "+keyField+" like ? AND qStatus<3";
-	objPstmt = objConn.prepareStatement(sql);
-	objPstmt.setString(1, "%" + keyWord + "%");
-}
+			if (keyWord.equals("null") || keyWord.equals("")) {
+				sql = "select count(*) from qnaBBS where qStatus<3";
+				objPstmt = objConn.prepareStatement(sql);
+			} else {
+				sql = "select count(*) from qnaBBS ";
+				sql += "where " + keyField + " like ? AND qStatus<3";
+				objPstmt = objConn.prepareStatement(sql);
+				objPstmt.setString(1, "%" + keyWord + "%");
+			}
 
-objRs = objPstmt.executeQuery();
+			objRs = objPstmt.executeQuery();
 
-if (objRs.next()) {
-	totalCnt = objRs.getInt(1);
-}
+			if (objRs.next()) {
+				totalCnt = objRs.getInt(1);
+			}
 
-} catch (Exception e) {
-System.out.println("SQL이슈4 : " + e.getMessage());
-} finally {
-pool.freeConnection(objConn, objPstmt, objRs);
-}
+		} catch (Exception e) {
+			System.out.println("SQL이슈4 : " + e.getMessage());
+		} finally {
+			pool.freeConnection(objConn, objPstmt, objRs);
+		}
 
-return totalCnt;
-}
+		return totalCnt;
+	}
 //////////////////총 게시물 수(List.jsp) 끝 //////////////////
 
 ///////////////////////////////////////////////////////////////////
@@ -213,20 +214,20 @@ return totalCnt;
 
 ////////  게시판 뷰페이지 출력(Read.jsp, 내용보기 페이지) 시작 ////////
 
-/*
- * public void upCount(int num) { // 조회수 증가 시작 Connection objConn = null;
- * PreparedStatement objPstmt = null; String sql = null;
- * 
- * try { objConn = pool.getConnection(); // DB연동 sql =
- * "update qna_board set count = count+1 where num=?"; objPstmt =
- * objConn.prepareStatement(sql); objPstmt.setInt(1, num);
- * objPstmt.executeUpdate();
- * 
- * } catch (Exception e) { System.out.println("SQL이슈5 : " + e.getMessage()); }
- * finally { pool.freeConnection(objConn, objPstmt); }
- * 
- * } // upCount( ), 조회수 증가 끝
- */
+	/*
+	 * public void upCount(int num) { // 조회수 증가 시작 Connection objConn = null;
+	 * PreparedStatement objPstmt = null; String sql = null;
+	 * 
+	 * try { objConn = pool.getConnection(); // DB연동 sql =
+	 * "update qna_board set count = count+1 where num=?"; objPstmt =
+	 * objConn.prepareStatement(sql); objPstmt.setInt(1, num);
+	 * objPstmt.executeUpdate();
+	 * 
+	 * } catch (Exception e) { System.out.println("SQL이슈5 : " + e.getMessage()); }
+	 * finally { pool.freeConnection(objConn, objPstmt); }
+	 * 
+	 * } // upCount( ), 조회수 증가 끝
+	 */
 	public BoardBean getBoard(int qNum) {
 //		뷰페이지 게시글 데이터 반환 시작
 		Connection objConn = null;
@@ -251,6 +252,7 @@ return totalCnt;
 				bean.setqRef(objRs.getInt("qRef"));
 				bean.setqDepth(objRs.getInt("qDepth"));
 				bean.setqRegDate(objRs.getString("qRegDate"));
+				bean.setqOriUid(objRs.getString("qOriUid"));
 				bean.setqFileName(objRs.getString("qFileName"));
 				bean.setqFileSize(objRs.getInt("qFileSize"));
 			}
@@ -269,7 +271,7 @@ return totalCnt;
 	 * 
 	 * public static int len;
 	 */
-	
+
 	public void downLoad(HttpServletRequest req, HttpServletResponse res, JspWriter out, PageContext pageContext) {
 		String fileName = req.getParameter("fileName"); // 다운로드할 파일 매개변수명 일치
 		try {
@@ -317,24 +319,20 @@ return totalCnt;
 		try {
 			objConn = pool.getConnection(); // DB연동
 
-			//////////// 게시글의 파일 삭제 시작 ///////////////
-			sql = "select qFileName from qnaBBS where qNum=?";
-			objPstmt = objConn.prepareStatement(sql);
-			objPstmt.setInt(1, qNum);
-			objRs = objPstmt.executeQuery();
-
-			if (objRs.next() && objRs.getString(1) != null) {
-				if (!objRs.getString(1).equals("")) {
-					String fName = objRs.getString(1);
-					String fileSrc = SAVEFOLER + "/" + fName;
-					File file = new File(fileSrc);
-
-					if (file.exists())
-						file.delete(); // 파일 삭제 실행
-
-				}
-			}
-			//////////// 게시글의 파일 삭제 끝 ///////////////
+			/*
+			 * //////////// 게시글의 파일 삭제 시작 /////////////// sql =
+			 * "select qFileName from qnaBBS where qNum=?"; objPstmt =
+			 * objConn.prepareStatement(sql); objPstmt.setInt(1, qNum); objRs =
+			 * objPstmt.executeQuery();
+			 * 
+			 * if (objRs.next() && objRs.getString(1) != null) { if
+			 * (!objRs.getString(1).equals("")) { String fName = objRs.getString(1); String
+			 * fileSrc = SAVEFOLER + "/" + fName; File file = new File(fileSrc);
+			 * 
+			 * if (file.exists()) file.delete(); // 파일 삭제 실행
+			 * 
+			 * } } //////////// 게시글의 파일 삭제 끝 ///////////////
+			 */
 
 			//////////// 게시글 삭제 시작 ///////////////
 			sql = "update qnaBBS set qStatus=3 where qNum=?";
@@ -385,83 +383,77 @@ return totalCnt;
 //////게시글 수정페이지 (UpdateProc.jsp) 끝 ////////	
 
 ///////// 게시글 답변 페이지 (ReplyProc.jsp) 시작 //////////
-public int replyBoard(BoardBean bean) {
+	public int replyBoard(BoardBean bean) {
 
-	Connection objConn = null;
-	PreparedStatement objPstmt = null;
-	ResultSet objRs = null;
-	String sql = null;
-	int cnt = 0;
+		Connection objConn = null;
+		PreparedStatement objPstmt = null;
+		ResultSet objRs = null;
+		String sql = null;
+		int cnt = 0;
 
+		try {
+			objConn = pool.getConnection(); // DB연동
 
-	try {
-		objConn = pool.getConnection(); // DB연동
+			sql = "insert into qnaBBS (";
+			sql += "qUid, qTitle, qContent, ";
+			sql += "qRef, qPos, qDepth, ";
+			sql += "qOriUid, qRegDate, qStatus";
+			sql += ") values (";
+			sql += "?, ?, ?, ?, ?, ?, ?, now(), ?)";
 
+			int qDepth = bean.getqDepth() + 1;
+			int qPos = bean.getqPos() + 1;
 
-		sql = "insert into qnaBBS (";
-		sql += "qUid, qTitle, qContent, ";
-		sql += "qRef, qPos, qDepth,  ";
-		sql += "qRegDate, qStatus ) values (";
-		sql += "?, ?, ?, ?, ?, ?, now(), ?)";
+			objPstmt = objConn.prepareStatement(sql);
+			objPstmt.setString(1, bean.getqUid());
+			objPstmt.setString(2, bean.getqTitle());
+			objPstmt.setString(3, bean.getqContent());
+			objPstmt.setInt(4, bean.getqRef());
+			objPstmt.setInt(5, qPos);
+			objPstmt.setInt(6, qDepth);
+			objPstmt.setString(7, bean.getqOriUid());
+			objPstmt.setInt(8, bean.getqStatus());
+			cnt = objPstmt.executeUpdate();
 
-		int qDepth = bean.getqDepth() + 1;
-		int qPos = bean.getqPos() + 1;
-		
-		objPstmt = objConn.prepareStatement(sql);
-		objPstmt.setString(1, bean.getqUid());
-		objPstmt.setString(2, bean.getqTitle());
-		objPstmt.setString(3, bean.getqContent());
-		objPstmt.setInt(4, bean.getqRef());
-		objPstmt.setInt(5, qPos);
-		objPstmt.setInt(6, qDepth);
-		objPstmt.setInt(7, bean.getqStatus());
-		cnt = objPstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("SQL이슈8 : " + e.getMessage());
+		} finally {
+			pool.freeConnection(objConn, objPstmt, objRs);
+		}
 
-	} catch (Exception e) {
-		System.out.println("SQL이슈8 : " + e.getMessage());
-	} finally {
-		pool.freeConnection(objConn, objPstmt, objRs);
+		return cnt; // DB에 실제 입력된 데이터 수(= Row Count) 반환
 	}
-
-	return cnt;  // DB에 실제 입력된 데이터 수(= Row Count) 반환
-}
-
-
 
 /////////////// 답변글 끼어들기 메서드 시작 ///////////////
-public int replyUpBoard(int qRef, int qPos) {
+	public int replyUpBoard(int qRef, int qPos) {
 
-	Connection objConn = null;
-	PreparedStatement objPstmt = null;
-	ResultSet objRs = null;
-	String sql = null;
-	int cnt = 0;
-	
+		Connection objConn = null;
+		PreparedStatement objPstmt = null;
+		ResultSet objRs = null;
+		String sql = null;
+		int cnt = 0;
 
-	try {
-		objConn = pool.getConnection(); // DB연동
+		try {
+			objConn = pool.getConnection(); // DB연동
 
-		//////////// 게시글의 파일 삭제 시작 ///////////////
-		sql = "update qnaBBS set qPos = qPos + 1 ";
-		sql += "where qRef = ? and qPos > ?";
-		
-		objPstmt = objConn.prepareStatement(sql);
-		objPstmt.setInt(1, qRef);
-		objPstmt.setInt(2, qPos);
-		cnt = objPstmt.executeUpdate();
+			//////////// 게시글의 파일 삭제 시작 ///////////////
+			sql = "update qnaBBS set qPos = qPos + 1 ";
+			sql += "where qRef = ? and qPos > ?";
 
+			objPstmt = objConn.prepareStatement(sql);
+			objPstmt.setInt(1, qRef);
+			objPstmt.setInt(2, qPos);
+			cnt = objPstmt.executeUpdate();
 
-	} catch (Exception e) {
-		System.out.println("SQL이슈 9: " + e.getMessage());
-	} finally {
-		pool.freeConnection(objConn, objPstmt, objRs);
+		} catch (Exception e) {
+			System.out.println("SQL이슈 9: " + e.getMessage());
+		} finally {
+			pool.freeConnection(objConn, objPstmt, objRs);
+		}
+
+		return cnt;
 	}
-
-	
-	return cnt;
-}	
 /////////////// 답변글 끼어들기 메서드 끝 ///////////////
-
 
 ///////// 게시글 답변 페이지 (ReplyProc.jsp) 끝 //////////
 

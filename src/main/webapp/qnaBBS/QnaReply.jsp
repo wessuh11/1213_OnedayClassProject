@@ -151,6 +151,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 				<input type="hidden" name="qRef" value="<%=qRef%>">				
 				<input type="hidden" name="qDepth" value="<%=qDepth%>">				
 				<input type="hidden" name="qPos" value="<%=qPos%>">
+				<input type="hidden" name="qOriUid" value="<%=qUid%>">
 				
 				<input type="hidden" name="nowPage" value="<%=nowPage%>" id="nowPage">
 

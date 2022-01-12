@@ -10,6 +10,7 @@ public class BoardBean {
 	private int qPos;
 	private int qRef;
 	private int qDepth;
+	private String qOriUid;
 	private String qFileName;
 	private int qFileSize;
 	private int qStatus;
@@ -62,6 +63,12 @@ public class BoardBean {
 	public void setqDepth(int qDepth) {
 		this.qDepth = qDepth;
 	}
+	public String getqOriUid() {
+		return qOriUid;
+	}
+	public void setqOriUid(String qOriUid) {
+		this.qOriUid = qOriUid;
+	}
 	public String getqFileName() {
 		return qFileName;
 	}
@@ -81,5 +88,4 @@ public class BoardBean {
 		this.qStatus = qStatus;
 	}
 	
-
 }

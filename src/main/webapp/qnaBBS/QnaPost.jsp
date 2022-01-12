@@ -2,6 +2,13 @@
     pageEncoding="UTF-8"%>
 <jsp:useBean id="mMgr" class="pack_Member.MemberMgr" scope="page" />
 <%
+//검색어 수신 시작
+String keyField = request.getParameter("keyField");
+String keyWord = request.getParameter("keyWord");
+//검색어 수신 끝
+String nowPage = request.getParameter("nowPage");
+
+
 String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
@@ -38,7 +45,7 @@ String uLevel = (String)session.getAttribute("levelKey");
                     <li></li>
                     <li>
                         <div id="headerCart">
-                            <a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
+                            <a href="#"><img src="/Proj_OnedayClass/img/cart.png" alt=""> <span>0</span></a>
                         </div>
                     </li>
                 </ul>
@@ -53,13 +60,7 @@ String uLevel = (String)session.getAttribute("levelKey");
                 <li><a href="./about.html">About</a></li>
                 <li><a href="#">Online</a></li>
                 <li><a href="#">Offline</a></li>
-                  <li class="active">
-                <% if (uId == null) { %> 
-					<a href="/Proj_OnedayClass/sign/Login.jsp" onclick="alert('로그인이 필요합니다.');">QnA</a>
-				<%  } else { %> 
-					<a href="/Proj_OnedayClass/bbs/List.jsp">QnA</a>
-				<% } %>
-                </li>
+				<li class="active"><a href="/Proj_OnedayClass/qnaBBS/QnaList.jsp">QnA</a></li>
             </ul>
         </nav>
 		<!--  HTML 템플릿(Template, Templet)  헤더 시작 -->
@@ -115,14 +116,16 @@ String uLevel = (String)session.getAttribute("levelKey");
 								</span>	
 							</td>
 						</tr>
+						
 						<tr>
 							<td>
-									<input type="hidden" name="contentType"
-										value="HTML">									
-									<input type="hidden" name="contentType"
-										value="TEXT" checked>											
+								<input type="hidden" name="contentType"
+									value="HTML">									
+								<input type="hidden" name="contentType"
+									value="TEXT" checked>											
 							</td>
 						</tr>
+						
 					</tbody>
 					<tfoot>
 						<tr>
@@ -137,22 +140,18 @@ String uLevel = (String)session.getAttribute("levelKey");
 						</tr>
 					</tfoot>
 				</table>
-			
-			    <!--  
-			    IP주소를 IPv4 형식으로 설정함.(IPv6 형식이 기본으로 설정되어 있음)
-			    프로젝트 => Run Configuration => Tomcat 클릭
-			    => (x)Argument => VM arguments 입력란 =>
-			    -Djava.net.preferIPv4Stack=true  
-			     -->
-			
-			
-			
+						
 			</form>
 		
-		
-		
+			<input type="hidden" name="nowPage" value="<%=nowPage%>" id="nowPage">
+			
+			<!-- 검색어전송 시작 -->
+			<input type="hidden" id="pKeyField" value="<%=keyField%>">
+			<input type="hidden" id="pKeyWord" value="<%=keyWord%>">
+			<!-- 검색어전송 끝 -->
 		
 		</main>  <!-- 본문영역 html 템플릿 끝 -->
+		
 			<footer id="footer">
 
             <div id="footerTop" class="flex-container">
@@ -188,7 +187,6 @@ String uLevel = (String)session.getAttribute("levelKey");
 	</div>
 	<!-- div#wrap -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="/Proj_OnedayClass/script/script.js"></script>
 	<script src="/Proj_OnedayClass/script/qnaBBS.js"></script>        
 </body>
 </html>

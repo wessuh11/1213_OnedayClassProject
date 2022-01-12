@@ -14,16 +14,17 @@ String keyField = request.getParameter("keyField");
 String keyWord = request.getParameter("keyWord");
 //검색어 수신 끝
 String uId = (String)session.getAttribute("idKey");
-BoardBean bean = (BoardBean)session.getAttribute("bean");
+String uLevel = (String) session.getAttribute("levelKey");
+BoardBean bean = (BoardBean) session.getAttribute("bean");
 
 String realDBUid = bean.getqUid();
 
-if(uId.equals(realDBUid)) {    // 사용자 아이디와 작성자 아이디가 일치할경우
+if (uId.equals(realDBUid) || uLevel.equals("3")) { // 사용자 아이디와 작성자 아이디가 일치할경우
 	int exeCnt = bMgr.deleteBoard(numParam);
-	
-	String url = "QnaList.jsp?nowPage="+nowPage;
-			 url += "&keyField="+keyField;
-			 url += "&keyWord="+keyWord;
+
+	String url = "QnaList.jsp?nowPage=" + nowPage;
+	url += "&keyField=" + keyField;
+	url += "&keyWord=" + keyWord;
 %>	
 <script>
 	alert("삭제되었습니다!");
