@@ -20,6 +20,8 @@ String lvlName = bean.getLvlName();
 String lvlSns = bean.getLvlSns();
 
 String uId = (String)session.getAttribute("idKey");
+String uName = (String)session.getAttribute("nameKey");
+String uLevel = (String)session.getAttribute("levelKey");
 String str1 = "3";
 String str2 = "2";
 %>    

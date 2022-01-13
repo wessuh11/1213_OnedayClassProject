@@ -179,10 +179,15 @@ String str2 = "2";
 							listBtnLabel = "검색목록";
 						}
 						%>
-							<td colspan="4" id="btnAreaTd" class="read">
+							<td colspan="5" id="btnAreaTd" class="read">
 							<button type="button" id="lvlListBtn" class="butcs"><%=listBtnLabel %></button>
 							<%if (str1.equals(uLevel)){%>
 							<button type="button" id="replyBtn" class="butcs">답 변</button>
+							<form name = "AcForm" id ="AcForm" action="LvlUpAcProc.jsp">
+							<button type="button" id="AcBtn" class="butcs">등업 승인</button>
+							<input type="hidden" name="lvlUid" value="<%=lvlUid%>">
+							</form>
+							<button type="button" id="RjBtn" class="butcs">등업 거절</button>
 							<%} else {%>
 							<button type="button" id="lvlModBtn" class="butcs">수 정</button>
 							<%} %>
@@ -200,7 +205,6 @@ String str2 = "2";
 			<input type="hidden" id="pKeyWord" value="<%=keyWord%>">
 			<!-- 검색어전송 끝 -->
 		  
-			
 		
 			<!--  뷰페이지 내용 출력 끝 -->
 		</main>  <!-- 본문영역 html 템플릿 끝 -->

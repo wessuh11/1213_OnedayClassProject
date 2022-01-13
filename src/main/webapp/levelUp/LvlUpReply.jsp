@@ -5,19 +5,22 @@
     
 <%
 request.setCharacterEncoding("UTF-8");
-int num = Integer.parseInt(request.getParameter("num"));
+int lvlNum = Integer.parseInt(request.getParameter("lvlNum"));
 //검색어 수신 시작
 String keyField = request.getParameter("keyField");
 String keyWord = request.getParameter("keyWord");
 //검색어 수신 끝
 
 String nowPage = request.getParameter("nowPage");
-String lvl = bean.getuIdb();
-String Qna_title = bean.getQna_title();
-String Qna_content = bean.getQna_content();
-String ref = String.valueOf(bean.getRef());
-String depth = String.valueOf(bean.getDepth());
-String pos = String.valueOf(bean.getPos());
+String lvlUid = bean.getLvlUid();
+String lvlTitle = bean.getLvlTitle();
+String lvlContent = bean.getLvlContent();
+String lvlName = bean.getLvlName();
+String lvlSns = bean.getLvlSns();
+String lvlRef = String.valueOf(bean.getLvlRef());
+String lvlDepth = String.valueOf(bean.getLvlDepth());
+String lvlPos = String.valueOf(bean.getLvlPos());
+
 String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
@@ -32,7 +35,7 @@ String str2 = "2";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-    <link rel="stylesheet" href="/Proj_OnedayClass/style/bbs.css">
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/lvlUpBBS.css">
 </head>
 <body>
 	<div id="wrap">
@@ -117,35 +120,44 @@ String str2 = "2";
 						<tr>
 							<td class="req">작성자</td>
 							<td>
-								<input type="text" id="uIdb"
-								name="uIdb" value="">
-								<span class="ori_Txt"><b><%=uIdb %></b> 님의 글</span>
+								<input type="text" id="lvlUid"
+								name="lvlUid" value="">
+								<span class="ori_Txt"><b><%=lvlUid %></b> 님의 글</span>
 							</td>
 						</tr>
 						<tr>
 							<td class="req">제목</td>
 							<td>
-								<input type="text" name="qna_title" value=""
-									size="50" id="Qna_title">								
-								<span class="ori_Txt">원본 글제목 : <b><%=Qna_title %></b></span>
+								<input type="text" name="lvlTitle" value=""
+									size="50" id="lvlTitle">								
+								<span class="ori_Txt">원본 글제목 : <b><%=lvlTitle %></b></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="req">상호명</td>
+							<td>
+								<input type="text" name="lvlName" value=""
+									size="50" id="lvlName">								
+								<span class="ori_Txt">원본 상호명 : <b><%=lvlName %></b></span>
+							</td>
+						</tr>
+						<tr>
+							<td class="req">SNS</td>
+							<td>
+								<input type="text" name="lvlSns" value=""
+									size="50" id="lvlSns">								
+								<span class="ori_Txt">원본 SNS : <b><%=lvlSns %></b></span>
 							</td>
 						</tr>
 						<tr>
 							<td style="vertical-align: top;">내용</td>
 							<td>
-								<textarea name="qna_content" id="Qna_content"  
+								<textarea name="lvlContent" id="lvlContent"  
 								cols="89" wrap="hard"></textarea>
 								
 								<span id="ori_SpanTxtArea" class="ori_Txt">원본 글내용</span>
 								<textarea id="ori_TxtArea"  
-								cols="89"><%=Qna_content %></textarea>
-								
-							</td>
-						</tr>	
-						<tr>
-							<td class="req">비밀번호</td>
-							<td>
-								<input type="password" name="uPw" id="uPw">								
+								cols="89"><%=lvlContent %></textarea>
 							</td>
 						</tr>					
 					</tbody>
@@ -167,15 +179,13 @@ String str2 = "2";
 					</tfoot>
 					 
 				</table>
-				<input type="hidden" name="num" value="<%=num%>" id="num">				
+				<input type="hidden" name="lvlNum" value="<%=lvlNum%>" id="lvlNum">				
 				
-				<input type="hidden" name="ref" value="<%=ref%>">				
-				<input type="hidden" name="depth" value="<%=depth%>">				
-				<input type="hidden" name="pos" value="<%=pos%>">
+				<input type="hidden" name="lvlRef" value="<%=lvlRef%>">				
+				<input type="hidden" name="lvlDepth" value="<%=lvlDepth%>">				
+				<input type="hidden" name="lvlPos" value="<%=lvlPos%>">
 				
 				<input type="hidden" name="nowPage" value="<%=nowPage%>" id="nowPage">
-				<input type="hidden" name="ip" value="<%=request.getRemoteAddr()%>">
-				
 				<!-- 검색어전송 시작 -->
 				<input type="hidden" name="keyField" id="keyField" value="<%=keyField%>">
 				<input type="hidden" name="keyWord" id="keyWord" value="<%=keyWord%>">
@@ -192,6 +202,6 @@ String str2 = "2";
 	<!-- div#wrap -->
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="/Proj_OnedayClass/script/bbs.js"></script>    
+	<script src="/Proj_OnedayClass/script/lvlUpBBS.js"></script>    
 </body>
 </html>

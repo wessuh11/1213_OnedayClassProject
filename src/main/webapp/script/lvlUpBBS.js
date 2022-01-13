@@ -179,26 +179,53 @@ $(function(){
 	});
 	//////////////// Read.jsp 에서 게시글 수정버튼 끝 //////////////////
 	
-		//////////////// Read.jsp 에서 답변글 버튼 시작 //////////////////	
+	//////////////// Read.jsp 에서 답변글 버튼 시작 //////////////////	
 	
 	$("td.read>button#replyBtn").click(function(){
 	
 		let nowPage = $("input#nowPage").val().trim();
-		let num = $("input#num").val().trim();
+		let lvlNum = $("input#lvlNum").val().trim();
 				
 		let p3 = $("#pKeyField").val().trim();  // p3 : keyField
 	    let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
 	
-		let url = "/Proj_OnedayClass/bbs/Reply.jsp?";
-			url += "num="+num;
+		let url = "/Proj_OnedayClass/levelUp/LvlUpReply.jsp?";
+			url += "lvlNum="+lvlNum;
 			url += "&nowPage="+nowPage;
 			url += "&keyField="+p3;
 	     	url += "&keyWord="+p4; 
 		location.href=url;
-	
 	});
 	
 	//////////////// Read.jsp 에서 답변글 버튼 끝 //////////////////
+	
+	
+	//////////////// Read.jsp 에서 등업 수락 버튼 시작 //////////////////
+	$("button#AcBtn").click(function(){
+		$("#AcForm").submit();
+	});
+	//////////////// Read.jsp 에서 등업 수락 버튼 끝 //////////////////
+	
+	
+	//////////////// Read.jsp 에서 등업 거절 버튼 시작 //////////////////
+	$("button#RjBtn").click(function(){
+			alert("승인 거절 되었습니다.");
+		let nowPage = $("input#nowPage").val().trim();
+		let lvlNum = $("input#lvlNum").val().trim();
+				
+		let p3 = $("#pKeyField").val().trim();  // p3 : keyField
+	    let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
+	
+		let url = "/Proj_OnedayClass/levelUp/LvlUpReply.jsp?";
+			url += "lvlNum="+lvlNum;
+			url += "&nowPage="+nowPage;
+			url += "&keyField="+p3;
+	     	url += "&keyWord="+p4; 
+		location.href=url;
+	});
+	//////////////// Read.jsp 에서 등업 거절 버튼 끝 //////////////////
+	
+	
 	
 	
 	//////////////// Reply.jsp 에서 답변글 버튼 시작 //////////////////
@@ -209,7 +236,7 @@ $(function(){
 		
 		if (lvlUid == "") {
 			alert("성명은 필수입력입니다.");
-			$("#lvlUid").focus();
+			$("#lvlUid").focus(); 
 		} else if (lvlTitle == "") {
 			alert("제목은 필수입력입니다.");
 			$("#lvlTitle").focus();
@@ -271,7 +298,6 @@ $(function(){
 			alert("상호명은 필수 입력입니다.");
 			$("#lvlTitle").focus();
 		} else {
-		
 			//alert("keyField : " + keyField + "\nkeyWord : " + keyWord);
 			//return;
 			$("#updateFrm").submit();
@@ -279,7 +305,5 @@ $(function(){
 	
 	});	
 	//////////////// Update.jsp 에서 게시글 수정 끝 //////////////////
-	
-
 });
 
