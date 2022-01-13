@@ -3,15 +3,7 @@
 $(function(){
 
     let contentArray = [
-        
-        ["1.png", "클래스이름",
-        "카테고리",
-        ],
-        
-        ["2.png", "클래스이름",
-        "카테고리", 
-        ],
-        
+
         ["3.png", "클래스이름", 
         "카테고리",]
         ];
@@ -27,7 +19,7 @@ $(function(){
             if (j != 4)  galleryListArea += "<tr>"; 
 
             if (j == 0) {
-                galleryListArea += "<td><a href='on-shop-detail.jsp'><img src='/Proj_OnedayClass/img/shop/"+ contentArray[i][j] +"' alt='이미지' width='320'></a></td>";
+                galleryListArea += "<td><a href='ClassRead.jsp'><img src='/Proj_OnedayClass/img/shop/"+ contentArray[i][j] +"' alt='이미지' width='320'></a></td>";
             } else if (j == 1) {
                 galleryListArea += "<td class='goodsName'>"+contentArray[i][j]+"</td>";
             } else if (j == 2) {
@@ -45,25 +37,6 @@ $(function(){
 
 //########### 갤러리게시판(일반) 시작 ##############
 let contentArray2 = [
-    ["4.png", "클래스이름",
-    "카테고리",
-    ],
-    
-    ["5.png", "클래스이름",
-    "카테고리", 
-    ],
-
-    ["6.png", "클래스이름",
-    "카테고리", 
-    ],
-
-    ["1.png", "클래스이름",
-    "카테고리", 
-    ],
-
-    ["2.png", "클래스이름",
-    "카테고리", 
-    ],
     
     ["3.png", "클래스이름", 
     "카테고리",]
@@ -80,7 +53,7 @@ for (let i = 0; i < contentArray2.length; i++) {
         if (j != 4)  galleryListArea2 += "<tr>"; 
 
         if (j == 0) {
-            galleryListArea2 += "<td><a href='on-shop-detail.jsp'><img src='/Proj_OnedayClass/img/shop/"+ contentArray2[i][j] +"' alt='이미지' width='320'></a></td>";
+            galleryListArea2 += "<td><a href='ClassRead.jsp'><img src='/Proj_OnedayClass/img/shop/"+ contentArray2[i][j] +"' alt='이미지' width='320'></a></td>";
         } else if (j == 1) {
             galleryListArea2 += "<td class='goodsName2'>"+contentArray2[i][j]+"</td>";
         } else if (j == 2) {
