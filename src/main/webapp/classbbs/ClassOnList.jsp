@@ -1,12 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="pack_ClassBbs.ClassBean, java.util.Vector" %>
+<jsp:useBean id="bMgr" class="pack_ClassBbs.ClassMgr"  scope="page" />
+    
 <%
 request.setCharacterEncoding("UTF-8");
+
+int listSize = 0;   // 1페이지에서 보여주는 데이터 수
+						//출력할 데이터의 개수 = 데이터 1개는 가로줄 1개
+						
+int nowPage = 1;          // 현재 (사용자가 보고 있는) 페이지 번호
+
+Vector <ClassBean> vList = null;
 String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
 String str1 = "3";
 String str2 = "2";
+
+
 %>  
 <!DOCTYPE html>
 <html lang="ko">
@@ -106,8 +118,33 @@ String str2 = "2";
         <!-- main#galleryListArea 시작 -->
             <main id="galleryListArea" class="flex-container">
                 <table class='goodsTbl'>
-                    <tbody>
-                        <tr>
+                <tbody>
+                <%
+				vList = bMgr.getBoardList();
+				listSize = vList.size();			
+				%> 
+                <%
+					if(vList.isEmpty()){
+				%>
+					<tr>
+						<td>
+						<%="게시물이 없습니다." %>
+						</td>
+					</tr>
+				<%
+				} else {
+				%>
+				<%
+				for (int i=0; i<listSize; i++) {		
+					
+					ClassBean bean = vList.get(i);
+					
+					int cNum = bean.getcNum();
+					String cCategory = bean.getcCategory();
+					String cTitle = bean.getcTitle();
+					
+				%>
+						<tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
                         	<td>
 	                            <a href="#">
 	                                <img alt='' width='310'>
@@ -115,15 +152,23 @@ String str2 = "2";
                             <!-- 상품이미지 -->
                             </td>
                         </tr>
-                        <tr>
-                            <td class='goodsName'></td>
-                            <!-- 상품명 -->
+                        <tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
+                            <td class='goodsName'>
+                            <%=cTitle%>
+                            </td>
+                            <!-- 상품제목 -->
                         </tr>
-                        <tr>
-                            <td class='goodsDesc'></td>
-                            <!-- 상품설명 goods Describe -->
+                        <tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
+                            <td class='goodsDesc'>
+                            <%=cCategory%>
+                            </td>
+                            <!-- 카테고리 -->
                         </tr>
                     </tbody>
+                <%
+					}
+				}
+				%>
                 </table>
                 <!-- table.goodsTbl 상품출력용 테이블 -->
             </main>
@@ -213,5 +258,6 @@ String str2 = "2";
 
     <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
     <script src="/Proj_OnedayClass/script/on-shop.js"></script>
+    <script src="/Proj_OnedayClass/script/classbbs.js"></script>
 </body>
 </html>

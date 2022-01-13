@@ -105,8 +105,6 @@ String str2 = "2";
 				
 				%>
 				<tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
-					<%
-					%>
 						<td><%=cNum %></td>
 						<td><%=cTeacher %></td>
 						<td><%=cTitle %></td>
