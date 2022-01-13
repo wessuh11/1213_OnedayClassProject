@@ -147,6 +147,12 @@ div#detail_expage{
 
 div#info{
 	width: 1000px;
-	height: 1000px;
 	border: 1px solid #000;
 }
+
+div#info table{
+	width: 1000px;
+	border: 1px solid #000;
+}
+
+

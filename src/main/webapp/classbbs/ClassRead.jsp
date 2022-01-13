@@ -254,8 +254,16 @@ session.setAttribute("bean", bean);
 
 		<!-- div#details -->
         	<div id="info">
-        		상세정보?
+        		<table>
+        			<tr>
+        				<td>
+        				<img src="/Proj_OnedayClass/fileupload/classfileupload/thumbnail/<%=cFileName%>" alt="상세정보"
+        	 			width ="1000">
+        				</td>
+        			</tr>
+        		</table>
         	</div>
+        	<!-- div#info -->
         </div>
         <!-- div#main -->
         
