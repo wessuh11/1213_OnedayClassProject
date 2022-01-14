@@ -34,7 +34,7 @@ String str2 = "2";
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
+	<title>등업 거절 사유 작성페이지</title>
     <link rel="stylesheet" href="/Proj_OnedayClass/style/lvlUpBBS.css">
 </head>
 <body>
@@ -101,7 +101,7 @@ String str2 = "2";
             </ul>
         </nav>
 		<!--  HTML 템플릿(Template, Templet)  헤더 시작 -->
-		<h1>답변 작성 페이지</h1>
+		<h1><%=lvlUid %>님의 등업 신청글</h1>
 		<!--  HTML 템플릿(Template, Templet)  헤더 끝 -->
 		
 		
@@ -110,19 +110,19 @@ String str2 = "2";
 			<!--  답변페이지 내용 출력 시작 -->
 			
 			
-			<form name="replyFrm" action="ReplyProc.jsp"
+			<form name="replyFrm" action="LvlUpReplyProc.jsp"
 					method="get" id="replyFrm">
 		
-				<h2>답변글 작성</h2>
+				<h2>등업 거절 사유 작성</h2>
 					
 				<table id="replyTbl">
 					<tbody id="replyTblBody">
 						<tr>
 							<td class="req">작성자</td>
 							<td>
-								<input type="text" id="lvlUid"
-								name="lvlUid" value="">
-								<span class="ori_Txt"><b><%=lvlUid %></b> 님의 글</span>
+								<input type="hidden" id="lvlUid"
+								name="lvlUid" value="<%=uId%>">
+								<span class="ori_Txt"><b><%=uName %></b></span>
 							</td>
 						</tr>
 						<tr>
@@ -136,7 +136,7 @@ String str2 = "2";
 						<tr>
 							<td class="req">상호명</td>
 							<td>
-								<input type="text" name="lvlName" value=""
+								<input type="hidden" name="lvlName" value="<%=lvlName %>"
 									size="50" id="lvlName">								
 								<span class="ori_Txt">원본 상호명 : <b><%=lvlName %></b></span>
 							</td>
@@ -144,7 +144,7 @@ String str2 = "2";
 						<tr>
 							<td class="req">SNS</td>
 							<td>
-								<input type="text" name="lvlSns" value=""
+								<input type="hidden" name="lvlSns" value="<%=lvlSns %>"
 									size="50" id="lvlSns">								
 								<span class="ori_Txt">원본 SNS : <b><%=lvlSns %></b></span>
 							</td>
@@ -184,6 +184,7 @@ String str2 = "2";
 				<input type="hidden" name="lvlRef" value="<%=lvlRef%>">				
 				<input type="hidden" name="lvlDepth" value="<%=lvlDepth%>">				
 				<input type="hidden" name="lvlPos" value="<%=lvlPos%>">
+				<input type="hidden" name="lvlOriUid" value="<%=lvlUid%>">
 				
 				<input type="hidden" name="nowPage" value="<%=nowPage%>" id="nowPage">
 				<!-- 검색어전송 시작 -->

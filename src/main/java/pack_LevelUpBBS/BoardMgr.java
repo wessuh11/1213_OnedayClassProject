@@ -183,16 +183,17 @@ return lvlStat;
 			} else {
 				if (keyWord.equals("null") || keyWord.equals("")) {
 					// 검색어가 없을 경우
-					sql = "select * from levelupbbs where lvlUid = ? AND lvlStatus = 1 "
+					sql = "select * from levelupbbs where lvlUid = ? AND lvlStatus = 1 OR lvlOriUid = ? "
 							+ "order by lvlRef desc, lvlPos asc limit ?, ?";
 					objPstmt = objConn.prepareStatement(sql);
 					objPstmt.setString(1, uId);
-					objPstmt.setInt(2, start);
-					objPstmt.setInt(3, end);
+					objPstmt.setString(2, uId);
+					objPstmt.setInt(3, start);
+					objPstmt.setInt(4, end);
 				} else {
 					// 검색어가 있을 경우
 					sql = "select * from levelupbbs "
-							+ "where "+ keyField +" like ? AND lvlUid = ? AND lvlStatus = 1 "
+							+ "where "+ keyField +" like ? AND lvlUid = ? AND lvlStatus = 1 OR lvlOriUid = ? "
 							+ "order by lvlRef desc, lvlPos asc limit ?, ?";
 					objPstmt = objConn.prepareStatement(sql);
 					objPstmt.setString(1, "%"+keyWord+"%");
@@ -214,6 +215,7 @@ return lvlStat;
 				bean.setLvlPos(objRs.getInt("lvlPos"));
 				bean.setLvlRef(objRs.getInt("lvlRef"));
 				bean.setLvlDepth(objRs.getInt("lvlDepth"));
+				bean.setLvlOriUid(objRs.getString("lvlOriUid"));
 				bean.setLvlRegDate(objRs.getString("lvlRegDate"));
 				bean.setLvlStatus(objRs.getInt("lvlStatus"));
 				vList.add(bean);
@@ -320,6 +322,7 @@ return totalCnt;
 				bean.setLvlPos(objRs.getInt("lvlPos"));
 				bean.setLvlRef(objRs.getInt("lvlRef"));
 				bean.setLvlDepth(objRs.getInt("lvlDepth"));
+				bean.setLvlOriUid(objRs.getString("lvlOriUid"));
 				bean.setLvlFileName(objRs.getString("lvlFileName"));
 				bean.setLvlFileSize(objRs.getInt("lvlFileSize"));
 			}
@@ -506,8 +509,8 @@ public int replyBoard(BoardBean bean) {
 		sql = "insert into levelupbbs (";
 		sql += "lvlUid, lvlTitle, lvlContent, lvlName, lvlSns, ";
 		sql += "lvlRef, lvlPos, lvlDepth,  ";
-		sql += "lvlRegDate) values (";
-		sql += "?, ?, ?, ?, ?, ?, ?, ?, now())";
+		sql += "lvlRegDate, lvlStatus, lvlOriUid) values (";
+		sql += "?, ?, ?, ?, ?, ?, ?, ?, now(), 1, ?)";
 
 		int lvlDepth = bean.getLvlDepth() + 1;
 		int lvlPos = bean.getLvlPos() + 1;
@@ -521,6 +524,7 @@ public int replyBoard(BoardBean bean) {
 		objPstmt.setInt(6, bean.getLvlRef());
 		objPstmt.setInt(7, lvlPos);
 		objPstmt.setInt(8, lvlDepth);
+		objPstmt.setString(9, bean.getLvlOriUid());
 		cnt = objPstmt.executeUpdate();
 
 
@@ -559,7 +563,7 @@ public int replyUpBoard(int lvlRef, int lvlPos) {
 
 
 	} catch (Exception e) {
-		System.out.println("SQL이슈 9: " + e.getMessage());
+		System.out.println("SQL이슈 10: " + e.getMessage());
 	} finally {
 		pool.freeConnection(objConn, objPstmt, objRs);
 	}

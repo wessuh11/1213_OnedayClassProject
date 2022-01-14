@@ -218,6 +218,7 @@ String str2 = "2";
 						String lvlUid = bean.getLvlUid();
 						String lvlTitle = bean.getLvlTitle();
 						String lvlRegDate = bean.getLvlRegDate();
+						String lvlOriUid = bean.getLvlOriUid();
 						int lvlDepth = bean.getLvlDepth();
 				%>
 					<tr class="prnTr" onclick="lvlRead('<%=lvlNum%>', '<%=nowPage%>')">
@@ -225,7 +226,7 @@ String str2 = "2";
 					//int prnNum = totalRecord - ((nowPage-1) * numPerPage) - i; 
 					// num와 prnNum는 전혀 관계없음
 					%>
-					<%-- <td>
+						<td>
 							<% if (lvlDepth == 0) out.print(lvlNum);   // 답변글이 아님을 의미함 %>
 						</td>  <!--  num로 변경필! -->
 						<td class="subjectTd">
@@ -237,11 +238,8 @@ String str2 = "2";
 								 } 
 								out.print(lvlTitle); 
 							%>
-					
-						</td> --%> 
-						<td><%=lvlNum %></td>  <!--  Qna_num로 변경필! -->
-						<td class="subjectTd"><%=lvlTitle %>
-						</td>
+						</td> 
+						
 						<td><%=lvlUid %></td>
 						<td><%=lvlRegDate %></td>
 					</tr>
@@ -366,14 +364,13 @@ String str2 = "2";
 						</td>
 					</tr>
 					<tr>
-						<td colspan="5" class="butcs">						
-							<a href="/Proj_OnedayClass//Post.jsp">글쓰기</a>
+						<td colspan="5" class="butcs">				
+							<a href="/Proj_OnedayClass/levelUp/LvlUpPost.jsp">글쓰기</a>
 						</td>						
 					</tr>
 					
 				</tbody>
 			</table>
-		
 		
 		
 		</main>  <!-- 본문영역 html 템플릿 끝 -->

@@ -14,6 +14,8 @@ public class BoardBean {
 	private int lvlDepth;
 	private String lvlFileName;
 	private int lvlFileSize;
+	private int lvlStatus;
+	private String lvlOriUid;
 	
 	public int getLvlNum() {
 		return lvlNum;
@@ -106,9 +108,14 @@ public class BoardBean {
 	public void setLvlStatus(int lvlStatus) {
 		this.lvlStatus = lvlStatus;
 		System.out.println("공개여부");
-		
 	}
-	private int lvlStatus;
+	public String getLvlOriUid() {
+		return lvlOriUid;
+	}
+	public void setLvlOriUid(String lvlOriUid) {
+		this.lvlOriUid = lvlOriUid;
+	}
+	
 	
 	
 
