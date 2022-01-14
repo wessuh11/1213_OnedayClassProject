@@ -42,20 +42,20 @@ public class ClassMgr {
 
 ////////////////게시판 입력(ClassPostProc.jsp) 시작  ///////////////////////
 	public void insertBoard(HttpServletRequest req) { // HttpServletRequest -> req라는 자료형
-		//지역변수 선언
+		// 지역변수 선언
 		Connection objConn = null;
 		PreparedStatement objPstmt = null;
 
 		String sql = null;
-		//SQL문
+		// SQL문
 
 		MultipartRequest multi = null;
 
-		//썸네일 : 갤러리 리스트에 출력
+		// 썸네일 : 갤러리 리스트에 출력
 		int cThumbSize = 0;
 		String cThumbName = null;
 
-		//상세정보 : 상세정보 페이지에 출력
+		// 상세정보 : 상세정보 페이지에 출력
 		int cFileSize = 0;
 		String cFileName = null;
 
@@ -64,10 +64,10 @@ public class ClassMgr {
 		try {
 			objConn = pool.getConnection();
 
-			//오브젝트 생성
+			// 오브젝트 생성
 			File file = new File(THUMSAVEFOLER);
-			
-			//classfileupload 폴더에 파일이 없다면 생성하라.
+
+			// classfileupload 폴더에 파일이 없다면 생성하라.
 			if (!file.exists())
 				file.mkdirs();
 
@@ -89,16 +89,16 @@ public class ClassMgr {
 				cFileSize = (int) multi.getFile("cFileName").length();
 			}
 
-			//클래스 cContent 부분
+			// 클래스 cContent 부분
 			String cContent = multi.getParameter("cContent");
 
 			if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
-				//equalsIgnoreCase -> 대소문자 무시함.	
+				// equalsIgnoreCase -> 대소문자 무시함.
 				cContent = UtilMgr.replace(cContent, "<", "&lt;");
-				//<내용이 들어오면, lt로 바꿔줌 (HTML 형식으로 사용불가능하도록 만들어줌)
+				// <내용이 들어오면, lt로 바꿔줌 (HTML 형식으로 사용불가능하도록 만들어줌)
 			}
 
-			//다중업로드
+			// 다중업로드
 			sql = "insert into classbbs(";
 			sql += "cCode, cTeacher, cUid, cCategory, cTitle, cContent, cRegDate, cPrice, cDelivery, ";
 			// ?, ?, ?, ?, ?, now(), ?, ?
@@ -108,7 +108,7 @@ public class ClassMgr {
 			// ?, 0, ?, ?, 1
 			sql += " ?, ?, ?, ?, ?, ?, now(), ?, ?, ";
 			sql += "?, ?, ?, ?, ";
-			sql += "?, 0, ?, ?, 2)";
+			sql += "?, 0, ?, ?, 1)";
 
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setString(1, cCode); // 코드
@@ -117,18 +117,18 @@ public class ClassMgr {
 			objPstmt.setString(4, multi.getParameter("cCategory")); // 클래스 종류
 			objPstmt.setString(5, multi.getParameter("cTitle")); // 클래스 제목
 			objPstmt.setString(6, cContent); // 클래스 설명
-			//cRegDate -> now()
-			//Integer.parseInt(multi.getParameter("cPrice"))
+			// cRegDate -> now()
+			// Integer.parseInt(multi.getParameter("cPrice"))
 			objPstmt.setInt(7, Integer.parseInt(multi.getParameter("cPrice")));
 			objPstmt.setInt(8, Integer.parseInt(multi.getParameter("cDelivery")));
-			//------------------------------------------------------------------//
+			// ------------------------------------------------------------------//
 
 			objPstmt.setString(9, cThumbName);
 			objPstmt.setInt(10, cThumbSize);
 
 			objPstmt.setString(11, cFileName);
 			objPstmt.setInt(12, cFileSize);
-			//------------------------------------------------------------------//
+			// ------------------------------------------------------------------//
 			objPstmt.setInt(13, Integer.parseInt(multi.getParameter("cMaxStu")));
 			objPstmt.setString(14, multi.getParameter("cOnoff"));
 			objPstmt.setString(15, multi.getParameter("cArea"));
@@ -146,7 +146,7 @@ public class ClassMgr {
 	}
 ////////////////게시판 입력(ClassPostProc.jsp) 끝  ///////////////////////
 
-///////////////  게시판 리스트 출력(List.jsp) 시작    ///////////////
+///////////////  게시판 리스트 출력(ClassRead.jsp) 시작    ///////////////
 	public Vector<ClassBean> getBoardList(String cCategorySel, int start, int end) {
 
 		Vector<ClassBean> vList = new Vector<>();
@@ -157,18 +157,16 @@ public class ClassMgr {
 
 		try {
 			objConn = pool.getConnection(); // DB연동
-			
+
 			if (cCategorySel.equals("null") || cCategorySel.equals("")) {
 				// 카테고리 메뉴 선택 안했을시
-				sql = "select * from classbbs where cStatus<3 "
-						+ "order by cNum asc limit ?, ?";
+				sql = "select * from classbbs where cStatus<4 " + "order by cNum asc limit ?, ?";
 				objPstmt = objConn.prepareStatement(sql);
 				objPstmt.setInt(1, start);
 				objPstmt.setInt(2, end);
 			} else {
-				// 카테고리 메뉴 클릭 시 
-				sql = "select * from classbbs "
-						+ "where cCategory like ? AND cStatus<3 "
+				// 카테고리 메뉴 클릭 시
+				sql = "select * from classbbs " + "where cCategory like ? AND cStatus<4 "
 						+ "order by cNum asc limit ?, ?";
 				objPstmt = objConn.prepareStatement(sql);
 				objPstmt.setString(1, "%" + cCategorySel + "%");
@@ -176,15 +174,13 @@ public class ClassMgr {
 				objPstmt.setInt(3, end);
 			}
 			objRs = objPstmt.executeQuery();
-			
+
 			/*
-			sql = "select * from classbbs order by cNum desc limit ?, ?";
-			objPstmt = objConn.prepareStatement(sql);
-			objPstmt.setInt(1, 0);
-			objPstmt.setInt(2, 10);
-			objRs = objPstmt.executeQuery();
-			*/
-			
+			 * sql = "select * from classbbs order by cNum desc limit ?, ?"; objPstmt =
+			 * objConn.prepareStatement(sql); objPstmt.setInt(1, 0); objPstmt.setInt(2, 10);
+			 * objRs = objPstmt.executeQuery();
+			 */
+
 			while (objRs.next()) {
 				ClassBean bean = new ClassBean();
 				bean.setcNum(objRs.getInt("cNum"));
@@ -205,12 +201,12 @@ public class ClassMgr {
 		return vList;
 	}
 
-///////////////  게시판 리스트 출력(List.jsp) 끝    ///////////////
+///////////////  게시판 리스트 출력(ClassList.jsp) 끝    ///////////////
 
-////////게시판 뷰페이지 출력(Read.jsp, 내용보기 페이지) 시작 ////////
+////////게시판 뷰페이지 출력(ClassRead.jsp, 내용보기 페이지) 시작 ////////
 
 	public ClassBean getBoard(int cNum) {
-//뷰페이지 게시글 데이터 반환 시작
+		//뷰페이지 게시글 데이터 반환 시작
 		Connection objConn = null;
 		PreparedStatement objPstmt = null;
 		ResultSet objRs = null;
@@ -243,8 +239,7 @@ public class ClassMgr {
 				bean.setcArea(objRs.getString("cArea"));
 				bean.setcOnoff(objRs.getString("cOnoff"));
 				bean.setcStatus(objRs.getInt("cStatus"));
-				
-				
+
 			}
 
 		} catch (Exception e) {
@@ -256,9 +251,38 @@ public class ClassMgr {
 		return bean;
 	}
 
-////////게시판 뷰페이지 출력(Read.jsp, 내용보기 페이지) 끝 ////////
+////////게시판 뷰페이지 출력(ClassRead.jsp, 내용보기 페이지) 끝 ////////
 
-//////////////////게시글 삭제(Delete.jsp) 시작 //////////////////
+//////////////////게시글 승인(관리자전용)//////////////////
+	public int approvalBoard(int cNum) {
+
+		Connection objConn = null;
+		PreparedStatement objPstmt = null;
+		ResultSet objRs = null;
+		String sql = null;
+
+		int exeCnt = 0; // 삭제 데이터 수, DB 삭제가 실행되었는지 여부 판단
+
+		try {
+			objConn = pool.getConnection(); // DB연동
+			//sql = "delete from classbbs where cnum=?";
+			sql = "update classbbs set cStatus=2 where cNum=?";
+			objPstmt = objConn.prepareStatement(sql);
+			objPstmt.setInt(1, cNum);
+			exeCnt = objPstmt.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("SQL이슈 : " + e.getMessage());
+		} finally {
+			pool.freeConnection(objConn, objPstmt, objRs);
+		}
+
+		return exeCnt;
+	}
+
+//////////////////게시글 승인(관리자전용)//////////////////
+
+//////////////////게시글 삭제(ClassDelete.jsp) 시작 //////////////////
 	public int deleteBoard(int cNum) {
 
 		Connection objConn = null;
@@ -270,7 +294,7 @@ public class ClassMgr {
 
 		try {
 			objConn = pool.getConnection(); // DB연동
-//		sql = "delete from classbbs where cnum=?";
+			//sql = "delete from classbbs where cnum=?";
 			sql = "update classbbs set cStatus=3 where cNum=?";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setInt(1, cNum);
@@ -285,9 +309,9 @@ public class ClassMgr {
 		return exeCnt;
 	}
 
-////////////////게시글 삭제(Delete.jsp) 끝 //////////////////
+////////////////게시글 삭제(ClassDelete.jsp) 끝 //////////////////
 
-////////게시글 수정페이지 (UpdateProc.jsp) 시작 ////////
+////////게시글 수정페이지 (ClassUpdateProc.jsp) 시작 ////////
 
 	public int updateBoard(ClassBean bean) {
 // 조회수 증가 시작
@@ -309,10 +333,9 @@ public class ClassMgr {
 			objPstmt.setInt(7, bean.getcMaxStu());
 			objPstmt.setString(8, bean.getcOnoff());
 			objPstmt.setString(9, bean.getcArea());
-			
-			
+
 			exeCnt = objPstmt.executeUpdate();
-			
+
 			// exeCnt : DB에서 실제 적용된 데이터(=row, 로우)의 개수 저장됨
 		} catch (Exception e) {
 			System.out.println("SQL이슈7 : " + e.getMessage());
@@ -324,4 +347,4 @@ public class ClassMgr {
 	}
 }
 
-//////게시글 수정페이지 (UpdateProc.jsp) 끝 ////////	
+//////게시글 수정페이지 (ClassUpdateProc.jsp) 끝 ////////	

@@ -78,7 +78,7 @@ session.setAttribute("bean", bean);
                     <li></li>
                     <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
                     <li></li>
-                    <li><a href="#">관리자 페이지</a></li>
+                    <li><a href="/Proj_OnedayClass/classbbs/ClassList.jsp">게시판 관리</a></li>
 	<% } else if(uId != null && TeaNum.equals(uLevel)) { %>
 	                <li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName %> 선생님 환영합니다.</a></li>
                     <li></li>
@@ -211,10 +211,10 @@ session.setAttribute("bean", bean);
 		    <table>
 			    <tr>
 			        <td>
-		        		<button type="button" class="teacherchoice" id ="modBtn">클래스 수정</button>
+		        		<button type="button" class="teacherchoice" id ="AdminBtn">승인</button>
 		           </td>
-		        	<td>
-		        		<button type="button" class="teacherchoice" id ="delBtn">클래스 삭제</button>
+		          	<td>
+		        		<button type="button" class="teacherchoice" id ="delBtn">삭제</button>
 		        	</td>
 			    </tr>
 		    </table>
@@ -237,7 +237,7 @@ session.setAttribute("bean", bean);
 		    </table>
 	    </div>
 	    <!-- div#teacherbtn 선생님만 보이도록 구현-->
-	    <% } %>
+	    <% }  %>
 	   
 	    <input type="hidden" name="nowPage" value="<%=nowPage%>" id="nowPage">
 		<input type="hidden" name="cNum" value="<%=numParam%>" id="cNum">

@@ -3,7 +3,7 @@
 $(function(){
 
     let contentArray = [
-	["31.png", "클래스이름", "카테고리",]
+	["", "", "",]
 	];
 
     let galleryListArea = "";   // 갤러리 리스트 각 table 항목을 저장할 변수

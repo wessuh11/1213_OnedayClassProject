@@ -65,6 +65,17 @@ $(function(){
 		let url = "";
 		location.href=url;
 	});
+	////// 클래스 승인 //////
+	$("button#AdminBtn").click(function(){
+	    let nowPage = $("input#nowPage").val().trim();
+		let cNum = $("input#cNum").val().trim();
+		
+		let url ="/Proj_OnedayClass/classbbs/ClassApproval.jsp?";
+		     url += "cNum="+cNum+"&nowPage="+nowPage;
+		location.href = url;
+	});
+	
+	
 	
 	////// 클래스 수정 //////
 	$("button#modBtn").click(function(){

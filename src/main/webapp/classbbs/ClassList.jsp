@@ -21,8 +21,9 @@ Vector<ClassBean> vList = null;
 String uId = (String) session.getAttribute("idKey");
 String uName = (String) session.getAttribute("nameKey");
 String uLevel = (String) session.getAttribute("levelKey");
-String str1 = "3";
-String str2 = "2";
+//로그인 등급 변수
+String AdminNum = "3";
+String TeaNum = "2";
 
 //카테고리 넘버
 String cCategory1 = "1";
@@ -55,7 +56,7 @@ String cCategory7 = "7";
 			<!-- div#headerLogo -->
 
 			<%
-			if (uId != null && (str2.equals(uLevel) || str1.equals(uLevel))) {
+			if (uId != null && (TeaNum.equals(uLevel))) {
 			%>
 			<div id="headerRight">
 				<ul class="flex-container">
@@ -72,7 +73,19 @@ String cCategory7 = "7";
 				</ul>
 			</div>
 			<!-- div#headerRight -->
-
+			<%
+			} else if (AdminNum.equals(uLevel)) {
+			%>
+			<div id="headerRight">
+				<ul class="flex-container">
+					<li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName%>님 환영합니다</a></li>
+					<li></li>
+					<li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
+					<li></li>
+					<li><a href="/Proj_OnedayClass/classbbs/ClassList.jsp">게시판관리</a></li>
+				</ul>
+			</div>
+			<!-- div#headerRight -->
 			<%
 			} else {
 			%>
@@ -98,6 +111,84 @@ String cCategory7 = "7";
 		</nav>
 		<!-- nav#gnb -->
 
+		<%
+		if (AdminNum.equals(uLevel)) {
+		%>
+		<main id="main" class="list">
+			<!-- DB 데이터 가져오기 -->
+			<table id="boardList">
+
+				<%
+				vList = bMgr.getBoardList(cCategorySel, start, end);
+				listSize = vList.size();
+				%>
+
+				<%
+				if (vList.isEmpty()) {
+				%>
+				<tr>
+					<td colspan="6"><%="게시물이 없습니다."%></td>
+				</tr>
+				<%
+				} else {
+				%>
+				<tr>
+					<th>번호</th>
+					<th>닉네임</th>
+					<th>강사이름</th>
+					<th>종류</th>
+					<th>제목</th>
+					<th>작성날짜</th>
+				</tr>
+				<%
+				for (int i = 0; i < listSize; i++) {
+
+					ClassBean bean = vList.get(i);
+
+					int cNum = bean.getcNum();
+					String cUid = bean.getcUid();
+					String cTeacher = bean.getcTeacher();
+					String cCategory = bean.getcCategory();
+					String cTitle = bean.getcTitle();
+					String cRegDate = bean.getcRegDate();
+					int cStatus = bean.getcStatus();
+				%>
+				<tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
+					<td><%=cNum%></td>
+					<td><%=cUid%></td>
+					<td><%=cTeacher%></td>
+					<td>
+						<%
+						if (cCategory1.equals(cCategory)) {
+							cCategory = "핸드 메이드";
+						} else if (cCategory2.equals(cCategory)) {
+							cCategory = "쿠킹";
+						} else if (cCategory3.equals(cCategory)) {
+							cCategory = "드로잉";
+						} else if (cCategory4.equals(cCategory)) {
+							cCategory = "음악";
+						} else if (cCategory5.equals(cCategory)) {
+							cCategory = "요가·필라테스";
+						} else if (cCategory6.equals(cCategory)) {
+							cCategory = "레져·스포츠";
+						} else if (cCategory7.equals(cCategory)) {
+							cCategory = "반려동물";
+						} else {
+							cCategory = "자기계발";
+						}
+						%><%=cCategory%></td>
+					<td><%=cTitle%></td>
+					<td><%=cRegDate%></td>
+
+					<%
+					}
+					}
+					} else {
+					%>
+				</tr>
+			</table>
+		</main>
+		<!-- Main -->
 
 		<main id="main" class="list">
 			<!-- DB 데이터 가져오기 -->
@@ -139,7 +230,7 @@ String cCategory7 = "7";
 					int cStatus = bean.getcStatus();
 
 					if (uId.equals(cUid) && cStatus == 2) {
-					//아이디가 같아야하고, cStatus 가 2번인것만 볼 수 있음.
+						//아이디가 같아야하고, cStatus 가 2번인것만 볼 수 있음.
 				%>
 				<tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
 					<td><%=cNum%></td>
@@ -169,15 +260,16 @@ String cCategory7 = "7";
 					<td><%=cRegDate%></td>
 				</tr>
 				<%
-				} 
+				}
+				}
 				}
 				}
 				%>
-
-
 			</table>
 		</main>
 		<!-- Main -->
+
+
 
 		<footer id="footer">
 			<div id="footerTop" class="flex-container">
