@@ -137,7 +137,8 @@ main.list div#pageInfo {
 }
 
 main.list table#boardList {
-	width: 100%;	
+	width: 1000px;
+	margin: 20px auto;
 	border-collapse: collapse;
 }
 
@@ -148,9 +149,12 @@ main.list th {
 }
 
 
-main.list th:first-child,
-main.list th:last-child {
+main.list th:first-child {
 	width: 70px;
+}
+
+main.list th:last-child{
+	width: 150px;
 }
 
 main.list th:nth-child(3) {

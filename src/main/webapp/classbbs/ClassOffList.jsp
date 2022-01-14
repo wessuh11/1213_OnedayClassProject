@@ -1,12 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="pack_ClassBbs.ClassBean, java.util.Vector" %>
+<jsp:useBean id="bMgr" class="pack_ClassBbs.ClassMgr"  scope="page" />    
+
 <%
 request.setCharacterEncoding("UTF-8");
+
+int totalRecord = 0;        // 전체 데이터 수(DB에 저장된 row 개수)
+int numPerPage = 10;    // 페이지당 출력하는 데이터 수(=게시글 숫자)
+int pagePerBlock = 5;   // 블럭당 표시되는 페이지 수의 개수
+int totalPage = 0;           // 전체 페이지 수
+int totalBlock = 0;           // 전체 블록수
+
+ /*
+totalRecord=> 200     전체레코드
+numPerPage => 10
+pagePerBlock => 5
+totalPage => 20
+totalBlock => 4  (20/5 => 4)
+*/
+
+int nowPage = 1;          // 현재 (사용자가 보고 있는) 페이지 번호
+int nowBlock = 1;         // 현재 (사용자가 보고 있는) 블럭
+
+int start = 0;     // DB에서 데이터를 불러올 때 시작하는 인덱스 번호
+int end = 10;     // 시작하는 인덱스 번호부터 반환하는(=출력하는) 데이터 개수 
+                          // select * from T/N where... order by ... limit start, end;
+
+int listSize = 0;    // 1페이지에서 보여주는 데이터 수
+						//출력할 데이터의 개수 = 데이터 1개는 가로줄 1개
+						
 String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
 String str1 = "3";
 String str2 = "2";
+
+String cCategorySel = ""; // DB의 카테고리
+						
+if (request.getParameter("cCategory") != null) {
+	cCategorySel = request.getParameter("cCategory");
+	//카테고리 선택값이 없다면 전체 페이지 출력?
+}
+
+if (request.getParameter("nowPage") != null) {
+	nowPage = Integer.parseInt(request.getParameter("nowPage"));
+	start = (nowPage * numPerPage) - numPerPage;
+	end = numPerPage;            
+	//카테고리 선택값이 있다면 해당 카테고리에 대한 게시물만 출력
+}
+
+Vector<ClassBean> vList = null;
+
 %>  
 <!DOCTYPE html>
 <html lang="ko">
@@ -15,7 +60,7 @@ String str2 = "2";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>오프라인 클래스</title>
-    <link rel="stylesheet" href="/Proj_OnedayClass/style/classbbs/off-shop.css">
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/classbbs/offshop.css">
 </head>
 <body>
 	<div id="wrap">
@@ -79,16 +124,19 @@ String str2 = "2";
 
         <!-- 카테고리 시작-->
             <div id="category">
-                 <ul class="">
-                     <li><a href="#">핸드메이드</a></li>
-                     <li><a href="#">쿠킹</a></li>
-                     <li><a href="#">드로잉</a></li>
-                     <li><a href="#">음악</a></li>
-                     <li><a href="#">요가·필라테스</a></li>
-                     <li><a href="#">레져·스포츠</a></li>
-                     <li><a href="#">반려동물</a></li>
-                     <li><a href="#">자기계발</a></li>
-                 </ul>
+				<ul id = "tagList" class="devUITagList">
+						<li class="devTagList" value="1" <%if (cCategorySel.equals("1")) out.print("selected");%>>핸드 메이드</li>
+						<!-- 1번 카테고리 전체출력.. -->
+						<li class="devTagList" value="2" <%if (cCategorySel.equals("2")) out.print("selected");%>>쿠킹</li>
+						<!-- 2번 카테고리 전체출력.. -->
+						<li class="devTagList" value="3" <%if (cCategorySel.equals("3")) out.print("selected");%>>드로잉</li>
+						<!-- 3번 카테고리 전체출력.. -->
+						<li class="devTagList" value="4" <%if (cCategorySel.equals("4")) out.print("selected");%>>음악</li>
+						<li class="devTagList" value="5" <%if (cCategorySel.equals("5")) out.print("selected");%>>요가·필라테스</li>
+						<li class="devTagList" value="6" <%if (cCategorySel.equals("6")) out.print("selected");%>>레져·스포츠</li>
+						<li class="devTagList" value="7" <%if (cCategorySel.equals("7")) out.print("selected");%>>반려동물</li>
+						<li class="devTagList" value="8" <%if (cCategorySel.equals("8")) out.print("selected");%>>자기계발</li>
+				</ul>
              </div>
              <!-- div#category -->
         <!-- 카테고리 종료-->
@@ -213,6 +261,6 @@ String str2 = "2";
     </div>
 
     <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
-    <script src="/Proj_OnedayClass/script/off-shop.js"></script>
+    <script src="/Proj_OnedayClass/script/onoffshop.js"></script>
 </body>
 </html>

@@ -101,6 +101,15 @@ $(function(){
 	
 	});	
 //////////////// Update.jsp 에서 게시글 수정 끝 //////////////////
+
+//////////////// ClassOnList.jsp, ClassOffList.jsp 카테고리 value 전송 //////////////////
+	$("#tagList").children().each(function(){ 
+		console.log("1. $(this).text() : "+$(this).text()+", $(this).attr() : "+$(this).attr("value"));
+		 }); 
 	
+	$(".devTagList").each(function(){ 
+		console.log("2. $(this).text() : "+$(this).text()+", $(this).attr() : "+$(this).attr("value")); 
+		});
 });
+//////////////// ClassOnList.jsp, ClassOffList.jsp 카테고리 value 전송 //////////////////
 

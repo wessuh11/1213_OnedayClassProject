@@ -108,7 +108,7 @@ public class ClassMgr {
 			// ?, 0, ?, ?, 1
 			sql += " ?, ?, ?, ?, ?, ?, now(), ?, ?, ";
 			sql += "?, ?, ?, ?, ";
-			sql += "?, 0, ?, ?, 1)";
+			sql += "?, 0, ?, ?, 2)";
 
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setString(1, cCode); // 코드
@@ -147,7 +147,7 @@ public class ClassMgr {
 ////////////////게시판 입력(ClassPostProc.jsp) 끝  ///////////////////////
 
 ///////////////  게시판 리스트 출력(List.jsp) 시작    ///////////////
-	public Vector<ClassBean> getBoardList() {
+	public Vector<ClassBean> getBoardList(String cCategorySel, int start, int end) {
 
 		Vector<ClassBean> vList = new Vector<>();
 		Connection objConn = null;
@@ -157,19 +157,43 @@ public class ClassMgr {
 
 		try {
 			objConn = pool.getConnection(); // DB연동
+			
+			if (cCategorySel.equals("null") || cCategorySel.equals("")) {
+				// 카테고리 메뉴 선택 안했을시
+				sql = "select * from classbbs where cStatus<3 "
+						+ "order by cNum asc limit ?, ?";
+				objPstmt = objConn.prepareStatement(sql);
+				objPstmt.setInt(1, start);
+				objPstmt.setInt(2, end);
+			} else {
+				// 카테고리 메뉴 클릭 시 
+				sql = "select * from classbbs "
+						+ "where cCategory like ? AND cStatus<3 "
+						+ "order by cNum asc limit ?, ?";
+				objPstmt = objConn.prepareStatement(sql);
+				objPstmt.setString(1, "%" + cCategorySel + "%");
+				objPstmt.setInt(2, start);
+				objPstmt.setInt(3, end);
+			}
+			objRs = objPstmt.executeQuery();
+			
+			/*
 			sql = "select * from classbbs order by cNum desc limit ?, ?";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setInt(1, 0);
 			objPstmt.setInt(2, 10);
 			objRs = objPstmt.executeQuery();
-
+			*/
+			
 			while (objRs.next()) {
 				ClassBean bean = new ClassBean();
 				bean.setcNum(objRs.getInt("cNum"));
 				bean.setcUid(objRs.getString("cUid"));
 				bean.setcTeacher(objRs.getString("cTeacher"));
+				bean.setcCategory(objRs.getString("cCategory"));
 				bean.setcTitle(objRs.getString("cTitle"));
 				bean.setcRegDate(objRs.getString("cRegDate"));
+				bean.setcStatus(objRs.getInt("cStatus"));
 				vList.add(bean);
 			}
 		} catch (Exception e) {
