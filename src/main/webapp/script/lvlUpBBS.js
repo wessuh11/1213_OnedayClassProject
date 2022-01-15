@@ -179,27 +179,6 @@ $(function(){
 	});
 	//////////////// Read.jsp 에서 게시글 수정버튼 끝 //////////////////
 	
-	//////////////// Read.jsp 에서 답변글 버튼 시작 //////////////////	
-	
-	$("td.read>button#replyBtn").click(function(){
-	
-		let nowPage = $("input#nowPage").val().trim();
-		let lvlNum = $("input#lvlNum").val().trim();
-				
-		let p3 = $("#pKeyField").val().trim();  // p3 : keyField
-	    let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
-	
-		let url = "/Proj_OnedayClass/levelUp/LvlUpReply.jsp?";
-			url += "lvlNum="+lvlNum;
-			url += "&nowPage="+nowPage;
-			url += "&keyField="+p3;
-	     	url += "&keyWord="+p4; 
-		location.href=url;
-	});
-	
-	//////////////// Read.jsp 에서 답변글 버튼 끝 //////////////////
-	
-	
 	//////////////// Read.jsp 에서 등업 수락 버튼 시작 //////////////////
 	$("button#AcBtn").click(function(){
 		$("#AcForm").submit();

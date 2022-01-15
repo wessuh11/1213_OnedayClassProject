@@ -184,16 +184,13 @@ String str2 = "2";
 							<form name = "AcForm" id ="AcForm" action="LvlUpAcProc.jsp">
 							<button type="button" id="lvlListBtn" class="butcs"><%=listBtnLabel %></button>
 							<%if (str1.equals(uLevel)){%>
-							
 							<button type="button" id="AcBtn" class="butcs">등업 승인</button>
 							<input type="hidden" name="lvlUid" value="<%=lvlUid%>">
-							
 							<button type="button" id="RjBtn" class="butcs">등업 거절</button>
-							<%} else {%>
+							<%} else {%></form>
 							<button type="button" id="lvlModBtn" class="butcs">수 정</button>
 							<%} %>
 							<button type="button" id="delBtn" class="butcs">삭 제</button>
-							</form>
 						</td>
 					</tr>
 				</tfoot>
