@@ -165,7 +165,7 @@ return lvlStat;
 			if (uId.equals("admin"))  {
 				if (keyWord.equals("null") || keyWord.equals("")) {
 					// 검색어가 없을 경우
-					sql = "select * from levelupbbs "
+					sql = "select * from levelupbbs where lvlStatus<3 "
 							+ "order by lvlRef desc, lvlPos asc limit ?, ?";
 					objPstmt = objConn.prepareStatement(sql);
 					objPstmt.setInt(1, start);
@@ -173,7 +173,7 @@ return lvlStat;
 				} else {
 					// 검색어가 있을 경우
 					sql = "select * from levelupbbs "
-							+ "where "+ keyField +" like ? "
+							+ "where "+ keyField +" like ? AND lvlStatus<3 "
 							+ "order by lvlRef desc, lvlPos asc limit ?, ?";
 					objPstmt = objConn.prepareStatement(sql);
 					objPstmt.setString(1, "%"+keyWord+"%");
