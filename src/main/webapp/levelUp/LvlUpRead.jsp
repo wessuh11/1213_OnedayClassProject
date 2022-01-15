@@ -4,11 +4,12 @@
 <%@ page import="pack_LevelUpBBS.BoardBean" %>
 <jsp:useBean id="bMgr" class="pack_LevelUpBBS.BoardMgr"  scope="page" />
 <%
+
 request.setCharacterEncoding("UTF-8");
 
 int lvlNumParam = Integer.parseInt(request.getParameter("lvlNum"));
 
-// 검색어 수신 시작
+// 검색어 수신 시작 
 String keyField = request.getParameter("keyField");
 String keyWord = request.getParameter("keyWord");
 // 검색어 수신 끝
@@ -179,19 +180,20 @@ String str2 = "2";
 							listBtnLabel = "검색목록";
 						}
 						%>
-							<td colspan="5" id="btnAreaTd" class="read">
+							<td colspan="4" id="btnAreaTd" class="read">
+							<form name = "AcForm" id ="AcForm" action="LvlUpAcProc.jsp">
 							<button type="button" id="lvlListBtn" class="butcs"><%=listBtnLabel %></button>
 							<%if (str1.equals(uLevel)){%>
-							<button type="button" id="replyBtn" class="butcs">답 변</button>
-							<form name = "AcForm" id ="AcForm" action="LvlUpAcProc.jsp">
+							
 							<button type="button" id="AcBtn" class="butcs">등업 승인</button>
 							<input type="hidden" name="lvlUid" value="<%=lvlUid%>">
-							</form>
+							
 							<button type="button" id="RjBtn" class="butcs">등업 거절</button>
 							<%} else {%>
 							<button type="button" id="lvlModBtn" class="butcs">수 정</button>
 							<%} %>
 							<button type="button" id="delBtn" class="butcs">삭 제</button>
+							</form>
 						</td>
 					</tr>
 				</tfoot>

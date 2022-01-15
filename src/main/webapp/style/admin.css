@@ -50,3 +50,18 @@
 #main div#adManu li.mainAdMenu .subContainer ul.subAdMenu2 li.subAdMenuLi:first-child{
     border-right: 1px solid #000;
 }
+#main div#adManu li{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 4px 10px;
+    cursor: pointer;
+    transform: translateY(2px);
+    border: none;
+    background: #fff;
+    color:#000;
+    margin-top: 10px;
+    opacity: 60%;
+}
+#main div#adManu li:hover{
+    opacity: 100%;
+}

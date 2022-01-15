@@ -170,7 +170,7 @@ String str2 = "2";
 							<td colspan="2" id="hrTd"><hr></td>							
 						</tr>
 						<tr>
-							<td colspan="2" id="btnAreaTd" class="reply">
+							<td colspan="3" id="btnAreaTd" class="reply">
 								<button type="button" id="replyBtn" class="butcs">답변등록</button>
 								<button type="reset" class="butcs">다시쓰기</button>
 								<button type="button" id="backBtn" class="butcs">뒤 로</button>							

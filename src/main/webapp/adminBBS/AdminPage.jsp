@@ -60,23 +60,10 @@ String str1 = "3";
                         </div>
 					</li>
 					<li><a href="#">ㅇㅇ</a></li>
-				</ul>
-			
-			
-			
+				</ul>	
 			</div>	
 		</main>
-			
-		
-		
-
-
-
 		</div>
-
-
-
-
 	</div>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
