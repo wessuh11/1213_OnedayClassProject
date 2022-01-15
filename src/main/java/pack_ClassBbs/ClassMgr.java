@@ -186,10 +186,12 @@ public class ClassMgr {
 				bean.setcNum(objRs.getInt("cNum"));
 				bean.setcUid(objRs.getString("cUid"));
 				bean.setcTeacher(objRs.getString("cTeacher"));
+				bean.setcThumbName(objRs.getString("cThumbName"));
 				bean.setcCategory(objRs.getString("cCategory"));
 				bean.setcTitle(objRs.getString("cTitle"));
 				bean.setcRegDate(objRs.getString("cRegDate"));
 				bean.setcStatus(objRs.getInt("cStatus"));
+				bean.setcOnoff(objRs.getString("cOnoff"));
 				vList.add(bean);
 			}
 		} catch (Exception e) {

@@ -55,11 +55,12 @@ function read(p1, p2){
 ///////////// ClassRead.jsp 버튼 기능 ////////////////
 $(function(){
 	/////////// 좋아요 ////////////
+	/*
 	$("#like").click(function(){
 		let url = "";
 		location.href=url;
 	});
-	
+	*/
 	//////// 구매하기 이동 ///////
 	$("#update").click(function(){
 		let url = "";
@@ -73,9 +74,8 @@ $(function(){
 		let url ="/Proj_OnedayClass/classbbs/ClassApproval.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
+		location.href = "/Proj_OnedayClass/classbbs/ClassList.jsp?"
 	});
-	
-	
 	
 	////// 클래스 수정 //////
 	$("button#modBtn").click(function(){
@@ -85,6 +85,7 @@ $(function(){
 		let url ="/Proj_OnedayClass/classbbs/ClassUpdate.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
+		location.href = "/Proj_OnedayClass/classbbs/ClassList.jsp?"
 	});
 	
 	////// 클래스 삭제 //////
@@ -95,6 +96,7 @@ $(function(){
 		let url ="/Proj_OnedayClass/classbbs/ClassDelete.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
+		location.href = "/Proj_OnedayClass/classbbs/ClassList.jsp?"
 	});
 ///////////// ClassRead.jsp 버튼 기능 ////////////////
 

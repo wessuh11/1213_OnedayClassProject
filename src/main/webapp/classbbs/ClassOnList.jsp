@@ -34,8 +34,14 @@ int listSize = 0; // 1페이지에서 보여주는 데이터 수
 String uId = (String) session.getAttribute("idKey");
 String uName = (String) session.getAttribute("nameKey");
 String uLevel = (String) session.getAttribute("levelKey");
+
+//str1= 관리자, str2는 강사
 String str1 = "3";
 String str2 = "2";
+
+//온&오프 클래스 유무
+String on = "N";
+String off = "Y";
 
 String cCategory1 = "1";
 String cCategory2 = "2";
@@ -60,6 +66,7 @@ if (request.getParameter("nowPage") != null) {
 }
 
 Vector<ClassBean> vList = null;
+
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -68,7 +75,8 @@ Vector<ClassBean> vList = null;
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>온라인 클래스</title>
-<link rel="stylesheet" href="/Proj_OnedayClass/style/classbbs/onshop.css">
+<link rel="stylesheet"
+	href="/Proj_OnedayClass/style/classbbs/onshop.css">
 </head>
 <body>
 	<div id="wrap">
@@ -84,11 +92,13 @@ Vector<ClassBean> vList = null;
 					<%
 					if (uId != null && str1.equals(uLevel)) { //관리자 로그인
 					%>
-                    <li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName %> 관리자님 안녕하세요.</a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/classbbs/ClassList.jsp">게시판 관리</a></li>
+					<li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName%>
+							관리자님 안녕하세요.</a></li>
+					<li></li>
+					<li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
+					<li></li>
+					<li><a href="/Proj_OnedayClass/classbbs/ClassList.jsp">게시판
+							관리</a></li>
 					<%
 					} else if (uId != null && str2.equals(uLevel)) {
 					%>
@@ -151,24 +161,32 @@ Vector<ClassBean> vList = null;
 		<div id="category">
 			<ul id="tagList" class="devUITagList">
 				<li class="devTagList" value="1"
-					<%if (cCategorySel.equals("1"))out.print("selected");%>>핸드메이드</li>
+					<%if (cCategorySel.equals("1"))
+	out.print("selected");%>>핸드메이드</li>
 				<!-- 1번 카테고리 전체출력.. -->
 				<li class="devTagList" value="2"
-					<%if (cCategorySel.equals("2"))out.print("selected");%>>쿠킹</li>
+					<%if (cCategorySel.equals("2"))
+	out.print("selected");%>>쿠킹</li>
 				<!-- 2번 카테고리 전체출력.. -->
 				<li class="devTagList" value="3"
-					<%if (cCategorySel.equals("3"))out.print("selected");%>>드로잉</li>
+					<%if (cCategorySel.equals("3"))
+	out.print("selected");%>>드로잉</li>
 				<!-- 3번 카테고리 전체출력.. -->
 				<li class="devTagList" value="4"
-					<%if (cCategorySel.equals("4"))out.print("selected");%>>음악</li>
+					<%if (cCategorySel.equals("4"))
+	out.print("selected");%>>음악</li>
 				<li class="devTagList" value="5"
-					<%if (cCategorySel.equals("5"))out.print("selected");%>>요가·필라테스</li>
+					<%if (cCategorySel.equals("5"))
+	out.print("selected");%>>요가·필라테스</li>
 				<li class="devTagList" value="6"
-					<%if (cCategorySel.equals("6"))out.print("selected");%>>레져·스포츠</li>
+					<%if (cCategorySel.equals("6"))
+	out.print("selected");%>>레져·스포츠</li>
 				<li class="devTagList" value="7"
-					<%if (cCategorySel.equals("7"))out.print("selected");%>>반려동물</li>
+					<%if (cCategorySel.equals("7"))
+	out.print("selected");%>>반려동물</li>
 				<li class="devTagList" value="8"
-					<%if (cCategorySel.equals("8"))out.print("selected");%>>자기계발</li>
+					<%if (cCategorySel.equals("8"))
+	out.print("selected");%>>자기계발</li>
 			</ul>
 		</div>
 		<!-- div#category -->
@@ -190,7 +208,6 @@ Vector<ClassBean> vList = null;
 					<%
 					vList = bMgr.getBoardList(cCategorySel, start, end);
 					listSize = vList.size();
-					
 					%>
 					<tbody>
 						<%
@@ -207,16 +224,23 @@ Vector<ClassBean> vList = null;
 
 							int cNum = bean.getcNum();
 							//게시글 넘버
+							String cThumbName = bean.getcThumbName();
 							String cCategory = bean.getcCategory();
 							//카테고리
 							String cTitle = bean.getcTitle();
 							//제목
 							int cStatus = bean.getcStatus();
-							//글 속성, 공개 비공개 여부 
-
+							//글 속성, 공개 비공개 여부
+							String cOnoff = bean.getcOnoff();
+							//클래스 on(N), off(Y) 여부
+							if (cStatus == 2 && on.equals(cOnoff)) {
+							//if (cStatus == 2 && off.equals(cOnoff)) {
 						%>
 						<tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
-							<td><a href="#"><img alt='이미지' width='310'></a></td>
+							<td><a href="#"> <img
+									src="/Proj_OnedayClass/fileupload/classfileupload/thumbnail/<%=cThumbName%>"
+									alt='이미지' width='310'>
+							</a></td>
 							<!-- 상품이미지 -->
 						</tr>
 						<tr>
@@ -248,7 +272,8 @@ Vector<ClassBean> vList = null;
 							<!-- cTitle -->
 						</tr>
 						<%
-							}
+						}
+						}
 						}
 						%>
 					</tbody>
@@ -273,19 +298,77 @@ Vector<ClassBean> vList = null;
 				<!-- main#galleryListArea 시작 -->
 				<main id="galleryListArea2" class="flex-container">
 					<table class='goodsTbl2'>
+						<%
+						vList = bMgr.getBoardList(cCategorySel, start, end);
+						listSize = vList.size();
+						%>
 						<tbody>
+						<%
+						if (vList.isEmpty()) {
+						%>
+						<tr>
+							<td colspan="6"><%="게시물이 없습니다."%></td>
+						</tr>
+						<%
+						} else {
+
+						for (int i = 0; i < listSize; i++) {
+							ClassBean bean = vList.get(i);
+
+							int cNum = bean.getcNum();
+							//게시글 넘버
+							String cThumbName = bean.getcThumbName();
+							String cCategory = bean.getcCategory();
+							//카테고리
+							String cTitle = bean.getcTitle();
+							//제목
+							int cStatus = bean.getcStatus();
+							//글 속성, 공개 비공개 여부
+							String cOnoff = bean.getcOnoff();
+							//클래스 on(N), off(Y) 여부
+						if (cStatus == 2 && on.equals(cOnoff)) {
+						//if (cStatus == 2 && off.equals(cOnoff)) {
+						%>
+						<tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
+							<td><a href="#"> <img
+									src="/Proj_OnedayClass/fileupload/classfileupload/thumbnail/<%=cThumbName%>"
+									alt='이미지' width='310'>
+							</a></td>
+							<!-- 상품이미지 -->
+						</tr>
 							<tr>
-								<td><a href="#"> <img alt='' width='310'>
-								</a> <!-- 상품이미지 --></td>
+								<td class='goodsName2'>
+								<%
+								if (cCategory1.equals(cCategory)) {
+									cCategory = "핸드 메이드";
+								} else if (cCategory2.equals(cCategory)) {
+									cCategory = "쿠킹";
+								} else if (cCategory3.equals(cCategory)) {
+									cCategory = "드로잉";
+								} else if (cCategory4.equals(cCategory)) {
+									cCategory = "음악";
+								} else if (cCategory5.equals(cCategory)) {
+									cCategory = "요가·필라테스";
+								} else if (cCategory6.equals(cCategory)) {
+									cCategory = "레져·스포츠";
+								} else if (cCategory7.equals(cCategory)) {
+									cCategory = "반려동물";
+								} else {
+									cCategory = "자기계발";
+								}
+								%><%=cCategory%>
+								</td>
 							</tr>
+							<!-- cCategory -->
 							<tr>
-								<td class='goodsName2'></td>
-								<!-- 상품명 -->
-							</tr>
-							<tr>
-								<td class='goodsDesc2'></td>
+								<td class='goodsDesc2'><%=cTitle%></td>
 								<!-- 상품설명 goods Describe -->
 							</tr>
+						<%
+						}
+						}
+						}
+						%>
 						</tbody>
 					</table>
 					<!-- table.goodsTbl 상품출력용 테이블 -->
@@ -334,6 +417,6 @@ Vector<ClassBean> vList = null;
 
 	<script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
 	<script src="/Proj_OnedayClass/script/classbbs.js"></script>
-	<script src="/Proj_OnedayClass/script/onoffshop.js"></script>
+	<!-- <script src="/Proj_OnedayClass/script/onoffshop.js"></script>-->
 </body>
 </html>
