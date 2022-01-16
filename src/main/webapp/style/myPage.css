@@ -2,6 +2,8 @@
 
 /* div#pageMenu 시작 */
 #pageMenu ul#myPageMenu {
+	margin-top: 20px;
+	
     justify-content: center;
 }
 
@@ -17,6 +19,10 @@
 
 #pageMenu #myPageMenu li.myPageMenuLi:first-child {
     margin-right: 50px;
+}
+
+#pageMenu #myPageMenu li.myPageMenuLi:first-child img {
+   width: 150px;
 }
 
 #pageMenu #myPageMenu li.myPageMenuLi:nth-child(2) {
@@ -41,7 +47,7 @@
 
 /* main#main 시작 */
 main#main {
-    width:80%;
+    width:1000px;
     margin: 30px auto;
 }
 

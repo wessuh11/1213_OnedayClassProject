@@ -10,7 +10,9 @@
     text-decoration: none;   /* 밑줄 제거  */
     padding: 0;
     margin: 0;
-    box-sizing: border-box;    
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;   
 }
 
 a:link {    /* a요소에서 href속성값이 적용된 텍스트의 색상 */
