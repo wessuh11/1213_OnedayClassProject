@@ -5,12 +5,12 @@
 
 /////////// 뷰페이지(=내용 보기 페이지) 이동 시작 ///////////
 function read(p1, p2) {
-    let p3 = $("#pKeyField").val().trim();  // p3 : keyField
-    let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
+    /*let p3 = $("#pKeyField").val().trim();  // p3 : keyField
+    let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord*/
 	let param = "RvRead.jsp?rNum="+p1;
 	     param += "&nowPage="+p2;
-	     param += "&keyField="+p3;
-	     param += "&keyWord="+p4 ; 
+	     /*param += "&keyField="+p3;
+	     param += "&keyWord="+p4 ; */
 	location.href=param;
 }	
 /////////// 뷰페이지(=내용 보기 페이지) 이동 끝 ///////////

@@ -19,17 +19,17 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import pack_DBCP.DBConnectionMgr;
+import pack_Util.UtilMgr;
 
 public class RvBoardMgr {
 
 	private DBConnectionMgr pool;
-	private static final String SAVEFOLER =
-			"C:/Users/kmr07/OneDrive/바탕 화면/sy/silsp/1213_OnedayClassProject/src/main/webapp/RvfileUpload";
-	// 수식어 static final 이 함께 사용된 필드를 상수필드라고함.
-	// 상수필드는 선언과 동시에 반드시 초기화해야 함.
-	// 필드명은 모두 대문자, 단어간 연결은 밑줄
-	// 재초기화 안됨
-
+	/*
+	 * private static final String SAVEFOLER =
+	 * "C:/Users/kmr07/OneDrive/바탕 화면/sy/silsp/1213_OnedayClassProject/src/main/webapp/RvfileUpload"
+	 * ; // 수식어 static final 이 함께 사용된 필드를 상수필드라고함. // 상수필드는 선언과 동시에 반드시 초기화해야 함. //
+	 * 필드명은 모두 대문자, 단어간 연결은 밑줄 // 재초기화 안됨
+	 */
 	private static String encType = "UTF-8";
 	private static int maxSize = 5 * 1024 * 1024;
 
@@ -52,8 +52,10 @@ public class RvBoardMgr {
 		MultipartRequest multi = null;
 		int rFileSize = 0;
 		String rFileName = null;
-	
-
+		String path= req.getServletContext().getRealPath("src/main/webapp/fileUpload/reviewBBS/");
+	    path = UtilMgr.replace
+	    (path, ".metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\", "");
+	    System.out.println(path);
 		try {
 			objConn = pool.getConnection();
 			// sql = "select max(rNum) from reviewBBS";
@@ -67,12 +69,12 @@ public class RvBoardMgr {
 			// 있다고 가정하면 max(num)는 3을 반환함. 그러므로 새 글번호를
 			// 참조하는 DB의 컬럼 ref는 4가 됨.
 
-			File file = new File(SAVEFOLER);
+			File file = new File(path);
 
 			if (!file.exists())
 				file.mkdirs();
 
-			multi = new MultipartRequest(req, SAVEFOLER, maxSize, encType, new DefaultFileRenamePolicy());
+			multi = new MultipartRequest(req, path, maxSize, encType, new DefaultFileRenamePolicy());
 
 			if (multi.getFilesystemName("rFileName") != null) {
 				rFileName = multi.getFilesystemName("rFileName");
@@ -82,7 +84,7 @@ public class RvBoardMgr {
 	
 
 			if (multi.getParameter("contentType").equalsIgnoreCase("TEXT")) {
-				rContent = RvUtilMgr.replace(rContent, "<", "&lt;");
+				rContent = UtilMgr.replace(rContent, "<", "&lt;");
 			}
 
 			sql = "insert into reviewBBS (";
@@ -311,15 +313,16 @@ public class RvBoardMgr {
 		return bean;
 	} // getBoard( ), 게시글 데이터 반환
 
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		System.out.println(len);
 	}
 
 	public static int len;
 	public void downLoad(HttpServletRequest req, HttpServletResponse res, JspWriter out, PageContext pageContext) {
 		String rFileName = req.getParameter("rFileName"); // 다운로드할 파일 매개변수명 일치
+		
 		try {
-			File file = new File(RvUtilMgr.con(SAVEFOLER + File.separator + rFileName));
+			File file = new File(UtilMgr.con(path + File.separator + rFileName));
 
 			byte[] b = new byte[(int) file.length()];
 			res.setHeader("Accept-Ranges", "bytes");
@@ -346,7 +349,7 @@ public class RvBoardMgr {
 			System.out.println("파일 처리 이슈 : " + e.getMessage());
 		}
 
-	}
+	}*/
 
 //////   게시판 뷰페이지 출력(Read.jsp, 내용보기 페이지) 끝  ////////	
 

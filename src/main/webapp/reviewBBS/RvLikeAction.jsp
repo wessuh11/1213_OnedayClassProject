@@ -45,8 +45,8 @@ else{
 			
 			%>
 			
-			location.href="RvList.jsp";
-			//history.back();
+			//location.href="RvList.jsp";
+			history.back();
 		</script>
 	<%
 }

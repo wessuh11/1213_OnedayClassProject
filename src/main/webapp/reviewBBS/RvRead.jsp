@@ -11,10 +11,10 @@ String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
 
-// 검색어 수신 시작
+/* // 검색어 수신 시작
 String keyField = request.getParameter("keyField");
 String keyWord = request.getParameter("keyWord");
-// 검색어 수신 끝
+// 검색어 수신 끝 */
 
 // 현재 페이지 돌아가기 소스 시작
 String nowPage = request.getParameter("nowPage");
@@ -84,7 +84,7 @@ session.setAttribute("bean", bean);
 				<tbody id="readTblBody">
 					<tr>
 						<td>작성자</td>  <!-- td.req 필수입력 -->
-						<td><%=uId %></td>
+						<td><%=rUid %></td>
 						<td>등록일</td>  <!-- td.req 필수입력 -->
 						<td><%=rRegDate %></td>
 					</tr>
@@ -107,7 +107,7 @@ session.setAttribute("bean", bean);
 						<td colspan="4" id="readContentTd"><pre><%=rContent %></pre>
 						<br><br><br>
 							<center>
-							<img src='../RvfileUpload/<%=rFileName %>' /></td>
+							<img src='../fileUpload/<%=rFileName %>' /></td>
 							</center>
 					</tr>					
 				</tbody>
@@ -116,11 +116,11 @@ session.setAttribute("bean", bean);
 					<tr>
 						<td colspan="4" id="footTopSpace"></td>							
 					</tr>			     
-					<tr>
+				<%-- 	<tr>
 						<td colspan="4" id="articleInfoTd">
 							<span><%="조회수 : " + rCnt %></span>
 						 			
-						</td>							
+						</td>	 --%>						
 					</tr>
 					<tr>
 						<td colspan="4" id="hrTd"><hr></td>							
@@ -128,11 +128,12 @@ session.setAttribute("bean", bean);
 					<tr>
 						<%
 						String listBtnLabel = "";
-						if(keyWord.equals("null") || keyWord.equals("")) {
+						listBtnLabel = "글목록";
+						/* if(keyWord.equals("null") || keyWord.equals("")) {
 							listBtnLabel = "글목록";
 						} else {
 							listBtnLabel = "검색목록";
-						}
+						} */
 						%>
 					
 						<td colspan="4" id="btnAreaTd" class="read">
@@ -159,10 +160,10 @@ session.setAttribute("bean", bean);
 			<input type="hidden" name="nowPage" value="<%=nowPage%>" id="nowPage">
 			<input type="hidden" name="rNum" value="<%=rNum%>" id="rNum">
 			
-			<!-- 검색어전송 시작 -->
+			<%-- <!-- 검색어전송 시작 -->
 			<input type="hidden" id="pKeyField" value="<%=keyField%>">
 			<input type="hidden" id="pKeyWord" value="<%=keyWord%>">
-			<!-- 검색어전송 끝 -->
+			<!-- 검색어전송 끝 --> --%>
 		  
 			</div>
 		

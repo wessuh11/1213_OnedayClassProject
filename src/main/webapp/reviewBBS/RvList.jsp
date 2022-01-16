@@ -189,7 +189,7 @@ Vector<RvBoardBean> vList = null;
 						}else
 						{
 							%>
-							<td><img src='../RvfileUpload/<%=rFileName %>' width="70" height="40"/></td>
+							<td><img src='../fileUpload/<%=rFileName %>' width="70" height="40"/></td>
 						<%} %>
 						<td><%=rTitle %></td>						
 						<td><%=rUid %></td>
@@ -283,7 +283,7 @@ Vector<RvBoardBean> vList = null;
 						
 						</td>
 						
-						 <td colspan="3">
+					<%-- 	 <td colspan="3">
 						
 					 	<form name="searchFrm" class="flex-container"
 									id="searchFrm">
@@ -314,6 +314,7 @@ Vector<RvBoardBean> vList = null;
 							<!-- 검색결과 유지용 매개변수 데이터끝 -->
 						
 						</td> 
+						--%>
 					</tr>
 					
 					
