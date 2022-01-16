@@ -104,11 +104,8 @@ String str2 = "2";
 		<h1><%=lvlUid %>님의 등업 신청글</h1>
 		<!--  HTML 템플릿(Template, Templet)  헤더 끝 -->
 		
-		
-		
 		<main id="main" class="reply">   <!-- 본문영역 html 템플릿 시작 -->
 			<!--  답변페이지 내용 출력 시작 -->
-			
 			
 			<form name="replyFrm" action="LvlUpReplyProc.jsp"
 					method="get" id="replyFrm">
@@ -121,7 +118,7 @@ String str2 = "2";
 							<td class="req">작성자</td>
 							<td>
 								<input type="hidden" id="lvlUid"
-								name="lvlUid" value="<%=uId%>">
+								name="lvlUid" value="<%=uName%>">
 								<span class="ori_Txt"><b><%=uName %></b></span>
 							</td>
 						</tr>

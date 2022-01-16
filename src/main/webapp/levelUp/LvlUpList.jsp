@@ -131,9 +131,9 @@ String str2 = "2";
                             <a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
                         </div>
                     </li>
-		<%} %>
 				</ul>
             </div>
+		<%} %>
             <!-- div#headerRight -->
         </header>
         <nav id="gnb">
