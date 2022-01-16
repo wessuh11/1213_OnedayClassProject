@@ -37,47 +37,10 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 </head>
 <body>
 	<div id="wrap">
-        <header id="header" class="flex-container">
-            <div id="headerLogo">
-                <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
-            </div>
-            <!-- div#headerLogo -->
+	<%@include file="../include/Header.jsp"%>
 
-            <div id="headerRight">
-                <ul class="flex-container">
-    <% if (uId != null) {   // 현재 로그인 상태라면  %>
-                    <li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName %> / 등급 : <%=uLevel %></a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-	<% } else { %>
-					<li><a href="/Proj_OnedayClass/sign/Login.jsp">Sign In</a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/sign/Member.jsp">Sign Up</a></li>
-	<%} %>
-                    <li></li>
-                    <li>
-                        <div id="headerCart">
-                            <a href="#"><img src="/Proj_OnedayClass/img/cart.png" alt=""> <span>0</span></a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <!-- div#headerRight -->
-        </header>
-        <!-- header#header -->
-        <nav id="gnb">
-            <ul class="flex-container">
-                <li class="active"><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
-                <li><a href="./about.html">About</a></li>
-                <li><a href="#">Online</a></li>
-                <li><a href="#">Offline</a></li>
-            </ul>
-        </nav>
-        
-        
         <div id="mod">
 			<form name="modFrm" id="modFrm" action="Member_ModProc.jsp" method="get">
-			
 				<table>
 					<caption><hr><h3>회원 정보 수정</h3></caption>
 					<tbody>
@@ -160,7 +123,7 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 			<!-- document.modFrm -->
         </div>
 		<!-- div#mod -->
-
+		 <%@include file="../include/Footer.jsp"%>
 	</div>
 	<!-- div#wrap -->
 	
