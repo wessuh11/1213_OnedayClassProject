@@ -12,7 +12,7 @@
 <body>
 	<div id="wrap">
 	
-		<%@include file="../include/header.jsp"%>
+		<%@include file="../include/Header.jsp"%>
 		
 		
         <div id="slide">
@@ -43,7 +43,7 @@
         	</div>
             <!-- 슬라이드쇼 방향키 시작 -->
             
-			<%@include file="../include/footer.jsp"%>
+			<%@include file="../include/Footer.jsp"%>
 	</div>
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
