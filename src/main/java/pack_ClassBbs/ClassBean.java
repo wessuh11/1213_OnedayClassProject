@@ -22,6 +22,7 @@ public class ClassBean {
 	private String cArea; //지역 null값 주면됨
 	private String cOnoff; //오프라인 유무(Y/N), 온라인이면 insert할때 수강인원 지역 null값 주면됨
 	private int cStatus; //게시물 상태(1. 비공개, 2. 공개, 3. 삭제)
+	private int cLikes; //좋아요
 	
 	public int getcNum() {
 		return cNum;
@@ -138,6 +139,12 @@ public class ClassBean {
 	}
 	public void setcStatus(int cStatus) {
 		this.cStatus = cStatus;
+	}
+	public int getcLikes() {
+		return cLikes;
+	}
+	public void setcLikes(int cLikes) {
+		this.cLikes = cLikes;
 	}
 
 }

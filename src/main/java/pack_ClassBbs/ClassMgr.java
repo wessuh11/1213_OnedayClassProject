@@ -1,6 +1,7 @@
 package pack_ClassBbs;
 
 import java.io.BufferedInputStream;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -104,11 +105,11 @@ public class ClassMgr {
 			// ?, ?, ?, ?, ?, now(), ?, ?
 			sql += "cThumbName, cThumbSize, cFileName, cFileSize, ";
 			// ?, ?, ?, ?
-			sql += "cMaxStu, cApplyStu, cOnoff, cArea, cStatus) values (";
+			sql += "cMaxStu, cApplyStu, cOnoff, cArea, cStatus, cLikes) values (";
 			// ?, 0, ?, ?, 1
 			sql += " ?, ?, ?, ?, ?, ?, now(), ?, ?, ";
 			sql += "?, ?, ?, ?, ";
-			sql += "?, 0, ?, ?, 1)";
+			sql += "?, 0, ?, ?, 1, 0)";
 
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setString(1, cCode); // 코드
@@ -192,6 +193,7 @@ public class ClassMgr {
 				bean.setcRegDate(objRs.getString("cRegDate"));
 				bean.setcStatus(objRs.getInt("cStatus"));
 				bean.setcOnoff(objRs.getString("cOnoff"));
+				bean.setcLikes(objRs.getInt("cLikes"));
 				vList.add(bean);
 			}
 		} catch (Exception e) {
@@ -208,7 +210,7 @@ public class ClassMgr {
 ////////게시판 뷰페이지 출력(ClassRead.jsp, 내용보기 페이지) 시작 ////////
 
 	public ClassBean getBoard(int cNum) {
-		//뷰페이지 게시글 데이터 반환 시작
+		// 뷰페이지 게시글 데이터 반환 시작
 		Connection objConn = null;
 		PreparedStatement objPstmt = null;
 		ResultSet objRs = null;
@@ -241,6 +243,7 @@ public class ClassMgr {
 				bean.setcArea(objRs.getString("cArea"));
 				bean.setcOnoff(objRs.getString("cOnoff"));
 				bean.setcStatus(objRs.getInt("cStatus"));
+				bean.setcLikes(objRs.getInt("cLikes"));
 
 			}
 
@@ -267,7 +270,7 @@ public class ClassMgr {
 
 		try {
 			objConn = pool.getConnection(); // DB연동
-			//sql = "delete from classbbs where cnum=?";
+			// sql = "delete from classbbs where cnum=?";
 			sql = "update classbbs set cStatus=2 where cNum=?";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setInt(1, cNum);
@@ -296,7 +299,7 @@ public class ClassMgr {
 
 		try {
 			objConn = pool.getConnection(); // DB연동
-			//sql = "delete from classbbs where cnum=?";
+			// sql = "delete from classbbs where cnum=?";
 			sql = "update classbbs set cStatus=3 where cNum=?";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setInt(1, cNum);
@@ -347,6 +350,57 @@ public class ClassMgr {
 
 		return exeCnt;
 	}
+
+//////게시글 수정페이지 (ClassUpdateProc.jsp) 끝 ////////
+
+///////////// 좋아요 시작? RvLikeAction.jsp //////////////	
+	public int UpdateLike(ClassLikeBean ClassLikeBean) {
+		int result = 0;
+
+		Connection objConn = null;
+		PreparedStatement objPstmt = null;
+		String sql = null;
+
+		try {
+			objConn = pool.getConnection(); // DB연동
+			sql = "insert into classLikes (uId, cNum) values(?,?)";
+			objPstmt = objConn.prepareStatement(sql);
+			//objPstmt.setString(1, bean.getrUid());
+			objPstmt.setString(1, ClassLikeBean.getuId());
+			objPstmt.setInt(2, ClassLikeBean.getcNum());
+			result = objPstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("SQL이슈 : " + e.getMessage());
+		} finally {
+			pool.freeConnection(objConn, objPstmt);
+		}
+
+		return result;
+	}
+
+	public int InsertLikeCnt(int cNum) {
+		int result = 0;
+
+		Connection objConn = null;
+		PreparedStatement objPstmt = null;
+		String sql = null;
+
+		try {
+			objConn = pool.getConnection(); // DB연동
+			sql = "update classbbs set cLikes=cLikes+1 where cNum=?;";
+			objPstmt = objConn.prepareStatement(sql);
+			objPstmt.setInt(1, cNum);
+
+			result = objPstmt.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("SQL이슈 : " + e.getMessage());
+		} finally {
+			pool.freeConnection(objConn, objPstmt);
+		}
+
+		return result;
+	}
 }
 
-//////게시글 수정페이지 (ClassUpdateProc.jsp) 끝 ////////	
+///////////// 좋아요 끝? RvLikeAction.jsp //////////////	

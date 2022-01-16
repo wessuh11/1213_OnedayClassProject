@@ -8,7 +8,7 @@
 request.setCharacterEncoding("UTF-8");
 
 int totalRecord = 0; // 전체 데이터 수(DB에 저장된 row 개수)
-int numPerPage = 10; // 페이지당 출력하는 데이터 수(=게시글 숫자)
+int numPerPage = 9; // 페이지당 출력하는 데이터 수(=게시글 숫자)
 int pagePerBlock = 5; // 블럭당 표시되는 페이지 수의 개수
 int totalPage = 0; // 전체 페이지 수
 int totalBlock = 0; // 전체 블록수
@@ -25,7 +25,7 @@ int nowPage = 1; // 현재 (사용자가 보고 있는) 페이지 번호
 int nowBlock = 1; // 현재 (사용자가 보고 있는) 블럭
 
 int start = 0; // DB에서 데이터를 불러올 때 시작하는 인덱스 번호
-int end = 10; // 시작하는 인덱스 번호부터 반환하는(=출력하는) 데이터 개수 
+int end = 9; // 시작하는 인덱스 번호부터 반환하는(=출력하는) 데이터 개수 
 // select * from T/N where... order by ... limit start, end;
 
 int listSize = 0; // 1페이지에서 보여주는 데이터 수
@@ -66,7 +66,6 @@ if (request.getParameter("nowPage") != null) {
 }
 
 Vector<ClassBean> vList = null;
-
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -196,20 +195,21 @@ Vector<ClassBean> vList = null;
 		<div id="Gallerybbs">
 
 			<!-- 추천리스트 갤러리 시작 -->
-			<div id="goodsPart" class="flex-container">
+			<div id="goodsPart">
 				<h2>★ 온라인 추천 클래스 ★</h2>
 				<span>HOME | Online</span>
 			</div>
 			<!-- div#goodsPart 끝 -->
 
 			<!-- main#galleryListArea 시작 -->
-			<main id="galleryListArea" class="flex-container">
-				<table class='goodsTbl'>
+			<main id="galleryListArea">
+				<table id="goodsTbl">
 					<%
 					vList = bMgr.getBoardList(cCategorySel, start, end);
 					listSize = vList.size();
 					%>
-					<tbody>
+					<tbody class=" flex-container">
+
 						<%
 						if (vList.isEmpty()) {
 						%>
@@ -233,17 +233,15 @@ Vector<ClassBean> vList = null;
 							//글 속성, 공개 비공개 여부
 							String cOnoff = bean.getcOnoff();
 							//클래스 on(N), off(Y) 여부
+
 							if (cStatus == 2 && on.equals(cOnoff)) {
-							//if (cStatus == 2 && off.equals(cOnoff)) {
+								//if (cStatus == 2 && off.equals(cOnoff)) {
 						%>
 						<tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
 							<td><a href="#"> <img
 									src="/Proj_OnedayClass/fileupload/classfileupload/thumbnail/<%=cThumbName%>"
-									alt='이미지' width='310'>
-							</a></td>
+									alt='이미지' width='310'></a></td>
 							<!-- 상품이미지 -->
-						</tr>
-						<tr>
 							<td class='goodsName'>
 								<%
 								if (cCategory1.equals(cCategory)) {
@@ -266,8 +264,6 @@ Vector<ClassBean> vList = null;
 								%><%=cCategory%>
 							</td>
 							<!-- cCategory -->
-						</tr>
-						<tr>
 							<td class='goodsDesc'><%=cTitle%></td>
 							<!-- cTitle -->
 						</tr>
@@ -289,7 +285,7 @@ Vector<ClassBean> vList = null;
 				<h2>★ 온라인 클래스 ★</h2>
 				<select>
 					<option>최신순</option>
-					<option>리뷰순</option>
+					<option>인기순</option>
 				</select>
 			</div>
 			<!-- div#allclass 최신순, 리뷰순 끝-->
@@ -302,76 +298,93 @@ Vector<ClassBean> vList = null;
 						vList = bMgr.getBoardList(cCategorySel, start, end);
 						listSize = vList.size();
 						%>
-						<tbody>
-						<%
-						if (vList.isEmpty()) {
-						%>
-						<tr>
-							<td colspan="6"><%="게시물이 없습니다."%></td>
-						</tr>
-						<%
-						} else {
-
-						for (int i = 0; i < listSize; i++) {
-							ClassBean bean = vList.get(i);
-
-							int cNum = bean.getcNum();
-							//게시글 넘버
-							String cThumbName = bean.getcThumbName();
-							String cCategory = bean.getcCategory();
-							//카테고리
-							String cTitle = bean.getcTitle();
-							//제목
-							int cStatus = bean.getcStatus();
-							//글 속성, 공개 비공개 여부
-							String cOnoff = bean.getcOnoff();
-							//클래스 on(N), off(Y) 여부
-						if (cStatus == 2 && on.equals(cOnoff)) {
-						//if (cStatus == 2 && off.equals(cOnoff)) {
-						%>
-						<tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
-							<td><a href="#"> <img
-									src="/Proj_OnedayClass/fileupload/classfileupload/thumbnail/<%=cThumbName%>"
-									alt='이미지' width='310'>
-							</a></td>
-							<!-- 상품이미지 -->
-						</tr>
+						<tbody class="flex-container">
+							<%
+							if (vList.isEmpty()) {
+							%>
 							<tr>
-								<td class='goodsName2'>
+								<td colspan="6"><%="게시물이 없습니다."%></td>
+							</tr>
+							<%
+							} else {
+
+							for (int i = 0; i < listSize; i += 3) {
+							%>
+							<tr>
 								<%
-								if (cCategory1.equals(cCategory)) {
-									cCategory = "핸드 메이드";
-								} else if (cCategory2.equals(cCategory)) {
-									cCategory = "쿠킹";
-								} else if (cCategory3.equals(cCategory)) {
-									cCategory = "드로잉";
-								} else if (cCategory4.equals(cCategory)) {
-									cCategory = "음악";
-								} else if (cCategory5.equals(cCategory)) {
-									cCategory = "요가·필라테스";
-								} else if (cCategory6.equals(cCategory)) {
-									cCategory = "레져·스포츠";
-								} else if (cCategory7.equals(cCategory)) {
-									cCategory = "반려동물";
-								} else {
-									cCategory = "자기계발";
-								}
-								%><%=cCategory%>
+								for (int j = 0; j < 3; j++) {
+
+									ClassBean bean = vList.get(i + j);
+
+									int cNum = bean.getcNum();
+									//게시글 넘버
+									String cThumbName = bean.getcThumbName();
+									String cCategory = bean.getcCategory();
+									//카테고리
+									String cTitle = bean.getcTitle();
+									//제목
+									int cStatus = bean.getcStatus();
+									//글 속성, 공개 비공개 여부
+									String cOnoff = bean.getcOnoff();
+									//클래스 on(N), off(Y) 여부
+
+									if (cStatus == 2 && on.equals(cOnoff)) {
+										//if (cStatus == 2 && off.equals(cOnoff)) {
+								%>
+								<td class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
+									<div>
+										<a href="#"> <img
+											src="/Proj_OnedayClass/fileupload/classfileupload/thumbnail/<%=cThumbName%>"
+											alt='이미지' width='310'>
+										</a>
+									</div>
+
+									<div>
+										<%
+										if (cCategory1.equals(cCategory)) {
+											cCategory = "핸드 메이드";
+										} else if (cCategory2.equals(cCategory)) {
+											cCategory = "쿠킹";
+										} else if (cCategory3.equals(cCategory)) {
+											cCategory = "드로잉";
+										} else if (cCategory4.equals(cCategory)) {
+											cCategory = "음악";
+										} else if (cCategory5.equals(cCategory)) {
+											cCategory = "요가·필라테스";
+										} else if (cCategory6.equals(cCategory)) {
+											cCategory = "레져·스포츠";
+										} else if (cCategory7.equals(cCategory)) {
+											cCategory = "반려동물";
+										} else {
+											cCategory = "자기계발";
+										}
+										%>
+										<%=cCategory%>
+									</div>
+
+									<div>
+										<%=cTitle%>
+									</div>
 								</td>
+								<%
+								}
+								%>
 							</tr>
-							<!-- cCategory -->
-							<tr>
-								<td class='goodsDesc2'><%=cTitle%></td>
-								<!-- 상품설명 goods Describe -->
-							</tr>
-						<%
-						}
-						}
-						}
-						%>
+
+							<%
+							if ((i + j) == (listSize - 1)) {
+								i += j;
+
+								break;
+							}
+							}
+							}
+							}
+							%>
 						</tbody>
 					</table>
 					<!-- table.goodsTbl 상품출력용 테이블 -->
+
 				</main>
 				<!-- main#galleryListArea 끝-->
 			</div>

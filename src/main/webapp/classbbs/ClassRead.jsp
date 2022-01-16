@@ -26,6 +26,8 @@ String cCategory = bean.getcCategory(); //클래스 카테고리
 String cTitle = bean.getcTitle(); //클래스 제목
 String cContent= bean.getcContent(); //클래스 설명
 String cRegDate= bean.getcRegDate(); //클래스 작성날짜
+int cLikes	= bean.getcLikes();
+//카우링 스탈 밤하늘의 퍼어얼
 
 int cPrice= bean.getcPrice(); //클래스 가격
 int cDelivery= bean.getcDelivery(); //배송비
@@ -192,7 +194,7 @@ session.setAttribute("bean", bean);
         		<table>
         			<tr>
         			    <td>
-        			    	<button type="button" class="like" id="like">♥</button>
+        			    	<button type="button" class="like" id="likeBtn" onClick="location.href='ClassLikeAction.jsp?cNum=<%= cNum %>&uId=<%=uId%>'">♥</button>
         			    </td>
         				<td>
         					<button type="button" class="buy" id="buy">클래스 신청하기</button>

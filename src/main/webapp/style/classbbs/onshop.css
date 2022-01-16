@@ -201,6 +201,11 @@ div#goodsPart {
 #Gallerybbs  main#galleryListArea>table td {
     color: #5f4a38;
     padding: 3px 0;
+    padding: 0px 0px 0px 20px
+}
+
+#Gallerybbs  main#galleryListArea>table#goodsTbl td {
+    display: block;
 }
 
 #Gallerybbs  #galleryListArea>table td.goodsDesc {
