@@ -19,10 +19,12 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import pack_DBCP.DBConnectionMgr;
+import pack_Util.UtilMgr;
+
 public class BoardMgr {
 
 	private DBConnectionMgr pool;
-	private static final String SAVEFOLER = "E:/Project/1213_OnedayClassProject/src/main/webapp/lvlFileUpLoad";
+	//private static final String SAVEFOLER = "E:/Project/1213_OnedayClassProject/src/main/webapp/lvlFileUpLoad";
 	// 수식어 static final 이 함께 사용된 필드를 상수필드라고함.
 	// 상수필드는 선언과 동시에 반드시 초기화해야 함.
 	// 필드명은 모두 대문자, 단어간 연결은 밑줄
@@ -50,7 +52,9 @@ public class BoardMgr {
 		MultipartRequest multi = null;
 		int lvlFileSize = 0;
 		String lvlFileName = null;
-
+		String path= req.getServletContext().getRealPath("/src/main/webapp/fileUpload/levelUpBBS/");
+	      path = UtilMgr.replace(path, ".metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\", "");
+			System.out.println(path);
 		try {
 			objConn = pool.getConnection();
 			sql = "select max(lvlNum) from levelUpBBS";
@@ -64,12 +68,12 @@ public class BoardMgr {
 			// 있다고 가정하면 max(num)는 3을 반환함. 그러므로 새 글번호를
 			// 참조하는 DB의 컬럼 ref는 4가 됨.
 
-			File file = new File(SAVEFOLER);
+			File file = new File(path);
 
 			if (!file.exists())
 				file.mkdirs();
 
-			multi = new MultipartRequest(req, SAVEFOLER, maxSize, encType, new DefaultFileRenamePolicy());
+			multi = new MultipartRequest(req, path, maxSize, encType, new DefaultFileRenamePolicy());
 
 			if (multi.getFilesystemName("lvlFileName") != null) {
 				lvlFileName = multi.getFilesystemName("lvlFileName");
@@ -336,21 +340,22 @@ return totalCnt;
 		return bean;
 	} // getBoard( ), 게시글 데이터 반환
 
-	public static void main(String[] args) {
-		System.out.println(len);
-	}
-
-	public static int len;
+//	public static void main(String[] args) {
+//		System.out.println(len);
+//	}
+//
+//	public static int len;
 	public void downLoad(HttpServletRequest req, HttpServletResponse res, JspWriter out, PageContext pageContext) {
 		String lvlFileName = req.getParameter("lvlFileName"); // 다운로드할 파일 매개변수명 일치
+		String path= req.getServletContext().getRealPath("/src/main/webapp/fileUpload/levelUpBBS/");
+	      path = UtilMgr.replace(path, ".metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\", "");
 		try {
-			File file = new File(UtilMgr.con(SAVEFOLER + File.separator + lvlFileName));
-
+			File file = new File(UtilMgr.con(path + File.separator + lvlFileName));
 			byte[] b = new byte[(int) file.length()];
 			res.setHeader("Accept-Ranges", "bytes");
 			String strClient = req.getHeader("User-Agent");
 			res.setContentType("application/smnet;charset=utf-8");
-			res.setHeader("Content-Disposition", "attachment;lvFileName=" + lvlFileName + ";");
+			res.setHeader("Content-Disposition", "attachment;fileName=" + lvlFileName + ";");
 
 			out.clear();
 			out = pageContext.pushBody();

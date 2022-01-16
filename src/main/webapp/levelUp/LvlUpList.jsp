@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+ 
 <%@ page import="pack_LevelUpBBS.BoardBean, java.util.Vector" %>
 <jsp:useBean id="bMgr" class="pack_LevelUpBBS.BoardMgr"  scope="page" />
 
 <%
 request.setCharacterEncoding("UTF-8");
-
 
 ///////////////////////페이징 관련 속성 값 시작///////////////////////////
 // 페이징(Paging) = 페이지 나누기를 의미함

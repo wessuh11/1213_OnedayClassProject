@@ -1,4 +1,4 @@
-package pack_LevelUpBBS;
+package pack_Util;
 
 public class UtilMgr {
 	

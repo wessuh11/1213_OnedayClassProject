@@ -120,3 +120,10 @@ $(function () {
         $(".mainAdMenu #subAdMenu").stop().slideUp(100);
     });
 //////////////////////////////ad page 메인 메뉴 끝/////////////////////////    
+function setClassName() {
+			document.getElementById('ex').classList.add('active');
+		}
+
+
+
+

@@ -5,6 +5,6 @@
 <%
 bMgr.downLoad(request, response, out, pageContext);
 String[] str = {};
-bMgr.main(str);
+/* bMgr.main(str); */
 %>    
     

@@ -137,7 +137,7 @@ $(function(){
 	//////////////// 파일다운로드(Read.jsp) 시작 //////////////////
 	$("span#downloadFile").click(function(){
 		let fName = $("input#hiddenFname").val().trim();
-		location.href="/Proj_OnedayClass/levelUp/LvlDownload.jsp?lvlFileName=" + fName;
+		location.href="/Proj_OnedayClass/levelUp/LvlUpDownload.jsp?lvlFileName=" + fName;
 	});
 	//////////////// 파일다운로드(Read.jsp) 끝 //////////////////
 	
