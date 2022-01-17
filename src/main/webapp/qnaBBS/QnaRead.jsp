@@ -57,51 +57,11 @@ String uLevel = (String)session.getAttribute("levelKey");
 </head>
 <body>
 	<div id="wrap">
-		<header id="header" class="flex-container">
-            <div id="headerLogo">
-                <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
-            </div>
-            <!-- div#headerLogo -->
-
-            <div id="headerRight">
-                <ul class="flex-container">
-    <% if (uId != null) {   // 현재 로그인 상태라면  %>
-                    <li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName %> / 등급 : <%=uLevel %></a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-	<% } else { %>
-					<li><a href="/Proj_OnedayClass/sign/Login.jsp">Sign In</a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/sign/Member.jsp">Sign Up</a></li>
-	<%} %>
-                    <li></li>
-                    <li>
-                        <div id="headerCart">
-                            <a href="#"><img src="/Proj_OnedayClass/img/cart.png" alt=""> <span>0</span></a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <!-- div#headerRight -->
-		</header>
-        <!-- header#header -->
-
-        <nav id="gnb">
-            <ul class="flex-container">
-                <li><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
-                <li><a href="./about.html">About</a></li>
-                <li><a href="#">Online</a></li>
-                <li><a href="#">Offline</a></li>
-                <li class="active"><a href="/Proj_OnedayClass/qnaBBS/QnaList.jsp">QnA</a></li>
-            </ul>
-        </nav>
-        <!-- nav#gnb -->
         
 		<h1><%=qTitle %> 문의 글</h1>
 
 		<!--  HTML 템플릿(Template, Templet)  헤더 끝 -->
-		
-		
+
 		<main id="main" class="read">   <!-- 본문영역 html 템플릿 시작 -->
 			<!--  뷰페이지 내용 출력 시작 -->
 		
@@ -180,12 +140,10 @@ String uLevel = (String)session.getAttribute("levelKey");
 			<!--  뷰페이지 내용 출력 끝 -->
 		</main>  <!-- 본문영역 html 템플릿 끝 -->
 
-
 	</div>
 	<!-- div#wrap -->
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="/Proj_OnedayClass/script/script.js"></script>    
 	<script src="/Proj_OnedayClass/script/qnaBBS.js"></script>    
 </body>
 </html>

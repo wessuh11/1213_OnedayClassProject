@@ -39,39 +39,7 @@ String keyWord = request.getParameter("keyWord");
 <%    
 int exeCnt = 0;
 if(upUid.equals(realDBUid)  || uLevel.equals("3")) {    // 사용자 아이디와 작성자 아이디가 일치할경우
-	exeCnt = bMgr.updateBoard(upBean);
-	
-	if (exeCnt > 0) {
-		String url = "QnaRead.jsp?nowPage="+nowPage;
-				 url += "&qNum="+upBean.getqNum();
-				 url += "&keyField="+keyField;
-				 url += "&keyWord="+keyWord;
-		
-		//out.print("url : " + url);	 
-		//response.sendRedirect(url);   <= 한글 전송 오류 발생
-%>		
-	 <script>
-	 	location.href="<%=url%>";
-	 </script>
-<%		
-	} else {
-%>		
-	<script>
-		alert("DB처리중 오류가 발생했습니다.\n문제가 계속되면 관리자에게 연락바람");
-		history.back();
-	</script>
-
-<%
-	}
-	
-	
-} else {   // 입력한 비번이 실제비번과 일치하지 않을경우
-%>
-	<script>
-		alert("비밀번호를 확인해주세요!");
-		history.back();
-	</script>
-<%	
+	exeCnt = bMgr.updateBoard(upBean);	
 }
 %>
 

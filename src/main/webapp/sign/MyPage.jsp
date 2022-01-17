@@ -95,7 +95,7 @@ String uLevel = (String)session.getAttribute("levelKey");
                         <a href="#">내 정보 관리</a>
                         <div id="subMenu2" class="subContainer">
                             <ul class="subMenu flex-container">
-                                <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Mod.jsp" id="memModBtn">회원 정보 수정</a></li>
+                                <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_PreMod.jsp" id="memModBtn">회원 정보 수정</a></li>
                                 <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Del.jsp" id="memDrop">회원 탈퇴</a></li>
                             </ul>
                         </div>

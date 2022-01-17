@@ -35,56 +35,16 @@ String uLevel = (String)session.getAttribute("levelKey");
 </head>
 <body>
 	<div id="wrap">
-		<header id="header" class="flex-container">
-            <div id="headerLogo">
-                <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
-            </div>
-            <!-- div#headerLogo -->
-
-            <div id="headerRight">
-                <ul class="flex-container">
-    <% if (uId != null) {   // 현재 로그인 상태라면  %>
-                    <li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName %> / 등급 : <%=uLevel %></a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-	<% } else { %>
-					<li><a href="/Proj_OnedayClass/sign/Login.jsp">Sign In</a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/sign/Member.jsp">Sign Up</a></li>
-	<%} %>
-                    <li></li>
-                    <li>
-                        <div id="headerCart">
-                            <a href="#"><img src="/Proj_OnedayClass/img/cart.png" alt=""> <span>0</span></a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-            <!-- div#headerRight -->
-		</header>
-        <!-- header#header -->
-
-        <nav id="gnb">
-            <ul class="flex-container">
-                <li><a href="/Proj_OnedayClass/index.jsp">Home</a></li>
-                <li><a href="./about.html">About</a></li>
-                <li><a href="#">Online</a></li>
-                <li><a href="#">Offline</a></li>
-				<li class="active"><a href="/Proj_OnedayClass/qnaBBS/QnaList.jsp">QnA</a></li>
-            </ul>
-        </nav>
+		
 		<!--  HTML 템플릿(Template, Templet)  헤더 시작 -->
 		<h1>답변 작성 페이지</h1>
 		<!--  HTML 템플릿(Template, Templet)  헤더 끝 -->
 		
-		
-		
 		<main id="main" class="reply">   <!-- 본문영역 html 템플릿 시작 -->
 			<!--  답변페이지 내용 출력 시작 -->
-			
-			
-			<form name="replyFrm" action="QnaReplyProc.jsp"
-					method="get" id="replyFrm">
+		
+			<form name="replyFrm" action="QnaReplyProc2.jsp"
+					method="post" id="replyFrm">
 		
 				<h2>답변글 작성</h2>
 					

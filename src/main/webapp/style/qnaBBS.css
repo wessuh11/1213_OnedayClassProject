@@ -2,12 +2,6 @@
 @import url(style_Reset.css);
 @import url(style.css);
 
-
-div#wrap {
-
-}
-
-
 /*///////////////// 템플릿 시작 ////////////////////*/
 #wrap>main#main {
 	padding: 20px;
@@ -39,7 +33,6 @@ main.post table {
 
 main.post table tbody td {
 	padding: 10px;
-	/*border: 1px solid #000;*/
 }
 main.post table tbody td:first-child {
 	width: 100px;
@@ -55,7 +48,6 @@ main.post table tfoot td {
 	width: 100%;
 	text-align: center;
 	padding: 4px 0;
-	/*border: 1px solid #aaa;*/
 }
 
 
