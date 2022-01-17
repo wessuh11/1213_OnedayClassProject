@@ -1,0 +1,367 @@
+@charset "UTF-8";
+@import url(style_Reset.css);
+
+/* header#header 시작 */
+header#header {
+    width: 50%;
+    margin: 20px auto;
+    justify-content: space-between;
+    align-items: center;
+} 
+
+#header #headerRight ul>li:nth-child(2n) {
+    width: 2px;
+    height: 20px;
+    background-color: #555;
+    margin: 0 20px;
+    transform: translateY(1px);
+}
+
+#header #headerRight #headerCart {
+    position: relative;
+}
+
+#header #headerRight #headerCart img {
+    position: absolute;
+    right: -7px;
+    top: -5px;
+}
+/* header#header 끝 */
+
+/* nav#gnb 시작 */
+nav#gnb {
+    width: 60%;
+    margin: 0 auto;
+}
+
+nav#gnb ul {
+    width: 1000px;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+nav#gnb ul li {
+    padding: 40px;
+    display: inline-block;
+}
+
+nav#gnb ul li.active  {
+    border-bottom: 3px solid #000;
+}
+
+nav#gnb ul li:hover a {
+    border-bottom: 1px solid #000;
+}
+/* nav#gnb 끝 */
+
+/* div#slide 시작 */
+
+div#slide {    /* 이미지 1개의 크기를 적용 */
+    width: 780px;
+    height: 350px;
+    margin: 20px auto;
+    overflow: hidden; 
+         /* 부모요소 영역보다 더 큰 자식요소의 
+         범람한 외부영역을 숨겨줌*/
+
+
+    /* 슬라이드쇼 방향키의 위치기준을 
+    적용하기 위한 포지션 */
+    position: relative;   
+
+
+}
+
+div#shuttleFrame {    /* 이미지 전체의 폭 */
+    width: 2360px;
+    height: 350px;
+}
+
+#slide a {
+    position: relative;
+}
+
+#slide a span {
+    color: #000;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    border: 4px solid #aaa;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 슬라이드쇼 방향키 시작 */
+div.arrowMark {
+    color: rgba(221, 221, 221, 0.61);
+    font-size: 60px;
+    margin: 0 30px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    user-select: none;
+}
+div.arrowMark:hover {
+    color: #e1e1e1;
+    cursor: pointer;
+}
+div.arrowMark:active {    
+    color: #f9f9f9;
+}
+div#arrowRight {
+    right: 0;
+}
+/* 슬라이드쇼 방향키 끝 */
+
+/* div#slide 끝 */
+
+/*#########################################################*/
+/*################### div#Gallerybbs 시작 giltaehyoung#################*/
+/*#########################################################*/
+
+/*############### 온라인css 시작 ################*/
+
+div#Gallerybbs{
+    width: 1000px;
+    /* height: 1000px; */
+    /* border: 1px solid #000; */
+    margin: 0 auto;
+}
+
+/* 카테고리 시작*/
+div#category{
+    width: 100%;
+    height: 80px;
+    /* border: 1px solid #000; */
+    margin: 10px;
+    /* border: 1px solid #000; */
+}
+
+/* 카데고리 gnb 시작 */
+div#category {
+    width: 1000px;
+    margin: 0 auto;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+
+div#category ul {
+    justify-content: center;
+    align-items: center;
+}
+
+div#category ul li {
+    padding: 30px;
+    display: inline-block;
+}
+
+div#category ul li:hover a {
+    border-bottom: 1px solid #000;
+}
+/* 카데고리 gnb 끝 */
+
+/* 추천리스트 시작 */
+div#goodsPart {
+    width: 1000px;
+    padding: 20px;
+    justify-content: space-between;
+    /* border: 1px solid #000; */
+}
+
+/* 추천리스트 종료 */
+
+/* 게시판 리스트(추천) 시작*/
+#Gallerybbs div#recommend{
+    width: 1000px;
+    height: 200px;
+}
+
+#Gallerybbs  main#galleryListArea3 {
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    margin-bottom: 0px;
+    border-bottom: 1px dotted #000;
+}
+
+/* table.goodsTbl 상품 출력용 테이블 시작 */
+#Gallerybbs  main#galleryListArea3>table {
+    text-align: center;
+    /* border: 1px solid #000; */
+    flex: 1;
+}
+
+#Gallerybbs  main#galleryListArea3>table td {
+    color: #5f4a38;
+    padding: 3px 0;
+}
+
+#Gallerybbs  #galleryListArea3>table td.goodsDesc3 {
+    /* 상품설명 */  
+    color: rgba(95, 74, 56, 0.68);  
+    font-size: 12px;
+}
+
+/* table.goodsTbl 상품 출력용 테이블 끝 */
+/* 게시판 리스트(추천) 종료*/
+
+/* 일반리스트 시작 */
+div#allclass{
+    width: 1000px;
+    text-align: center;
+    /* font-size: 17px; */
+    font-weight: bold;
+    padding: 20px;
+    justify-content: space-between;
+    border-bottom: 1px dotted #000;
+    /* border: 1px solid #000; */
+}
+
+#allclass select {
+    font-size: 20px;
+}
+
+div#BasicList{
+width: 1000px;
+height: 600px;
+/* border: 1px solid #000; */
+}
+/* 일반리스트 종료 */
+
+/* 게시판 리스트(일반) 시작*/
+#Gallerybbs div#recommend{
+    width: 1000px;
+    height: 200px;
+    /* border: 1px solid #000; */
+}
+
+#Gallerybbs  main#galleryListArea4 {
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+/* table.goodsTbl 상품 출력용 테이블 시작 */
+#Gallerybbs  main#galleryListArea4>table {
+    text-align: center;
+    /* border: 1px solid #000; */
+    flex: 1;
+}
+
+#Gallerybbs  main#galleryListArea4>table td {
+    color: #5f4a38;
+    padding: 3px 0;
+}
+
+
+#Gallerybbs  #galleryListArea4>table td.goodsDesc4 {
+    /* 상품설명 */  
+    color: rgba(95, 74, 56, 0.68);  
+    font-size: 12px;
+}
+
+/* table.goodsTbl 상품 출력용 테이블 끝 */
+/* 게시판 리스트(일반) 종료*/
+/*############### 온라인css 종료 ################*/
+
+/*############### 오프라인css 시작 ################*/
+
+
+/*#########################################################*/
+/*################### div#Gallerybbs 종료 giltaehyoung#################*/
+/*#########################################################*/
+
+
+
+/* footer#footer 시작 */
+footer#footer {
+    width: 1000px;
+    margin: 0 auto;
+    /* border: 1px solid #000; */
+}
+
+/* div#footerTop 시작 */
+#footerTop nav#footerLnbArea {
+    padding: 10px;
+    flex: 1;
+}
+
+#footerTop nav#footerLnbArea ul {
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+#footerTop nav#footerLnbArea li:nth-child(2n) {
+    width: 1px;
+    height: 16px;
+    background-color: #555;
+    margin: 0 14px;
+    transform: translateY(2px);
+}
+/* div#footerTop 끝 */
+
+/* div#footerBottom 시작 */
+#footerBottom nav#footerArea {
+    padding: 10px;
+    flex: 1;
+}
+
+#footerBottom nav#footerArea ul {
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+#footerBottom li:not(:last-of-type):after {
+	content: "";
+	display: inline-block;
+	width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 0 10px 0 15px;
+    vertical-align: middle;
+}
+
+/* div#footerBottom 끝 */
+/* footer#footer 끝 */
+
+/*///////////////// 리스트 List.jsp  페이징 시작 ////////////////////*/
+main.list td#pagingTd span {
+	width: 30px;
+	height: 30px;
+	font-weight: 12px;
+	text-align: center;
+	line-height: 30px;
+	
+	margin: 10px 2px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+
+
+main.list td#pagingTd span:hover {
+	color: #aaa;
+}
+
+main.list td#pagingTd span.nowPageNum {
+	font-size: 16px;
+	font-weight: bold;
+	background-color: rgba(136, 136, 136, 0.1);
+	cursor: default;
+}
+
+main.list td#pagingTd span.moveBlockArea {
+	width: 30px;
+	height: 30px;
+	font-size: 12px;
+	margin: 0 6px;
+	display: inline-block;
+}
+/*///////////////// 리스트 List.jsp  페이징 끝 ////////////////////*/

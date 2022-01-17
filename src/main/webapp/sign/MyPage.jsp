@@ -49,27 +49,49 @@ String str3 = "1";
             </ul>
         </div>
 
-
         <main id="main">
+        <%if (str1.equals(uLevel)) {%>
             <nav id="mainNav">
                 <ul id="mainMenu" class="flex-container">
                     <li id="mainLi1" class="mainLi">
-                        <a href="#">주문 내역</a>
+                        <a href="#">클래스 신청 내역</a>
                         <div id="subMenu1"  class="subContainer">
-                            <ul class="subMenu flex-container">
+                            <ul class="subMenu flex-container">           
                                 <li class="subMenuLi"><a href="#" id="onlineBtn">온라인</a></li>
-                                <li class="subMenuLi"><a href="#" id="offlineBtn">오프라인</a></li>
+                                <li class="subMenuLi"><a href="#" id="offlineBtn">오프라인</a></li>                            
                             </ul>
                         </div>
                     </li>
-                    <li class="mainLi">
-                        <a href="#" id="deliveryChkBtn">배송 조회</a>
+         <% } else if(str2.equals(uLevel)){ %>
+             <nav id="mainNav">
+                <ul id="mainMenu" class="flex-container">
+                    <li id="mainLi1" class="mainLi">
+                        <a href="#">클래스관리</a>
+                        <div id="subMenu1"  class="subContainer">
+                            <ul class="subMenu flex-container">           
+                                <li class="subMenuLi"><a href="/Proj_OnedayClass/classBBS/ClassPost.jsp" id="onlineBtn">클래스 등록</a></li>
+                                <li class="subMenuLi"><a href="/Proj_OnedayClass/classBBS/ClassList.jsp" id="offlineBtn">클래스 관리</a></li>                            
+                            </ul>
+                        </div>
                     </li>
+                    <% } else {%>
+                <nav id="mainNav">
+                <ul id="mainMenu" class="flex-container">
+                    <li id="mainLi1" class="mainLi">
+                        <a href="#">클래스 신청 내역</a>
+                        <div id="subMenu1"  class="subContainer">
+                            <ul class="subMenu flex-container">           
+                                <li class="subMenuLi"><a href="#" id="onlineBtn">온라인</a></li>
+                                <li class="subMenuLi"><a href="#" id="offlineBtn">오프라인</a></li>                            
+                            </ul>
+                        </div>
+                    </li>
+                     <% }%>
                     <li id="mainLi2" class="mainLi">                     
                         <a href="#">내 정보 관리</a>
                         <div id="subMenu2" class="subContainer">
                             <ul class="subMenu flex-container">
-                     <%if (str3.equals(uLevel)) {%>
+                    <%if (str3.equals(uLevel)) {%>
                                 <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Mod.jsp" id="memModBtn">회원 정보 수정</a></li>
                                 <li class="subMenuLi"><a href="/Proj_OnedayClass/levelUp/LvlUpPost.jsp" id="">등업 신청</a></li>
                                 <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Del.jsp" id="memDrop">회원 탈퇴</a></li>
@@ -83,18 +105,18 @@ String str3 = "1";
                 </ul>
             </nav>
 
-            <div id="detailedContent">
+            <div>
             	
 				<table id="bbsTbl">
 					<thead>
-						<tr>
+						<!-- <tr>
 							<th><span id="title1">강의 종류</span></th>
 							<th><span id="title2">클래스 이름</span></th>
 							<th><span id="title3">비용</span></th>
 							<th><span id="title4">배달비</span></th>
 							<th><span id="title5">신청인원</span></th>
 							<th><span id="title6">결제일</span></th>
-						</tr>
+						</tr> -->
 					</thead>
 					<tbody id="bbsContent">
 						<tr>

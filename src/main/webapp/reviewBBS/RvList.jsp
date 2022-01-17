@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import="pack_BBS.BoardBean, java.util.Vector" %>
-<jsp:useBean id="bMgr" class="pack_BBS.BoardMgr"  scope="page" />
-
+<%@ page import="pack_reviewBBS.RvBoardBean, java.util.Vector" %>
+<jsp:useBean id="bMgr" class="pack_reviewBBS.RvBoardMgr"  scope="page" />
 <%
 request.setCharacterEncoding("UTF-8");
+String uId = (String)session.getAttribute("idKey");
+String uName = (String)session.getAttribute("nameKey");
+String uLevel = (String)session.getAttribute("levelKey");
 
 
 ///////////////////////페이징 관련 속성 값 시작///////////////////////////
@@ -19,7 +21,7 @@ int totalBlock = 0;          // 전체 블록수
  /*
 totalRecord=> 200     전체레코드
 numPerPage => 10
-pagePerBlock => 5
+pagePerBlock => 5 
 totalPage => 20
 totalBlock => 4  (20/5 => 4)
 */
@@ -72,88 +74,36 @@ totalBlock = (int)Math.ceil((double)totalPage/pagePerBlock);
 
 ///////////////////////페이징 관련 속성 값 끝///////////////////////////
 
-Vector<BoardBean> vList = null;
+Vector<RvBoardBean> vList = null;
 
-String uId = (String)session.getAttribute("idKey");
-String uName = (String)session.getAttribute("nameKey");
-String uLevel = (String)session.getAttribute("levelKey");
+
 %>    
+    
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-    <link rel="stylesheet" href="/Proj_OnedayClass/style/bbs.css">
+	<title>OneDayClass</title>
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/reviewBBS.css">
 </head>
 <body>
+
+	 <% if (uId == null) {      %>
+	 <script>
+       	alert("로그인 후 사용 가능합니다."); 
+		location.href="/Proj_OnedayClass/sign/Login.jsp"; 	
+	</script>
+	
+       <% } else { // 현재 로그인 상태라면 %> 
 	<div id="wrap">
-		  <% if (uId != null) {   // 현재 로그인 상태라면  %>
-        <header id="header" class="flex-container">
-            <div id="headerLogo">
-                <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" width="45%" height="45%" alt="로고"></a>
-            </div>
-
-            <div id="headerRight">
-                <ul class="flex-container">
-                    <li><a href="/Proj_OnedayClass/sign/Member_Mod.jsp"><%=uName %> / 등급 : <%=uLevel %></a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-                    <li></li>
-                    <li>
-                        <div id="headerCart">
-                            <a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </header>
-	<% } else { %>
-        <header id="header" class="flex-container">
-            <div id="headerLogo">
-                <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" width="45%" height="45%" alt="로고"></a>
-            </div>
-
-            <div id="headerRight">
-                <ul class="flex-container">
-                    <li><a href="/Proj_OnedayClass/sign/Login.jsp">Sign In</a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/sign/Member.jsp">Sign Up</a></li>
-                    <li></li>
-                    <li>
-                        <div id="headerCart">
-                            <a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </header>
-        <%} %>
-        <nav id="gnb">
-            <ul class="flex-container">
-                <li><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
-                <li><a href="./about.html">About</a></li>
-                <li><a href="#">Online</a></li>
-                <li><a href="#">Offline</a></li>
-                  <li class="active">
-                <% if (uId == null) { %> 
-					<a href="/Proj_OnedayClass/sign/Login.jsp" onclick="alert('로그인이 필요합니다.');">QnA</a>
-				<%  } else { %> 
-					<a href="/Proj_OnedayClass/bbs/List.jsp">QnA</a>
-				<% } %>
-                </li>
-            </ul>
-        </nav>
-		<!--  HTML 템플릿(Template, Templet)  헤더 시작 -->
-		<h1>List 페이지</h1>
-			
-		<!--  HTML 템플릿(Template, Templet)  헤더 끝 -->
+	
+	<%@include file="../include/Header.jsp"%>	
 		
+		<main id="main" class="list">   
 		
-		
-		<main id="main" class="list">   <!-- 본문영역 html 템플릿 시작 -->
-		
+		<h1>Review</h1>
 			<%
 				String prnType = "";
 				if (keyWord.equals("null") || keyWord.equals("")) {
@@ -164,20 +114,25 @@ String uLevel = (String)session.getAttribute("levelKey");
 			%>
 			
 			<div id="pageInfo" class="flex-container">
-				<span><%=prnType %> :  <%=totalRecord%> 개</span>
-				<span>페이지 :  <%=nowPage + " / " + totalPage%></span>  
-			</div>							
+				
+				 <span>
+		  		 <a href="/Proj_OnedayClass/reviewBBS/RvPost.jsp">글쓰기</a>
+		   		</span>
+			</div>	
+									
 			<table id="boardList">
 				<thead>
-					<tr>
-						<th>번호</th>
+					<tr height="50">
+						<th>번호</th>						
+						<th> </th>
 						<th>제목</th>
-						<th>아이디</th>
+						<th>작성자</th>
 						<th>날짜</th>
 						<th>조회수</th>
+						<th>추천수</th>
 					</tr>		
 					<tr>
-						<td colspan="5" class="spaceTd"></td>
+						<td colspan="7" class="spaceTd"></td>
 					</tr>		
 				</thead>
 				<tbody>
@@ -185,14 +140,14 @@ String uLevel = (String)session.getAttribute("levelKey");
 	
 			
 			<%
-			vList = bMgr.getBoardList(keyField, keyWord, start, end);  // DB에서 데이터 불러오기
+			vList = bMgr.getBoardList(keyField, keyWord, start, end, uId);  // DB에서 데이터 불러오기
 			listSize = vList.size();			
 			
 				if (vList.isEmpty()) {
 					// 데이터가 없을 경우 출력 시작
 				%> 
 					<tr>
-						<td colspan="5">
+						<td colspan="6">
 						<%="게시물이 없습니다." %>
 						</td>
 					</tr>				
@@ -208,26 +163,39 @@ String uLevel = (String)session.getAttribute("levelKey");
 						
 						if(i==listSize) break;
 						
-						BoardBean bean = vList.get(i);
+						RvBoardBean bean = vList.get(i);
 						
-						int num = bean.getNum();
-						String uIdb = bean.getuIdb();
-						String qna_title = bean.getQna_title();
-						String regDate = bean.getRegDate();
-						int depth = bean.getDepth();
-						int count = bean.getCount();
+						String rUid = bean.getrUid();
+						String rTitle = bean.getrTitle();
+						int rNum = bean.getrNum();
+						String rRegDate = bean.getrRegDate();
+						String rFileName = bean.getrFileName();
+						int rCnt = bean.getrCnt();
+						int rLikes = bean.getrLikes();
+						int rStatus = bean.getrStatus();
 				%>
-					<tr class="prnTr" onclick="read('<%=num%>', '<%=nowPage%>')">
+					<tr height="60" class="prnTr" onclick="read('<%=rNum%>', '<%=nowPage%>')">
 					<%
 					//int prnNum = totalRecord - ((nowPage-1) * numPerPage) - i; 
 					// num와 prnNum는 전혀 관계없음
 					%>
-						<td><%=num %></td>  <!--  Qna_num로 변경필! -->
-						<td class="subjectTd"><%=qna_title %></a>
-						</td>
-						<td><%=uIdb %></td>
-						<td><%=regDate %></td>
-						<td><%=count %></td>
+						
+						<td><%=rNum %></td>
+						<%
+						if(rFileName==null){
+							%>
+							<td></td>
+							<%
+						}else
+						{
+							%>
+							<td><img src='../fileUpload/<%=rFileName %>' width="70" height="40"/></td>
+						<%} %>
+						<td><%=rTitle %></td>						
+						<td><%=rUid %></td>
+						<td><%=rRegDate %></td>
+						<td><%=rCnt %></td>
+						<td><%=rLikes %></td>
 					</tr>
 				<%
 					}	// end for
@@ -237,7 +205,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 					
 					<tr>
 					<!-- 페이징 시작 -->
-						<td colspan="2" id="pagingTd">
+						<td colspan="2" id="pagingTd" >
 				<%
 				int pageStart = (nowBlock - 1 ) * pagePerBlock + 1;
 							// 26개 자료기준
@@ -315,22 +283,21 @@ String uLevel = (String)session.getAttribute("levelKey");
 						
 						</td>
 						
-						<td colspan="3">
+					<%-- 	 <td colspan="3">
 						
-							<form name="searchFrm" class="flex-container"
+					 	<form name="searchFrm" class="flex-container"
 									id="searchFrm">
 							
 								<div>
 									<select name="keyField" id="keyField">
-										<option value="Qna_title" 
-												<% if(keyField.equals("Qna_title")) out.print("selected"); %>>제  목</option>
-										<option value="uIdb" 
-												<% if(keyField.equals("uIdb")) out.print("selected"); %>>아이디</option>
-										<option value="Qna_content" 
-												<% if(keyField.equals("Qna_content")) out.print("selected"); %>>내  용</option>
+										<option value="rTitle" 
+												<% if(keyField.equals("rTitle")) out.print("selected"); %>>제  목</option>
+										<option value="uName" 
+												<% if(keyField.equals("rUid")) out.print("selected"); %>>작성자</option>
+										<option value="qna_content" 
+												<% if(keyField.equals("rContent")) out.print("selected"); %>>내  용</option>
 									</select>
 								</div>
-								
 								<div>
 									<input type="text" name="keyWord" id="keyWord"
 									  id="keyWord" size="20" maxlength="30" value="<%=keyWord%>">
@@ -346,57 +313,26 @@ String uLevel = (String)session.getAttribute("levelKey");
 							<input type="hidden" id="pKeyWord" value="<%=keyWord%>">
 							<!-- 검색결과 유지용 매개변수 데이터끝 -->
 						
-						</td>
+						</td> 
+						--%>
 					</tr>
-					<tr>
-						<td colspan="5" class="butcs">						
-							<a href="/Proj_OnedayClass/bbs/Post.jsp">글쓰기</a>
-						</td>						
-					</tr>
+					
 					
 				</tbody>
 			</table>
 		
 		
 		
-		</main>  <!-- 본문영역 html 템플릿 끝 -->
-		<footer id="footer">
+		</main>  
 
-            <div id="footerTop" class="flex-container">
-                <nav id="footerLnbArea">
-                    <ul id="footermainMenu" class="flex-container">
-                        <li class="footerMainLi"><a href="#">서비스이용약관</a></li>
-                        <li class="footerMainLi"></li>
-                        <li class="footerMainLi"><a href="#">개인정보처리방침</a></li>
-                        <li class="footerMainLi"></li>
-                        <li class="footerMainLi"><a href="#">이메일무단수집거부</a></li>
-                        <li class="footerMainLi"></li>
-                        <li class="footerMainLi"><a href="#">인터넷증명발급</a></li>
-                    </ul>
-                </nav>
-                <!-- nav#footerLnbArea -->
-            </div>
-            <!-- div#footerTop 회사 관련 정보 영역 -->
+  	 <%@include file="../include/Footer.jsp"%>	
+	</div>       	
+	
+	<% } %>
 
-            <div id="footerBottom" class="flex-container">
-                <nav id="footerArea">
-                    <ul id="footerBtm" class="flex-container">
-                        <li class="footerBtmLi"><a href="#">주소</a></li>
-                        <li class="footerBtmLi"><a href="#">대표</a></li>
-                        <li class="footerBtmLi"><a href="#">사업자번호</a></li>
-                        <li class="footerBtmLi"><a href="#">전화번호</a></li>
-                    </ul>
-                </nav>
-                <!-- nav#footerArea -->
-            </div>
-
-        </footer>
-
-	</div>
 	<!-- div#wrap -->
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="/Proj_OnedayClass/script/script.js"></script>
-	<script src="/Proj_OnedayClass/script/bbs.js"></script>   
+	<script src="/Proj_OnedayClass/script/reviewBBS.js"></script>      
 </body>
 </html>

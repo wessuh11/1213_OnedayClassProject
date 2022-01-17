@@ -52,13 +52,13 @@ String str1 = "3";
 			<div id="adManu">
 				<ul>
 					<li><a href="/Proj_OnedayClass/levelUp/LvlUpList.jsp">등업 관리</a></li>
-					<li><a href="#">클래스 관리</a></li>
+					<li><a href="/Proj_OnedayClass/classBBS/ClassList.jsp">클래스 관리</a></li>
 					<li id="adMainLi" class="mainAdMenu" >
 						<a href="#">게시판 관리</a>
 					 	<div id="subAdMenu" class="subContainer">
                             <ul class="subAdMenu2 flex-container">
-                                <li class="subAdMenuLi"><a href="#" id="">문의 게시판</a></li>
-                                <li class="subAdMenuLi"><a href="#" id="">리뷰 게시판</a></li>
+                                <li class="subAdMenuLi"><a href="/Proj_OnedayClass/adminBBS/AdminQnaList.jsp" id="">문의 게시판</a></li>
+                                <li class="subAdMenuLi"><a href="/Proj_OnedayClass/adminBBS/AdminRvList.jsp" id="">리뷰 게시판</a></li>
                             </ul>
                         </div>
 					</li>
