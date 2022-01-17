@@ -330,3 +330,38 @@ footer#footer {
 
 /* div#footerBottom 끝 */
 /* footer#footer 끝 */
+
+/*///////////////// 리스트 List.jsp  페이징 시작 ////////////////////*/
+main.list td#pagingTd span {
+	width: 30px;
+	height: 30px;
+	font-weight: 12px;
+	text-align: center;
+	line-height: 30px;
+	
+	margin: 10px 2px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+
+
+main.list td#pagingTd span:hover {
+	color: #aaa;
+}
+
+main.list td#pagingTd span.nowPageNum {
+	font-size: 16px;
+	font-weight: bold;
+	background-color: rgba(136, 136, 136, 0.1);
+	cursor: default;
+}
+
+main.list td#pagingTd span.moveBlockArea {
+	width: 30px;
+	height: 30px;
+	font-size: 12px;
+	margin: 0 6px;
+	display: inline-block;
+}
+/*///////////////// 리스트 List.jsp  페이징 끝 ////////////////////*/

@@ -1,4 +1,3 @@
-<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="pack_ClassBbs.ClassBean, java.util.Vector"%>
@@ -53,10 +52,12 @@ String cCategory7 = "7";
 
 String cCategorySel = ""; // DB의 카테고리
 
+/*
 if (request.getParameter("cCategory") != null) {
 	cCategorySel = request.getParameter("cCategory");
 	//카테고리 선택값이 없다면 전체 페이지 출력?
 }
+*/
 
 if (request.getParameter("nowPage") != null) {
 	nowPage = Integer.parseInt(request.getParameter("nowPage"));
@@ -64,6 +65,11 @@ if (request.getParameter("nowPage") != null) {
 	end = numPerPage;
 	//카테고리 선택값이 있다면 해당 카테고리에 대한 게시물만 출력
 }
+
+totalPage = (int) Math.ceil((double) totalRecord / numPerPage);
+nowBlock = (int) Math.ceil((double) nowPage / pagePerBlock);
+totalBlock = (int) Math.ceil((double) totalPage / pagePerBlock);
+
 
 Vector<ClassBean> vList = null;
 %>
@@ -79,73 +85,7 @@ Vector<ClassBean> vList = null;
 </head>
 <body>
 	<div id="wrap">
-		<header id="header" class="flex-container">
-			<div id="headerLogo">
-				<a href="/Proj_OnedayClass/Index.jsp"><img
-					src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
-			</div>
-			<!-- div#headerLogo -->
-
-			<div id="headerRight">
-				<ul class="flex-container">
-					<%
-					if (uId != null && str1.equals(uLevel)) { //관리자 로그인
-					%>
-					<li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName%>
-							관리자님 안녕하세요.</a></li>
-					<li></li>
-					<li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-					<li></li>
-					<li><a href="/Proj_OnedayClass/classbbs/ClassList.jsp">게시판
-							관리</a></li>
-					<%
-					} else if (uId != null && str2.equals(uLevel)) {
-					%>
-					<li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName%>
-							선생님 환영합니다.</a></li>
-					<li></li>
-					<li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-					<li></li>
-					<li><a href="/Proj_OnedayClass/classbbs/ClassPost.jsp">클래스
-							생성</a></li>
-					<li></li>
-					<li><a href="/Proj_OnedayClass/classbbs/ClassList.jsp">클래스
-							관리</a></li>
-					<%
-					} else if (uId != null) {
-					%>
-					<li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName%>
-							<%=uLevel%>님 환영합니다.</a></li>
-					<li></li>
-					<li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-					<li></li>
-					<li>
-						<div id="headerCart">
-							<a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
-						</div>
-					</li>
-					<%
-					} else {
-					%>
-					<li><a href="/Proj_OnedayClass/sign/Login.jsp">Sign In</a></li>
-					<li></li>
-					<li><a href="/Proj_OnedayClass/sign/Member.jsp">Sign Up</a></li>
-					<li></li>
-					<li>
-						<div id="headerCart">
-							<a href="#"><img src="/Proj_OnedayClass/img/cart.png" alt="">
-								<span>0</span></a>
-						</div>
-					</li>
-					<%
-					}
-					%>
-				</ul>
-			</div>
-			<!-- div#headerRight -->
-		</header>
-		<!-- header#header -->
-
+		<%@include file="../include/Header.jsp"%>
 		<nav id="gnb">
 			<ul class="flex-container">
 				<li><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
@@ -155,53 +95,52 @@ Vector<ClassBean> vList = null;
 				<li><a href="/Proj_OnedayClass/classbbs/ClassOffList.jsp">Offline</a></li>
 			</ul>
 		</nav>
-
+		
 		<!-- 카테고리 시작-->
 		<div id="category">
-			<ul id="tagList" class="devUITagList">
+			<ul id="tagList" class="cCategorySel">
 				<li class="devTagList" value="1"
-					<%if (cCategorySel.equals("1"))
-	out.print("selected");%>>핸드메이드</li>
+					<%if (cCategorySel.equals("1"))out.print("selected");%>>핸드메이드</li>
 				<!-- 1번 카테고리 전체출력.. -->
 				<li class="devTagList" value="2"
-					<%if (cCategorySel.equals("2"))
-	out.print("selected");%>>쿠킹</li>
+					<%if (cCategorySel.equals("2"))out.print("selected");%>>쿠킹</li>
 				<!-- 2번 카테고리 전체출력.. -->
 				<li class="devTagList" value="3"
-					<%if (cCategorySel.equals("3"))
-	out.print("selected");%>>드로잉</li>
+					<%if (cCategorySel.equals("3"))out.print("selected");%>>드로잉</li>
 				<!-- 3번 카테고리 전체출력.. -->
 				<li class="devTagList" value="4"
-					<%if (cCategorySel.equals("4"))
-	out.print("selected");%>>음악</li>
+					<%if (cCategorySel.equals("4"))out.print("selected");%>>음악</li>
+				<!-- 4번 카테고리 전체출력.. -->
 				<li class="devTagList" value="5"
-					<%if (cCategorySel.equals("5"))
-	out.print("selected");%>>요가·필라테스</li>
+					<%if (cCategorySel.equals("5"))out.print("selected");%>>요가·필라테스</li>
+				<!-- 5번 카테고리 전체출력.. -->
 				<li class="devTagList" value="6"
-					<%if (cCategorySel.equals("6"))
-	out.print("selected");%>>레져·스포츠</li>
+					<%if (cCategorySel.equals("6"))out.print("selected");%>>레져·스포츠</li>
+				<!-- 6번 카테고리 전체출력.. -->
 				<li class="devTagList" value="7"
-					<%if (cCategorySel.equals("7"))
-	out.print("selected");%>>반려동물</li>
+					<%if (cCategorySel.equals("7"))out.print("selected");%>>반려동물</li>
+				<!-- 7번 카테고리 전체출력.. -->
 				<li class="devTagList" value="8"
-					<%if (cCategorySel.equals("8"))
-	out.print("selected");%>>자기계발</li>
+					<%if (cCategorySel.equals("8"))out.print("selected");%>>자기계발</li>
+				<!-- 8번 카테고리 전체출력.. -->
 			</ul>
+			
+			<input type="hidden" id="pKeyField" value="<%=cCategorySel%>">
 		</div>
 		<!-- div#category -->
 		<!-- 카테고리 종료-->
 
 		<!-- 온라인 게시판 시작 -->
 		<div id="Gallerybbs">
-
+			
 			<!-- 추천리스트 갤러리 시작 -->
-			<div id="goodsPart">
-				<h2>★ 온라인 추천 클래스 ★</h2>
+			<div id="goodsPart" class="flex-container">
+				<h2>★ 오늘의 원데이 추천 클래스 ★</h2>
 				<span>HOME | Online</span>
 			</div>
 			<!-- div#goodsPart 끝 -->
 
-			<!-- main#galleryListArea 시작 -->
+			<!-- main#galleryListArea 추천 게시물 시작 -->
 			<main id="galleryListArea">
 				<table id="goodsTbl">
 					<%
@@ -221,10 +160,11 @@ Vector<ClassBean> vList = null;
 
 						for (int i = 0; i < listSize; i++) {
 							ClassBean bean = vList.get(i);
-
+							
 							int cNum = bean.getcNum();
 							//게시글 넘버
 							String cThumbName = bean.getcThumbName();
+							//게시글 썸네일
 							String cCategory = bean.getcCategory();
 							//카테고리
 							String cTitle = bean.getcTitle();
@@ -233,13 +173,15 @@ Vector<ClassBean> vList = null;
 							//글 속성, 공개 비공개 여부
 							String cOnoff = bean.getcOnoff();
 							//클래스 on(N), off(Y) 여부
-
+							int cLikes = bean.getcLikes();
+							//좋아요
+							
 							if (cStatus == 2 && on.equals(cOnoff)) {
 								//if (cStatus == 2 && off.equals(cOnoff)) {
 						%>
 						<tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
 							<td><a href="#"> <img
-									src="/Proj_OnedayClass/fileupload/classfileupload/thumbnail/<%=cThumbName%>"
+									src="/Proj_OnedayClass/fileupload/classfileupload/<%=cThumbName%>"
 									alt='이미지' width='310'></a></td>
 							<!-- 상품이미지 -->
 							<td class='goodsName'>
@@ -275,6 +217,7 @@ Vector<ClassBean> vList = null;
 					</tbody>
 				</table>
 				<!-- table.goodsTbl 상품출력용 테이블 -->
+				
 			</main>
 			<!-- main#galleryListArea 끝-->
 			<!-- 추천리스트 갤러리 끝 -->
@@ -282,23 +225,19 @@ Vector<ClassBean> vList = null;
 			<!-- 일반리스트 갤러리 시작 -->
 			<!-- 최신순, 리뷰순 -->
 			<div id="allclass" class="flex-container">
-				<h2>★ 온라인 클래스 ★</h2>
-				<select>
-					<option>최신순</option>
-					<option>인기순</option>
-				</select>
+				<h3>★ 온라인 클래스 ★</h3>
 			</div>
 			<!-- div#allclass 최신순, 리뷰순 끝-->
 
 			<div id="BasicList">
 				<!-- main#galleryListArea 시작 -->
-				<main id="galleryListArea2" class="flex-container">
+				<main id="galleryListArea2">
 					<table class='goodsTbl2'>
 						<%
-						vList = bMgr.getBoardList(cCategorySel, start, end);
+						vList = bMgr.getBoardList2(cCategorySel, start, end);
 						listSize = vList.size();
 						%>
-						<tbody class="flex-container">
+						<tbody>
 							<%
 							if (vList.isEmpty()) {
 							%>
@@ -307,7 +246,8 @@ Vector<ClassBean> vList = null;
 							</tr>
 							<%
 							} else {
-
+							%>
+							<%
 							for (int i = 0; i < listSize; i += 3) {
 							%>
 							<tr>
@@ -331,10 +271,11 @@ Vector<ClassBean> vList = null;
 									if (cStatus == 2 && on.equals(cOnoff)) {
 										//if (cStatus == 2 && off.equals(cOnoff)) {
 								%>
-								<td class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
+								<td onclick="read('<%=cNum%>', '<%=nowPage%>')">
+									<!-- 1 -->
 									<div>
 										<a href="#"> <img
-											src="/Proj_OnedayClass/fileupload/classfileupload/thumbnail/<%=cThumbName%>"
+											src="/Proj_OnedayClass/fileupload/classfileupload/<%=cThumbName%>"
 											alt='이미지' width='310'>
 										</a>
 									</div>
@@ -369,8 +310,6 @@ Vector<ClassBean> vList = null;
 								<%
 								}
 								%>
-							</tr>
-
 							<%
 							if ((i + j) == (listSize - 1)) {
 								i += j;
@@ -378,10 +317,15 @@ Vector<ClassBean> vList = null;
 								break;
 							}
 							}
+							%>
+							</tr>
+							<%
 							}
 							}
 							%>
+
 						</tbody>
+					
 					</table>
 					<!-- table.goodsTbl 상품출력용 테이블 -->
 
@@ -393,43 +337,11 @@ Vector<ClassBean> vList = null;
 		<!-- div#BasicList -->
 		<!-- 일반리스트 갤러리 종료 -->
 
-		<!-- 푸터영역 -->
-		<footer id="footer">
-
-			<div id="footerTop" class="flex-container">
-				<nav id="footerLnbArea">
-					<ul id="footermainMenu" class="flex-container">
-						<li class="footerMainLi"><a href="#">서비스이용약관</a></li>
-						<li class="footerMainLi"></li>
-						<li class="footerMainLi"><a href="#">개인정보처리방침</a></li>
-						<li class="footerMainLi"></li>
-						<li class="footerMainLi"><a href="#">이메일무단수집거부</a></li>
-						<li class="footerMainLi"></li>
-						<li class="footerMainLi"><a href="#">인터넷증명발급</a></li>
-					</ul>
-				</nav>
-				<!-- nav#footerLnbArea -->
-			</div>
-			<!-- div#footerTop 회사 관련 정보 영역 -->
-
-			<div id="footerBottom" class="flex-container">
-				<nav id="footerArea">
-					<ul id="footerBtm" class="flex-container">
-						<li class="footerBtmLi"><a href="#">주소</a></li>
-						<li class="footerBtmLi"><a href="#">대표</a></li>
-						<li class="footerBtmLi"><a href="#">사업자번호</a></li>
-						<li class="footerBtmLi"><a href="#">전화번호</a></li>
-					</ul>
-				</nav>
-				<!-- nav#footerArea -->
-			</div>
-
-		</footer>
-		<!-- footer#footer -->
+		<%@include file="../include/Footer.jsp"%>
 	</div>
 
 	<script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
-	<script src="/Proj_OnedayClass/script/classbbs.js"></script>
+	<!-- <script src="/Proj_OnedayClass/script/classbbs.js"></script>  -->
 	<!-- <script src="/Proj_OnedayClass/script/onoffshop.js"></script>-->
 </body>
 </html>

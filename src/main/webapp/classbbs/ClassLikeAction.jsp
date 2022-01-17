@@ -25,7 +25,6 @@ int cNum = Integer.parseInt(request.getParameter("cNum"));
 LikeBean.setuId(uId);
 LikeBean.setcNum(cNum);
 int result = bMgr.UpdateLike(LikeBean);
-System.out.print(uId);
 if(result == 0){
 %>
 		<script>

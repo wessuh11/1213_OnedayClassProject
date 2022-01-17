@@ -173,34 +173,33 @@ div#goodsPart {
     width: 1000px;
     padding: 20px;
     justify-content: space-between;
-    /* border: 1px solid #000; */
 }
+
+
 
 /* 추천리스트 종료 */
 
 /* 게시판 리스트(추천) 시작*/
 #Gallerybbs div#recommend{
     width: 1000px;
-    height: 200px;
 }
 
 #Gallerybbs  main#galleryListArea {
     margin-bottom: 40px;
     flex-wrap: wrap;
     margin-bottom: 0px;
-    border-bottom: 1px dotted #000;
 }
 
 /* table.goodsTbl 상품 출력용 테이블 시작 */
 #Gallerybbs  main#galleryListArea>table {
+	width: 500px;
     text-align: center;
-    /* border: 1px solid #000; */
     flex: 1;
+    border: 1px solid #000;
 }
 
 #Gallerybbs  main#galleryListArea>table td {
     color: #5f4a38;
-    padding: 3px 0;
     padding: 0px 0px 0px 20px
 }
 
@@ -234,34 +233,28 @@ div#allclass{
 }
 
 div#BasicList{
-width: 1000px;
-height: 600px;
-/* border: 1px solid #000; */
+width: 100%;
 }
 /* 일반리스트 종료 */
 
 /* 게시판 리스트(일반) 시작*/
-#Gallerybbs div#recommend{
-    width: 1000px;
-    height: 200px;
-    /* border: 1px solid #000; */
-}
 
 #Gallerybbs  main#galleryListArea2 {
+	width: 100%;
     margin-bottom: 40px;
     flex-wrap: wrap;
+    border: 1px solid #000;
 }
 
 /* table.goodsTbl 상품 출력용 테이블 시작 */
-#Gallerybbs  main#galleryListArea2>table {
+#Gallerybbs  main#galleryListArea2>table.goodsTbl2 {
     text-align: center;
-    /* border: 1px solid #000; */
-    flex: 1;
 }
 
 #Gallerybbs  main#galleryListArea2>table td {
     color: #5f4a38;
-    padding: 3px 0;
+    padding: 0px 0px 0px 16px
+    
 }
 
 
@@ -270,6 +263,7 @@ height: 600px;
     color: rgba(95, 74, 56, 0.68);  
     font-size: 12px;
 }
+
 
 /* table.goodsTbl 상품 출력용 테이블 끝 */
 /* 게시판 리스트(일반) 종료*/

@@ -48,68 +48,7 @@ String cCategory7 = "7";
 </head>
 <body>
 	<div id="wrap">
-		<header id="header" class="flex-container">
-			<div id="headerLogo">
-				<a href="/Proj_OnedayClass/Index.jsp"><img
-					src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
-			</div>
-			<!-- div#headerLogo -->
-
-			<%
-			if (uId != null && (TeaNum.equals(uLevel))) {
-			%>
-			<div id="headerRight">
-				<ul class="flex-container">
-					<li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName%>
-							선생님 환영합니다.</a></li>
-					<li></li>
-					<li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-					<li></li>
-					<li><a href="/Proj_OnedayClass/classbbs/ClassPost.jsp">클래스
-							생성</a></li>
-					<li></li>
-					<li><a href="/Proj_OnedayClass/classbbs/ClassList.jsp">클래스
-							관리</a></li>
-				</ul>
-			</div>
-			<!-- div#headerRight -->
-			<%
-			} else if (AdminNum.equals(uLevel)) {
-			%>
-			<div id="headerRight">
-				<ul class="flex-container">
-					<li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName%>님 환영합니다</a></li>
-					<li></li>
-					<li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-					<li></li>
-					<li><a href="/Proj_OnedayClass/classbbs/ClassList.jsp">게시판관리</a></li>
-				</ul>
-			</div>
-			<!-- div#headerRight -->
-			<%
-			} else {
-			%>
-			<script>
-				alert("비정상적인 접속입니다.\n" + "메인페이지로 이동합니다.");
-				// 현재 메인페이지는 없기 때문에 로그인페이지로 이동
-				location.href = "../Index.jsp";
-			</script>
-
-			<%
-			}
-			%>
-		</header>
-		<!-- header#header -->
-
-		<nav id="gnb">
-			<ul class="flex-container">
-				<li><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
-				<li><a href="./about.html">About</a></li>
-				<li><a href="/Proj_OnedayClass/classbbs/ClassOnList.jsp">Online</a></li>
-				<li><a href="/Proj_OnedayClass/classbbs/ClassOffList.jsp">Offline</a></li>
-			</ul>
-		</nav>
-		<!-- nav#gnb -->
+	<%@include file="../include/Header.jsp"%>
 
 		<%
 		if (AdminNum.equals(uLevel)) {
@@ -268,45 +207,11 @@ String cCategory7 = "7";
 			</table>
 		</main>
 		<!-- Main -->
+		
+			<%@include file="../include/Footer.jsp"%>
+		</div>
 
-
-
-		<footer id="footer">
-			<div id="footerTop" class="flex-container">
-				<nav id="footerLnbArea">
-					<ul id="footermainMenu" class="flex-container">
-						<li class="footerMainLi"><a href="#">서비스이용약관</a></li>
-						<li class="footerMainLi"></li>
-						<li class="footerMainLi"><a href="#">개인정보처리방침</a></li>
-						<li class="footerMainLi"></li>
-						<li class="footerMainLi"><a href="#">이메일무단수집거부</a></li>
-						<li class="footerMainLi"></li>
-						<li class="footerMainLi"><a href="#">인터넷증명발급</a></li>
-					</ul>
-				</nav>
-				<!-- nav#footerLnbArea -->
-			</div>
-			<!-- div#footerTop 회사 관련 정보 영역 -->
-
-			<div id="footerBottom" class="flex-container">
-				<nav id="footerArea">
-					<ul id="footerBtm" class="flex-container">
-						<li class="footerBtmLi"><a href="#">주소</a></li>
-						<li class="footerBtmLi"><a href="#">대표</a></li>
-						<li class="footerBtmLi"><a href="#">사업자번호</a></li>
-						<li class="footerBtmLi"><a href="#">전화번호</a></li>
-					</ul>
-				</nav>
-				<!-- nav#footerArea -->
-			</div>
-			<!-- div#footerBottom -->
-
-		</footer>
-		<!-- footer#footer -->
-	</div>
-
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="/Proj_OnedayClass/script/classbbs.js"></script>
 </body>
 </html>

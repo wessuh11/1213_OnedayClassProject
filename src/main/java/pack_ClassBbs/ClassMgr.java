@@ -26,7 +26,8 @@ public class ClassMgr {
 
 	private DBConnectionMgr pool;
 
-	private static final String THUMSAVEFOLER = "D:/GTH/silsp/EZ_Project/Proj_OnedayClass/src/main/webapp/fileupload/classfileupload/thumbnail";
+	// private static final String THUMSAVEFOLER =
+	// "D:/GTH/silsp/EZ_Project/Proj_OnedayClass/src/main/webapp/fileupload/classfileupload/thumbnail";
 
 	private static String encType = "UTF-8";
 	private static int maxSize = 5 * 1024 * 1024;
@@ -59,6 +60,8 @@ public class ClassMgr {
 		// 상세정보 : 상세정보 페이지에 출력
 		int cFileSize = 0;
 		String cFileName = null;
+		String path = req.getServletContext().getRealPath("/src/main/webapp/fileUpload/classfileupload/");
+		path = UtilMgr.replace(path, ".metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\", "");
 
 		String cCode = UUID.randomUUID().toString();
 
@@ -66,13 +69,13 @@ public class ClassMgr {
 			objConn = pool.getConnection();
 
 			// 오브젝트 생성
-			File file = new File(THUMSAVEFOLER);
+			File file = new File(path);
 
 			// classfileupload 폴더에 파일이 없다면 생성하라.
 			if (!file.exists())
 				file.mkdirs();
 
-			multi = new MultipartRequest(req, THUMSAVEFOLER, // 저장소
+			multi = new MultipartRequest(req, path, // 저장소
 					maxSize, // 파일크기
 					encType, new DefaultFileRenamePolicy());
 
@@ -161,14 +164,13 @@ public class ClassMgr {
 
 			if (cCategorySel.equals("null") || cCategorySel.equals("")) {
 				// 카테고리 메뉴 선택 안했을시
-				sql = "select * from classbbs where cStatus<4 " + "order by cNum asc limit ?, ?";
+				sql = "select * from classbbs where cStatus<3 " + "order by cLikes desc limit ?, ?";
 				objPstmt = objConn.prepareStatement(sql);
 				objPstmt.setInt(1, start);
 				objPstmt.setInt(2, end);
 			} else {
 				// 카테고리 메뉴 클릭 시
-				sql = "select * from classbbs " + "where cCategory like ? AND cStatus<4 "
-						+ "order by cNum asc limit ?, ?";
+				sql = "select * from classbbs " + "where cCategory like ? AND cStatus<3 " + "order by cLikes desc ?, ?";
 				objPstmt = objConn.prepareStatement(sql);
 				objPstmt.setString(1, "%" + cCategorySel + "%");
 				objPstmt.setInt(2, start);
@@ -176,11 +178,62 @@ public class ClassMgr {
 			}
 			objRs = objPstmt.executeQuery();
 
-			/*
-			 * sql = "select * from classbbs order by cNum desc limit ?, ?"; objPstmt =
-			 * objConn.prepareStatement(sql); objPstmt.setInt(1, 0); objPstmt.setInt(2, 10);
-			 * objRs = objPstmt.executeQuery();
-			 */
+			objRs = objPstmt.executeQuery();
+
+			while (objRs.next()) {
+				ClassBean bean = new ClassBean();
+				bean.setcNum(objRs.getInt("cNum"));
+				bean.setcUid(objRs.getString("cUid"));
+				bean.setcTeacher(objRs.getString("cTeacher"));
+				bean.setcThumbName(objRs.getString("cThumbName"));
+				bean.setcCategory(objRs.getString("cCategory"));
+				bean.setcTitle(objRs.getString("cTitle"));
+				bean.setcRegDate(objRs.getString("cRegDate"));
+				bean.setcStatus(objRs.getInt("cStatus"));
+				bean.setcOnoff(objRs.getString("cOnoff"));
+				bean.setcLikes(objRs.getInt("cLikes"));
+				vList.add(bean);
+			}
+		} catch (Exception e) {
+			System.out.println("SQL이슈3 : " + e.getMessage());
+		} finally {
+			pool.freeConnection(objConn, objPstmt, objRs);
+		}
+
+		return vList;
+	}
+
+///////////////  게시판 리스트 출력(ClassList.jsp) 끝    ///////////////
+
+///////////////  게시판 리스트 출력(ClassRead.jsp) 시작    ///////////////
+	public Vector<ClassBean> getBoardList2(String cCategorySel, int start, int end) {
+
+		Vector<ClassBean> vList = new Vector<>();
+		Connection objConn = null;
+		PreparedStatement objPstmt = null;
+		ResultSet objRs = null;
+		String sql = null;
+
+		try {
+			objConn = pool.getConnection(); // DB연동
+
+			if (cCategorySel.equals("null") || cCategorySel.equals("")) {
+				// 카테고리 메뉴 선택 안했을시
+				sql = "select * from classbbs where cStatus<3 " + "order by cNum asc limit ?, ?";
+				objPstmt = objConn.prepareStatement(sql);
+				objPstmt.setInt(1, start);
+				objPstmt.setInt(2, end);
+			} else {
+				// 카테고리 메뉴 클릭 시
+				sql = "select * from classbbs " + "where cCategory like ? AND cStatus<3 " + "order by cNum asc ?, ?";
+				objPstmt = objConn.prepareStatement(sql);
+				objPstmt.setString(1, "%" + cCategorySel + "%");
+				objPstmt.setInt(2, start);
+				objPstmt.setInt(3, end);
+			}
+			objRs = objPstmt.executeQuery();
+
+			objRs = objPstmt.executeQuery();
 
 			while (objRs.next()) {
 				ClassBean bean = new ClassBean();
@@ -365,7 +418,7 @@ public class ClassMgr {
 			objConn = pool.getConnection(); // DB연동
 			sql = "insert into classLikes (uId, cNum) values(?,?)";
 			objPstmt = objConn.prepareStatement(sql);
-			//objPstmt.setString(1, bean.getrUid());
+			// objPstmt.setString(1, bean.getrUid());
 			objPstmt.setString(1, ClassLikeBean.getuId());
 			objPstmt.setInt(2, ClassLikeBean.getcNum());
 			result = objPstmt.executeUpdate();
