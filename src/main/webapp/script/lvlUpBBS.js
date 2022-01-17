@@ -145,6 +145,7 @@ $(function(){
 	
 	//////////////// Read.jsp 에서 게시글 삭제버튼 시작 //////////////////
 	$("button#delBtn").click(function(){
+		 if(window.confirm("정말 삭제하시겠습니까 ? ")){
 		let nowPage = $("input#nowPage").val().trim();
 		let lvlNum = $("input#lvlNum").val().trim();
 				
@@ -156,6 +157,7 @@ $(function(){
 			url += "&keyField="+p3;
 			url += "&keyWord="+p4;
 		location.href=url;
+		}
 	});
 	//////////////// Read.jsp 에서 게시글 삭제버튼 끝 //////////////////
 	

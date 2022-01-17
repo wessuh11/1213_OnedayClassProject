@@ -121,7 +121,10 @@ $(function () {
 function setClassName() {
 			document.getElementById('ex').classList.add('active');
 		}
-
-
-
-
+		
+/////////////////////삭제/////////////////////////////
+$("#memDrop").click(function(){
+     if(window.confirm("정말 삭제하시겠습니까 ? ")){
+        location.href="/Proj_OnedayClass/sign/Member_Del.jsp";
+        }
+});

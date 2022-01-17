@@ -94,10 +94,10 @@ String str3 = "1";
                     <%if (str3.equals(uLevel)) {%>
                                 <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Mod.jsp" id="memModBtn">회원 정보 수정</a></li>
                                 <li class="subMenuLi"><a href="/Proj_OnedayClass/levelUp/LvlUpPost.jsp" id="">등업 신청</a></li>
-                                <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Del.jsp" id="memDrop">회원 탈퇴</a></li>
+                                <li class="subMenuLi"><a href="#" id="memDrop">회원 탈퇴</a></li>
 					<% } else { %>
 					            <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Mod.jsp" id="memModBtn">회원 정보 수정</a></li>                                
-                                <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Del.jsp" id="memDrop">회원 탈퇴</a></li>
+                                <li class="subMenuLi"><a href="#" id="memDrop">회원 탈퇴</a></li>
                     <% } %>
                             </ul>
                         </div>
@@ -208,7 +208,6 @@ String str3 = "1";
        <%@include file="../include/Footer.jsp"%>
         <!-- footer#footer -->
     </div>
-
     <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
     <script src="/Proj_OnedayClass/script/script.js"></script>
 </body>
