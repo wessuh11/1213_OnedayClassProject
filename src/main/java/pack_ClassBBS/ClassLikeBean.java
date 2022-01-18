@@ -1,4 +1,4 @@
-package pack_ClassBbs;
+package pack_ClassBBS;
 
 public class ClassLikeBean {
 

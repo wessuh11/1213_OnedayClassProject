@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ page import="pack_ClassBbs.ClassBean, java.util.Vector"%>
-<jsp:useBean id="bMgr" class="pack_ClassBbs.ClassMgr" scope="page" />
+<%@ page import="pack_ClassBBS.ClassBean, java.util.Vector"%>
+<jsp:useBean id="bMgr" class="pack_ClassBBS.ClassMgr" scope="page" />
 <%
 request.setCharacterEncoding("UTF-8");
 

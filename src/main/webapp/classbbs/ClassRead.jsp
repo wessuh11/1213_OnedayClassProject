@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="pack_ClassBbs.ClassBean" %>
-<jsp:useBean id="bMgr" class="pack_ClassBbs.ClassMgr"  scope="page" />
+<%@ page import="pack_ClassBBS.ClassBean" %>
+<jsp:useBean id="bMgr" class="pack_ClassBBS.ClassMgr"  scope="page" />
     
 <%
 request.setCharacterEncoding("UTF-8");
@@ -142,6 +142,9 @@ session.setAttribute("bean", bean);
         			    </td>
         				<td>
         					<button type="button" class="buy" id="buy">클래스 신청하기</button>
+        				</td>
+        				<td>
+        					<button type="button" class="put" id="put" onClick="location.href='장바구니?cNum=<%= cNum %>&uId=<%=uId%>'">담기</button>
         				</td>
         				<!-- 결제페이지 이동 -->
         			</tr>

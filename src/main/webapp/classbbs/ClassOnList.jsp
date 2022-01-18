@@ -1,17 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="pack_ClassBbs.ClassBean, java.util.Vector"%>
-<jsp:useBean id="bMgr" class="pack_ClassBbs.ClassMgr" scope="page" />
+<%@ page import="pack_ClassBBS.ClassBean, java.util.Vector"%>
+<jsp:useBean id="bMgr" class="pack_ClassBBS.ClassMgr" scope="page" />
 
 <%
 request.setCharacterEncoding("UTF-8");
-
 int totalRecord = 0; // 전체 데이터 수(DB에 저장된 row 개수)
 int numPerPage = 9; // 페이지당 출력하는 데이터 수(=게시글 숫자)
 int pagePerBlock = 5; // 블럭당 표시되는 페이지 수의 개수
 int totalPage = 0; // 전체 페이지 수
 int totalBlock = 0; // 전체 블록수
-
 /*
 totalRecord=> 200     전체레코드
 numPerPage => 10
@@ -19,29 +17,22 @@ pagePerBlock => 5
 totalPage => 20
 totalBlock => 4  (20/5 => 4)
 */
-
 int nowPage = 1; // 현재 (사용자가 보고 있는) 페이지 번호
 int nowBlock = 1; // 현재 (사용자가 보고 있는) 블럭
-
 int start = 0; // DB에서 데이터를 불러올 때 시작하는 인덱스 번호
 int end = 9; // 시작하는 인덱스 번호부터 반환하는(=출력하는) 데이터 개수 
 // select * from T/N where... order by ... limit start, end;
-
 int listSize = 0; // 1페이지에서 보여주는 데이터 수
 //출력할 데이터의 개수 = 데이터 1개는 가로줄 1개
-
 String uId = (String) session.getAttribute("idKey");
 String uName = (String) session.getAttribute("nameKey");
 String uLevel = (String) session.getAttribute("levelKey");
-
 //str1= 관리자, str2는 강사
 String str1 = "3";
 String str2 = "2";
-
 //온&오프 클래스 유무
 String on = "N";
 String off = "Y";
-
 String cCategory1 = "1";
 String cCategory2 = "2";
 String cCategory3 = "3";
@@ -49,9 +40,7 @@ String cCategory4 = "4";
 String cCategory5 = "5";
 String cCategory6 = "6";
 String cCategory7 = "7";
-
 String cCategorySel = ""; // DB의 카테고리
-
 
 if (request.getParameter("cCategorySel") != null) {
 	cCategorySel = request.getParameter("cCategorySel");
@@ -66,12 +55,9 @@ if (request.getParameter("nowPage") != null) {
 
 totalRecord = bMgr.getTotalCount(cCategorySel);
 //전체 데이터 수 반환
-
 totalPage = (int) Math.ceil((double) totalRecord / numPerPage);
 nowBlock = (int) Math.ceil((double) nowPage / pagePerBlock);
 totalBlock = (int) Math.ceil((double) totalPage / pagePerBlock);
-
-
 Vector<ClassBean> vList = null;
 %>
 <!DOCTYPE html>
@@ -129,7 +115,7 @@ Vector<ClassBean> vList = null;
 		<!-- 온라인 게시판 시작 -->
 		<div id="Gallerybbs">
 			
-			<!-- 추천리스트 갤러리 시작 -->
+			<!--  div#goodsPart 추천리스트 시작 -->
 			<div id="goodsPart" class="flex-container">
 				<h2>★ 오늘의 원데이 추천 클래스 ★</h2>
 				<span>HOME | Online</span>
@@ -138,24 +124,22 @@ Vector<ClassBean> vList = null;
 
 			<!-- main#galleryListArea 추천 게시물 시작 -->
 			<main id="galleryListArea">
-				<table id="goodsTbl">
-
 					<%
 					vList = bMgr.getBoardLike(cCategorySel, start, end);
 					listSize = vList.size();
 					%>
-					<tbody class="flex-container swiper-container">
-					
-
+					<div class="swiper-container">
 						<%
 						if (vList.isEmpty()) {
 						%>
-						<tr>
-							<td colspan="6"><%="게시물이 없습니다."%></td>
-						</tr>
+						<div>
+							<div><%="게시물이 없습니다."%></div>
+						</div>
 						<%
 						} else {
-
+						%>
+						<div class="prnTr swiper-wrapper">
+						<%
 						for (int i = 0; i < listSize; i++) {
 							ClassBean bean = vList.get(i);
 							
@@ -177,13 +161,15 @@ Vector<ClassBean> vList = null;
 							if (cStatus == 2 && on.equals(cOnoff)) {
 								//if (cStatus == 2 && off.equals(cOnoff)) {
 						%>
-						<tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
-							<td><a href="#"> <img
+							<div class="swiper-slide" onclick="read('<%=cNum%>', '<%=nowPage%>')">
+							<div>
+								<a href="#"> <img
 									src="/Proj_OnedayClass/fileupload/classfileupload/<%=cThumbName%>"
-									alt='이미지' width='310'></a></td>
-							<!-- 상품이미지 -->
-							<td class="goodsName" >
-								<%
+									alt='이미지' width='310'></a>
+							</div>
+							
+							<div>
+							<%
 								if (cCategory1.equals(cCategory)) {
 									cCategory = "핸드 메이드";
 								} else if (cCategory2.equals(cCategory)) {
@@ -202,19 +188,22 @@ Vector<ClassBean> vList = null;
 									cCategory = "자기계발";
 								}
 								%><%=cCategory%>
-							</td>
-							<!-- cCategory -->
-							<td class="goodsDesc"><%=cTitle%></td>
-							<!-- cTitle -->
-						</tr>
-						
+							</div>
+							
+							<div>
+								<%=cTitle%>
+							</div>
+						</div>
 						<%
 						}
 						}
+						%>
+						</div>
+						
+						<% 
 						}
 						%>
-					</tbody>
-				</table>
+					</div>
 			</main>
 			<!-- main#galleryListArea 끝-->
 			<!-- 추천리스트 갤러리 끝 -->
@@ -250,9 +239,7 @@ Vector<ClassBean> vList = null;
 							<tr>
 								<%
 								for (int j = 0; j < 3; j++) {
-
 									ClassBean bean = vList.get(i + j);
-
 									int cNum = bean.getcNum();
 									//게시글 넘버
 									String cThumbName = bean.getcThumbName();
@@ -264,7 +251,6 @@ Vector<ClassBean> vList = null;
 									//글 속성, 공개 비공개 여부
 									String cOnoff = bean.getcOnoff();
 									//클래스 on(N), off(Y) 여부
-
 									if (cStatus == 2 && on.equals(cOnoff)) {
 										//if (cStatus == 2 && off.equals(cOnoff)) {
 								%>
@@ -310,7 +296,6 @@ Vector<ClassBean> vList = null;
 							<%
 							if ((i + j) == (listSize - 1)) {
 								i += j;
-
 								break;
 							}
 							}
@@ -420,7 +405,6 @@ Vector<ClassBean> vList = null;
           //클릭 가능여부
           clickable: true,
         },
-
         //방향표
         navigation: {
           //다음페이지 설정

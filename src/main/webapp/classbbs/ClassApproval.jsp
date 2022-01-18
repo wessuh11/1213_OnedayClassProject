@@ -1,8 +1,8 @@
-<%@page import="pack_ClassBbs.ClassBean"%>
+<%@page import="pack_ClassBBS.ClassBean"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" %>
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="bMgr" class="pack_ClassBbs.ClassMgr" scope="page" />
+<jsp:useBean id="bMgr" class="pack_ClassBBS.ClassMgr" scope="page" />
 <%
 String uId = (String)session.getAttribute("idKey");
 String uLevel = (String)session.getAttribute("levelKey");

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="pack_ClassBbs.*"%>
+    pageEncoding="UTF-8" import="pack_ClassBBS.*"%>
     
 <%
 request.setCharacterEncoding("UTF-8");

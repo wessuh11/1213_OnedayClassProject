@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 
-<jsp:useBean id="bean" class="pack_ClassBbs.ClassBean" scope="session" />
+<jsp:useBean id="bean" class="pack_ClassBBS.ClassBean" scope="session" />
 <!-- Read.jsp에서 DB 에서 자료를 반환하여 session을 만들 때 세션이름을 "bean"으로,
        세션에 저장되는 값을 DB에서 반환된 자료를 setter로 저장한 BoardBean 객체를
        생성했었음 -->         
        
-<jsp:useBean id="upBean" class="pack_ClassBbs.ClassBean" scope="page" />
+<jsp:useBean id="upBean" class="pack_ClassBBS.ClassBean" scope="page" />
 <!--  Update.jsp에서 form 요소의 하위요소에 입력된 값들을 전달받아서
         초기화시키기위해 생성되는 객체 -->
         
@@ -28,7 +28,7 @@ String realDBUid = bean.getcUid();
 
 %>
 
-<jsp:useBean id="bMgr" class="pack_ClassBbs.ClassMgr" scope="page" />
+<jsp:useBean id="bMgr" class="pack_ClassBBS.ClassMgr" scope="page" />
 <!-- id="bMgr" 유즈빈은 bMgr.updateBoard(upBean) 실행용도
        => 실제 게시글이 DB와 연동하여 수정됨 -->
 <%    
