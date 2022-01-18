@@ -75,11 +75,9 @@ Vector<BoardBean> vList = null;
           
                 <ul class="flex-container">
     	<% if (uId != null && str1.equals(uLevel)) {  //관리자 로그인%>
-                    <li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName %> 관리자님 안녕하세요.</a></li>
+                    <li><a href="/Proj_OnedayClass/adminBBS/AdminPage.jsp"><%=uName %> 관리자님 안녕하세요.</a></li>
                     <li></li>
                     <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/adminBBS/AdminPage.jsp">관리자 페이지</a></li>   
     	<% } else { %>
 					<script>
 					alert("관리자가 아닙니다. 홈페이지로 이동합니다.");

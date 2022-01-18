@@ -32,7 +32,6 @@ String istr2 = "2";
                     <li><a href="/Proj_OnedayClass/adminBBS/AdminPage.jsp"><%=iuName %> 관리자님 안녕하세요.</a></li>
                     <li></li>
                     <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-                    <li></li>
 <!--                     <li><a href="/Proj_OnedayClass/adminBBS/AdminPage.jsp">관리자 페이지</a></li> -->
 		<% } else if(iuId != null && istr2.equals(iuLevel)) { %>
 	                <li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=iuName %> 선생님 환영합니다.</a></li>
@@ -49,7 +48,7 @@ String istr2 = "2";
                     <li></li>
                     <li>
                         <div id="headerCart">
-                            <a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
+                            <a href="#"><img src="/Proj_OnedayClass/img/cart.png" alt=""> <span>0</span></a>
                         </div>
                     </li>
     	<% } else { %>
@@ -59,7 +58,7 @@ String istr2 = "2";
                     <li></li>
                     <li>
                         <div id="headerCart">
-                            <a href="#"><img src="img/cart.png" alt=""> <span>0</span></a>
+                            <a href="#"><img src="/Proj_OnedayClass/img/cart.png" alt=""> <span>0</span></a>
                         </div>
                     </li>
 		<%} %>

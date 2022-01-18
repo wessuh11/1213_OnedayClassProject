@@ -31,7 +31,7 @@ String str2 = "2";
 		
 		
 		<main id="main" class="post">   <!-- 본문영역 html 템플릿 시작 -->
-		
+		<div id="postmain">
 			<h2>등업 작성</h2>
 			
 			<form name="postFrm" action="LvlUpPostProc.jsp"
@@ -102,7 +102,7 @@ String str2 = "2";
 					</tfoot>
 				</table>
 			</form>
-
+		</div>
 		</main>  <!-- 본문영역 html 템플릿 끝 -->
 		<%@include file="../include/Footer.jsp"%>
 

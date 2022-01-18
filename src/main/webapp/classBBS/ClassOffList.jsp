@@ -77,15 +77,15 @@ Vector<ClassBean> vList = null;
                     <li></li>
                     <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
                     <li></li>
-                    <li><a href="/Proj_OnedayClass/classbbs/ClassList.jsp">게시판 관리</a></li>
+                    <li><a href="/Proj_OnedayClass/classBBS/ClassList.jsp">게시판 관리</a></li>
 	<% } else if(uId != null && str2.equals(uLevel)) { %>
 	                <li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName %> 선생님 환영합니다.</a></li>
                     <li></li>
                     <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
                     <li></li>
-                    <li><a href="/Proj_OnedayClass/classbbs/ClassPost.jsp">클래스 생성</a></li>
+                    <li><a href="/Proj_OnedayClass/classBBS/ClassPost.jsp">클래스 생성</a></li>
                     <li></li>
-                    <li><a href="/Proj_OnedayClass/classbbs/ClassList.jsp">클래스 관리</a></li>
+                    <li><a href="/Proj_OnedayClass/classBBS/ClassList.jsp">클래스 관리</a></li>
     <% } else if(uId != null) { %>
     	            <li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName %> <%=uLevel %>님 환영합니다.</a></li>
                     <li></li>
@@ -117,8 +117,8 @@ Vector<ClassBean> vList = null;
             <ul class="flex-container">
                 <li ><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
                 <li ><a href="#">About</a></li>
-                <li ><a href="/Proj_OnedayClass/classbbs/ClassOnList.jsp">Online</a></li>
-                <li class="active"><a href="/Proj_OnedayClass/classbbs/ClassOffList.jsp">Offline</a></li>
+                <li ><a href="/Proj_OnedayClass/classBBS/ClassOnList.jsp">Online</a></li>
+                <li class="active"><a href="/Proj_OnedayClass/classBBS/ClassOffList.jsp">Offline</a></li>
             </ul>
         </nav>
 

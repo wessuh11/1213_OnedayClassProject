@@ -108,7 +108,8 @@ String str2 = "2";
 			<div id="pageInfo" class="flex-container">
 				<span><%=prnType %> :  <%=totalRecord%> 개</span>
 				<span>페이지 :  <%=nowPage + " / " + totalPage%></span>  
-			</div>							
+			</div>		
+								
 			<table id="boardList">
 				<thead>
 					<tr>
