@@ -46,7 +46,6 @@ div#goodsPart {
 }
 /* div#goodsPart 끝 */
 
-
 /* main#galleryListArea 추천 게시물 시작 */
 #Gallerybbs  main#galleryListArea {
     margin-bottom: 40px;
@@ -55,11 +54,16 @@ div#goodsPart {
     overflow: hidden; 
 }
 
+div.letter{
+	text-align: center;
+}
 
-
-
-
-
+div.titleletter{
+	text-align: center;
+	color: rgba(95, 74, 56, 0.68);  
+    font-size: 12px;
+}
+/* main#galleryListArea 추천 게시물 끝 */
 
 /* 일반리스트 갤러리 시작 */
 div#allclass{
@@ -73,24 +77,23 @@ div#allclass{
     /* border: 1px solid #000; */
 }
 
-#Gallerybbs  main#galleryListArea2 {
+#Gallerybbs  main#galleryListArea {
 	width: 100%;
     margin-bottom: 40px;
     flex-wrap: wrap;
 }
 
-#Gallerybbs  main#galleryListArea2>table.goodsTbl2 {
+#Gallerybbs  main#galleryListArea>table.goodsTbl {
     text-align: center;
 }
 
-#Gallerybbs  main#galleryListArea2>table td {
+#Gallerybbs  main#galleryListArea>table td {
     color: #5f4a38;
     padding: 0px 0px 0px 16px
     
 }
 
-#Gallerybbs  #galleryListArea2>table td.goodsDesc2 {
-    /* 상품설명 */  
+#Gallerybbs  #galleryListArea>table td.goodsDesc {
     color: rgba(95, 74, 56, 0.68);  
     font-size: 12px;
 }
@@ -104,3 +107,4 @@ table.page{
 	font-size: 18px;
 }
 /*############# 페이징 끝 #############*/
+

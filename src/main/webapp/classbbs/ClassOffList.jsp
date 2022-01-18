@@ -30,9 +30,7 @@ String uLevel = (String) session.getAttribute("levelKey");
 //str1= 관리자, str2는 강사
 String str1 = "3";
 String str2 = "2";
-//온&오프 클래스 유무
-String on = "N";
-String off = "Y";
+
 String cCategory1 = "1";
 String cCategory2 = "2";
 String cCategory3 = "3";
@@ -66,7 +64,7 @@ Vector<ClassBean> vList = null;
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>온라인 클래스</title>
+<title>오프라인 클래스</title>
 <link rel="stylesheet" href="/Proj_OnedayClass/style/classbbs/onoffshop.css">
  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" /> 
   <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
@@ -112,7 +110,7 @@ Vector<ClassBean> vList = null;
 		<!-- 카테고리 종료-->
 	</form>
 	
-		<!-- 온라인 게시판 시작 -->
+		<!-- 오프라인 게시판 시작 -->
 		<div id="Gallerybbs">
 			
 			<!--  div#goodsPart 추천리스트 시작 -->
@@ -158,7 +156,7 @@ Vector<ClassBean> vList = null;
 							int cLikes = bean.getcLikes();
 							//좋아요
 							
-							if (cStatus == 2 && off.equals(cOnoff)) {
+							if (cStatus == 2 && cOnoff.equals("Y")) {
 						%>
 							<div class="swiper-slide" onclick="read('<%=cNum%>', '<%=nowPage%>')">
 							<div>
@@ -169,19 +167,19 @@ Vector<ClassBean> vList = null;
 							
 							<div>
 							<%
-								if (cCategory1.equals(cCategory)) {
+								if (cCategory.equals("1")) {
 									cCategory = "핸드 메이드";
-								} else if (cCategory2.equals(cCategory)) {
+								} else if (cCategory.equals("2")) {
 									cCategory = "쿠킹";
-								} else if (cCategory3.equals(cCategory)) {
+								} else if (cCategory.equals("3")) {
 									cCategory = "드로잉";
-								} else if (cCategory4.equals(cCategory)) {
+								} else if (cCategory.equals("4")) {
 									cCategory = "음악";
-								} else if (cCategory5.equals(cCategory)) {
+								} else if (cCategory.equals("5")) {
 									cCategory = "요가·필라테스";
-								} else if (cCategory6.equals(cCategory)) {
+								} else if (cCategory.equals("6")) {
 									cCategory = "레져·스포츠";
-								} else if (cCategory7.equals(cCategory)) {
+								} else if (cCategory.equals("7")) {
 									cCategory = "반려동물";
 								} else {
 									cCategory = "자기계발";
@@ -251,7 +249,7 @@ Vector<ClassBean> vList = null;
 									String cOnoff = bean.getcOnoff();
 									//클래스 on(N), off(Y) 여부
 									
-									if (cStatus == 2 && off.equals(cOnoff)) {
+									if (cStatus == 2 && cOnoff.equals("Y")) {
 								%>
 								<td onclick="read('<%=cNum%>', '<%=nowPage%>')">
 									<!-- 1 -->
@@ -264,19 +262,19 @@ Vector<ClassBean> vList = null;
 
 									<div>
 										<%
-										if (cCategory1.equals(cCategory)) {
+										if (cCategory.equals("1")) {
 											cCategory = "핸드 메이드";
-										} else if (cCategory2.equals(cCategory)) {
+										} else if (cCategory.equals("2")) {
 											cCategory = "쿠킹";
-										} else if (cCategory3.equals(cCategory)) {
+										} else if (cCategory.equals("3")) {
 											cCategory = "드로잉";
-										} else if (cCategory4.equals(cCategory)) {
+										} else if (cCategory.equals("4")) {
 											cCategory = "음악";
-										} else if (cCategory5.equals(cCategory)) {
+										} else if (cCategory.equals("5")) {
 											cCategory = "요가·필라테스";
-										} else if (cCategory6.equals(cCategory)) {
+										} else if (cCategory.equals("6")) {
 											cCategory = "레져·스포츠";
-										} else if (cCategory7.equals(cCategory)) {
+										} else if (cCategory.equals("7")) {
 											cCategory = "반려동물";
 										} else {
 											cCategory = "자기계발";

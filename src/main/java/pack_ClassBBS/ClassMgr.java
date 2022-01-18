@@ -170,7 +170,8 @@ public class ClassMgr {
 				objPstmt.setInt(2, end);
 			} else {
 				// 카테고리 메뉴 클릭 시
-				sql = "select * from classbbs " + "where cCategory =? AND cStatus<3 " + "order by cLikes desc limit ?, ?";
+				sql = "select * from classbbs " + "where cCategory =? AND cStatus<3 "
+						+ "order by cLikes desc limit ?, ?";
 				objPstmt = objConn.prepareStatement(sql);
 				objPstmt.setString(1, cCategorySel);
 				objPstmt.setInt(2, start);
@@ -203,7 +204,7 @@ public class ClassMgr {
 
 ///////////////  게시판 리스트 출력(ClassList.jsp) 추천리스트 끝    ///////////////
 
-///////////////  게시판 리스트 출력(ClassList.jsp) 일반   ///////////////
+///////////////  게시판 리스트 출력 on,off list 일반  ///////////////
 	public Vector<ClassBean> getBoardList(String cCategorySel, int start, int end) {
 
 		Vector<ClassBean> vList = new Vector<>();
@@ -254,44 +255,88 @@ public class ClassMgr {
 		return vList;
 	}
 
-///////////////  게시판 리스트 출력(ClassList.jsp) 끝 일반  ///////////////
+///////////////  게시판 리스트 출력 on,off list 일반  ///////////////
+	
+	
+///////////////  게시판 리스트 출력(ClassList.jsp) 끝 일반  ///////////////	
+	public Vector<ClassBean> getBoardadmin(String cCategorySel, int start, int end) {
+
+		Vector<ClassBean> vList = new Vector<>();
+		Connection objConn = null;
+		PreparedStatement objPstmt = null;
+		ResultSet objRs = null;
+		String sql = null;
+
+		try {
+			objConn = pool.getConnection(); // DB연동
+
+			sql = "select * from classbbs order by cNum asc limit ?, ?";
+			objPstmt = objConn.prepareStatement(sql);
+			objPstmt.setInt(1, start);
+			objPstmt.setInt(2, end);
+
+			objRs = objPstmt.executeQuery();
+
+			while (objRs.next()) {
+				ClassBean bean = new ClassBean();
+				bean.setcNum(objRs.getInt("cNum"));
+				bean.setcUid(objRs.getString("cUid"));
+				bean.setcTeacher(objRs.getString("cTeacher"));
+				bean.setcThumbName(objRs.getString("cThumbName"));
+				bean.setcCategory(objRs.getString("cCategory"));
+				bean.setcTitle(objRs.getString("cTitle"));
+				bean.setcRegDate(objRs.getString("cRegDate"));
+				bean.setcStatus(objRs.getInt("cStatus"));
+				bean.setcOnoff(objRs.getString("cOnoff"));
+				bean.setcLikes(objRs.getInt("cLikes"));
+				vList.add(bean);
+			}
+		} catch (Exception e) {
+			System.out.println("SQL이슈3 : " + e.getMessage());
+		} finally {
+			pool.freeConnection(objConn, objPstmt, objRs);
+		}
+
+		return vList;
+	}
+///////////////  게시판 리스트 출력(ClassList.jsp) 일반   ///////////////
 
 //////////////////총 게시물 수(List.jsp) 시작 //////////////////
-public int getTotalCount(String cCategorySel) {
+	public int getTotalCount(String cCategorySel) {
 
-Connection objConn = null;
-PreparedStatement objPstmt = null;
-ResultSet objRs = null;
-String sql = null;
-int totalCnt = 0;
+		Connection objConn = null;
+		PreparedStatement objPstmt = null;
+		ResultSet objRs = null;
+		String sql = null;
+		int totalCnt = 0;
 
-try {
-objConn = pool.getConnection(); // DB연동
+		try {
+			objConn = pool.getConnection(); // DB연동
 
-if (cCategorySel.equals("null") || cCategorySel.equals("")) {
-	sql = "select count(*) from classBbs where cStatus<3";
-	objPstmt = objConn.prepareStatement(sql);
-} else {
-	sql = "select count(*) from classBbs ";
-	sql += "where cCategory = ? AND cStatus<3";
-	objPstmt = objConn.prepareStatement(sql);
-	objPstmt.setString(1, cCategorySel);
-}
+			if (cCategorySel.equals("null") || cCategorySel.equals("")) {
+				sql = "select count(*) from classBbs where cStatus<3";
+				objPstmt = objConn.prepareStatement(sql);
+			} else {
+				sql = "select count(*) from classBbs ";
+				sql += "where cCategory = ? AND cStatus<3";
+				objPstmt = objConn.prepareStatement(sql);
+				objPstmt.setString(1, cCategorySel);
+			}
 
-objRs = objPstmt.executeQuery();
+			objRs = objPstmt.executeQuery();
 
-if (objRs.next()) {
-	totalCnt = objRs.getInt(1);
-}
+			if (objRs.next()) {
+				totalCnt = objRs.getInt(1);
+			}
 
-} catch (Exception e) {
-System.out.println("SQL이슈4 : " + e.getMessage());
-} finally {
-pool.freeConnection(objConn, objPstmt, objRs);
-}
+		} catch (Exception e) {
+			System.out.println("SQL이슈4 : " + e.getMessage());
+		} finally {
+			pool.freeConnection(objConn, objPstmt, objRs);
+		}
 
-return totalCnt;
-}
+		return totalCnt;
+	}
 //////////////////총 게시물 수(List.jsp) 끝 //////////////////
 
 ////////게시판 뷰페이지 출력(ClassRead.jsp, 내용보기 페이지) 시작 ////////

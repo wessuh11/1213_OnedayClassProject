@@ -65,12 +65,12 @@ String str2 = "2";
                     <tbody>
                         <tr>
                        		<!-- cTeacher -->
-                        	<td class="req">강사이름</td>
+                        	<td class="req">상호명</td>
                          <td>
                                <input type="hidden" id="cCode" name="cCode" size="27" class="umem">
                        		   <input type="hidden" name="cUid" id="cUid" value="<%=uId%>">
                                <input type="text" id="cTeacher" name="cTeacher" size="27" 
-                                class="umem" maxlength="20" autofocus  placeholder="선생님 이름을 입력하세요.">
+                                class="umem" maxlength="20" autofocus  placeholder="상호명을 입력하세요.">
                          </td>
                         </tr>
                         <tr>
