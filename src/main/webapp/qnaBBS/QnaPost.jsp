@@ -7,7 +7,7 @@ String keyField = request.getParameter("keyField");
 String keyWord = request.getParameter("keyWord");
 //검색어 수신 끝
 String nowPage = request.getParameter("nowPage");
-
+int cNum = (int) session.getAttribute("cNumKey"); //클래스 게시판 번호
 
 String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
@@ -21,7 +21,7 @@ String uLevel = (String)session.getAttribute("levelKey");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>문의 페이지</title>
-    <link rel="stylesheet" href="/Proj_OnedayClass/style/qnaBBS.css">
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/ajaxBBS.css">
 </head>
 <body>
 	<div id="wrap">
@@ -40,6 +40,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 							<td>
 								<%=uId%>
 								<input type="hidden" name="qUid" id="qUid" value="<%=uId%>">
+								<input type="hidden" name="cNum" id="cNum" value="<%=cNum%>">
 							</td>
 						</tr>
 						<tr>
@@ -74,14 +75,14 @@ String uLevel = (String)session.getAttribute("levelKey");
 							</td>
 						</tr>
 						
-						<tr>
+						<!-- <tr>
 							<td>
 								<input type="hidden" name="contentType"
 									value="HTML">									
 								<input type="hidden" name="contentType"
 									value="TEXT" checked>											
 							</td>
-						</tr>
+						</tr> -->
 						
 					</tbody>
 					<tfoot>

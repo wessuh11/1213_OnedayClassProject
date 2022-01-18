@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ page import="pack_QnaBBS.BoardBean, java.util.Vector"%>
+<%@ page import="pack_QnaBBS.BoardBean, java.util.Vector, pack_ClassBBS.ClassBean"%>
 <jsp:useBean id="bMgr" class="pack_QnaBBS.BoardMgr" scope="page" />
 
 <%
@@ -39,7 +39,11 @@ if (request.getParameter("nowPage") != null) {
 	end = numPerPage;
 }
 
-totalRecord = bMgr.getTotalCount(keyField, keyWord);
+// 클래스 번호 반환
+
+int cNum = (int) session.getAttribute("cNumKey");
+
+totalRecord = bMgr.getAjaxTotalCount(keyField, keyWord, cNum);
 // 전체 데이터 수 반환
 
 totalPage = (int) Math.ceil((double) totalRecord / numPerPage);
@@ -61,7 +65,7 @@ String uLevel = (String) session.getAttribute("levelKey");
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>QnA 게시판</title>
-<link rel="stylesheet" href="/Proj_OnedayClass/style/qnaBBS.css">
+<link rel="stylesheet" href="/Proj_OnedayClass/style/ajaxBBS.css">
 </head>
 <body>
 	<div id="wrap">
@@ -95,7 +99,7 @@ String uLevel = (String) session.getAttribute("levelKey");
 				<tbody>
 
 					<%
-					vList = bMgr.getBoardList(keyField, keyWord, start, end); // DB에서 데이터 불러오기
+					vList = bMgr.getAjaxBoardList(keyField, keyWord, start, end, cNum); // DB에서 데이터 불러오기
 					listSize = vList.size();
 
 					if (vList.isEmpty()) {
@@ -276,8 +280,7 @@ String uLevel = (String) session.getAttribute("levelKey");
 	</div>
 	<!-- div#wrap -->
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="/Proj_OnedayClass/script/qnaBBS.js"></script>
 </body>
 </html>

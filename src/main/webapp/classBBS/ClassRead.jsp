@@ -53,6 +53,7 @@ String cCategory7 = "7";
 //수강인원 꽉차면 닫아줌
 
 session.setAttribute("bean", bean);
+session.setAttribute("cNumKey", cNum);
 //불러온 모든걸 세션으로 만들어줌!!
 %>  
     
@@ -192,10 +193,12 @@ session.setAttribute("bean", bean);
 	    	 <ul class="flex-container">
                     <li><a href="#">상세</a></li>
                     <li><a href="#">리뷰</a></li>
-                    <li><a href="#">문의</a></li>
+                    <li onclick="qnaCall(<%=numParam%>)" ><a href="#">문의</a></li>
               </ul>
 	    </div>
 	    <!-- div#boardmenu -->
+
+		<div id="tblArea" style="width='100%';"></div>
 
 		<!-- div#details -->
         	<div id="info">
@@ -217,5 +220,16 @@ session.setAttribute("bean", bean);
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="/Proj_OnedayClass/script/classbbs.js"></script>
+	<script>
+		function qnaCall(cNum) {
+			// ajax 통신
+			$.ajax({
+			    url : "/Proj_OnedayClass/qnaBBS/QnaList.jsp",      // 컨트롤러에서 대기중인 URL 주소이다.
+			    type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			}).done(function(qnaList){
+				$("#tblArea").html(qnaList);
+			});
+		}       
+	</script>
 </body>
 </html>

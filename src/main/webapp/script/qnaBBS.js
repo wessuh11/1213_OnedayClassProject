@@ -95,6 +95,7 @@ $(function(){
 	////////////////게시글 등록 시작 //////////////////
 		$("#regBtn").click(function(event){
 			let qTitle = $("#qTitle").val().trim();
+			let p5 = $("#cNum").val().trim();
 			
 			if (qTitle == "") {
 				alert("제목은 필수입력입니다.");
@@ -200,52 +201,54 @@ $(function(){
 	
 	//////////////// Read.jsp 에서 게시글 삭제버튼 시작 //////////////////
 	$("button#delBtn").click(function(){
-		let nowPage = $("input#nowPage").val().trim();
-		let num = $("input#qNum").val().trim();
-				
-		let p3 = $("#pKeyField").val().trim()  // p3 : keyField
-	    let p4 = $("#pKeyWord").val().trim()  // p4 : keyWord
-	    
-		let param = "/Proj_OnedayClass/qnaBBS/QnaDelete.jsp?";
-			param += "qNum="+num+"&nowPage="+nowPage;
-			param += "&keyField="+p3;
-			param += "&keyWord="+p4;
+		if(window.confirm) {
+			let nowPage = $("input#nowPage").val().trim();
+			let qNum = $("input#qNum").val().trim();
+					
+			let p3 = $("#pKeyField").val().trim()  // p3 : keyField
+		    let p4 = $("#pKeyWord").val().trim()  // p4 : keyWord
+		    
+			let param = "/Proj_OnedayClass/qnaBBS/QnaDelete.jsp?";
+				param += "qNum="+qNum+"&nowPage="+nowPage;
+				param += "&keyField="+p3;
+				param += "&keyWord="+p4;
 		
-		$.ajax({
-		    url : param,      // 컨트롤러에서 대기중인 URL 주소이다.
-		    type : "GET",            // HTTP method type(GET, POST) 형식이다.
-			success: function () {
-				alert("삭제되었습니다!");
-				
-				let param2 = "/Proj_OnedayClass/qnaBBS/QnaList.jsp?nowPage=" + nowPage;
-				param2 += "&keyField=" + p3;
-				param2 += "&keyWord=" + p4;
-				
-				$.ajax({
-				    url : param2,      // 컨트롤러에서 대기중인 URL 주소이다.
-				    type : "GET",            // HTTP method type(GET, POST) 형식이다.
-				}).done(function(qnaList){
-					$("#tblArea").html(qnaList);
-				});
-	        },          
-	        error: function (e) {  
-	        	console.log("ERROR : ", e);     
-	            $("#delBtn").prop("disabled", false);    
-	            alert("권한이 없습니다.");
-				
-				let param3 = "/Proj_OnedayClass/qnaBBS/QnaRead.jsp?nowPage=" + nowPage;
-				param3 += "&qNum="+qNum;
-    			param3 += "&keyField="+p3;
- 				param3 += "&keyWord="+p4;
-
-				$.ajax({
-				    url : param3,      // 컨트롤러에서 대기중인 URL 주소이다.
-				    type : "GET",            // HTTP method type(GET, POST) 형식이다.
-				}).done(function(qnaList){
-					$("#tblArea").html(qnaList);
-				});
-	         }
-		})
+			$.ajax({
+			    url : param,      // 컨트롤러에서 대기중인 URL 주소이다.
+			    type : "GET",            // HTTP method type(GET, POST) 형식이다.
+				success: function () {
+					alert("삭제되었습니다!");
+					
+					let param2 = "/Proj_OnedayClass/qnaBBS/QnaList.jsp?nowPage=" + nowPage;
+					param2 += "&keyField=" + p3;
+					param2 += "&keyWord=" + p4;
+					
+					$.ajax({
+					    url : param2,      // 컨트롤러에서 대기중인 URL 주소이다.
+					    type : "GET",            // HTTP method type(GET, POST) 형식이다.
+					}).done(function(qnaList){
+						$("#tblArea").html(qnaList);
+					});
+		        },          
+		        error: function (e) {  
+		        	console.log("ERROR : ", e);     
+		            $("#delBtn").prop("disabled", false);    
+		            alert("권한이 없습니다.");
+					
+					let param3 = "/Proj_OnedayClass/qnaBBS/QnaRead.jsp?nowPage=" + nowPage;
+					param3 += "&qNum="+qNum;
+	    			param3 += "&keyField="+p3;
+	 				param3 += "&keyWord="+p4;
+	
+					$.ajax({
+					    url : param3,      // 컨트롤러에서 대기중인 URL 주소이다.
+					    type : "GET",            // HTTP method type(GET, POST) 형식이다.
+					}).done(function(qnaList){
+						$("#tblArea").html(qnaList);
+					});
+		         }
+			});
+		}
 	});
 	//////////////// Read.jsp 에서 게시글 삭제버튼 끝 //////////////////
 	
@@ -375,7 +378,7 @@ $(function(){
 		        success: function () {
 					
 					let nowPage = $("input#nowPage").val();
-					let qNum = $("input#num").val();
+					let qNum = $("input#qNum").val();
 							
 					let keyField = $("#keyField").val();  // p3 : keyField
 				    let keyWord = $("#keyWord").val();
@@ -409,7 +412,7 @@ $(function(){
 	//////////////// Update.jsp 에서 뒤로가기 버튼 시작 //////////////////
 	$("button#backBtn").click(function(){
 		let nowPage = $("input#nowPage").val();
-		let qNum = $("input#num").val();
+		let qNum = $("input#qNum").val();
 				
 		let keyField = $("#keyField").val();  // p3 : keyField
 	    let keyWord = $("#keyWord").val();

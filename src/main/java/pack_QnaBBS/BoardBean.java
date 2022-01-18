@@ -14,6 +14,7 @@ public class BoardBean {
 	private String qFileName;
 	private int qFileSize;
 	private int qStatus;
+	private int cNum;
 	
 	public int getqNum() {
 		return qNum;
@@ -87,5 +88,10 @@ public class BoardBean {
 	public void setqStatus(int qStatus) {
 		this.qStatus = qStatus;
 	}
-	
+	public int getcNum() {
+		return cNum;
+	}
+	public void setcNum(int cNum) {
+		this.cNum = cNum;
+	}
 }

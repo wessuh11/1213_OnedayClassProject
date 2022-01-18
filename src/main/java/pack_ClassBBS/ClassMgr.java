@@ -1,10 +1,6 @@
 package pack_ClassBBS;
 
-import java.io.BufferedInputStream;
-
-import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,10 +9,6 @@ import java.util.Vector;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.jsp.JspWriter;
-import javax.servlet.jsp.PageContext;
-
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -219,13 +211,13 @@ public class ClassMgr {
 
 			if (cCategorySel.equals("null") || cCategorySel.equals("")) {
 				// 카테고리 메뉴 선택 안했을시
-				sql = "select * from classbbs where cStatus<3 " + "order by cNum asc limit ?, ?";
+				sql = "select * from classbbs where cStatus<3 order by cNum asc limit ?, ?";
 				objPstmt = objConn.prepareStatement(sql);
 				objPstmt.setInt(1, start);
 				objPstmt.setInt(2, end);
 			} else {
 				// 카테고리 메뉴 클릭 시
-				sql = "select * from classbbs " + "where cCategory like ? AND cStatus<3 " + "order by cNum asc ?, ?";
+				sql = "select * from classbbs where cCategory like ? AND cStatus<3 order by cNum asc ?, ?";
 				objPstmt = objConn.prepareStatement(sql);
 				objPstmt.setString(1, "%" + cCategorySel + "%");
 				objPstmt.setInt(2, start);
