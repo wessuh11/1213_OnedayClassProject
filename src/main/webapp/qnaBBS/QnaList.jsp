@@ -53,7 +53,6 @@ Vector<BoardBean> vList = null;
 String uId = (String) session.getAttribute("idKey");
 String uName = (String) session.getAttribute("nameKey");
 String uLevel = (String) session.getAttribute("levelKey");
-String str1 = "3";
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -66,31 +65,7 @@ String str1 = "3";
 </head>
 <body>
 	<div id="wrap">
-		<header id="header" class="flex-container">
-            <div id="headerLogo">
-                <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" width="75%" alt="로고"></a>
-            </div>
-            <!-- div#headerLogo -->
-            <div id="headerRight">
-          
-                <ul class="flex-container">
-    	<% if (uId != null && str1.equals(uLevel)) {  //관리자 로그인%>
-                    <li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName %> 관리자님 안녕하세요.</a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/adminBBS/AdminPage.jsp">관리자 페이지</a></li>   
-    	<% } else { %>
-					<script>
-					alert("관리자가 아닙니다. 홈페이지로 이동합니다.");
-					location.href="/Proj_OnedayClass/Index.jsp";
-					</script>
-		<% } %>
-				</ul>
-            </div>
-            <!-- div#headerRight -->
-        </header>
-	        <!-- header#header -->
+		
 		<main id="main" class="list">
 
 			<%
@@ -297,7 +272,7 @@ String str1 = "3";
 
 		</main>
 		<!-- main#main -->
-		<%@include file="../include/Footer.jsp"%>	
+
 	</div>
 	<!-- div#wrap -->
 

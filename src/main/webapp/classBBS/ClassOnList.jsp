@@ -52,12 +52,10 @@ String cCategory7 = "7";
 
 String cCategorySel = ""; // DB의 카테고리
 
-/*
-if (request.getParameter("cCategory") != null) {
-	cCategorySel = request.getParameter("cCategory");
-	//카테고리 선택값이 없다면 전체 페이지 출력?
+
+if (request.getParameter("cCategorySel") != null) {
+	cCategorySel = request.getParameter("cCategorySel");
 }
-*/
 
 if (request.getParameter("nowPage") != null) {
 	nowPage = Integer.parseInt(request.getParameter("nowPage"));
@@ -65,6 +63,9 @@ if (request.getParameter("nowPage") != null) {
 	end = numPerPage;
 	//카테고리 선택값이 있다면 해당 카테고리에 대한 게시물만 출력
 }
+
+totalRecord = bMgr.getTotalCount(cCategorySel);
+//전체 데이터 수 반환
 
 totalPage = (int) Math.ceil((double) totalRecord / numPerPage);
 nowBlock = (int) Math.ceil((double) nowPage / pagePerBlock);
@@ -80,61 +81,47 @@ Vector<ClassBean> vList = null;
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>온라인 클래스</title>
-<link rel="stylesheet"
-	href="/Proj_OnedayClass/style/classbbs/onshop.css">
+<link rel="stylesheet" href="/Proj_OnedayClass/style/classbbs/onoffshop.css">
+ <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" /> 
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
 </head>
 <body>
 	<div id="wrap">
 		<%@include file="../include/Header.jsp"%>
-		<nav id="gnb">
-			<ul class="flex-container">
-				<li><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
-				<li><a href="#">About</a></li>
-				<li class="active"><a
-					href="/Proj_OnedayClass/classbbs/ClassOnList.jsp">Online</a></li>
-				<li><a href="/Proj_OnedayClass/classbbs/ClassOffList.jsp">Offline</a></li>
-			</ul>
-		</nav>
 		
+		<form id="categoryform" name="categoryform">
 		<!-- 카테고리 시작-->
 		<div id="category">
-			<ul id="tagList" class="cCategorySel">
-				<li class="devTagList" value="1"
-					<%if (cCategorySel.equals("1"))out.print("selected");%>>핸드메이드</li>
+			<ul id="tree">
+				<li class="devTagList"><span onclick="cCategorySelect('1')"> 핸드메이드</span></li>
 				<!-- 1번 카테고리 전체출력.. -->
-				<li class="devTagList" value="2"
-					<%if (cCategorySel.equals("2"))out.print("selected");%>>쿠킹</li>
+				<li class="devTagList"><span onclick="cCategorySelect('2')"> 쿠킹</span></li>
 				<!-- 2번 카테고리 전체출력.. -->
-				<li class="devTagList" value="3"
-					<%if (cCategorySel.equals("3"))out.print("selected");%>>드로잉</li>
+				<li class="devTagList"><span onclick="cCategorySelect('3')">드로잉</span></li>
 				<!-- 3번 카테고리 전체출력.. -->
-				<li class="devTagList" value="4"
-					<%if (cCategorySel.equals("4"))out.print("selected");%>>음악</li>
+				<li class="devTagList"><span onclick="cCategorySelect('4')">음악</span></li>
 				<!-- 4번 카테고리 전체출력.. -->
-				<li class="devTagList" value="5"
-					<%if (cCategorySel.equals("5"))out.print("selected");%>>요가·필라테스</li>
+				<li class="devTagList"><span onclick="cCategorySelect('5')">요가·필라테스</span></li>
 				<!-- 5번 카테고리 전체출력.. -->
-				<li class="devTagList" value="6"
-					<%if (cCategorySel.equals("6"))out.print("selected");%>>레져·스포츠</li>
+				<li class="devTagList"><span onclick="cCategorySelect('6')">레져·스포츠</span></li>
 				<!-- 6번 카테고리 전체출력.. -->
-				<li class="devTagList" value="7"
-					<%if (cCategorySel.equals("7"))out.print("selected");%>>반려동물</li>
+				<li class="devTagList"><span onclick="cCategorySelect('7')">반려동물</span></li>
 				<!-- 7번 카테고리 전체출력.. -->
-				<li class="devTagList" value="8"
-					<%if (cCategorySel.equals("8"))out.print("selected");%>>자기계발</li>
+				<li class="devTagList"><span onclick="cCategorySelect('8')">자기계발</span></li>
 				<!-- 8번 카테고리 전체출력.. -->
-			</ul>
-			
-			<input type="hidden" id="pKeyField" value="<%=cCategorySel%>">
+				</ul>
+			<input type="hidden" id="cCategorySel" name="cCategorySel" value="">
 		</div>
 		<!-- div#category -->
 		<!-- 카테고리 종료-->
-
+	</form>
+	
 		<!-- 온라인 게시판 시작 -->
 		<div id="Gallerybbs">
 			
 			<!-- 추천리스트 갤러리 시작 -->
-			<div id="goodsPart" class="flex-container">
+			<div id="goodsPart">
 				<h2>★ 오늘의 원데이 추천 클래스 ★</h2>
 				<span>HOME | Online</span>
 			</div>
@@ -142,12 +129,14 @@ Vector<ClassBean> vList = null;
 
 			<!-- main#galleryListArea 추천 게시물 시작 -->
 			<main id="galleryListArea">
-				<table id="goodsTbl">
+				<table id="goodsTbl" class="swiper-container">
+
 					<%
-					vList = bMgr.getBoardList(cCategorySel, start, end);
+					vList = bMgr.getBoardLike(cCategorySel, start, end);
 					listSize = vList.size();
 					%>
-					<tbody class=" flex-container">
+					<tbody class="swiper-wrapper">
+					
 
 						<%
 						if (vList.isEmpty()) {
@@ -180,11 +169,11 @@ Vector<ClassBean> vList = null;
 								//if (cStatus == 2 && off.equals(cOnoff)) {
 						%>
 						<tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
-							<td><a href="#"> <img
+							<td class="swiper-slide"><a href="#"> <img
 									src="/Proj_OnedayClass/fileupload/classfileupload/<%=cThumbName%>"
 									alt='이미지' width='310'></a></td>
 							<!-- 상품이미지 -->
-							<td class='goodsName'>
+							<td class="goodsName swiper-slide" >
 								<%
 								if (cCategory1.equals(cCategory)) {
 									cCategory = "핸드 메이드";
@@ -206,9 +195,10 @@ Vector<ClassBean> vList = null;
 								%><%=cCategory%>
 							</td>
 							<!-- cCategory -->
-							<td class='goodsDesc'><%=cTitle%></td>
+							<td class="goodsDesc swiper-slide"><%=cTitle%></td>
 							<!-- cTitle -->
 						</tr>
+						
 						<%
 						}
 						}
@@ -216,8 +206,6 @@ Vector<ClassBean> vList = null;
 						%>
 					</tbody>
 				</table>
-				<!-- table.goodsTbl 상품출력용 테이블 -->
-				
 			</main>
 			<!-- main#galleryListArea 끝-->
 			<!-- 추천리스트 갤러리 끝 -->
@@ -232,9 +220,9 @@ Vector<ClassBean> vList = null;
 			<div id="BasicList">
 				<!-- main#galleryListArea 시작 -->
 				<main id="galleryListArea2">
-					<table class='goodsTbl2'>
+					<table class="goodsTbl2">
 						<%
-						vList = bMgr.getBoardList2(cCategorySel, start, end);
+						vList = bMgr.getBoardList(cCategorySel, start, end);
 						listSize = vList.size();
 						%>
 						<tbody>
@@ -323,12 +311,62 @@ Vector<ClassBean> vList = null;
 							}
 							}
 							%>
-
 						</tbody>
-					
 					</table>
 					<!-- table.goodsTbl 상품출력용 테이블 -->
-
+					
+					<table class="page">
+						<tbody>
+							<tr>
+								<!-- 페이징 시작 -->
+								<td colspan="2" id="pagingTd">
+									<%
+									int pageStart = (nowBlock - 1) * pagePerBlock + 1;
+									int pageEnd = (nowBlock < totalBlock) ? pageStart + pagePerBlock - 1 : totalPage;
+									
+									if (totalPage != 0) { //   전체 페이지가 0이 아니라면 = 게시글이 1개라도 있다면
+									// #if 01_totalPage
+									
+									if (nowBlock > 1) { // 페이지 블럭이 2이상이면 => 2개이상의 블럭이 있어야 가능
+									%> 
+			 							<span class="moveBlockArea" onclick="moveBlock('<%=nowBlock - 1%>', '<%=pagePerBlock%>')"> &lt; </span>
+									<%
+									 } else {
+									 %>
+										<span class="moveBlockArea"></span>
+									<%
+									 }
+									// 페이지 나누기용 페이지 번호 출력 시작 
+									 for (; pageStart <= pageEnd; pageStart++) {
+									
+									 	if (pageStart == nowPage) { // 현재 사용자가 보고 있는 페이지
+									 %> 
+			 							<span class="nowPageNum"><%=pageStart%></span>
+										<%
+										 } else { // 현재 사용자가 보고 있지 않은 페이지
+										 %>
+										<span class="pageNum" onclick="movePage('<%=pageStart%>')"> <%=pageStart%></span>
+									<%
+									 	} // End If
+			
+			 						} // End For 페이지 나누기용 페이지 번호 출력 끝
+									 
+									if (totalBlock > nowBlock) { // 다음 블럭이 남아 있다면
+			 						%>
+										<span class="moveBlockArea" onclick="moveBlock('<%=nowBlock + 1%>', '<%=pagePerBlock%>')"> &gt; </span>
+									<%
+									 } else {
+									 %>
+										<span class="moveBlockArea"></span>
+									<%
+									 }
+			
+								 } // End if#01_totalPage
+								 %>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 				</main>
 				<!-- main#galleryListArea 끝-->
 			</div>
@@ -339,9 +377,55 @@ Vector<ClassBean> vList = null;
 
 		<%@include file="../include/Footer.jsp"%>
 	</div>
+	<script>
+       const swiper = new Swiper('.swiper-container', {
+        //기본 셋팅
+        //방향 셋팅 vertical 수직, horizontal 수평 설정이 없으면 수평
+        direction: 'horizontal',
+        //한번에 보여지는 페이지 숫자
+        slidesPerView: 2,
+        //페이지와 페이지 사이의 간격
+        spaceBetween: 30,
+        //드레그 기능 true 사용가능 false 사용불가
+        debugger: true,
+        //마우스 휠기능 true 사용가능 false 사용불가
+        mousewheel: true,
+        //반복 기능 true 사용가능 false 사용불가
+        loop: true,
+        //선택된 슬라이드를 중심으로 true 사용가능 false 사용불가 djqt
+        centeredSlides: true,
+        // 페이지 전환효과 slidesPerView효과와 같이 사용 불가
+        // effect: 'fade',
+ 
+        //자동 스크를링
+        autoplay: {
+          //시간 1000 이 1초
+          delay: 2500,
+          disableOnInteraction: false,
+         },
+        
+        //페이징
+        pagination: {
+          //페이지 기능
+          el: '.swiper-pagination',
+          //클릭 가능여부
+          clickable: true,
+        },
 
+        //방향표
+        navigation: {
+          //다음페이지 설정
+          nextEl: '.swiper-button-next',
+          //이전페이지 설정
+          prevEl: '.swiper-button-prev',
+        },
+        
+      });
+  </script>
+	
+	
 	<script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
-	<!-- <script src="/Proj_OnedayClass/script/classbbs.js"></script>  -->
+	<script src="/Proj_OnedayClass/script/classbbs.js"></script>
 	<!-- <script src="/Proj_OnedayClass/script/onoffshop.js"></script>-->
 </body>
 </html>

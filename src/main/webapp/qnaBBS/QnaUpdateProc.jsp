@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
 
-<jsp:useBean id="bean" class="pack_QnaBBS.BoardBean" scope="session" />
+<jsp:useBean id="qnaBean" class="pack_QnaBBS.BoardBean" scope="session" />
 <!-- Read.jsp에서 DB 에서 자료를 반환하여 session을 만들 때 세션이름을 "bean"으로,
        세션에 저장되는 값을 DB에서 반환된 자료를 setter로 저장한 BoardBean 객체를
        생성했었음 -->         
@@ -24,7 +24,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 
 String upUid = upBean.getqUid();   
                      // 사용자가 Update.jsp에서 로그인된 아이디
-String realDBUid = bean.getqUid();   
+String realDBUid = qnaBean.getqUid();   
                      // DB에서 불러온 실제 작성자 아이디(세션에 저장되어 있었음)
                      
 //검색어 수신 시작

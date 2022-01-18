@@ -12,7 +12,8 @@ String keyField = request.getParameter("keyField");
 String keyWord = request.getParameter("keyWord");
 //검색어 수신 끝
 
-BoardBean bean = (BoardBean)session.getAttribute("bean");
+BoardBean bean = (BoardBean)session.getAttribute("qnaBean");
+
 String qTitle = bean.getqTitle();
 String qUid = bean.getqUid();
 String qContent = bean.getqContent();

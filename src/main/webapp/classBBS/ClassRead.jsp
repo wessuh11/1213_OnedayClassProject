@@ -54,6 +54,7 @@ String cCategory7 = "7";
 
 session.setAttribute("bean", bean);
 //불러온 모든걸 세션으로 만들어줌!!
+//Ajax 사용시 
 %>  
     
 <!DOCTYPE html>

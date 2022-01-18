@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<jsp:useBean id="bean" class="pack_QnaBBS.BoardBean" scope="session" />    
+<jsp:useBean id="qnaBean" class="pack_QnaBBS.BoardBean" scope="session" />    
     
 <%
 request.setCharacterEncoding("UTF-8");
@@ -12,12 +12,12 @@ String keyWord = request.getParameter("keyWord");
 //검색어 수신 끝
 
 String nowPage = request.getParameter("nowPage");
-String qUid = bean.getqUid();
-String qTitle = bean.getqTitle();
-String qContent = bean.getqContent();
-String qRef = String.valueOf(bean.getqRef());
-String qDepth = String.valueOf(bean.getqDepth());
-String qPos = String.valueOf(bean.getqPos());
+String qUid = qnaBean.getqUid();
+String qTitle = qnaBean.getqTitle();
+String qContent = qnaBean.getqContent();
+String qRef = String.valueOf(qnaBean.getqRef());
+String qDepth = String.valueOf(qnaBean.getqDepth());
+String qPos = String.valueOf(qnaBean.getqPos());
 
 String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");

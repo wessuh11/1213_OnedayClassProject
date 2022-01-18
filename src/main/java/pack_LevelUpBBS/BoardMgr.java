@@ -470,7 +470,7 @@ return totalCnt;
 	
 ///////////// 등업 승인(LvlUpAcProc.jsp) 시작 //////////////////////	
 	
-	public boolean AcBoard(String LvlUid) {
+	public boolean AcBoard(String lvlUid, String lvlName, String lvlSns) {
 
 		Connection objConn = null;
 		PreparedStatement objPstmt = null;
@@ -479,9 +479,11 @@ return totalCnt;
 		
 		try {
 			objConn = pool.getConnection(); 
-		sql = "update memberlist set uLevel=2 where uId=?";
+		sql = "update memberlist set uLevel=2, sName=?, sSns=? where uId=?";
 		objPstmt = objConn.prepareStatement(sql);
-		objPstmt.setString(1, LvlUid);
+		objPstmt.setString(1, lvlName);
+		objPstmt.setString(2, lvlSns);
+		objPstmt.setString(3, lvlUid);
 		objPstmt.executeUpdate();
 		
 		} catch (Exception e) {

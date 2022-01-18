@@ -76,7 +76,6 @@ $(function(){
 		let lvlTitle = $("#lvlTitle").val().trim();
 		let lvlContent= $("#lvlContent").val().trim();
 		let lvlName= $("#lvlName").val().trim();
-		let lvlSns= $("#lvlSns").val().trim();
 		
 		if (lvlTitle == "") {
 			alert("제목은 입력해주세요.");
@@ -87,13 +86,11 @@ $(function(){
 		} else if (lvlName == "") {
 			alert("상호명을 입력해주세요.");
 			$("#lvlName").focus();
-		} else if (lvlSns == "") {
-			alert("상호명을 입력해주세요.");
-			$("#lvlSns").focus();
-		} else {
+		}  else {
+		if(window.confirm("게시글 등록 하시겠습니까?")){
 			$("#postFrm").submit();
+			}
 		}
-	
 	});	
 	//////////////// 게시글 등록 끝 //////////////////
 	
@@ -183,14 +180,16 @@ $(function(){
 	
 	//////////////// Read.jsp 에서 등업 수락 버튼 시작 //////////////////
 	$("button#AcBtn").click(function(){
-		$("#AcForm").submit();
+		if(window.confirm("등업 승인 하시겠습니까?")){
+			$("#AcForm").submit();
+		}
 	});
 	//////////////// Read.jsp 에서 등업 수락 버튼 끝 //////////////////
 	
 	
 	//////////////// Read.jsp 에서 등업 거절 버튼 시작 //////////////////
 	$("button#RjBtn").click(function(){
-			alert("승인 거절 되었습니다.");
+		if(window.confirm("등업 거절 하시겠습니까?")){
 		let nowPage = $("input#nowPage").val().trim();
 		let lvlNum = $("input#lvlNum").val().trim();
 				
@@ -203,6 +202,7 @@ $(function(){
 			url += "&keyField="+p3;
 	     	url += "&keyWord="+p4; 
 		location.href=url;
+		}
 	});
 	//////////////// Read.jsp 에서 등업 거절 버튼 끝 //////////////////
 	

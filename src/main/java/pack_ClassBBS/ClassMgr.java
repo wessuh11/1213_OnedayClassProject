@@ -150,8 +150,8 @@ public class ClassMgr {
 	}
 ////////////////게시판 입력(ClassPostProc.jsp) 끝  ///////////////////////
 
-///////////////  게시판 리스트 출력(ClassRead.jsp) 시작    ///////////////
-	public Vector<ClassBean> getBoardList(String cCategorySel, int start, int end) {
+///////////////  게시판 리스트 출력(ClassList.jsp) 추천리스트 ///////////////
+	public Vector<ClassBean> getBoardLike(String cCategorySel, int start, int end) {
 
 		Vector<ClassBean> vList = new Vector<>();
 		Connection objConn = null;
@@ -170,14 +170,12 @@ public class ClassMgr {
 				objPstmt.setInt(2, end);
 			} else {
 				// 카테고리 메뉴 클릭 시
-				sql = "select * from classbbs " + "where cCategory like ? AND cStatus<3 " + "order by cLikes desc ?, ?";
+				sql = "select * from classbbs " + "where cCategory =? AND cStatus<3 " + "order by cLikes desc limit ?, ?";
 				objPstmt = objConn.prepareStatement(sql);
-				objPstmt.setString(1, "%" + cCategorySel + "%");
+				objPstmt.setString(1, cCategorySel);
 				objPstmt.setInt(2, start);
 				objPstmt.setInt(3, end);
 			}
-			objRs = objPstmt.executeQuery();
-
 			objRs = objPstmt.executeQuery();
 
 			while (objRs.next()) {
@@ -203,10 +201,10 @@ public class ClassMgr {
 		return vList;
 	}
 
-///////////////  게시판 리스트 출력(ClassList.jsp) 끝    ///////////////
+///////////////  게시판 리스트 출력(ClassList.jsp) 추천리스트 끝    ///////////////
 
-///////////////  게시판 리스트 출력(ClassRead.jsp) 시작    ///////////////
-	public Vector<ClassBean> getBoardList2(String cCategorySel, int start, int end) {
+///////////////  게시판 리스트 출력(ClassList.jsp) 일반   ///////////////
+	public Vector<ClassBean> getBoardList(String cCategorySel, int start, int end) {
 
 		Vector<ClassBean> vList = new Vector<>();
 		Connection objConn = null;
@@ -225,14 +223,12 @@ public class ClassMgr {
 				objPstmt.setInt(2, end);
 			} else {
 				// 카테고리 메뉴 클릭 시
-				sql = "select * from classbbs " + "where cCategory like ? AND cStatus<3 " + "order by cNum asc ?, ?";
+				sql = "select * from classbbs " + "where cCategory = ? AND cStatus<3 " + "order by cNum asc limit ?, ?";
 				objPstmt = objConn.prepareStatement(sql);
-				objPstmt.setString(1, "%" + cCategorySel + "%");
+				objPstmt.setString(1, cCategorySel);
 				objPstmt.setInt(2, start);
 				objPstmt.setInt(3, end);
 			}
-			objRs = objPstmt.executeQuery();
-
 			objRs = objPstmt.executeQuery();
 
 			while (objRs.next()) {
@@ -258,7 +254,45 @@ public class ClassMgr {
 		return vList;
 	}
 
-///////////////  게시판 리스트 출력(ClassList.jsp) 끝    ///////////////
+///////////////  게시판 리스트 출력(ClassList.jsp) 끝 일반  ///////////////
+
+//////////////////총 게시물 수(List.jsp) 시작 //////////////////
+public int getTotalCount(String cCategorySel) {
+
+Connection objConn = null;
+PreparedStatement objPstmt = null;
+ResultSet objRs = null;
+String sql = null;
+int totalCnt = 0;
+
+try {
+objConn = pool.getConnection(); // DB연동
+
+if (cCategorySel.equals("null") || cCategorySel.equals("")) {
+	sql = "select count(*) from classBbs where cStatus<3";
+	objPstmt = objConn.prepareStatement(sql);
+} else {
+	sql = "select count(*) from classBbs ";
+	sql += "where cCategory = ? AND cStatus<3";
+	objPstmt = objConn.prepareStatement(sql);
+	objPstmt.setString(1, cCategorySel);
+}
+
+objRs = objPstmt.executeQuery();
+
+if (objRs.next()) {
+	totalCnt = objRs.getInt(1);
+}
+
+} catch (Exception e) {
+System.out.println("SQL이슈4 : " + e.getMessage());
+} finally {
+pool.freeConnection(objConn, objPstmt, objRs);
+}
+
+return totalCnt;
+}
+//////////////////총 게시물 수(List.jsp) 끝 //////////////////
 
 ////////게시판 뷰페이지 출력(ClassRead.jsp, 내용보기 페이지) 시작 ////////
 
@@ -407,7 +441,7 @@ public class ClassMgr {
 //////게시글 수정페이지 (ClassUpdateProc.jsp) 끝 ////////
 
 ///////////// 좋아요 시작? RvLikeAction.jsp //////////////	
-	public int UpdateLike(ClassLikeBean ClassLikeBean) {
+	public int UpdateLike(ClassLikeBean classLikeBean) {
 		int result = 0;
 
 		Connection objConn = null;
@@ -419,8 +453,8 @@ public class ClassMgr {
 			sql = "insert into classLikes (uId, cNum) values(?,?)";
 			objPstmt = objConn.prepareStatement(sql);
 			// objPstmt.setString(1, bean.getrUid());
-			objPstmt.setString(1, ClassLikeBean.getuId());
-			objPstmt.setInt(2, ClassLikeBean.getcNum());
+			objPstmt.setString(1, classLikeBean.getuId());
+			objPstmt.setInt(2, classLikeBean.getcNum());
 			result = objPstmt.executeUpdate();
 		} catch (Exception e) {
 			System.out.println("SQL이슈 : " + e.getMessage());

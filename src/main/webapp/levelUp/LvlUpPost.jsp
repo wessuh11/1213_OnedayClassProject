@@ -20,18 +20,16 @@ String str2 = "2";
     <link rel="stylesheet" href="/Proj_OnedayClass/style/lvlUpBBS.css">
 </head>
 <body>
-	<div id="wrap">
-	<%@include file="../include/Header.jsp"%> 
-	
-         
+	<div id="wrap">       
 		<!--  HTML 템플릿(Template, Templet)  헤더 시작 -->
-		<h1>등업 페이지</h1>
+		<%@include file="../include/Header.jsp"%> 
 		
 		<!--  HTML 템플릿(Template, Templet)  헤더 끝 -->
 		
 		
 		<main id="main" class="post">   <!-- 본문영역 html 템플릿 시작 -->
-		<div id="postmain">
+		<h1>등업 페이지</h1>
+		<div id="postwrap">
 			<h2>등업 작성</h2>
 			
 			<form name="postFrm" action="LvlUpPostProc.jsp"
@@ -66,14 +64,14 @@ String str2 = "2";
 							</td>
 						</tr>
 						<tr>
-							<td class="req">SNS</td> <!-- td.req 필수입력 -->
+							<td>SNS</td> <!-- td.req 필수입력 -->
 							<td>
 								<input type="text" name="lvlSns"
 								maxlength="50" id="lvlSns">
 							</td>
 						</tr>
 						<tr>
-							<td>등업관련 파일첨부</td>
+							<td class="req">등업관련 파일첨부</td>
 							<td>
 								<span class="spanFile">
 									<input type="file" name="lvlFileName"

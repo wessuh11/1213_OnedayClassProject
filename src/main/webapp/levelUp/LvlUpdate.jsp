@@ -32,7 +32,7 @@ String str2 = "2";
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>게시글 수정페이지</title>
+	<title>등업 수정페이지</title>
     <link rel="stylesheet" href="/Proj_OnedayClass/style/lvlUpBBS.css">
 </head>
 <body>
@@ -40,14 +40,13 @@ String str2 = "2";
 		<%@include file="../include/Header.jsp"%> 
 		
 		<!--  HTML 템플릿(Template, Templet)  헤더 시작 -->
-		<h1>수정페이지</h1>
 		<!--  HTML 템플릿(Template, Templet)  헤더 끝 -->
 		
 		
 		<main id="main" class="mod">   <!-- 본문영역 html 템플릿 시작 -->
 			<!--  뷰페이지 내용 출력 시작 -->
-			
-			
+			<div id="modwrap">
+			<h1>등업 수정</h1>
 			<form name="updateFrm" action="LvlUpdateProc.jsp"
 					method="get" id="updateFrm">
 		
@@ -119,7 +118,7 @@ String str2 = "2";
 			</form>
 			<!--  뷰페이지 내용 출력 끝 -->
 			
-			
+			</div>
 		</main>  <!-- 본문영역 html 템플릿 끝 -->
 
 		<%@include file="../include/Footer.jsp"%>

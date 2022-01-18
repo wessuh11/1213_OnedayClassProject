@@ -23,16 +23,22 @@
 
 
 /*///////////////// 글쓰기 Post.jsp 시작 ////////////////////*/
-main.post div#postmain{
+main.post div#postwrap{
 width: 50%;
 margin: 0 auto;	
+}
+
+main.post h1{
+	text-align: center;
+	margin-bottom: 40px;
+	color: #888;
 }
 
 main.post h2 {
 	text-align: center;
 	padding: 10px 0;	
 	margin-bottom: 20px;
-	background-color: rgb(255, 128, 128);
+	background-color: #eee;
 }
 
 main.post table {
@@ -144,16 +150,25 @@ main.list div#pageInfo {
 	justify-content: space-between;
 }
 
+main.list div#pageInfo span{
+	margin-bottom: 15px;
+}
+
+main.list h1 {
+	text-align: center;
+	margin-bottom: 50px;
+	color: #888;
+}
+
 main.list table#boardList {
 	width: 60%;	
 	border-collapse: collapse;
 	margin: 0 auto;
 }
 
-
 main.list th {
 	padding: 8px 2px;
-	background-color: rgb(255, 128, 128)
+	background-color: #eee;
 }
 
 
@@ -245,14 +260,18 @@ main.list form#searchFrm > div {
 }
 
 main.list #searchFrm select,
-main.list #searchFrm input,
-main.list #searchFrm button {
+main.list #searchFrm input{
+	margin-top: 16px;
 	font-size: 16px;
-	padding: 2px 6px;
 }
 main.list #searchFrm button {
 	font-weight: bold;
 	cursor: pointer;
+}
+main.list #searchFrm button#searchBtn.butcs {
+	width: 70px;
+	font-size: 18px;
+	padding-bottom: 10px;
 }
 /*/////////// 리스트 List.jsp search, searchFrm 검색 끝 ////////////////*/
 
@@ -260,11 +279,25 @@ main.list #searchFrm button {
 
 
 /*///////////////// 뷰(내용 보기) Read.jsp 시작 ////////////////////*/
+main.read div#readwrap{
+	width: 60%;
+	margin: 0 auto;
+	
+}
+
+main.read h1{
+	text-align: center;
+	margin-bottom: 50px;
+	color: #888;
+	
+}
+
 main.read h2 {
+	
 	text-align: center;
 	padding: 10px;
 	margin-bottom: 10px;
-	background-color: rgb(255, 128, 128);
+	background-color:#eee;
 }
 
 main.read table#readTbl {
@@ -387,11 +420,22 @@ main.delete tfoot#readTblFoot td#btnAreaTd button {
 
 /*///////////////// 게시글 수정 Update.jsp 시작 ////////////////////*/
 
+main.mod div#modwrap{
+width: 50%;
+margin: 0 auto;	
+}
+
+main.mod h1 {
+	text-align: center;
+	margin-bottom: 50px;
+	color: #888;	
+}
+
 main.mod h2 {
 	text-align: center;
 	padding: 10px;
 	margin-bottom: 10px;
-	background-color: rgb(255, 128, 128);
+	background-color: #eee;
 }
 
 
@@ -461,13 +505,23 @@ main.mod tfoot td#btnAreaTd button {
 
 /*///////////////// 게시글 답변 Reply.jsp 시작 ////////////////////*/
 
+main.reply div#Rewrap{
+width: 50%;
+margin: 0 auto;	
+}
+
+main.reply h1 {
+	text-align: center;
+	margin-bottom: 50px;
+	color: #888;	
+}
+
 main.reply h2 {
 	text-align: center;
 	padding: 10px;
 	margin-bottom: 10px;
-	background-color: rgb(255, 128, 128);
+	background-color: #eee;
 }
-
 
 main.reply table#replyTbl {
 	width: 100%;

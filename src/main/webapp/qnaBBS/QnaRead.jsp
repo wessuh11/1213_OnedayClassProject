@@ -40,7 +40,9 @@ if(qFileSize > 1024) {
 } 
 
 
-session.setAttribute("bean", bean);
+
+session.setAttribute("qnaBean", bean);
+
 String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
