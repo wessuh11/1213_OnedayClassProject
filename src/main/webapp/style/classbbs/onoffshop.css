@@ -1,5 +1,5 @@
 @charset "UTF-8";
-@import url(style_Reset.css);
+@import url(../style_Reset.css);
 
 /* header#header 시작 */
 header#header {
@@ -272,11 +272,21 @@ width: 100%;
 /*############### 오프라인css 시작 ################*/
 
 
+/*                          페이징 요소                          */
+table.page{
+	width: 100%;
+	text-align: center;
+	border: 1px solid #000;
+	font-size: 18px;
+}
+
+
+
+/*                          페이징 요소 끝                         */
+
 /*#########################################################*/
 /*################### div#Gallerybbs 종료 giltaehyoung#################*/
 /*#########################################################*/
-
-
 
 /* footer#footer 시작 */
 footer#footer {
