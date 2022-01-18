@@ -16,6 +16,7 @@ String uId = (String)session.getAttribute("idKey");
     <link rel="stylesheet" href="/Proj_OnedayClass/style/sign.css">
 </head>
 <body>
+<<<<<<< HEAD
     <div id="wrap">
     
         <header id="header" class="flex-container">
@@ -110,6 +111,49 @@ String uId = (String)session.getAttribute("idKey");
         </footer>
         <!-- footer#footer -->
     </div>
+=======
+ 	<% if (uId != null) {      %>
+	 <script>
+       	alert("이미 로그인 상태입니다."); 
+		location.href="/Proj_OnedayClass/Index.jsp"; 	
+	</script>
+	  <% } else { // 현재 로그인 상태라면 %> 
+    <div id="wrap">
+    <%@include file="../include/Header.jsp"%>
+        <!-- 로그인시작 -->
+        <div id="signin">
+        <form action="LoginProc.jsp" id="loginFrm" name="loginFrm">
+			<table>
+				<caption><hr><h3>로그인</h3></caption>
+				<tbody>
+					<tr>
+						<td>
+							<input type="text" class="loginInput" name="uId" id="uId" autofocus size="30"
+                            placeholder="아이디">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="password" class="loginInput" name="uPw" id="uPw" size="30"
+                            placeholder="비밀번호">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">						
+							<button type="button" id="loginBtn">로그인</button>
+							<button type="button" id="signUpBtn">회원가입</button>
+						</td>						
+					</tr>
+				</tbody>
+			</table>
+		</form>
+        </div>
+        <!-- 로그인끝 -->
+    	<%@include file="../include/Footer.jsp"%>
+        <!-- footer#footer -->
+    </div>
+    <%} %>	
+>>>>>>> refs/heads/onedayclass_Mo
 </body>
     <script src="../script/jquery-3.6.0.min.js"></script>
 	<script src="/Proj_OnedayClass/script/script.js"></script>

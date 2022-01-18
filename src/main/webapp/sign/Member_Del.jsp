@@ -11,8 +11,13 @@ if (res) {
 	session.invalidate();
 }
 %>
+<<<<<<< HEAD
 
 <script>
 	alert("정상적으로 처리되었습니다.\n확인을 눌러주세요.");
 	location.href="/Proj_OnedayClass/Index.jsp";
+=======
+<script>
+	location.href="../Index.jsp";
+>>>>>>> refs/heads/onedayclass_Mo
 </script>

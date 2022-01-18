@@ -37,6 +37,7 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 </head>
 <body>
 	<div id="wrap">
+<<<<<<< HEAD
         <header id="header" class="flex-container">
             <div id="headerLogo">
                 <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
@@ -161,6 +162,95 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
         </div>
 		<!-- div#mod -->
 
+=======
+	<%@include file="../include/Header.jsp"%>
+
+        <div id="mod">
+			<form name="modFrm" id="modFrm" action="Member_ModProc.jsp" method="get">
+				<table>
+					<caption><hr><h3>회원 정보 수정</h3></caption>
+					<tbody>
+				  		<tr>
+							<td>아이디</td>
+							<td><%=uId %></td>
+						</tr>
+		                <tr>
+							<td class="req">패스워드</td>
+							<td>
+								<input type="password" class="umem" name="uPw" id="uPw" size="40"
+						        value="<%=uPw %>">
+						        <input type="hidden" id="uPw_bak" value="<%=uPw %>">
+							</td>
+						</tr>
+						<tr>
+							<td>패스워드 확인</td>
+							<td>
+								<input type="password" class="umem" id="uPw_Re" size="40"
+		                    	value="<%=uPw %>">
+							</td>
+						</tr>
+						<tr>
+							<td>이름</td>
+							<td><%=uName %></td>
+						</tr>
+						<tr>
+							<td class="req">전화번호</td>
+							<td>
+						        <input type="text" class="umem" name="uPhone" id="uPhone" size="40"
+						        value="<%=uPhone%>">    
+						        <input type="hidden" id="uPhone_bak" value="<%=uPhone %>">
+							</td>
+						</tr>                      
+		            	<tr>
+		            		<td class="req">주소</td>
+							<td>
+								<input type="text" name="uZip" id="uZip" size="25" 
+								readonly value="<%=uZip%>">
+								<input type="hidden" id="uZip_bak" value="<%=uZip %>">
+								<button type="button" id="zipBtn">우편번호찾기</button>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<input type="text" id="uAddr1" name="uAddr1" size="40"
+								readonly value="<%=uAddr1%>">
+								<input type="hidden" id="uAddr1_bak" value="<%=uAddr1 %>">
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<input type="text" id="uAddr2" name="uAddr2" size="40"
+								value="<%=uAddr2%>">
+								<input type="hidden" id="uAddr2_bak" value="<%=uAddr2 %>">
+							</td>
+						</tr>
+		
+						<tr>
+							<td class="req">이메일</td>
+							<td>
+								<input type="text" class="umem" name="uEmail" id="uEmail" size="40"
+		                     	value="<%=uEmail%>">
+		                     	<input type="hidden" id="uEmail_bak" value="<%=uEmail %>">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">
+								<button type="button" id="modBtn">정보수정</button>
+								<button type="reset">다시쓰기</button>
+								<button type="button" id="mainBtn">메인으로</button>		
+								<button type="button" id="logoutBtn">로그아웃</button>					
+							</td>
+						</tr>
+		       		</tbody>
+				</table>
+			</form>
+			<!-- document.modFrm -->
+        </div>
+		<!-- div#mod -->
+		 <%@include file="../include/Footer.jsp"%>
+>>>>>>> refs/heads/onedayclass_Mo
 	</div>
 	<!-- div#wrap -->
 	
