@@ -105,8 +105,6 @@ $(function () {
 		$("#detailedContent").css({"display" : "block"});
     });
 
-    /*$("#onlineBtn").click(function(){
-        // $("#detailedContent").stop().slideUp(500);
-		$("#detailedContent").css({"display" : "none"});
-    });*/
-    
+	$("#memDrop").click(function(){
+        if(window.confirm("정말 삭제하시겠습니까 ?")) location.href="/Proj_OnedayClass/sign/Member_Del.jsp";
+    });

@@ -96,7 +96,7 @@ String uLevel = (String)session.getAttribute("levelKey");
                         <div id="subMenu2" class="subContainer">
                             <ul class="subMenu flex-container">
                                 <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_PreMod.jsp" id="memModBtn">회원 정보 수정</a></li>
-                                <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Del.jsp" id="memDrop">회원 탈퇴</a></li>
+                                <li class="subMenuLi"><a href="#" id="memDrop">회원 탈퇴</a></li>
                             </ul>
                         </div>
                     </li>
@@ -237,16 +237,17 @@ String uLevel = (String)session.getAttribute("levelKey");
         <!-- footer#footer -->
     </div>
 
+
+    <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
+    <script src="/Proj_OnedayClass/script/script.js"></script>
+    
+</body>
+</html>
+
 	<% } else { %>
 	<script>
-		alert("비정상적인 접속입니다.\n"
-			+"메인페이지로 이동합니다."); 
+		alert("비정상적인 접속입니다.\n메인페이지로 이동합니다."); 
 		// 현재 메인페이지는 없기 때문에 로그인페이지로 이동
 		location.href="/Proj_OnedayClass/Index.jsp";
 	</script>
 	<%} %>
-
-    <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
-    <script src="/Proj_OnedayClass/script/script.js"></script>
-</body>
-</html>

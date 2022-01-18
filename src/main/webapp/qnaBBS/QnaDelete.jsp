@@ -15,7 +15,7 @@ String keyWord = request.getParameter("keyWord");
 //검색어 수신 끝
 String uId = (String)session.getAttribute("idKey");
 String uLevel = (String) session.getAttribute("levelKey");
-BoardBean bean = (BoardBean) session.getAttribute("bean");
+BoardBean bean = (BoardBean) session.getAttribute("qnaBean");
 
 String realDBUid = bean.getqUid();
 
