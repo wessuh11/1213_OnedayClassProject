@@ -1,6 +1,6 @@
 @charset "UTF-8";
-@import url(style_Reset.css);
-@import url(style.css);
+@import url(../style_Reset.css);
+@import url(../style.css);
 
 div#main{
 	width: 1000px;
@@ -63,7 +63,7 @@ td.cDelivery{
 div#thumbinfo{
 	width: 500px;
 	height: 350px;
-    border: 1px solid #000;
+/*    border: 1px solid #000;*/
 }
 
 div#thumbinfo table{
@@ -73,7 +73,7 @@ div#thumbinfo table{
 
 div#thumbinfo tr, td{
 	height: 40px;
-    border: 1px solid #000;
+/*    border: 1px solid #000;*/
 }
 
 div#thumbinfo button.like{
@@ -88,7 +88,25 @@ div#thumbinfo button.like{
 }
 
 div#thumbinfo button.buy{
-	width: 400px;
+	width: 300px;
+	height: 60px;
+	font-size: 30px;
+	margin-left: 5px;
+	border: 3px solid #f44336;
+	background-color: #fff;
+}
+
+div#thumbinfo button.buy{
+	width: 300px;
+	height: 60px;
+	font-size: 30px;
+	margin-left: 5px;
+	border: 3px solid #f44336;
+	background-color: #fff;
+}
+
+div#thumbinfo button.put{
+	width: 100px;
 	height: 60px;
 	font-size: 30px;
 	margin-left: 5px;
@@ -99,7 +117,7 @@ div#thumbinfo button.buy{
 div#teacherbtn{
 	width: 1000px;
 	height: 70px;
-	border: 1px solid #000;
+/*    border: 1px solid #000;*/
 	margin: 20px auto;
 }
 
@@ -140,19 +158,19 @@ div#boardmenu ul li:hover a {
 div#detail_expage{
     width: 1000px;
     height: 100px;
-    border: 1px solid #000;
+/*    border: 1px solid #000;*/
     font-size: 40px;
 }
 
 
 div#info{
-	width: 1000px;
-	border: 1px solid #000;
+	width: 100%;
+/*    border: 1px solid #000;*/
 }
 
 div#info table{
-	width: 1000px;
-	border: 1px solid #000;
+	width: 100%;
+/*    border: 1px solid #000;*/
 }
 
 

@@ -95,12 +95,29 @@ $(function () {
     $("#mainLi2").mouseout(function(){
         $(".mainLi #subMenu2").stop().slideUp(100);
     });
+    
+     $("#mainLi3").mouseover(function() {
+        $(".mainLi #subMenu3").stop().slideDown(200);
+    });
+
+    $("#mainLi3").mouseout(function(){
+        $(".mainLi #subMenu3").stop().slideUp(100);
+    });
 
 ///////////////////////////// 서브메뉴 끝 ///////////////////////////////
 	$("#onlineBtn").click(function() {
         // $("#detailedContent").stop().slideDown(800);
 		$("#detailedContent").css({"display" : "block"});
     });
+  	$("#offlineBtn").click(function() {
+        // $("#detailedContent").stop().slideDown(800);
+        $("#detailedContent").css({"display" : "block"});
+    });
+    /*$("#onlineBtn").click(function(){
+        // $("#detailedContent").stop().slideUp(500);
+		$("#detailedContent").css({"display" : "none"});
+    });*/
+    
     
 //////////////////////////////ad page 메인 메뉴/////////////////////////
 	$("#adMainLi").mouseover(function(){

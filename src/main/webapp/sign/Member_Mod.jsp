@@ -37,7 +37,6 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 </head>
 <body>
 	<div id="wrap">
-
 	<%@include file="../include/Header.jsp"%>
 
         <div id="mod">
@@ -125,7 +124,6 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
         </div>
 		<!-- div#mod -->
 		 <%@include file="../include/Footer.jsp"%>
->>>>>>> refs/heads/onedayclass_Mo
 	</div>
 	<!-- div#wrap -->
 	

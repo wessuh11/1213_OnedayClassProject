@@ -42,11 +42,14 @@ String str2 = "2";
 	<%@include file="../include/Header.jsp"%> 
 	
 		<!--  HTML 템플릿(Template, Templet)  헤더 시작 -->
-		<h1><%=lvlUid %>님의 등업 신청글</h1>
+		
 		<!--  HTML 템플릿(Template, Templet)  헤더 끝 -->
 		
 		<main id="main" class="reply">   <!-- 본문영역 html 템플릿 시작 -->
 			<!--  답변페이지 내용 출력 시작 -->
+			<div id="Rewrap">
+			
+			<h1><%=lvlUid %>님의 등업 신청글</h1>
 			
 			<form name="replyFrm" action="LvlUpReplyProc.jsp"
 					method="get" id="replyFrm">
@@ -133,7 +136,7 @@ String str2 = "2";
 			</form>
 			<!--  답변페이지 내용 출력 끝 -->
 			
-			
+			</div>
 		</main>  <!-- 본문영역 html 템플릿 끝 -->
 		<%@include file="../include/Footer.jsp"%>
 

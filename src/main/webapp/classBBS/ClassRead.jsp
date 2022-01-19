@@ -10,10 +10,6 @@ String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
 
-//로그인 등급 변수
-String AdminNum = "3";
-String TeaNum = "2";
-
 int numParam = Integer.parseInt(request.getParameter("cNum")); //현재 페이지 번호
 String nowPage = request.getParameter("nowPage");
 
@@ -40,21 +36,11 @@ int cFileSize= bean.getcFileSize(); //크기저장
 int cMaxStu= bean.getcMaxStu(); //최대 수강인원
 int cApplyStu= bean.getcApplyStu(); //수강신청 인원
 
-
-//카테고리 넘버
-String cCategory1 = "1";
-String cCategory2 = "2";
-String cCategory3 = "3";
-String cCategory4 = "4";
-String cCategory5 = "5";
-String cCategory6 = "6";
-String cCategory7 = "7";
-
 //수강인원 꽉차면 닫아줌
-
-session.setAttribute("bean", bean);
 session.setAttribute("cNumKey", cNum);
+session.setAttribute("bean", bean);
 //불러온 모든걸 세션으로 만들어줌!!
+//Ajax 사용시 
 %>  
     
 <!DOCTYPE html>
@@ -64,7 +50,7 @@ session.setAttribute("cNumKey", cNum);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>클래스 상세페이지</title>
-	<link rel="stylesheet" href="/Proj_OnedayClass/style/classbbs/classread.css">
+	<link rel="stylesheet" href="/Proj_OnedayClass/style/classBBS/classread.css">
 </head>
 <body>
 	<div id="wrap">
@@ -77,7 +63,7 @@ session.setAttribute("cNumKey", cNum);
         	 	<table>
         	 	<tr>
         	 		<td class="thumimg">
-        	 			<img src="/Proj_OnedayClass/fileupload/classfileupload/<%=cThumbName%>" alt="썸네일"
+        	 			<img src="/Proj_OnedayClass/fileUpload/classfileupload/<%=cThumbName%>" alt="썸네일"
         	 			width ="490px" height = "345px">
         	 		</td>
         	 	</tr>
@@ -90,19 +76,19 @@ session.setAttribute("cNumKey", cNum);
         			
         			<tr>
         				<td colspan ="2" class="cCategory">[<%
-        				if(cCategory1.equals(cCategory)){
+        				if(cCategory.equals("1")){
         					cCategory = "핸드 메이드";
-        				} else if(cCategory2.equals(cCategory)){
+        				} else if(cCategory.equals("2")){
         					cCategory = "쿠킹";
-        				} else if(cCategory3.equals(cCategory)){
+        				} else if(cCategory.equals("3")){
         					cCategory = "드로잉";
-        				} else if(cCategory4.equals(cCategory)){
+        				} else if(cCategory.equals("4")){
         					cCategory = "음악";
-        				} else if(cCategory5.equals(cCategory)){
+        				} else if(cCategory.equals("5")){
         					cCategory = "요가·필라테스";
-        				} else if(cCategory6.equals(cCategory)){
+        				} else if(cCategory.equals("6")){
         					cCategory = "레져·스포츠";
-        				} else if(cCategory7.equals(cCategory)){
+        				} else if(cCategory.equals("7")){
         					cCategory = "반려동물";
         				} else {
         					cCategory = "자기계발";
@@ -143,6 +129,9 @@ session.setAttribute("cNumKey", cNum);
         				<td>
         					<button type="button" class="buy" id="buy">클래스 신청하기</button>
         				</td>
+        				<td>
+        					<button type="button" class="put" id="put" onClick="location.href='../payment/CartAction.jsp?cNum=<%= cNum %>&uId=<%=uId%>&nowPage=<%=nowPage%>'">담기</button>
+        				</td>
         				<!-- 결제페이지 이동 -->
         			</tr>
         		</table>
@@ -152,7 +141,7 @@ session.setAttribute("cNumKey", cNum);
         </div>
         <!-- div#info -->
         
-       <% if(uId != null && AdminNum.equals(uLevel)) { %>
+       <% if(uId != null && uLevel.equals("3")) { %>
 	    <div id="teacherbtn">
 		    <table>
 			    <tr>
@@ -169,12 +158,12 @@ session.setAttribute("cNumKey", cNum);
 	    <%} %>
         
         
-	    <% if(uId != null && TeaNum.equals(uLevel)) { %>
+	    <% if(uId != null && uLevel.equals("2")) { %>
 	    <div id="teacherbtn">
 		    <table>
 			    <tr>
 			        <td>
-		        		<button type="button" class="teacherchoice" id ="modBtn">클래스 수정</button>
+		        		<button type="button" class="teacherchoice" id ="classmodbtn">클래스 수정</button>
 		           </td>
 		        	<td>
 		        		<button type="button" class="teacherchoice" id ="delBtn">클래스 삭제</button>
@@ -192,20 +181,23 @@ session.setAttribute("cNumKey", cNum);
 	    <div id="boardmenu">
 	    	 <ul class="flex-container">
                     <li><a href="#">상세</a></li>
-                    <li><a href="#">리뷰</a></li>
-                    <li onclick="qnaCall(<%=numParam%>)" ><a href="#">문의</a></li>
+                    <li id="reviewcall"><a href="#">리뷰</a></li>
+                    <li id="qnacall"><a href="#">문의</a></li>
               </ul>
 	    </div>
 	    <!-- div#boardmenu -->
+		
+		<div id="tblArea">
+		
+		</div>
 
-		<div id="tblArea" style="width='100%';"></div>
-
+	
 		<!-- div#details -->
         	<div id="info">
         		<table>
         			<tr>
         				<td>
-        				<img src="/Proj_OnedayClass/fileupload/classfileupload/<%=cFileName%>" alt="상세정보"
+        				<img src="/Proj_OnedayClass/fileUpload/classfileupload/<%=cFileName%>" alt="상세정보"
         	 			width ="1000">
         				</td>
         			</tr>
@@ -219,9 +211,21 @@ session.setAttribute("cNumKey", cNum);
 		</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="/Proj_OnedayClass/script/classbbs.js"></script>
 	<script>
-		function qnaCall(cNum) {
+	$(function(){
+		$("#reviewcall").click(function(){
+			// ajax 통신
+			$.ajax({
+			    url : "/Proj_OnedayClass/reviewBBS/RvList.jsp",      // 컨트롤러에서 대기중인 URL 주소이다.
+			    type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			}).done(function(RvList){
+				$("#tblArea").html(RvList);
+			});
+		});
+	});
+	
+	$(function(){
+		$("#qnacall").click(function(){
 			// ajax 통신
 			$.ajax({
 			    url : "/Proj_OnedayClass/qnaBBS/QnaList.jsp",      // 컨트롤러에서 대기중인 URL 주소이다.
@@ -229,7 +233,10 @@ session.setAttribute("cNumKey", cNum);
 			}).done(function(qnaList){
 				$("#tblArea").html(qnaList);
 			});
-		}       
+		});
+	});    
+	
 	</script>
+	<script src="/Proj_OnedayClass/script/classbbs.js"></script>
 </body>
 </html>

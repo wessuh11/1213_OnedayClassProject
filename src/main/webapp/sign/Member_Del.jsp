@@ -11,7 +11,6 @@ if (res) {
 	session.invalidate();
 }
 %>
-
 <script>
 	location.href="../Index.jsp";
 </script>

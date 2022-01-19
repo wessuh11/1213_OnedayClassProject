@@ -15,7 +15,7 @@ int pagePerBlock = 5;   // 블럭당 표시되는 페이지 수의 개수
 int totalPage = 0;           // 전체 페이지 수
 int totalBlock = 0;          // 전체 블록수
 
- /*
+/*
 totalRecord=> 200     전체레코드
 numPerPage => 10
 pagePerBlock => 5
@@ -84,7 +84,7 @@ String str2 = "2";
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>등업 리스트</title>
+	<title>등업 신청 리스트</title>
     <link rel="stylesheet" href="/Proj_OnedayClass/style/lvlUpBBS.css">
 </head>
 <body>
@@ -92,10 +92,10 @@ String str2 = "2";
             <%@include file="../include/Header.jsp"%>
         
 		<!--  HTML 템플릿(Template, Templet)  헤더 시작 -->
-		<h1>등업 리스트</h1>	
+			
 		<!--  HTML 템플릿(Template, Templet)  헤더 끝 -->
 		<main id="main" class="list">   <!-- 본문영역 html 템플릿 시작 -->
-		
+		<h1>등업 리스트</h1>
 			<%
 				String prnType = "";
 				if (keyWord.equals("null") || keyWord.equals("")) {
@@ -108,7 +108,8 @@ String str2 = "2";
 			<div id="pageInfo" class="flex-container">
 				<span><%=prnType %> :  <%=totalRecord%> 개</span>
 				<span>페이지 :  <%=nowPage + " / " + totalPage%></span>  
-			</div>							
+			</div>		
+								
 			<table id="boardList">
 				<thead>
 					<tr>
@@ -122,8 +123,6 @@ String str2 = "2";
 					</tr>		
 				</thead>
 				<tbody>
-			
-	
 			
 			<%
 			vList = bMgr.getBoardList(keyField, keyWord, start, end, uId);  // DB에서 데이터 불러오기
@@ -243,8 +242,7 @@ String str2 = "2";
 							 	</span>					
 							<% } // End If%>		 	
 					<% }  // End For%>
-					<!-- 페이지 나누기용 페이지 번호 출력 끝  -->	
-					
+					<!-- 페이지 나누기용 페이지 번호 출력 끝  -->		
 				
 				<% if (totalBlock>nowBlock) { // 다음 블럭이 남아 있다면  %>
 							<span  class="moveBlockArea" onclick="moveBlock('<%=nowBlock+1%>', '<%=pagePerBlock%>')">
@@ -254,23 +252,14 @@ String str2 = "2";
 				<% } else { %>
 				            <span class="moveBlockArea"></span>
 				<% } %>
-				
-					
-					
+			
 				<%
 				}  // End if#01_totalPage
 				%>	
-									
-						
-						
-						
 						</td>
-						
-						<td colspan="3">
-						
+						<td colspan="3">		
 							<form name="searchFrm" class="flex-container"
-									id="searchFrm">
-							
+									id="searchFrm">			
 								<div>
 									<select name="keyField" id="keyField">
 										<option value="lvlTitle" 
@@ -281,22 +270,18 @@ String str2 = "2";
 												<% if(keyField.equals("lvlContent")) out.print("selected"); %>>내  용</option>
 									</select>
 								</div>
-								
 								<div>
 									<input type="text" name="keyWord" id="keyWord"
 									  id="keyWord" size="20" maxlength="30" value="<%=keyWord%>">
 								</div>
 								<div>
-									<button type="button" id="searchBtn">검색</button>
+									<button type="button" id="searchBtn" class="butcs">검색</button>
 								</div>
-															
 							</form>
-							
 							<!-- 검색결과 유지용 매개변수 데이터시작 -->
 							<input type="hidden" id="pKeyField" value="<%=keyField%>">
 							<input type="hidden" id="pKeyWord" value="<%=keyWord%>">
 							<!-- 검색결과 유지용 매개변수 데이터끝 -->
-						
 						</td>
 					</tr>
 					<tr>
@@ -304,10 +289,8 @@ String str2 = "2";
 							<a href="/Proj_OnedayClass/levelUp/LvlUpPost.jsp">글쓰기</a>
 						</td>						
 					</tr>
-					
 				</tbody>
 			</table>
-		
 		
 		</main>  <!-- 본문영역 html 템플릿 끝 -->
 		<%@include file="../include/Footer.jsp"%>

@@ -53,11 +53,11 @@ String uId = (String)session.getAttribute("idKey");
 		</form>
         </div>
         <!-- 로그인끝 -->
+        
     	<%@include file="../include/Footer.jsp"%>
         <!-- footer#footer -->
     </div>
     <%} %>	
-
 </body>
     <script src="../script/jquery-3.6.0.min.js"></script>
 	<script src="/Proj_OnedayClass/script/script.js"></script>

@@ -55,7 +55,7 @@ String str2 = "2";
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>글내용 보기</title>
+	<title>등업 내용</title>
     <link rel="stylesheet" href="/Proj_OnedayClass/style/lvlUpBBS.css">
 </head>
 <body>
@@ -63,14 +63,15 @@ String str2 = "2";
 		 <%@include file="../include/Header.jsp"%> 
 		 
 		<!--  HTML 템플릿(Template, Templet)  헤더 시작 -->
-		<h1><%=lvlUid %> 등업 문의</h1>
+		
 
 		<!--  HTML 템플릿(Template, Templet)  헤더 끝 -->
 		
 		
 		<main id="main" class="read">   <!-- 본문영역 html 템플릿 시작 -->
 			<!--  뷰페이지 내용 출력 시작 -->
-		
+		<h1><%=lvlUid %> 등업 문의</h1>
+		<div id="readwrap">
 			<h2><%=lvlTitle %></h2>
 				
 			<table id="readTbl">
@@ -126,6 +127,8 @@ String str2 = "2";
 							<button type="button" id="lvlListBtn" class="butcs"><%=listBtnLabel %></button>
 							<%if (str1.equals(uLevel)){%>
 							<button type="button" id="AcBtn" class="butcs">등업 승인</button>
+							<input type="hidden" name="lvlName" value="<%=lvlName%>">
+							<input type="hidden" name="lvlSns" value="<%=lvlSns%>">
 							<input type="hidden" name="lvlUid" value="<%=lvlUid%>">
 							<button type="button" id="RjBtn" class="butcs">등업 거절</button>
 							<%} else {%></form>
@@ -147,6 +150,7 @@ String str2 = "2";
 		  
 		
 			<!--  뷰페이지 내용 출력 끝 -->
+			</div>
 		</main>  <!-- 본문영역 html 템플릿 끝 -->
 		<%@include file="../include/Footer.jsp"%>
 

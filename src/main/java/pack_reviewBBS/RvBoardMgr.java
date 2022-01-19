@@ -1,6 +1,9 @@
 package pack_reviewBBS;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,6 +11,9 @@ import java.sql.SQLException;
 import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.PageContext;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -18,12 +24,12 @@ import pack_Util.UtilMgr;
 public class RvBoardMgr {
 
 	private DBConnectionMgr pool;
-	/*
-	 * private static final String SAVEFOLER =
-	 * "C:/Users/kmr07/OneDrive/바탕 화면/sy/silsp/1213_OnedayClassProject/src/main/webapp/RvfileUpload"
-	 * ; // 수식어 static final 이 함께 사용된 필드를 상수필드라고함. // 상수필드는 선언과 동시에 반드시 초기화해야 함. //
-	 * 필드명은 모두 대문자, 단어간 연결은 밑줄 // 재초기화 안됨
-	 */
+	
+	  //private static final String SAVEFOLER =
+	  //"C:/Users/kmr07/OneDrive/바탕 화면/sy/silsp/1213_OnedayClassProject/src/main/webapp/fileUpload/Rvbbs/"; 
+	  // 수식어 static final 이 함께 사용된 필드를 상수필드라고함. // 상수필드는 선언과 동시에 반드시 초기화해야 함.
+	  //필드명은 모두 대문자, 단어간 연결은 밑줄 // 재초기화 안됨
+	 
 	private static String encType = "UTF-8";
 	private static int maxSize = 5 * 1024 * 1024;
 
@@ -46,10 +52,10 @@ public class RvBoardMgr {
 		MultipartRequest multi = null;
 		int rFileSize = 0;
 		String rFileName = null;
-		String path= req.getServletContext().getRealPath("src/main/webapp/fileUpload/reviewBBS/");
-	    path = UtilMgr.replace
-	    (path, ".metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\", "");
-	    System.out.println(path);
+		String path = req.getServletContext().getRealPath("/src/main/webapp/fileUpload/reviewbbs/");
+		path = UtilMgr.replace(path, ".metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\", "");
+	
+		
 		try {
 			objConn = pool.getConnection();
 			// sql = "select max(rNum) from reviewBBS";
@@ -83,8 +89,8 @@ public class RvBoardMgr {
 
 			sql = "insert into reviewBBS (";
 			sql += "rUid, rTitle, rContent, rCnt, rLikes,  ";
-			sql += "rRegDate, rFileName, rFileSize, rStatus) values (";
-			sql += "?, ?, ?, 0, 0,     now(), ?, ?, 2)";
+			sql += "rRegDate, rFileName, rFileSize, rStatus, cNum ) values (";
+			sql += "?, ?, ?, 0, 0,     now(), ?, ?, 2, ?)";
 
 			objPstmt = objConn.prepareStatement(sql);
 			
@@ -95,6 +101,7 @@ public class RvBoardMgr {
 			objPstmt.setString(3, rContent);
 			objPstmt.setString(4, rFileName);
 			objPstmt.setInt(5, rFileSize);
+			objPstmt.setInt(6, Integer.parseInt(multi.getParameter("cNum")));
 			
 
 
@@ -116,7 +123,7 @@ public class RvBoardMgr {
 ///////////////////////////////////////////////////////////////////
 
 ///////////////  게시판 리스트 출력(List.jsp) 시작    ///////////////
-	public Vector<RvBoardBean> getBoardList(String keyField, String keyWord, int start, int end, String rUid) {
+	public Vector<RvBoardBean> getBoardList( int start, int end, String rUid) {
 
 		Vector<RvBoardBean> vList = new Vector<>();
 		Connection objConn = null;
@@ -129,7 +136,6 @@ public class RvBoardMgr {
 			
 			if (rUid.equals("admin")) {
 				
-				if (keyWord.equals("null") || keyWord.equals("")) {
 					// 검색어가 없을 경우
 					
 					sql = "select * from reviewBBS "
@@ -137,22 +143,9 @@ public class RvBoardMgr {
 				
 					objPstmt = objConn.prepareStatement(sql);
 					objPstmt.setInt(1, start);
-					objPstmt.setInt(2, end);
+					objPstmt.setInt(2, end);					
 					
-					
-				} else {
-					// 검색어가 있을 경우
-					sql = "select * from reviewBBS "
-							+ "where "+ keyField +" like ?"
-							+ "order by rNum desc limit ?, ?";
-					objPstmt = objConn.prepareStatement(sql);
-					objPstmt.setString(1, "%"+keyWord+"%");
-					objPstmt.setInt(2, start);
-					objPstmt.setInt(3, end);				
-				} 
 			} else {
-				
-				if (keyWord.equals("null") || keyWord.equals("")) {
 					// 검색어가 없을 경우
 					
 					sql = "select * from reviewBBS where rStatus=2 "
@@ -162,17 +155,6 @@ public class RvBoardMgr {
 					objPstmt.setInt(1, start);
 					objPstmt.setInt(2, end);
 					
-					
-				} else {
-					// 검색어가 있을 경우
-					sql = "select * from reviewBBS "
-							+ "where "+ keyField +" like ? AND rStatus=2 "
-							+ "order by rNum desc limit ?, ?";
-					objPstmt = objConn.prepareStatement(sql);
-					objPstmt.setString(1, "%"+keyWord+"%");
-					objPstmt.setInt(2, start);
-					objPstmt.setInt(3, end);				
-				} 
 			}
 			
 			
@@ -202,8 +184,9 @@ public class RvBoardMgr {
 
 ///////////////  게시판 리스트 출력(List.jsp) 끝    ///////////////
 
+
 //////////////////총 게시물 수(List.jsp) 시작 //////////////////
-	public int getTotalCount(String keyField, String keyWord) {
+	public int getTotalCount() {
 
 		Connection objConn = null;
 		PreparedStatement objPstmt = null;
@@ -214,16 +197,9 @@ public class RvBoardMgr {
 		try {
 			objConn = pool.getConnection(); // DB연동
 			
-			if(keyWord.equals("null") || keyWord.equals("")) {
 				sql = "select count(*) from reviewBBS";
 				objPstmt = objConn.prepareStatement(sql);
-			} else {
-				sql = "select count(*) from reviewBBS ";
-				sql += "where "+keyField+" like ?";
-				objPstmt = objConn.prepareStatement(sql);
-				objPstmt.setString(1, "%" + keyWord + "%");
-			}
-
+	
 			objRs = objPstmt.executeQuery();
 
 			if (objRs.next()) {
@@ -243,6 +219,104 @@ public class RvBoardMgr {
 ///////////////////////////////////////////////////////////////////
 ///////////////  게시판 리스트 작업관련(List.jsp) 끝  ///////////////
 ///////////////////////////////////////////////////////////////////
+	
+///////////////  Ajax 게시판 리스트 출력(List.jsp) 시작    ///////////////
+public Vector<RvBoardBean> getAjaxBoardList( int start, int end, String rUid, int cNum) {
+
+Vector<RvBoardBean> vList = new Vector<>();
+Connection objConn = null;
+PreparedStatement objPstmt = null;
+ResultSet objRs = null;
+String sql = null;
+
+try {
+	objConn = pool.getConnection(); // DB연동
+	
+	if (rUid.equals("admin")) {
+		
+			// 검색어가 없을 경우
+			
+			sql = "select * from reviewBBS where cNum = ? "
+					+ "order by rNum limit ?, ?";
+		
+			objPstmt = objConn.prepareStatement(sql);
+			objPstmt.setInt(1, cNum);
+			objPstmt.setInt(2, start);
+			objPstmt.setInt(3, end);					
+			
+			
+	} else {
+			// 검색어가 없을 경우
+			
+			sql = "select * from reviewBBS where rStatus=2 AND cNum = ? "
+					+ "order by rNum desc limit ?, ?";
+		
+			objPstmt = objConn.prepareStatement(sql);
+			objPstmt.setInt(1, cNum);
+			objPstmt.setInt(2, start);
+			objPstmt.setInt(3, end);
+			
+	}
+	
+	
+	objRs = objPstmt.executeQuery();
+
+	while (objRs.next()) {
+		RvBoardBean bean = new RvBoardBean();
+		bean.setrUid(objRs.getString("rUid"));
+		bean.setrNum(objRs.getInt("rNum"));
+		bean.setrTitle(objRs.getString("rTitle"));
+		bean.setrContent(objRs.getString("rContent"));
+		bean.setrCnt(objRs.getInt("rCnt"));
+		bean.setrLikes(objRs.getInt("rLikes"));
+		bean.setrRegDate(objRs.getString("rRegDate"));
+		bean.setrStatus(objRs.getInt("rStatus"));
+		bean.setrFileName(objRs.getString("rFileName"));
+		vList.add(bean);
+	}
+} catch (Exception e) {
+	System.out.println("SQL이슈 : " + e.getMessage());
+} finally {
+	pool.freeConnection(objConn, objPstmt, objRs);
+}
+
+return vList;
+}
+
+///////////////  게시판 리스트 출력(List.jsp) 끝    ///////////////
+
+
+//////////////////총 게시물 수(List.jsp) 시작 //////////////////
+public int getAjaxTotalCount(int cNum) {
+
+Connection objConn = null;
+PreparedStatement objPstmt = null;
+ResultSet objRs = null;
+String sql = null;
+int totalCnt = 0;
+
+try {
+		objConn = pool.getConnection(); // DB연동
+	
+		sql = "select count(*) from reviewBBS where cNum=? ";
+		objPstmt = objConn.prepareStatement(sql);
+		objPstmt.setInt(1, cNum);
+		
+	objRs = objPstmt.executeQuery();
+
+	if (objRs.next()) {
+		totalCnt = objRs.getInt(1);
+	}
+	
+} catch (Exception e) {
+	System.out.println("SQL이슈 : " + e.getMessage());
+} finally {
+	pool.freeConnection(objConn, objPstmt, objRs);
+}
+
+return totalCnt;
+}
+//////////////////총 게시물 수(List.jsp) 끝 //////////////////	
 
 
 ////////  게시판 뷰페이지 출력(Read.jsp, 내용보기 페이지) 시작 ////////

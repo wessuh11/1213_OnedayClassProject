@@ -23,7 +23,7 @@ String nowPage = request.getParameter("nowPage");
 
 String upUid = upBean.getcUid();   
 // 사용자가 Update.jsp에서 로그인된 아이디
-String realDBUid = bean.getcUid();   
+String cUid = bean.getcUid();   
 // DB에서 불러온 실제 작성자 아이디(세션에 저장되어 있었음)
 
 %>
@@ -33,7 +33,8 @@ String realDBUid = bean.getcUid();
        => 실제 게시글이 DB와 연동하여 수정됨 -->
 <%    
 int exeCnt = 0;
-if(upUid.equals(realDBUid)) {    // 사용자 아이디와 작성자 아이디가 일치할경우
+
+if(upUid.equals(cUid)) {    // 사용자 아이디와 작성자 아이디가 일치할경우
 	exeCnt = bMgr.updateBoard(upBean);
 	
 	if (exeCnt > 0) {
@@ -49,7 +50,7 @@ if(upUid.equals(realDBUid)) {    // 사용자 아이디와 작성자 아이디�
 	} else {
 %>
 	<script>
-		alert("수정할수 없습니다. 관리자한테 문의하세요.");
+		alert("내용을 입력해주세요");
 		history.back();
 	</script>
 <%	

@@ -47,7 +47,7 @@ if(rFileSize > 1024) {
 
 //String ip	= bean.getIp();
 
-session.setAttribute("bean", bean);
+session.setAttribute("rvBean", bean);
 %>   	
     
 <!DOCTYPE html>
@@ -57,7 +57,7 @@ session.setAttribute("bean", bean);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>OneDayClass</title>
-    <link rel="stylesheet" href="/Proj_OnedayClass/style/reviewBBS.css">
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/ajaxBBS.css">
 </head>
 <body>
  <% if (uId == null) {      %>
@@ -65,13 +65,12 @@ session.setAttribute("bean", bean);
        	alert("로그인 후 사용 가능합니다."); 
 		location.href="/Proj_OnedayClass/sign/Login.jsp"; 	
 	</script>
-	
-       <% } else { // 현재 로그인 상태라면 %> 
+	<%} %>	
 	<div id="wrap">
 	
-	<%@include file="../include/Header.jsp"%>	
+	<%-- <jsp:include page="../include/Header.jsp" /> --%>
 		
-		<%} %>	
+		
 		
 		<main id="main" class="read">   
 				<h1>Review</h1>
@@ -106,24 +105,27 @@ session.setAttribute("bean", bean);
 					<tr>
 						<td colspan="4" id="readContentTd"><pre><%=rContent %></pre>
 						<br><br><br>
+						
+						<%
+						if(rFileName==null){
+						%>
+						<td></td>
+						<%}else { %>
 							<center>
-							<img src='../fileUpload/<%=rFileName %>' /></td>
+							<img src='../fileUpload/Rvbbs/<%=rFileName %>' /></td>
 							</center>
+						<%} %>	
 					</tr>					
 				</tbody>
 				 
 				<tfoot id="readTblFoot">	
-					<tr>
+					<!-- <tr>
 						<td colspan="4" id="footTopSpace"></td>							
-					</tr>			     
-				<%-- 	<tr>
-						<td colspan="4" id="articleInfoTd">
-							<span><%="조회수 : " + rCnt %></span>
-						 			
-						</td>	 --%>						
+					</tr>			    -->  
+								
 					</tr>
 					<tr>
-						<td colspan="4" id="hrTd"><hr></td>							
+						<td colspan="6" id="hrTd"><hr></td>							
 					</tr>
 					<tr>
 						<%
@@ -136,7 +138,7 @@ session.setAttribute("bean", bean);
 						} */
 						%>
 					
-						<td colspan="4" id="btnAreaTd" class="read">
+						<td colspan="6" id="btnAreaTd" class="read">
 							<button type="button" id="listBtn"><%=listBtnLabel %></button>
 							<%
 								if(uId.equals(rUid) || uLevel.equals("3")){ 
@@ -150,7 +152,7 @@ session.setAttribute("bean", bean);
 								 								 
 								<button type="button" id="likeBtn" onClick="location.href='RvLikeAction.jsp?rNum=<%= rNum %>&uId=<%=uId%>'">추천하기</button>
 							<%	 }%>														
-								<!--  <img src="/Proj_OnedayClass/img/heart.png" width="50px"> -->
+								
 							
 						</td>
 					</tr>
@@ -170,7 +172,7 @@ session.setAttribute("bean", bean);
 			<!--  뷰페이지 내용 출력 끝 -->
 		</main>  <!-- 본문영역 html 템플릿 끝 -->
 	
-		<%@include file="../include/Footer.jsp"%>	
+			<%-- <jsp:include page="../include/Footer.jsp" /> --%>
 	
 
 	</div>
@@ -178,6 +180,6 @@ session.setAttribute("bean", bean);
 	<!-- div#wrap -->
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="/Proj_OnedayClass/script/reviewBBS.js"></script>    
+	<script src="/Proj_OnedayClass/script/bbs.js"></script>    
 </body>
 </html>

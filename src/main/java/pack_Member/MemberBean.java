@@ -10,6 +10,8 @@ public class MemberBean {
 	private String uAddr1;
 	private String uAddr2;
 	private String uEmail;
+	
+	
 	public String getuId() {
 		return uId;
 	}

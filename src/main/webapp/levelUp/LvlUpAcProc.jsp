@@ -11,12 +11,14 @@ String keyWord = request.getParameter("keyWord");
 //검색어 수신 끝
 
 String lvlUid = request.getParameter("lvlUid");
+String lvlName = request.getParameter("lvlName");
+String lvlSns = request.getParameter("lvlSns");
 %>
 
 <jsp:useBean id="bMgr" class="pack_LevelUpBBS.BoardMgr" scope="page" />
 
 <%	
-boolean res = bMgr.AcBoard(lvlUid);
+boolean res = bMgr.AcBoard(lvlUid, lvlName, lvlSns);
 %>
 	
 <script>

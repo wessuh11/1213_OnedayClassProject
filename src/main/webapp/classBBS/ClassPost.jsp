@@ -18,42 +18,12 @@ String str2 = "2";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>클래스 생성페이지</title>
-    <link rel="stylesheet" href="/Proj_OnedayClass/style/classbbs/classpost.css">
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/classBBS/classpost.css">
 </head>
 <body>
-	<div id="wrap">
-        <header id="header" class="flex-container">
-            <div id="headerLogo">
-                <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
-            </div>
-            <!-- div#headerLogo -->
-
-            <div id="headerRight">
-                <ul class="flex-container">
+<div id="wrap">
+	<%@include file="../include/Header.jsp"%>
 	<%if(uId != null && str2.equals(uLevel)) { %>
-	                <li><a href="/Proj_OnedayClass/sign/MyPage.jsp"><%=uName %> 선생님 환영합니다.</a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/classbbs/ClassPost.jsp">클래스 생성</a></li>
-                    <li></li>
-                    <li><a href="/Proj_OnedayClass/classbbs/ClassList.jsp">클래스 관리</a></li>
-
-				</ul>
-            </div>
-            <!-- div#headerRight -->
-        </header>
-        <!-- header#header -->
-        
-        <nav id="gnb">
-            <ul class="flex-container">
-                <li><a href="/Proj_OnedayClass/Index.jsp">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="/Proj_OnedayClass/classbbs/ClassOnList.jsp">Online</a></li>
-                <li><a href="/Proj_OnedayClass/classbbs/ClassOffList.jsp">Offline</a></li>
-            </ul>
-        </nav>
-        
         <!-- ClassBbs 시작 -->
         <div id="classbbs">
             <form name="regFrm" id="regFrm" action="ClassPostProc.jsp" 
@@ -65,12 +35,12 @@ String str2 = "2";
                     <tbody>
                         <tr>
                        		<!-- cTeacher -->
-                        	<td class="req">강사이름</td>
+                        	<td class="req">상호명</td>
                          <td>
                                <input type="hidden" id="cCode" name="cCode" size="27" class="umem">
                        		   <input type="hidden" name="cUid" id="cUid" value="<%=uId%>">
                                <input type="text" id="cTeacher" name="cTeacher" size="27" 
-                                class="umem" maxlength="20" autofocus  placeholder="선생님 이름을 입력하세요.">
+                                class="umem" maxlength="20" autofocus  placeholder="상호명을 입력하세요.">
                          </td>
                         </tr>
                         <tr>
@@ -181,38 +151,7 @@ String str2 = "2";
             </div>
             <!-- ClassBbs 종료 -->
 
-        <footer id="footer">
-
-            <div id="footerTop" class="flex-container">
-                <nav id="footerLnbArea">
-                    <ul id="footermainMenu" class="flex-container">
-                        <li class="footerMainLi"><a href="#">서비스이용약관</a></li>
-                        <li class="footerMainLi"></li>
-                        <li class="footerMainLi"><a href="#">개인정보처리방침</a></li>
-                        <li class="footerMainLi"></li>
-                        <li class="footerMainLi"><a href="#">이메일무단수집거부</a></li>
-                        <li class="footerMainLi"></li>
-                        <li class="footerMainLi"><a href="#">인터넷증명발급</a></li>
-                    </ul>
-                </nav>
-                <!-- nav#footerLnbArea -->
-            </div>
-            <!-- div#footerTop 회사 관련 정보 영역 -->
-
-            <div id="footerBottom" class="flex-container">
-                <nav id="footerArea">
-                    <ul id="footerBtm" class="flex-container">
-                        <li class="footerBtmLi"><a href="#">주소</a></li>
-                        <li class="footerBtmLi"><a href="#">대표</a></li>
-                        <li class="footerBtmLi"><a href="#">사업자번호</a></li>
-                        <li class="footerBtmLi"><a href="#">전화번호</a></li>
-                    </ul>
-                </nav>
-                <!-- nav#footerArea -->
-            </div>
-
-        </footer>
-        <!-- footer#footer -->
+	<%@include file="../include/Footer.jsp"%>
     </div>
     
     <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
