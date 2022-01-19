@@ -138,7 +138,7 @@ Vector<ClassBean> vList = null;
 							<div class="swiper-slide" onclick="read('<%=cNum%>', '<%=nowPage%>')">
 							<div>
 								<a href="#"> <img
-									src="/Proj_OnedayClass/fileupload/classfileupload/<%=cThumbName%>"
+									src="/Proj_OnedayClass/fileUpload/classfileupload/<%=cThumbName%>"
 									alt='이미지' width='310'></a>
 							</div>
 							
@@ -231,7 +231,7 @@ Vector<ClassBean> vList = null;
 									<!-- 1 -->
 									<div>
 										<a href="#"> <img
-											src="/Proj_OnedayClass/fileupload/classfileupload/<%=cThumbName%>"
+											src="/Proj_OnedayClass/fileUpload/classfileupload/<%=cThumbName%>"
 											alt='이미지' width='310'>
 										</a>
 									</div>

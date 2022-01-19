@@ -107,6 +107,8 @@ Vector<ClassBean> vList = null;
 					String cTitle = bean.getcTitle();
 					String cRegDate = bean.getcRegDate();
 					int cStatus = bean.getcStatus();
+					
+					if(uId.equals(cUid)||uLevel.equals("3")){
 				%>
 				<tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
 					<td><%=cNum%></td>
@@ -135,7 +137,8 @@ Vector<ClassBean> vList = null;
 					<td><%=cTitle%></td>
 					<td><%=cRegDate%></td>
 					<%
-						}
+					}
+					}
 					}
 					%>
 						<tr>
@@ -180,8 +183,7 @@ Vector<ClassBean> vList = null;
 									 %>
 										<span class="moveBlockArea"></span>
 									<%
-									 }
-			
+								 }
 								 } 
 								 }
 								 %>

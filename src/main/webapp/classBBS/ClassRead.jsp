@@ -63,7 +63,7 @@ session.setAttribute("bean", bean);
         	 	<table>
         	 	<tr>
         	 		<td class="thumimg">
-        	 			<img src="/Proj_OnedayClass/fileupload/classfileupload/<%=cThumbName%>" alt="썸네일"
+        	 			<img src="/Proj_OnedayClass/fileUpload/classfileupload/<%=cThumbName%>" alt="썸네일"
         	 			width ="490px" height = "345px">
         	 		</td>
         	 	</tr>
