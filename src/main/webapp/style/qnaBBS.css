@@ -239,14 +239,18 @@ main.list form#searchFrm > div {
 }
 
 main.list #searchFrm select,
-main.list #searchFrm input,
-main.list #searchFrm button {
+main.list #searchFrm input{
+	margin-top: 16px;
 	font-size: 16px;
-	padding: 2px 6px;
 }
 main.list #searchFrm button {
 	font-weight: bold;
 	cursor: pointer;
+}
+main.list #searchFrm button#searchBtn.butcs {
+	width: 70px;
+	font-size: 18px;
+	padding-bottom: 10px;
 }
 /*/////////// 리스트 List.jsp search, searchFrm 검색 끝 ////////////////*/
 

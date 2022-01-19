@@ -18,7 +18,7 @@ String keyWord = request.getParameter("keyWord");
 //검색어 수신 끝
 
 
-RvBoardBean bean = (RvBoardBean)session.getAttribute("bean");
+RvBoardBean bean = (RvBoardBean)session.getAttribute("rvBean");
 String rTitle = bean.getrTitle();
 String rUid = bean.getrUid();
 String rContent = bean.getrContent();
@@ -31,7 +31,7 @@ int rNum = bean.getrNum();
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>게시글 수정페이지</title>
+	<title>OnedayClass</title>
    <link rel="stylesheet" href="/Proj_OnedayClass/style/reviewBBS.css">
 </head>
 <body>
@@ -45,7 +45,7 @@ int rNum = bean.getrNum();
        <% } else { // 현재 로그인 상태라면 %> 
 	<div id="wrap">
 	
-	<%@include file="../include/Header.jsp"%>	
+	<jsp:include page="../include/Header.jsp" />
 			<%} %>	
 			
 		<main id="main" class="mod">   <!-- 본문영역 html 템플릿 시작 -->
@@ -63,16 +63,16 @@ int rNum = bean.getrNum();
 						<tr>
 							<td class="req">작성자</td>
 							<td>
-								<input type="text" id="uId"
+								<input type"text" id="uId"
 								name="uId" value="<%=uId %>"
-									size="50"  readonly>
+									size="80"  readonly>
 							</td>
 						</tr>
 						<tr>
 							<td class="req">제목</td>
 							<td>
 								<input type="text" name="rTitle" value="<%=rTitle %>"
-									size="50" id="rTitle">
+									size="80" id="rTitle">
 							</td>
 						</tr>
 						<tr>
@@ -115,7 +115,7 @@ int rNum = bean.getrNum();
 			</div>
 		</main>  <!-- 본문영역 html 템플릿 끝 -->
 		
-		<%@include file="../include/Footer.jsp"%>	
+		<jsp:include page="../include/Footer.jsp" />
 
 
 	</div>
@@ -123,6 +123,6 @@ int rNum = bean.getrNum();
 	<!-- div#wrap -->
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="/Proj_OnedayClass/script/reviewBBS.js"></script>        
+	<script src="/Proj_OnedayClass/script/bbs.js"></script>    
 </body>
 </html>

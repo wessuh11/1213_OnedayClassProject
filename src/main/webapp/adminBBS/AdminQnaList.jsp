@@ -253,7 +253,7 @@ Vector<BoardBean> vList = null;
 										size="20" maxlength="30" value="<%=keyWord%>">
 								</div>
 								<div>
-									<button type="button" id="searchBtn">검색</button>
+									<button type="button" id="searchBtn" class="butcs">검색</button>
 								</div>
 
 							</form> 
@@ -265,9 +265,9 @@ Vector<BoardBean> vList = null;
 
 						</td>
 					</tr>
-					<tr>
-						<td colspan="5" class="butcs"><a href="/Proj_OnedayClass/qnaBBS/QnaPost.jsp?nowPage=<%=nowPage %>&keyField=<%=keyField%>&keyWord=<%=keyWord%>">글쓰기</a></td>
-					</tr>
+					<%-- <tr>
+						<td colspan="5" class="butcs"><a href="/Proj_OnedayClass/qnaBBS/QnaPost.jsp?nowPage=<%=nowPage %>&keyField=<%=keyField%>&keyWord=<%=keyWord%>"></a></td>
+					</tr> --%>
 				</tbody>
 			</table>
 

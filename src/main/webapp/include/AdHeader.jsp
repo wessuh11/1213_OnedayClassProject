@@ -9,9 +9,6 @@ String iuLevel = (String)session.getAttribute("levelKey");
 String istr1 = "3";
 String istr2 = "2";
 %>    
-    
-<!DOCTYPE html>
-
 
 		<header id="header" class="flex-container">
             <div id="headerLogo">
@@ -44,5 +41,3 @@ String istr2 = "2";
                 <li><a href="/Proj_OnedayClass/classBBS/ClassOffList.jsp">Offline</a></li>
             </ul>
         </nav>
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

@@ -5,53 +5,24 @@
 
 <%
 request.setCharacterEncoding("UTF-8");
-
 int totalRecord = 0; // 전체 데이터 수(DB에 저장된 row 개수)
 int numPerPage = 9; // 페이지당 출력하는 데이터 수(=게시글 숫자)
 int pagePerBlock = 5; // 블럭당 표시되는 페이지 수의 개수
 int totalPage = 0; // 전체 페이지 수
 int totalBlock = 0; // 전체 블록수
 
-/*
-totalRecord=> 200     전체레코드
-numPerPage => 10
-pagePerBlock => 5
-totalPage => 20
-totalBlock => 4  (20/5 => 4)
-*/
-
 int nowPage = 1; // 현재 (사용자가 보고 있는) 페이지 번호
 int nowBlock = 1; // 현재 (사용자가 보고 있는) 블럭
-
 int start = 0; // DB에서 데이터를 불러올 때 시작하는 인덱스 번호
 int end = 9; // 시작하는 인덱스 번호부터 반환하는(=출력하는) 데이터 개수 
 // select * from T/N where... order by ... limit start, end;
-
 int listSize = 0; // 1페이지에서 보여주는 데이터 수
 //출력할 데이터의 개수 = 데이터 1개는 가로줄 1개
-
 String uId = (String) session.getAttribute("idKey");
 String uName = (String) session.getAttribute("nameKey");
 String uLevel = (String) session.getAttribute("levelKey");
 
-//str1= 관리자, str2는 강사
-String str1 = "3";
-String str2 = "2";
-
-//온&오프 클래스 유무
-String on = "N";
-String off = "Y";
-
-String cCategory1 = "1";
-String cCategory2 = "2";
-String cCategory3 = "3";
-String cCategory4 = "4";
-String cCategory5 = "5";
-String cCategory6 = "6";
-String cCategory7 = "7";
-
 String cCategorySel = ""; // DB의 카테고리
-
 
 if (request.getParameter("cCategorySel") != null) {
 	cCategorySel = request.getParameter("cCategorySel");
@@ -66,12 +37,9 @@ if (request.getParameter("nowPage") != null) {
 
 totalRecord = bMgr.getTotalCount(cCategorySel);
 //전체 데이터 수 반환
-
 totalPage = (int) Math.ceil((double) totalRecord / numPerPage);
 nowBlock = (int) Math.ceil((double) nowPage / pagePerBlock);
 totalBlock = (int) Math.ceil((double) totalPage / pagePerBlock);
-
-
 Vector<ClassBean> vList = null;
 %>
 <!DOCTYPE html>
@@ -81,15 +49,15 @@ Vector<ClassBean> vList = null;
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>온라인 클래스</title>
-<link rel="stylesheet" href="/Proj_OnedayClass/style/classbbs/onoffshop.css">
- <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" /> 
-  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+<link rel="stylesheet" href="/Proj_OnedayClass/style/classBBS/onoffshop.css" />
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" /> 
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
 </head>
 <body>
 	<div id="wrap">
 		<%@include file="../include/Header.jsp"%>
-		
+
 		<form id="categoryform" name="categoryform">
 		<!-- 카테고리 시작-->
 		<div id="category">
@@ -120,8 +88,8 @@ Vector<ClassBean> vList = null;
 		<!-- 온라인 게시판 시작 -->
 		<div id="Gallerybbs">
 			
-			<!-- 추천리스트 갤러리 시작 -->
-			<div id="goodsPart">
+			<!--  div#goodsPart 추천리스트 시작 -->
+			<div id="goodsPart" class="flex-container">
 				<h2>★ 오늘의 원데이 추천 클래스 ★</h2>
 				<span>HOME | Online</span>
 			</div>
@@ -129,24 +97,22 @@ Vector<ClassBean> vList = null;
 
 			<!-- main#galleryListArea 추천 게시물 시작 -->
 			<main id="galleryListArea">
-				<table id="goodsTbl" class="swiper-container">
-
 					<%
 					vList = bMgr.getBoardLike(cCategorySel, start, end);
 					listSize = vList.size();
 					%>
-					<tbody class="swiper-wrapper">
-					
-
+					<div class="swiper-container">
 						<%
 						if (vList.isEmpty()) {
 						%>
-						<tr>
-							<td colspan="6"><%="게시물이 없습니다."%></td>
-						</tr>
+						<div>
+							<div><%="게시물이 없습니다."%></div>
+						</div>
 						<%
 						} else {
-
+						%>
+						<div class="prnTr swiper-wrapper">
+						<%
 						for (int i = 0; i < listSize; i++) {
 							ClassBean bean = vList.get(i);
 							
@@ -165,47 +131,52 @@ Vector<ClassBean> vList = null;
 							int cLikes = bean.getcLikes();
 							//좋아요
 							
-							if (cStatus == 2 && on.equals(cOnoff)) {
+							if (cStatus == 2 && cOnoff.equals("N")) {
 								//if (cStatus == 2 && off.equals(cOnoff)) {
 						%>
-						<tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
-							<td class="swiper-slide"><a href="#"> <img
+							<div class="swiper-slide" onclick="read('<%=cNum%>', '<%=nowPage%>')">
+							<div>
+								<a href="#"> <img
 									src="/Proj_OnedayClass/fileupload/classfileupload/<%=cThumbName%>"
-									alt='이미지' width='310'></a></td>
-							<!-- 상품이미지 -->
-							<td class="goodsName swiper-slide" >
-								<%
-								if (cCategory1.equals(cCategory)) {
+									alt='이미지' width='310'></a>
+							</div>
+							
+							<div class="letter">
+							<%
+								if (cCategory.equals("1")) {
 									cCategory = "핸드 메이드";
-								} else if (cCategory2.equals(cCategory)) {
+								} else if (cCategory.equals("2")) {
 									cCategory = "쿠킹";
-								} else if (cCategory3.equals(cCategory)) {
+								} else if (cCategory.equals("3")) {
 									cCategory = "드로잉";
-								} else if (cCategory4.equals(cCategory)) {
+								} else if (cCategory.equals("4")) {
 									cCategory = "음악";
-								} else if (cCategory5.equals(cCategory)) {
+								} else if (cCategory.equals("5")) {
 									cCategory = "요가·필라테스";
-								} else if (cCategory6.equals(cCategory)) {
+								} else if (cCategory.equals("6")) {
 									cCategory = "레져·스포츠";
-								} else if (cCategory7.equals(cCategory)) {
+								} else if (cCategory.equals("7")) {
 									cCategory = "반려동물";
 								} else {
 									cCategory = "자기계발";
 								}
 								%><%=cCategory%>
-							</td>
-							<!-- cCategory -->
-							<td class="goodsDesc swiper-slide"><%=cTitle%></td>
-							<!-- cTitle -->
-						</tr>
-						
+							</div>
+							
+							<div class="titleletter">
+								<%=cTitle%>
+							</div>
+						</div>
 						<%
 						}
 						}
+						%>
+						</div>
+						
+						<% 
 						}
 						%>
-					</tbody>
-				</table>
+					</div>
 			</main>
 			<!-- main#galleryListArea 끝-->
 			<!-- 추천리스트 갤러리 끝 -->
@@ -219,8 +190,8 @@ Vector<ClassBean> vList = null;
 
 			<div id="BasicList">
 				<!-- main#galleryListArea 시작 -->
-				<main id="galleryListArea2">
-					<table class="goodsTbl2">
+				<main id="galleryListArea">
+					<table class="goodsTbl">
 						<%
 						vList = bMgr.getBoardList(cCategorySel, start, end);
 						listSize = vList.size();
@@ -241,9 +212,7 @@ Vector<ClassBean> vList = null;
 							<tr>
 								<%
 								for (int j = 0; j < 3; j++) {
-
 									ClassBean bean = vList.get(i + j);
-
 									int cNum = bean.getcNum();
 									//게시글 넘버
 									String cThumbName = bean.getcThumbName();
@@ -255,8 +224,7 @@ Vector<ClassBean> vList = null;
 									//글 속성, 공개 비공개 여부
 									String cOnoff = bean.getcOnoff();
 									//클래스 on(N), off(Y) 여부
-
-									if (cStatus == 2 && on.equals(cOnoff)) {
+									if (cStatus == 2 && cOnoff.equals("N")) {
 										//if (cStatus == 2 && off.equals(cOnoff)) {
 								%>
 								<td onclick="read('<%=cNum%>', '<%=nowPage%>')">
@@ -270,19 +238,19 @@ Vector<ClassBean> vList = null;
 
 									<div>
 										<%
-										if (cCategory1.equals(cCategory)) {
+										if (cCategory.equals("1")) {
 											cCategory = "핸드 메이드";
-										} else if (cCategory2.equals(cCategory)) {
+										} else if (cCategory.equals("2")) {
 											cCategory = "쿠킹";
-										} else if (cCategory3.equals(cCategory)) {
+										} else if (cCategory.equals("3")) {
 											cCategory = "드로잉";
-										} else if (cCategory4.equals(cCategory)) {
+										} else if (cCategory.equals("4")) {
 											cCategory = "음악";
-										} else if (cCategory5.equals(cCategory)) {
+										} else if (cCategory.equals("5")) {
 											cCategory = "요가·필라테스";
-										} else if (cCategory6.equals(cCategory)) {
+										} else if (cCategory.equals("6")) {
 											cCategory = "레져·스포츠";
-										} else if (cCategory7.equals(cCategory)) {
+										} else if (cCategory.equals("7")) {
 											cCategory = "반려동물";
 										} else {
 											cCategory = "자기계발";
@@ -291,7 +259,7 @@ Vector<ClassBean> vList = null;
 										<%=cCategory%>
 									</div>
 
-									<div>
+									<div class="titleletter">
 										<%=cTitle%>
 									</div>
 								</td>
@@ -301,7 +269,6 @@ Vector<ClassBean> vList = null;
 							<%
 							if ((i + j) == (listSize - 1)) {
 								i += j;
-
 								break;
 							}
 							}
@@ -383,7 +350,7 @@ Vector<ClassBean> vList = null;
         //방향 셋팅 vertical 수직, horizontal 수평 설정이 없으면 수평
         direction: 'horizontal',
         //한번에 보여지는 페이지 숫자
-        slidesPerView: 2,
+        slidesPerView: 3,
         //페이지와 페이지 사이의 간격
         spaceBetween: 30,
         //드레그 기능 true 사용가능 false 사용불가
@@ -411,7 +378,6 @@ Vector<ClassBean> vList = null;
           //클릭 가능여부
           clickable: true,
         },
-
         //방향표
         navigation: {
           //다음페이지 설정

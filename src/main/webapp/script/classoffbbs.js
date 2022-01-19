@@ -63,7 +63,7 @@ function cCategorySelect(c){
 
 function movePage(p1) {    // 페이지 이동
 
-	let param = "ClassOnList.jsp?nowPage="+p1;	    
+	let param = "ClassOffList.jsp?nowPage="+p1;	    
 	location.href= param;
 
 }
@@ -75,11 +75,12 @@ function moveBlock(p1, p2) {    // 블럭 이동
 	let pagePerBlock = parseInt(p2);	
 	//alert("p1 : " + p1 + "\np2 : " + p2);
 	
-	let param = "ClassOnList.jsp?nowPage="+(pagePerBlock*(pageNum-1)+1);
+	let param = "ClassOffList.jsp?nowPage="+(pagePerBlock*(pageNum-1)+1);
 	location.href=param;
 
 }
-//////////////// 리스트페이지 페이징 끝 //////////////////
+//////////////// 리스트페이지 페이징 끝 //////////////////	
+
 
 ///////////// ClassRead.jsp 버튼 기능 ////////////////
 $(function(){
@@ -95,6 +96,7 @@ $(function(){
 		let url = "";
 		location.href=url;
 	});
+	
 	////// 클래스 승인 //////
 	$("button#AdminBtn").click(function(){
 	    let nowPage = $("input#nowPage").val().trim();
@@ -103,7 +105,7 @@ $(function(){
 		let url ="/Proj_OnedayClass/classBBS/ClassApproval.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
-		location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
+		location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?"
 	});
 	
 	////// 클래스 수정 //////
@@ -114,7 +116,7 @@ $(function(){
 		let url ="/Proj_OnedayClass/classBBS/ClassUpdate.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
-		location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
+		location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?"
 	});
 	
 	////// 클래스 삭제 //////
@@ -125,7 +127,7 @@ $(function(){
 		let url ="/Proj_OnedayClass/classBBS/ClassDelete.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
-		location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
+		location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?"
 	});
 ///////////// ClassRead.jsp 버튼 기능 ////////////////
 
@@ -143,7 +145,7 @@ $(function(){
 	
 	});	
 //////////////// Update.jsp 에서 게시글 수정 끝 //////////////////
-
+//////////////// 페이징기능떄문에 하나 더 만듬 //////////////////
 
 
 

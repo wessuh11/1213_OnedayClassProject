@@ -5,6 +5,9 @@
 String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
+
+int cNum = (int) session.getAttribute("cNumKey");
+String nowPage = request.getParameter("nowPage");
 %>  
 
 <!DOCTYPE html>
@@ -23,12 +26,12 @@ String uLevel = (String)session.getAttribute("levelKey");
 		location.href="/Proj_OnedayClass/sign/Login.jsp"; 	
 	</script>
 	
-       <% } else { // 현재 로그인 상태라면 %> 
+      <%} %>	
 	<div id="wrap">
 	
-	<%@include file="../include/Header.jsp"%>	
+	<%-- <jsp:include page="../include/Header.jsp" /> --%>
 		
-		<%} %>	
+		
 		
 		
 		<main id="main" class="post">   <!-- 본문영역 html 템플릿 시작 -->
@@ -44,8 +47,9 @@ String uLevel = (String)session.getAttribute("levelKey");
 						<tr>
 							<td class="req">작성자</td>  <!-- td.req 필수입력 -->
 							<td>
-								<%=uId%>
+								<span class=postuId><%=uId%></span>
 								<input type="hidden" name="rUid" id="rUid" value="<%=uId%>">
+								<input type="hidden" name="cNum" id="cNum" value="<%=cNum%>">
 							</td>
 						</tr>
 						<tr>
@@ -58,7 +62,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 						<tr>
 							<td class="contentTD">내용</td>
 							<td>
-								<textarea name="rContent" id="rContent" rows="10" cols="60"  wrap="hard"></textarea>
+								<textarea name="rContent" id="rContent" rows="10" cols="59"  wrap="hard"></textarea>
 							</td>
 						</tr>
 						<tr>
@@ -93,14 +97,16 @@ String uLevel = (String)session.getAttribute("levelKey");
 			
 			</form>	
 		</div>
+		
+			<input type="hidden" name="nowPage" value="<%=nowPage%>" id="nowPage">
 		</main>  <!-- 본문영역 html 템플릿 끝 -->
 		
-			<%@include file="../include/Footer.jsp"%>	
+		<%-- 	<jsp:include page="../include/Footer.jsp" /> --%>
 	
 	</div>
 	<!-- div#wrap -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="/Proj_OnedayClass/script/script.js"></script>
-	<script src="/Proj_OnedayClass/script/reviewBBS.js"></script>       
+	<script src="/Proj_OnedayClass/script/bbs.js"></script>        
 </body>
 </html>

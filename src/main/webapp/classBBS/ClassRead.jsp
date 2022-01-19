@@ -10,10 +10,6 @@ String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
 
-//로그인 등급 변수
-String AdminNum = "3";
-String TeaNum = "2";
-
 int numParam = Integer.parseInt(request.getParameter("cNum")); //현재 페이지 번호
 String nowPage = request.getParameter("nowPage");
 
@@ -64,7 +60,7 @@ session.setAttribute("bean", bean);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>클래스 상세페이지</title>
-	<link rel="stylesheet" href="/Proj_OnedayClass/style/classbbs/classread.css">
+	<link rel="stylesheet" href="/Proj_OnedayClass/style/classBBS/classread.css">
 </head>
 <body>
 	<div id="wrap">
@@ -90,19 +86,19 @@ session.setAttribute("bean", bean);
         			
         			<tr>
         				<td colspan ="2" class="cCategory">[<%
-        				if(cCategory1.equals(cCategory)){
+        				if(cCategory.equals("1")){
         					cCategory = "핸드 메이드";
-        				} else if(cCategory2.equals(cCategory)){
+        				} else if(cCategory.equals("2")){
         					cCategory = "쿠킹";
-        				} else if(cCategory3.equals(cCategory)){
+        				} else if(cCategory.equals("3")){
         					cCategory = "드로잉";
-        				} else if(cCategory4.equals(cCategory)){
+        				} else if(cCategory.equals("4")){
         					cCategory = "음악";
-        				} else if(cCategory5.equals(cCategory)){
+        				} else if(cCategory.equals("5")){
         					cCategory = "요가·필라테스";
-        				} else if(cCategory6.equals(cCategory)){
+        				} else if(cCategory.equals("6")){
         					cCategory = "레져·스포츠";
-        				} else if(cCategory7.equals(cCategory)){
+        				} else if(cCategory.equals("7")){
         					cCategory = "반려동물";
         				} else {
         					cCategory = "자기계발";
@@ -143,6 +139,9 @@ session.setAttribute("bean", bean);
         				<td>
         					<button type="button" class="buy" id="buy">클래스 신청하기</button>
         				</td>
+        				<td>
+        					<button type="button" class="put" id="put" onClick="location.href='장바구니?cNum=<%= cNum %>&uId=<%=uId%>'">담기</button>
+        				</td>
         				<!-- 결제페이지 이동 -->
         			</tr>
         		</table>
@@ -152,7 +151,7 @@ session.setAttribute("bean", bean);
         </div>
         <!-- div#info -->
         
-       <% if(uId != null && AdminNum.equals(uLevel)) { %>
+       <% if(uId != null && uLevel.equals("3")) { %>
 	    <div id="teacherbtn">
 		    <table>
 			    <tr>
@@ -169,7 +168,7 @@ session.setAttribute("bean", bean);
 	    <%} %>
         
         
-	    <% if(uId != null && TeaNum.equals(uLevel)) { %>
+	    <% if(uId != null && uLevel.equals("2")) { %>
 	    <div id="teacherbtn">
 		    <table>
 			    <tr>
@@ -217,6 +216,17 @@ session.setAttribute("bean", bean);
 		</div>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script>
+	$("reviewcall").click(function(){
+		$("#tblArea").css{'display', 'none'}
+		$.ajax({
+			url:
+		});
+	});
+	</script>
+	
+	
+	
 	<script src="/Proj_OnedayClass/script/classbbs.js"></script>
 </body>
 </html>

@@ -44,7 +44,7 @@ String str2 = "2";
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>클래스 수정페이지</title>
-    <link rel="stylesheet" href="/Proj_OnedayClass/style/classbbs/classupdate.css">
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/classBBS/classupdate.css">
 </head>
 <body>
 	<div id="wrap">

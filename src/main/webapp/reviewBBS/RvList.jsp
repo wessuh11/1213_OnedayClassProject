@@ -36,15 +36,6 @@ int end = 10;     // 시작하는 인덱스 번호부터 반환하는(=출력하
 int listSize = 0;    // 1페이지에서 보여주는 데이터 수
 						//출력할 데이터의 개수 = 데이터 1개는 가로줄 1개
 
-// 게시판 검색 관련소스
-String keyField = ""; // DB의 컬럼명
-String keyWord = ""; // DB의 검색어
-						
-if (request.getParameter("keyWord") != null) {
-	keyField = request.getParameter("keyField");
-	keyWord = request.getParameter("keyWord");
-}
-
 
 						
 if (request.getParameter("nowPage") != null) {
@@ -65,7 +56,8 @@ if (request.getParameter("nowPage") != null) {
 3페이지    80~71
 */
 
-totalRecord = bMgr.getTotalCount();
+int cNum = (int) session.getAttribute("cNumKey");
+totalRecord = bMgr.getAjaxTotalCount(cNum);   
 // 전체 데이터 수 반환
 
 totalPage = (int)Math.ceil((double)totalRecord/numPerPage);
@@ -86,7 +78,7 @@ Vector<RvBoardBean> vList = null;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>OneDayClass</title>
-    <link rel="stylesheet" href="/Proj_OnedayClass/style/reviewBBS.css">
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/reviewBBS.css"> 
 </head>
 <body>
 
@@ -95,28 +87,21 @@ Vector<RvBoardBean> vList = null;
        	alert("로그인 후 사용 가능합니다."); 
 		location.href="/Proj_OnedayClass/sign/Login.jsp"; 	
 	</script>
+		<%}	%>
 	
-       <% } else { // 현재 로그인 상태라면 %> 
 	<div id="wrap">
-	
-	<%@include file="../include/Header.jsp"%>	
+			<%--  <%@include file="../include/Header.jsp"%> --%>
+
 		
 		<main id="main" class="list">   
-		
+			
 		<h1>Review</h1>
-			<%
-				String prnType = "";
-				if (keyWord.equals("null") || keyWord.equals("")) {
-					prnType = "전체 게시글";
-				} else {
-					prnType = "검색 결과";
-				}
-			%>
+		
 			
 			<div id="pageInfo" class="flex-container">
 				
-				 <span>
-		  		 <a href="/Proj_OnedayClass/reviewBBS/RvPost.jsp">글쓰기</a>
+				 <span id="postBtn">
+		  		 <a href="#">글쓰기</a>
 		   		</span>
 			</div>	
 									
@@ -140,7 +125,7 @@ Vector<RvBoardBean> vList = null;
 	
 			
 			<%
-			vList = bMgr.getBoardList(start, end, uId);  // DB에서 데이터 불러오기
+			vList = bMgr.getAjaxBoardList(start, end, uId, cNum);  // DB에서 데이터 불러오기
 			listSize = vList.size();			
 			
 				if (vList.isEmpty()) {
@@ -189,7 +174,7 @@ Vector<RvBoardBean> vList = null;
 						}else
 						{
 							%>
-							<td><img src='../fileUpload/<%=rFileName %>' width="70" height="40"/></td>
+							<td><img src='../fileUpload/Rvbbs/<%=rFileName %>' width="75" height="50"/></td>
 						<%} %>
 						<td><%=rTitle %></td>						
 						<td><%=rUid %></td>
@@ -262,6 +247,7 @@ Vector<RvBoardBean> vList = null;
 							<% } // End If%>		 	
 					<% }  // End For%>
 					<!-- 페이지 나누기용 페이지 번호 출력 끝  -->	
+					
 				
 				<% if (totalBlock>nowBlock) { // 다음 블럭이 남아 있다면  %>
 							<span  class="moveBlockArea" onclick="moveBlock('<%=nowBlock+1%>', '<%=pagePerBlock%>')">
@@ -271,11 +257,15 @@ Vector<RvBoardBean> vList = null;
 				<% } else { %>
 				            <span class="moveBlockArea"></span>
 				<% } %>
-			
+				
+					
+					
 				<%
 				}  // End if#01_totalPage
 				%>						
-			
+						
+						
+						
 						</td>
 						
 					<%-- 	 <td colspan="3">
@@ -310,19 +300,24 @@ Vector<RvBoardBean> vList = null;
 						
 						</td> 
 						--%>
-					</tr>				
+					</tr>
+					
+					
 				</tbody>
-			</table>	
-		</main>  
+			</table>
 		
-  	 <%@include file="../include/Footer.jsp"%>	
+		
+		
+		</main>  
+
+<%-- 			<%@include file="../include/Footer.jsp"%> --%>
 	</div>       	
 	
-	<% } %>
+
 
 	<!-- div#wrap -->
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="/Proj_OnedayClass/script/reviewBBS.js"></script>      
+	<script src="/Proj_OnedayClass/script/bbs.js"></script>    
 </body>
 </html>
