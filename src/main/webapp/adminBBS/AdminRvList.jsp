@@ -9,7 +9,6 @@ String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
 
-
 ///////////////////////페이징 관련 속성 값 시작///////////////////////////
 // 페이징(Paging) = 페이지 나누기를 의미함
 int totalRecord = 0;        // 전체 데이터 수(DB에 저장된 row 개수)
@@ -99,7 +98,7 @@ Vector<RvBoardBean> vList = null;
        <% } else { // 현재 로그인 상태라면 %> 
 	<div id="wrap">
 	
-	<%@include file="../include/Header.jsp"%>	
+	<%@include file="../include/AdHeader.jsp"%>
 		
 		<main id="main" class="list">   
 		
@@ -113,12 +112,6 @@ Vector<RvBoardBean> vList = null;
 				}
 			%>
 			
-			<div id="pageInfo" class="flex-container">
-				
-				 <span>
-		  		 <a href="/Proj_OnedayClass/reviewBBS/RvPost.jsp">글쓰기</a>
-		   		</span>
-			</div>	
 									
 			<table id="boardList">
 				<thead>
@@ -333,6 +326,6 @@ Vector<RvBoardBean> vList = null;
 	<!-- div#wrap -->
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="/Proj_OnedayClass/script/reviewBBS.js"></script>      
+	<script src="/Proj_OnedayClass/script/adRvBBS.js"></script>      
 </body>
 </html>

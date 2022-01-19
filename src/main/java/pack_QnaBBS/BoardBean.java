@@ -2,6 +2,7 @@ package pack_QnaBBS;
 
 public class BoardBean {
 	
+	
 	private int qNum;
 	private String qUid;
 	private String qTitle;
@@ -15,6 +16,7 @@ public class BoardBean {
 	private int qFileSize;
 	private int qStatus;
 	private int cNum;
+	
 	
 	public int getqNum() {
 		return qNum;
@@ -94,4 +96,5 @@ public class BoardBean {
 	public void setcNum(int cNum) {
 		this.cNum = cNum;
 	}
+	
 }

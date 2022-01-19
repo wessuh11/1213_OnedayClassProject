@@ -77,7 +77,6 @@ main#main {
 
 #main #mainNav #mainMenu li.mainLi:nth-child(2)>a{
     border-left: none;
-    border-right: none;
 }
 
 #main #mainNav #mainMenu .mainLi div.subContainer {
@@ -88,7 +87,9 @@ main#main {
     border: 1px solid #000;
     border-top: none;
 }
-
+#main #mainNav #mainMenu .mainLi .subContainer ul.subMenu:last-child {
+     border-right: 1px solid #000;
+}
 #main #mainNav #mainMenu .mainLi .subContainer .subMenu li.subMenuLi {
     width: 100%;
 }
@@ -100,6 +101,9 @@ main#main {
 
 #main #mainNav #mainMenu .mainLi .subContainer .subMenu li.subMenuLi:first-child{
     border-right: 1px solid #000;
+}
+.subMenuLila {
+  	 border-right: 1px solid #000;
 }
 /* 메인 메뉴 끝 */
 

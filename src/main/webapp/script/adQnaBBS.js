@@ -7,7 +7,7 @@
 function read(p1, p2) {
     let p3 = $("#pKeyField").val().trim();  // p3 : keyField
     let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
-	let param = "QnaRead.jsp?qNum="+p1;
+	let param = "../adminBBS/AdminQnaRead.jsp?qNum="+p1;
 	     param += "&nowPage="+p2;
 	     param += "&keyField="+p3;
 	     param += "&keyWord="+p4 ; 
@@ -19,7 +19,7 @@ function read(p1, p2) {
 function qnaRead(p1, p2) {
     let p3 = $("#pKeyField").val().trim();  // p3 : keyField
     let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
-	let param = "../qnaBBS/QnaRead.jsp?qNum="+p1;
+	let param = "../adminBBS/AdminQnaRead.jsp?qNum="+p1;
 	     param += "&nowPage="+p2;
 	     param += "&keyField="+p3;
 	     param += "&keyWord="+p4 ; 
@@ -36,13 +36,11 @@ function movePage(p1) {    // 페이지 이동
     let p3 = $("#pKeyField").val().trim();  // p3 : keyField
     let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
 
-	let param = "QnaList.jsp?nowPage="+p1;	    
+	let param = "AdminQnaList.jsp?nowPage="+p1;	    
 	     param += "&keyField="+p3;
 	     param += "&keyWord="+p4 ; 
 	location.href= param;
-
 }
-
 
 function moveBlock(p1, p2) {    // 블럭 이동
 
@@ -53,7 +51,7 @@ function moveBlock(p1, p2) {    // 블럭 이동
     let p3 = $("#pKeyField").val().trim();  // p3 : keyField
     let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
 	
-	let param = "QnaList.jsp?nowPage="+(pagePerBlock*(pageNum-1)+1);
+	let param = "AdminQnaList.jsp?nowPage="+(pagePerBlock*(pageNum-1)+1);
 	     param += "&keyField="+p3;
 	     param += "&keyWord="+p4 ; 
 	location.href=param;
@@ -84,7 +82,7 @@ $(function(){
 	});
 	//////////////// 로그인 메뉴 안내멘트 끝 //////////////////
 	
-	//////////////// 게시글 등록 시작 //////////////////
+/*	//////////////// 게시글 등록 시작 //////////////////
 	$("#regBtn").click(function(){
 		let qTitle = $("#qTitle").val().trim();
 		
@@ -96,7 +94,7 @@ $(function(){
 		}
 	
 	});	
-	//////////////// 게시글 등록 끝 //////////////////
+	//////////////// 게시글 등록 끝 //////////////////*/
 	
 	
 	
@@ -109,7 +107,7 @@ $(function(){
 		let p3 = $("#pKeyField").val().trim();  // p3 : keyField
 	    let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
 	     
-		let url = "/Proj_OnedayClass/qnaBBS/QnaList.jsp?nowPage=" + param;		    
+		let url = "/Proj_OnedayClass/adminBBS/AdminQnaList.jsp?nowPage=" + param;		    
 		    url += "&keyField="+p3;
 	     	url += "&keyWord="+p4 ; 
 		location.href=url;
@@ -152,7 +150,7 @@ $(function(){
 		let p3 = $("#pKeyField").val().trim();  // p3 : keyField
 	    let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
 	    
-		let url = "/Proj_OnedayClass/qnaBBS/QnaDelete.jsp?";
+		let url = "/Proj_OnedayClass/adminBBS/AdminQnaDelete.jsp?";
 			url += "qNum="+num+"&nowPage="+nowPage;
 			url += "&keyField="+p3;
 			url += "&keyWord="+p4;
@@ -163,8 +161,8 @@ $(function(){
 	
 	
 	//////////////// Read.jsp 에서 게시글 수정버튼 시작 //////////////////
-	$("td.read>button#modBtn").click(function(){
-	
+	/*$("td.read>button#modBtn").click(function(){
+		
 		let nowPage = $("input#nowPage").val().trim();
 		let qNum = $("input#qNum").val().trim();
 				
@@ -177,7 +175,7 @@ $(function(){
 			url += "&keyField="+p3;
 	     	url += "&keyWord="+p4; 
 		location.href=url;
-	});
+	});*/
 	//////////////// Read.jsp 에서 게시글 수정버튼 끝 //////////////////
 	
 		//////////////// Read.jsp 에서 답변글 버튼 시작 //////////////////	
@@ -226,7 +224,7 @@ $(function(){
 	
 	
 	//////////////// Update.jsp 에서 게시글 수정 시작 //////////////////
-	$("td.update>button#modBtn").click(function(){
+/*	$("td.update>button#modBtn").click(function(){
 
 		let qTitle = $("#qTitle").val().trim();
 		
@@ -243,13 +241,13 @@ $(function(){
 			$("#updateFrm").submit();
 		}
 	
-	});	
+	});	*/
 	//////////////// Update.jsp 에서 게시글 수정 끝 //////////////////
 	
-	//////////////// Update.jsp 에서 뒤로가기 버튼 시작 //////////////////
+/*	//////////////// Update.jsp 에서 뒤로가기 버튼 시작 //////////////////
 	$("button#backBtn").click(function(){
 		history.back();
-	});
+	});*/
 	//////////////// Update.jsp 에서 뒤로가기 버튼 끝 //////////////////
 	
 });
