@@ -171,7 +171,7 @@ Vector<RvBoardBean> vList = null;
 						}else
 						{
 							%>
-							<td><img src='../fileUpload/Rvbbs/<%=rFileName %>' width="75" height="50"/></td>
+							<td><img src="/Proj_OnedayClass/fileUpload/reviewbbs/<%=rFileName %>" width="75" height="50"/></td>
 						<%} %>
 						<td><%=rTitle %></td>						
 						<td><%=rUid %></td>

@@ -51,7 +51,6 @@ int rNum = bean.getrNum();
 		<main id="main" class="mod">   <!-- 본문영역 html 템플릿 시작 -->
 			<!--  뷰페이지 내용 출력 시작 -->
 			<div id="modwrap">
-			<h1>Review</h1>
 			<form name="updateFrm" action="RvUpdateProc.jsp"
 					method="get" id="updateFrm">
 			<input type="hidden" name="rNum" value="<%=rNum%>" 
@@ -63,7 +62,7 @@ int rNum = bean.getrNum();
 						<tr>
 							<td class="req">작성자</td>
 							<td>
-								<input type"text" id="uId"
+								<input type="text" id="uId"
 								name="uId" value="<%=uId %>"
 									size="80"  readonly>
 							</td>
