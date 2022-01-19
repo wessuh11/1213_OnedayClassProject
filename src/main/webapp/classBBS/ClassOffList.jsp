@@ -198,8 +198,8 @@ Vector<ClassBean> vList = null;
 
 			<div id="BasicList">
 				<!-- main#galleryListArea 시작 -->
-				<main id="galleryListArea2">
-					<table class="goodsTbl2">
+				<main id="galleryListArea">
+					<table class="goodsTbl">
 						<%
 						vList = bMgr.getBoardList(cCategorySel, start, end);
 						listSize = vList.size();
