@@ -1,72 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="pack_ClassBBS.*"%>
-    
+    pageEncoding="UTF-8"%>
+
 <%
 request.setCharacterEncoding("UTF-8");
-
-int numParam = Integer.parseInt(request.getParameter("cNum")); //현재 페이지 번호
-String nowPage = request.getParameter("nowPage");
-
-ClassBean bean = (ClassBean)session.getAttribute("bean");
-int cNum = bean.getcNum(); //클래스 게시판 번호 //현재 페이지 번호
-String cTeacher = bean.getcTeacher(); //강사이름
-String cUid = bean.getcUid(); //글 아이디
-String cCategory = bean.getcCategory(); //클래스 카테고리
-String cTitle = bean.getcTitle(); //클래스 제목
-String cContent= bean.getcContent(); //클래스 설명
-String cRegDate= bean.getcRegDate(); //클래스 작성날짜
-
-int cPrice= bean.getcPrice(); //클래스 가격
-int cDelivery= bean.getcDelivery(); //배송비
-
-String cThumbName= bean.getcThumbName(); //썸네일 이름
-int cThumbSize= bean.getcThumbSize(); //썸네일 크기저장
-String cFileName= bean.getcFileName(); //파일이름 
-int cFileSize= bean.getcFileSize(); //크기저장
-
-int cMaxStu= bean.getcMaxStu(); //최대 수강인원
-int cApplyStu= bean.getcApplyStu(); //수강신청 인원
-
-String Area = bean.getcArea(); //지역
-String cOnoff = bean.getcOnoff(); //onoff 여부
-
 String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
 String str1 = "3";
 String str2 = "2";
-%>    
+
+%>   
     
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>클래스 수정페이지</title>
-    <link rel="stylesheet" href="/Proj_OnedayClass/style/classbbs/classupdate.css">
+    <title>클래스 생성페이지</title>
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/classBBS/classpost.css">
 </head>
 <body>
-	<div id="wrap">
+<div id="wrap">
 	<%@include file="../include/Header.jsp"%>
-	
-        <!-- ClassUpdate 시작 -->
+	<%if(uId != null && str2.equals(uLevel)) { %>
+        <!-- ClassBbs 시작 -->
         <div id="classbbs">
-            <form name="updateFrm" id="updateFrm" action="ClassUpdateProc.jsp" 
-            method="post" >
+            <form name="regFrm" id="regFrm" action="ClassPostProc.jsp" 
+            method="post" enctype="multipart/form-data">
                 <table>
                     <tr>
-                    	<th colspan="2" style="background-color: #fbceb1;"><h1>★ 클래스 수정 ★</h1></th>
+                    	<th colspan="2" style="background-color: #fbceb1;"><h1>★ 클래스 생성 ★</h1></th>
                     </tr>
                     <tbody>
                         <tr>
                        		<!-- cTeacher -->
-                        	<td class="req">강사이름</td>
+                        	<td class="req">상호명</td>
                          <td>
                                <input type="hidden" id="cCode" name="cCode" size="27" class="umem">
                        		   <input type="hidden" name="cUid" id="cUid" value="<%=uId%>">
                                <input type="text" id="cTeacher" name="cTeacher" size="27" 
-                                class="umem" maxlength="20" autofocus  placeholder="선생님 이름을 입력하세요." value="<%=cTeacher%>">
+                                class="umem" maxlength="20" autofocus  placeholder="상호명을 입력하세요.">
                          </td>
                         </tr>
                         <tr>
@@ -91,7 +65,7 @@ String str2 = "2";
 	                        <td class="req">클래스 제목</td>
 	                        <td>
 	                                <input type="text" class="umem" name="cTitle" id="cTitle" size="40"
-	                                placeholder="제목을 입력하세요." value="<%=cTitle%>">
+	                                placeholder="제목을 입력하세요.">
 	                        </td>
                         </tr>
                         <tr>
@@ -99,7 +73,7 @@ String str2 = "2";
 	                        <td class="req">클래스 설명</td>
 	                        <td>
 	                        	<textarea name="cContent" id="cContent" cols="80" rows="10"></textarea>
-	                        	<input type="hidden" name="contentType" value="<%=cContent%>">
+	                        	<input type="hidden" name="contentType"value="TEXT">
 	                        </td>
                         </tr>
                         <tr>
@@ -107,7 +81,7 @@ String str2 = "2";
 	                        <td class="req">수강료</td>
 	                        <td>
 	                                <input type="text" class="umem" name="cPrice" id="cPrice" size="40"
-	                                placeholder="가격은 얼마인가요?" value="<%=cPrice%>">
+	                                placeholder="가격은 얼마인가요?">
 	                        </td>
                         </tr>
                         <tr>
@@ -115,7 +89,25 @@ String str2 = "2";
 	                        <td class="reqNull">배송비</td>
 	                        <td>
 	                                <input type="text" class="umem" name="cDelivery" id="cDelivery" size="40"
-	                                placeholder="배송비는 얼마인가요?" value="<%=cDelivery%>">
+	                                placeholder="배송비는 얼마인가요?">
+	                        </td>
+                        </tr>
+                        <tr>
+                            <!-- cThumbName, cThumbSize -->
+	                        <td class="reqNull">썸네일사진</td>
+	                        <td>
+	                        	<span>
+	                                <input type="file" name="cThumbName" id="cThumbName">
+	                            </span>
+	                        </td>
+                        </tr>
+                       <tr>
+                            <!-- cFileName, cFileSize -->
+	                        <td class="reqNull">상세정보사진</td>
+	                        <td>
+	                        	<span>
+	                                <input type="file" name="cFileName" id="cFileName">
+	                            </span>
 	                        </td>
                         </tr>
 						<tr>
@@ -147,26 +139,36 @@ String str2 = "2";
 	                        </td>
                         </tr>
                         <tr>
-                            <td class="button" id="btnAreaTd"  colspan = "2">
-                                <button type="button" id="updateBtn" class="classbutton">클래스 수정하기</button>
-                                <button type="button" id="backBtn" class="classbutton">돌아가기</button>
+                            <td class="button" colspan = "2">
+                                <button type="button" id="regBtn" class="classbutton">클래스 생성하기</button>
+                                <!-- <button type="button" id="regBtn" class="classbutton">돌아가기</button> -->
                             </td>
                         </tr>
                     </tbody>
                 </table>              
                 </form>
-         		<input type="hidden" name="nowPage" value="<%=nowPage%>" id="nowPage">
-				<input type="hidden" name="cNum" value="<%=numParam%>" id="cNum">
-		
+                
             </div>
-            <!-- ClassUpdate 종료 -->
-	
-		<%@include file="../include/Footer.jsp"%>
-	</div>
-	<!-- div#wrap -->
-	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="/Proj_OnedayClass/script/script.js"></script>
-	<script src="/Proj_OnedayClass/script/classbbs.js"></script>    
+            <!-- ClassBbs 종료 -->
+
+	<%@include file="../include/Footer.jsp"%>
+    </div>
+    
+    <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
+	<script src="/Proj_OnedayClass/script/classbbs.js"></script>
 </body>
+	<% } else { %>
+	
+	<script>
+	/*
+		alert("비정상적인 접속입니다.\n"
+				 +"메인페이지로 이동합니다."); 
+		           // 현재 메인페이지는 없기 때문에 로그인페이지로 이동
+		location.href="../Index.jsp";
+	*/
+	</script>
+	
+<% } %>
 </html>
+
+	

@@ -60,7 +60,7 @@ session.setAttribute("bean", bean);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>클래스 상세페이지</title>
-	<link rel="stylesheet" href="/Proj_OnedayClass/style/classbbs/classread.css">
+	<link rel="stylesheet" href="/Proj_OnedayClass/style/classBBS/classread.css">
 </head>
 <body>
 	<div id="wrap">

@@ -7,7 +7,7 @@
 request.setCharacterEncoding("UTF-8");
 
 int totalRecord = 0; // 전체 데이터 수(DB에 저장된 row 개수)
-int numPerPage = 9; // 페이지당 출력하는 데이터 수(=게시글 숫자)
+int numPerPage = 10; // 페이지당 출력하는 데이터 수(=게시글 숫자)
 int pagePerBlock = 5; // 블럭당 표시되는 페이지 수의 개수
 int totalPage = 0; // 전체 페이지 수
 int totalBlock = 0; // 전체 블록수
@@ -15,7 +15,7 @@ int totalBlock = 0; // 전체 블록수
 int nowPage = 1; // 현재 (사용자가 보고 있는) 페이지 번호
 int nowBlock = 1; // 현재 (사용자가 보고 있는) 블럭
 int start = 0; // DB에서 데이터를 불러올 때 시작하는 인덱스 번호
-int end = 9; // 시작하는 인덱스 번호부터 반환하는(=출력하는) 데이터 개수 
+int end = 10; // 시작하는 인덱스 번호부터 반환하는(=출력하는) 데이터 개수 
 int listSize = 0; // 1페이지에서 보여주는 데이터 수
 //출력할 데이터의 개수 = 데이터 1개는 가로줄 1개
 
@@ -56,22 +56,26 @@ Vector<ClassBean> vList = null;
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OneDayClass</title>
-<link rel="stylesheet"
-	href="/Proj_OnedayClass/style/classbbs/classlist.css">
+<link rel="stylesheet" href="/Proj_OnedayClass/style/classBBS/classlist.css">
 </head>
 <body>
 	<div id="wrap">
 		<%@include file="../include/Header.jsp"%>
 
 		<%
-		if (uLevel.equals("3")) {
+		if (uLevel.equals("3")||uLevel.equals("2")) {
 		%>
 		<main id="main" class="list">
 			<!-- DB 데이터 가져오기 -->
 			<table id="boardList">
 				<%
-				vList = bMgr.getBoardadmin(cCategorySel, start, end);
+				if(uLevel.equals("3")){
+				vList = bMgr.getBoardadmin(start, end);
 				listSize = vList.size();
+				}else{
+				vList = bMgr.getBoardTeacher(start, end);
+				listSize = vList.size();	
+				}
 				%>
 
 				<%
@@ -103,7 +107,6 @@ Vector<ClassBean> vList = null;
 					String cTitle = bean.getcTitle();
 					String cRegDate = bean.getcRegDate();
 					int cStatus = bean.getcStatus();
-					
 				%>
 				<tr class="prnTr" onclick="read('<%=cNum%>', '<%=nowPage%>')">
 					<td><%=cNum%></td>
@@ -131,9 +134,8 @@ Vector<ClassBean> vList = null;
 						%><%=cCategory%></td>
 					<td><%=cTitle%></td>
 					<td><%=cRegDate%></td>
-
 					<%
-					}
+						}
 					}
 					%>
 						<tr>
@@ -181,7 +183,7 @@ Vector<ClassBean> vList = null;
 									 }
 			
 								 } 
-		}
+								 }
 								 %>
 								</td>
 							</tr>

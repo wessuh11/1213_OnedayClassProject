@@ -101,11 +101,10 @@ $(function(){
 	    let nowPage = $("input#nowPage").val().trim();
 		let cNum = $("input#cNum").val().trim();
 		
-		let url ="/Proj_OnedayClass/classbbs/ClassApproval.jsp?";
+		let url ="/Proj_OnedayClass/classBBS/ClassApproval.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
-		history.back();
-		//location.href = "/Proj_OnedayClass/classbbs/ClassList.jsp?"
+		location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
 	});
 	
 	////// 클래스 수정 //////
@@ -113,10 +112,10 @@ $(function(){
 	    let nowPage = $("input#nowPage").val().trim();
 		let cNum = $("input#cNum").val().trim();
 		
-		let url ="/Proj_OnedayClass/classbbs/ClassUpdate.jsp?";
+		let url ="/Proj_OnedayClass/classBBS/ClassUpdate.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
-		history.back();
+		location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
 	});
 	
 	////// 클래스 삭제 //////
@@ -124,11 +123,10 @@ $(function(){
 		let nowPage = $("input#nowPage").val().trim();
 		let cNum = $("input#cNum").val().trim();
 		
-		let url ="/Proj_OnedayClass/classbbs/ClassDelete.jsp?";
+		let url ="/Proj_OnedayClass/classBBS/ClassDelete.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
-		history.back();
-		//location.href = "/Proj_OnedayClass/classbbs/ClassList.jsp?"
+		location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
 	});
 ///////////// ClassRead.jsp 버튼 기능 ////////////////
 

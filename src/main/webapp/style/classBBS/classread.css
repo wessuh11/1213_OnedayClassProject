@@ -63,7 +63,7 @@ td.cDelivery{
 div#thumbinfo{
 	width: 500px;
 	height: 350px;
-    border: 1px solid #000;
+/*    border: 1px solid #000;*/
 }
 
 div#thumbinfo table{
@@ -73,7 +73,7 @@ div#thumbinfo table{
 
 div#thumbinfo tr, td{
 	height: 40px;
-    border: 1px solid #000;
+/*    border: 1px solid #000;*/
 }
 
 div#thumbinfo button.like{
@@ -117,7 +117,7 @@ div#thumbinfo button.put{
 div#teacherbtn{
 	width: 1000px;
 	height: 70px;
-	border: 1px solid #000;
+/*    border: 1px solid #000;*/
 	margin: 20px auto;
 }
 
@@ -158,19 +158,19 @@ div#boardmenu ul li:hover a {
 div#detail_expage{
     width: 1000px;
     height: 100px;
-    border: 1px solid #000;
+/*    border: 1px solid #000;*/
     font-size: 40px;
 }
 
 
 div#info{
-	width: 1000px;
-	border: 1px solid #000;
+	width: 100%;
+/*    border: 1px solid #000;*/
 }
 
 div#info table{
-	width: 1000px;
-	border: 1px solid #000;
+	width: 100%;
+/*    border: 1px solid #000;*/
 }
 
 

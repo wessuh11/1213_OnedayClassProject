@@ -16,6 +16,12 @@ String uId = (String)session.getAttribute("idKey");
     <link rel="stylesheet" href="/Proj_OnedayClass/style/sign.css">
 </head>
 <body>
+ 	<% if (uId != null) {      %>
+	 <script>
+       	alert("이미 로그인 상태입니다."); 
+		location.href="/Proj_OnedayClass/Index.jsp"; 	
+	</script>
+	  <% } else { // 현재 로그인 상태라면 %> 
     <div id="wrap">
     <%@include file="../include/Header.jsp"%>
         <!-- 로그인시작 -->
@@ -50,6 +56,7 @@ String uId = (String)session.getAttribute("idKey");
     	<%@include file="../include/Footer.jsp"%>
         <!-- footer#footer -->
     </div>
+    <%} %>	
 </body>
     <script src="../script/jquery-3.6.0.min.js"></script>
 	<script src="/Proj_OnedayClass/script/script.js"></script>
