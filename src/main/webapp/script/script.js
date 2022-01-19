@@ -48,10 +48,7 @@ $(function () {
             );
     
         }
-        
-    
-    
-    
+
         // 마우스를 올리면(mouseover) 슬라이드 멈춤
         $("div#slide").mouseover(function () {
             // setInterval 중지방법
@@ -98,15 +95,47 @@ $(function () {
     $("#mainLi2").mouseout(function(){
         $(".mainLi #subMenu2").stop().slideUp(100);
     });
+    
+     $("#mainLi3").mouseover(function() {
+        $(".mainLi #subMenu3").stop().slideDown(200);
+    });
+
+    $("#mainLi3").mouseout(function(){
+        $(".mainLi #subMenu3").stop().slideUp(100);
+    });
 
 ///////////////////////////// 서브메뉴 끝 ///////////////////////////////
 	$("#onlineBtn").click(function() {
         // $("#detailedContent").stop().slideDown(800);
 		$("#detailedContent").css({"display" : "block"});
     });
-
+  	$("#offlineBtn").click(function() {
+        // $("#detailedContent").stop().slideDown(800);
+        $("#detailedContent").css({"display" : "block"});
+    });
     /*$("#onlineBtn").click(function(){
         // $("#detailedContent").stop().slideUp(500);
 		$("#detailedContent").css({"display" : "none"});
     });*/
     
+    
+//////////////////////////////ad page 메인 메뉴/////////////////////////
+	$("#adMainLi").mouseover(function(){
+        $(".mainAdMenu #subAdMenu").stop().slideDown(200);
+    });
+
+    $("#adMainLi").mouseout(function(){
+        $(".mainAdMenu #subAdMenu").stop().slideUp(100);
+    });
+    
+//////////////////////////////ad page 메인 메뉴 끝/////////////////////////    
+function setClassName() {
+			document.getElementById('ex').classList.add('active');
+		}
+		
+/////////////////////삭제/////////////////////////////
+$("#memDrop").click(function(){
+     if(window.confirm("정말 삭제하시겠습니까 ? ")){
+        location.href="/Proj_OnedayClass/sign/Member_Del.jsp";
+        }
+});

@@ -10,36 +10,32 @@ public class MemberBean {
 	private String uAddr1;
 	private String uAddr2;
 	private String uEmail;
-		
+	
+	
 	public String getuId() {
 		return uId;
 	}
 	public void setuId(String uId) {
 		this.uId = uId;
-		System.out.println("id");
 	}
 	public String getuPw() {
 		return uPw;
 	}
 	public void setuPw(String uPw) {
 		this.uPw = uPw;
-		System.out.println("pw");
 	}
 	public String getuName() {
 		return uName;
 	}
 	public void setuName(String uName) {
 		this.uName = uName;
-		System.out.println("이름");
 	}
 	public String getuPhone() {
 		return uPhone;
 	}
 	public void setuPhone(String uPhone) {
 		this.uPhone = uPhone;
-		System.out.println("번호");
 	}
-	
 	public String getuZip() {
 		return uZip;
 	}
@@ -63,7 +59,6 @@ public class MemberBean {
 	}
 	public void setuEmail(String uEmail) {
 		this.uEmail = uEmail;
-		System.out.println("이메일");
 	}
 	
 }

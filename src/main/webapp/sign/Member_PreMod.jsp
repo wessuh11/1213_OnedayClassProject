@@ -14,7 +14,7 @@ String uLevel = (String)session.getAttribute("levelKey");
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인</title>
+    <title>회원정보 수정</title>
     <link rel="stylesheet" href="/Proj_OnedayClass/style/sign.css">
 </head>
 <body>
