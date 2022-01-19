@@ -103,18 +103,19 @@ $(function(){
 		let url ="/Proj_OnedayClass/classBBS/ClassApproval.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
-		location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
+		//location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
 	});
 	
 	////// 클래스 수정 //////
-	$("button#modBtn").click(function(){
+	$("button#classmodbtn").click(function(){
 	    let nowPage = $("input#nowPage").val().trim();
 		let cNum = $("input#cNum").val().trim();
 		
 		let url ="/Proj_OnedayClass/classBBS/ClassUpdate.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
-		location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
+		//location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
+		
 	});
 	
 	////// 클래스 삭제 //////
@@ -125,7 +126,7 @@ $(function(){
 		let url ="/Proj_OnedayClass/classBBS/ClassDelete.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
-		location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
+		//location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
 	});
 ///////////// ClassRead.jsp 버튼 기능 ////////////////
 

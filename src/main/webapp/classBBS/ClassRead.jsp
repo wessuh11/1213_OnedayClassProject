@@ -36,18 +36,8 @@ int cFileSize= bean.getcFileSize(); //크기저장
 int cMaxStu= bean.getcMaxStu(); //최대 수강인원
 int cApplyStu= bean.getcApplyStu(); //수강신청 인원
 
-
-//카테고리 넘버
-String cCategory1 = "1";
-String cCategory2 = "2";
-String cCategory3 = "3";
-String cCategory4 = "4";
-String cCategory5 = "5";
-String cCategory6 = "6";
-String cCategory7 = "7";
-
 //수강인원 꽉차면 닫아줌
-
+session.setAttribute("cNumKey", cNum);
 session.setAttribute("bean", bean);
 //불러온 모든걸 세션으로 만들어줌!!
 //Ajax 사용시 
@@ -173,7 +163,7 @@ session.setAttribute("bean", bean);
 		    <table>
 			    <tr>
 			        <td>
-		        		<button type="button" class="teacherchoice" id ="modBtn">클래스 수정</button>
+		        		<button type="button" class="teacherchoice" id ="classmodbtn">클래스 수정</button>
 		           </td>
 		        	<td>
 		        		<button type="button" class="teacherchoice" id ="delBtn">클래스 삭제</button>
@@ -191,12 +181,17 @@ session.setAttribute("bean", bean);
 	    <div id="boardmenu">
 	    	 <ul class="flex-container">
                     <li><a href="#">상세</a></li>
-                    <li><a href="#">리뷰</a></li>
-                    <li><a href="#">문의</a></li>
+                    <li id="reviewcall"><a href="#">리뷰</a></li>
+                    <li id="qnacall"><a href="#">문의</a></li>
               </ul>
 	    </div>
 	    <!-- div#boardmenu -->
+		
+		<div id="tblArea">
+		
+		</div>
 
+	
 		<!-- div#details -->
         	<div id="info">
         		<table>
@@ -217,16 +212,31 @@ session.setAttribute("bean", bean);
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script>
-	$("reviewcall").click(function(){
-		$("#tblArea").css{'display', 'none'}
-		$.ajax({
-			url:
+	$(function(){
+		$("#reviewcall").click(function(){
+			// ajax 통신
+			$.ajax({
+			    url : "/Proj_OnedayClass/reviewBBS/RvList.jsp",      // 컨트롤러에서 대기중인 URL 주소이다.
+			    type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			}).done(function(RvList){
+				$("#tblArea").html(RvList);
+			});
 		});
 	});
+	
+	$(function(){
+		$("#qnacall").click(function(){
+			// ajax 통신
+			$.ajax({
+			    url : "/Proj_OnedayClass/qnaBBS/QnaList.jsp",      // 컨트롤러에서 대기중인 URL 주소이다.
+			    type : "GET",            // HTTP method type(GET, POST) 형식이다.
+			}).done(function(qnaList){
+				$("#tblArea").html(qnaList);
+			});
+		});
+	});    
+	
 	</script>
-	
-	
-	
 	<script src="/Proj_OnedayClass/script/classbbs.js"></script>
 </body>
 </html>

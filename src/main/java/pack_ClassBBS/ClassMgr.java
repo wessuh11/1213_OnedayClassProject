@@ -21,7 +21,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import pack_DBCP.DBConnectionMgr;
-import pack_Util.UtilMgr; 
+import pack_Util.*;
 public class ClassMgr {
 
 	private DBConnectionMgr pool;
@@ -62,7 +62,7 @@ public class ClassMgr {
 		String cFileName = null;
 		String path = req.getServletContext().getRealPath("/src/main/webapp/fileUpload/classfileupload/");
 		path = UtilMgr.replace(path, ".metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\", "");
-
+		System.out.print(path);
 		String cCode = UUID.randomUUID().toString();
 
 		try {
