@@ -100,8 +100,8 @@ Vector<ClassBean> vList = null;
 			<!-- main#galleryListArea 추천 게시물 시작 -->
 			<main id="galleryListArea">
 					<%
-					vList = bMgr.getBoardLike(cCategorySel, start, end);
-					listSize = vList.size();
+						vList = bMgr.getBoardLike(cCategorySel, start, end);
+						listSize = vList.size();
 					%>
 					<div class="swiper-container">
 						<%
