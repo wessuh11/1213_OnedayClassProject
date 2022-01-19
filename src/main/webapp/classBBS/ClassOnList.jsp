@@ -5,6 +5,7 @@
 
 <%
 request.setCharacterEncoding("UTF-8");
+
 int totalRecord = 0; // 전체 데이터 수(DB에 저장된 row 개수)
 int numPerPage = 9; // 페이지당 출력하는 데이터 수(=게시글 숫자)
 int pagePerBlock = 5; // 블럭당 표시되는 페이지 수의 개수
@@ -23,6 +24,7 @@ String uName = (String) session.getAttribute("nameKey");
 String uLevel = (String) session.getAttribute("levelKey");
 
 String cCategorySel = ""; // DB의 카테고리
+String online = "N"; //온오프라인여부
 
 if (request.getParameter("cCategorySel") != null) {
 	cCategorySel = request.getParameter("cCategorySel");
@@ -131,13 +133,12 @@ Vector<ClassBean> vList = null;
 							int cLikes = bean.getcLikes();
 							//좋아요
 							
-							if (cStatus == 2 && cOnoff.equals("N")) {
-								//if (cStatus == 2 && off.equals(cOnoff)) {
+							if (cStatus == 2 && online.equals(cOnoff)) {
 						%>
 							<div class="swiper-slide" onclick="read('<%=cNum%>', '<%=nowPage%>')">
 							<div>
 								<a href="#"> <img
-									src="/Proj_OnedayClass/fileupload/classfileupload/<%=cThumbName%>"
+									src="/Proj_OnedayClass/fileUpload/classfileupload/<%=cThumbName%>"
 									alt='이미지' width='310'></a>
 							</div>
 							
@@ -224,19 +225,18 @@ Vector<ClassBean> vList = null;
 									//글 속성, 공개 비공개 여부
 									String cOnoff = bean.getcOnoff();
 									//클래스 on(N), off(Y) 여부
-									if (cStatus == 2 && cOnoff.equals("N")) {
-										//if (cStatus == 2 && off.equals(cOnoff)) {
+									if (cStatus == 2 && online.equals(cOnoff)) {
 								%>
 								<td onclick="read('<%=cNum%>', '<%=nowPage%>')">
 									<!-- 1 -->
 									<div>
 										<a href="#"> <img
-											src="/Proj_OnedayClass/fileupload/classfileupload/<%=cThumbName%>"
+											src="/Proj_OnedayClass/fileUpload/classfileupload/<%=cThumbName%>"
 											alt='이미지' width='310'>
 										</a>
 									</div>
 
-									<div>
+									<div class="letter">
 										<%
 										if (cCategory.equals("1")) {
 											cCategory = "핸드 메이드";

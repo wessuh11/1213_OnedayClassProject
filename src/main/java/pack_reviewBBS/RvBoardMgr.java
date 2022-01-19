@@ -25,8 +25,8 @@ public class RvBoardMgr {
 
 	private DBConnectionMgr pool;
 	
-	  private static final String SAVEFOLER =
-	  "C:/Users/kmr07/OneDrive/바탕 화면/sy/silsp/1213_OnedayClassProject/src/main/webapp/fileUpload/Rvbbs/"; 
+	  //private static final String SAVEFOLER =
+	  //"C:/Users/kmr07/OneDrive/바탕 화면/sy/silsp/1213_OnedayClassProject/src/main/webapp/fileUpload/Rvbbs/"; 
 	  // 수식어 static final 이 함께 사용된 필드를 상수필드라고함. // 상수필드는 선언과 동시에 반드시 초기화해야 함.
 	  //필드명은 모두 대문자, 단어간 연결은 밑줄 // 재초기화 안됨
 	 
@@ -52,6 +52,9 @@ public class RvBoardMgr {
 		MultipartRequest multi = null;
 		int rFileSize = 0;
 		String rFileName = null;
+		String path = req.getServletContext().getRealPath("/src/main/webapp/fileUpload/reviewbbs/");
+		path = UtilMgr.replace(path, ".metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\", "");
+	
 		
 		try {
 			objConn = pool.getConnection();
@@ -66,12 +69,12 @@ public class RvBoardMgr {
 			// 있다고 가정하면 max(num)는 3을 반환함. 그러므로 새 글번호를
 			// 참조하는 DB의 컬럼 ref는 4가 됨.
 
-			File file = new File(SAVEFOLER);
+			File file = new File(path);
 
 			if (!file.exists())
 				file.mkdirs();
 
-			multi = new MultipartRequest(req, SAVEFOLER, maxSize, encType, new DefaultFileRenamePolicy());
+			multi = new MultipartRequest(req, path, maxSize, encType, new DefaultFileRenamePolicy());
 
 			if (multi.getFilesystemName("rFileName") != null) {
 				rFileName = multi.getFilesystemName("rFileName");

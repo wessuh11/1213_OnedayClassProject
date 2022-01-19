@@ -15,6 +15,8 @@ public class RvBoardBean {
 	
 	
 	
+	
+	
 	public String getrUid() {
 		return rUid;
 	}

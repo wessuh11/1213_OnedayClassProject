@@ -78,7 +78,7 @@ Vector<RvBoardBean> vList = null;
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>OneDayClass</title>
-    <link rel="stylesheet" href="/Proj_OnedayClass/style/reviewBBS.css"> 
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/ajaxBBS.css">
 </head>
 <body>
 
@@ -94,10 +94,7 @@ Vector<RvBoardBean> vList = null;
 
 		
 		<main id="main" class="list">   
-			
-		<h1>Review</h1>
-		
-			
+	
 			<div id="pageInfo" class="flex-container">
 				
 				 <span id="postBtn">

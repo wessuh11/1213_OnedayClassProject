@@ -6,7 +6,6 @@ request.setCharacterEncoding("UTF-8");
 String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
-
 String str1 = "3";
 String str2 = "2";
 String str3 = "1";
@@ -29,7 +28,7 @@ String str3 = "1";
         <div id="pageMenu">
             <ul id="myPageMenu" class="flex-container">
                 <li class="myPageMenuLi">
-                    <a href="#"><img src="/Proj_OnedayClass/img/profile.png" alt="프로필 설정"></a>
+                    <a href="#"><img src="/Proj_OnedayClass/img/blank-profile.png" alt="프로필 설정"></a>
                 </li>
                 <li class="myPageMenuLi">
                     <Strong id="uName"><%=uName %></Strong>
@@ -37,65 +36,67 @@ String str3 = "1";
                 </li>
                 <li class="myPageMenuLi">
                     <Strong>회원등급</Strong>
-                    <%if(uLevel.equals("2")) { %>
-                    <span id="uGrade">강사</span>
-                    <%} else {%>
-                    <span id="uGrade">학생</span>
-                    <%} %>
+                    <span id="uGrade">회원</span>
+                </li>
+                <li class="myPageMenuLi">
+                    <Strong>적립금</Strong>
+                    <span id="c_point">0 </span>원
+                </li>
+                <li class="myPageMenuLi">
+                    <Strong>쿠폰</Strong>
+                    <span id="couponSum">0 </span>장
                 </li>
             </ul>
         </div>
+
+
         <main id="main">
             <nav id="mainNav">
                 <ul id="mainMenu" class="flex-container">
+                    <%if(str2.equals(uLevel)){ %>
                     <li id="mainLi1" class="mainLi">
-        <%if (uLevel.equals("1")) {%>
-                        <a href="#">주문 내역</a>
+                        <a href="#">수강 결제 내역</a>
                         <div id="subMenu1"  class="subContainer">
-                            <ul class="subMenu flex-container">         
+                            <ul class="subMenu flex-container">
                                 <li class="subMenuLi"><a href="#" id="onlineBtn">온라인</a></li>
-                                <li class="subMenuLi"><a href="#" id="offlineBtn">오프라인</a></li>     
-							</ul>
-						</div>                      
-         <% } else { %>
-                        <a href="#">클래스 관리</a>
-                        <div id="subMenu1"  class="subContainer">
-                            <ul class="subMenu flex-container">           
-                                <li class="subMenuLi"><a href="/Proj_OnedayClass/classBBS/ClassPost.jsp">클래스 등록</a></li>
-                                <li class="subMenuLi"><a href="/Proj_OnedayClass/classBBS/ClassList.jsp" >클래스 관리</a></li>
-							</ul>
-                        </div>    
-                      </li>     
-                      <li id="mainLi2" class="mainLi">
-                      <a href="#">수강 결제 내역</a>
-                        <div id="subMenu2"  class="subContainer">
-                            <ul class="subMenu flex-container">
-                                <li class="subMenuLi"><a href="#" id="onlineBtn" id="onlineBtn">온라인</a></li>
-                                <li class="subMenuLi"><a href="#" id="offlineBtn" id="offlineBtn">오프라인</a></li>
+                                <li class="subMenuLi"><a href="#" id="offlineBtn">오프라인</a></li>
                             </ul>
-                        </div>             
-        <% } %>  
-        		</li>                        
-                    <li id="mainLi3" class="mainLi" >           
-                        <a href="#" class=" subMenuLila">내 정보 관리</a>
-                        <div id="subMenu3" class="subContainer">
+                        </div>
+                    </li>
+                    <%} else { %>
+                     <li id="mainLi1" class="mainLi">
+                      <a href="#">주문 내역</a>
+                        <div id="subMenu1"  class="subContainer">
                             <ul class="subMenu flex-container">
-                    <%if (uLevel.equals("1")) {%>
+                                <li class="subMenuLi"><a href="#" id="onlineBtn">온라인</a></li>
+                                <li class="subMenuLi"><a href="#" id="offlineBtn">오프라인</a></li>
+                            </ul>
+                        </div>
+                        <%} %>
+                    <li class="mainLi">
+                        <a href="#" id="deliveryChkBtn">배송 조회</a>
+                    </li>
+                    <li id="mainLi2" class="mainLi">                     
+                        <a href="#">내 정보 관리</a>
+                        <div id="subMenu2" class="subContainer">
+                            <ul class="subMenu flex-container">
+                     <%if (str3.equals(uLevel)) {%>
                                 <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Mod.jsp" id="memModBtn">회원 정보 수정</a></li>
                                 <li class="subMenuLi"><a href="/Proj_OnedayClass/levelUp/LvlUpPost.jsp" id="">등업 신청</a></li>
-                                <li class="subMenuLi"><a href="#" id="memDrop">회원 탈퇴</a></li>
+                                <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Del.jsp" id="memDrop">회원 탈퇴</a></li>
 					<% } else { %>
 					            <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Mod.jsp" id="memModBtn">회원 정보 수정</a></li>                                
-                                <li class="subMenuLi"><a href="#" id="memDrop">회원 탈퇴</a></li>
+                                <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Del.jsp" id="memDrop">회원 탈퇴</a></li>
                     <% } %>
                             </ul>
                         </div>
                     </li>
                 </ul>
             </nav>
-            
-				 <div id="detailedContent">	
-            	<%if(uLevel.equals("2")) {%>
+
+            <div id="detailedContent">
+            	
+            	<%if(str2.equals(uLevel)) {%>
 				<table id="bbsTbl">
 					<thead>
 						<tr>
@@ -122,7 +123,8 @@ String str3 = "1";
 						</tr>
 					</thead>
 					<%} %>
-				<tbody id="bbsContent">
+					
+					<tbody id="bbsContent">
 						<tr>
 							<td></td>
 							<td></td>
@@ -205,12 +207,14 @@ String str3 = "1";
 						</tr>
 					</tbody>
 				</table>
-           </div>
+				
+            </div>
         </main>
 
        <%@include file="../include/Footer.jsp"%>
         <!-- footer#footer -->
     </div>
+
     <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
     <script src="/Proj_OnedayClass/script/script.js"></script>
 </body>

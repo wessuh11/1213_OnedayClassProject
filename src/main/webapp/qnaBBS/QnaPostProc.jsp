@@ -5,5 +5,4 @@
 <jsp:useBean id="bMgr" class="pack_QnaBBS.BoardMgr" scope="page" />
 <%
 bMgr.insertBoard(request);
-response.sendRedirect("AdminQnaList.jsp");
 %>

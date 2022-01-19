@@ -10,9 +10,6 @@ request.setCharacterEncoding("UTF-8");
 <%
 bMgr.insertBoard(request);
 response.sendRedirect("ClassOnList.jsp");
-
-
-
 //System.out.print(cOnoff);
 
 /*

@@ -12,16 +12,16 @@ String s = request.getParameter("cNum");
 int numParam = Integer.parseInt(s);
 
 ClassBean bean = (ClassBean)session.getAttribute("bean"); 
-String realDBUid = bean.getcUid(); //ClassBean cUid 가져옴
+String cUid = bean.getcUid(); //ClassBean cUid 가져옴
 
-
-if(uId.equals(realDBUid)||uLevel.equals("3")) {    // cUid와 uid가 일치한다면.
 	int exeCnt = bMgr.deleteBoard(numParam);
 	String url = "ClassList.jsp?cNum="+nowPage;
+	
+if(uId.equals(cUid)||uLevel.equals("3")) {
 %>
 	<script>
 		alert("삭제되었습니다!");
-		location.href =<%=url%>
+		location.href = "<%=url%>";
 	</script>
 <% 
 	} else {

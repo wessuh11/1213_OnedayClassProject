@@ -6,6 +6,7 @@
 <%
 request.setCharacterEncoding("UTF-8");
 int qNum = Integer.parseInt(request.getParameter("qNum"));
+int cNum = (int) session.getAttribute("cNumKey"); //클래스 게시판 번호
 //검색어 수신 시작
 String keyField = request.getParameter("keyField");
 String keyWord = request.getParameter("keyWord");
@@ -31,7 +32,7 @@ String uLevel = (String)session.getAttribute("levelKey");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-    <link rel="stylesheet" href="/Proj_OnedayClass/style/qnaBBS.css">
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/ajaxBBS.css">
 </head>
 <body>
 	<div id="wrap">
@@ -56,6 +57,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 								<%=uId %> 님
 								<input type="hidden" name="qUid" id="qUid" value="<%=uId%>">
 								<span class="ori_Txt"><b><%=qUid %></b> 님의 글</span>
+								<input type="hidden" name="cNum" id="cNum" value="<%=cNum%>">
 							</td>
 						</tr>
 						<tr>
@@ -106,7 +108,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 					</tfoot>
 					 
 				</table>
-				<input type="hidden" name="qNum" value="<%=qNum%>" id="num">				
+				<input type="hidden" name="qNum" value="<%=qNum%>" id="qNum">				
 				
 				<input type="hidden" name="qRef" value="<%=qRef%>">				
 				<input type="hidden" name="qDepth" value="<%=qDepth%>">				

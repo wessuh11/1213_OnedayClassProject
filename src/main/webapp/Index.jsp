@@ -14,7 +14,6 @@
 </head>
 <body>
 	<div id="wrap">
-	
 		<%@include file="../include/Header.jsp"%>
 			<div id="slide">
             <div class="swiper-container">

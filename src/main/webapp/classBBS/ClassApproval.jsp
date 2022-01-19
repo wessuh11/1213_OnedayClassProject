@@ -21,7 +21,7 @@ if(uId.equals(realDBUid)||uLevel.equals("3")) {    // cUid와 uid가 일치한�
 %>
 	<script>
 		alert("승인완료!");
-		location.href =<%=url%>
+		location.href ="<%=url%>";
 	</script>
 <% 
 	} else {

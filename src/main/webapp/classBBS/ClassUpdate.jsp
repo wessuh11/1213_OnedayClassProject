@@ -33,8 +33,6 @@ String cOnoff = bean.getcOnoff(); //onoff 여부
 String uId = (String)session.getAttribute("idKey");
 String uName = (String)session.getAttribute("nameKey");
 String uLevel = (String)session.getAttribute("levelKey");
-String str1 = "3";
-String str2 = "2";
 %>    
     
 <!DOCTYPE html>
@@ -49,7 +47,7 @@ String str2 = "2";
 <body>
 	<div id="wrap">
 	<%@include file="../include/Header.jsp"%>
-	
+	<% if(uId == cUid || uLevel.equals("3")) {%>
         <!-- ClassUpdate 시작 -->
         <div id="classbbs">
             <form name="updateFrm" id="updateFrm" action="ClassUpdateProc.jsp" 
@@ -132,7 +130,7 @@ String str2 = "2";
                         	<td>
 	                        	<label>
 	                        		오프라인 클래스
-	                        	 <input type="radio" name="cOnoff" id="cOnoff" value="Y">
+	                        	 <input type="radio" name="cOnoff" id="cOnoff" value="Y" checked>
 	                        	 	온라인 클래스
 	                        	 <input type="radio" name="cOnoff" id="cOnoff" value="N">
 	                        	 </label>
@@ -160,8 +158,16 @@ String str2 = "2";
 		
             </div>
             <!-- ClassUpdate 종료 -->
-	
+		
 		<%@include file="../include/Footer.jsp"%>
+		<% } else {%>
+			<script>
+				alert("당신의 게시물이 아닙니다."); 
+				history.back();
+			</script>	
+		<%
+		} 
+		%>
 	</div>
 	<!-- div#wrap -->
 	

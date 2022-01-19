@@ -55,7 +55,7 @@ String uLevel = (String)session.getAttribute("levelKey");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>글내용 보기</title>
-    <link rel="stylesheet" href="/Proj_OnedayClass/style/qnaBBS.css">
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/ajaxBBS.css">
 </head>
 <body>
 	<div id="wrap">

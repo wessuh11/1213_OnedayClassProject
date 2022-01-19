@@ -19,7 +19,7 @@ String istr2 = "2";
           
                 <ul class="flex-container">
     	<% if (iuId != null && istr1.equals(iuLevel)) {  //관리자 로그인%>
-                    <li><a href="/Proj_OnedayClass/adminBBS/AdminPage.jsp">관리자님 안녕하세요.</a></li>
+                    <li><a href="/Proj_OnedayClass/adminBBS/AdminPage.jsp"><%=iuName %>님 안녕하세요.</a></li>
                     <li></li>
                     <li><a href="/Proj_OnedayClass/sign/Logout.jsp">로그아웃</a></li>
     	<% } else { %>

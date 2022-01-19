@@ -31,7 +31,7 @@ String uLevel = (String)session.getAttribute("levelKey");
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>게시글 수정페이지</title>
-    <link rel="stylesheet" href="/Proj_OnedayClass/style/qnaBBS.css">
+    <link rel="stylesheet" href="/Proj_OnedayClass/style/ajaxBBS.css">
 </head>
 <body>
 	<div id="wrap">
@@ -110,7 +110,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 					 
 				</table>
 				<input type="hidden" name="nowPage" value="<%=nowPage%>" id="nowPage">
-				<input type="hidden" name="qNum" value="<%=qNum%>" id="num">
+				<input type="hidden" name="qNum" value="<%=qNum%>" id="qNum">
 				
 				<!-- 검색어전송 시작 -->
 				<input type="hidden" name="keyField" id="keyField" value="<%=keyField%>">

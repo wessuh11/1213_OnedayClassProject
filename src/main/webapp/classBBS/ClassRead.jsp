@@ -63,7 +63,7 @@ session.setAttribute("bean", bean);
         	 	<table>
         	 	<tr>
         	 		<td class="thumimg">
-        	 			<img src="/Proj_OnedayClass/fileupload/classfileupload/<%=cThumbName%>" alt="썸네일"
+        	 			<img src="/Proj_OnedayClass/fileUpload/classfileupload/<%=cThumbName%>" alt="썸네일"
         	 			width ="490px" height = "345px">
         	 		</td>
         	 	</tr>
@@ -130,7 +130,7 @@ session.setAttribute("bean", bean);
         					<button type="button" class="buy" id="buy">클래스 신청하기</button>
         				</td>
         				<td>
-        					<button type="button" class="put" id="put" onClick="location.href='장바구니?cNum=<%= cNum %>&uId=<%=uId%>'">담기</button>
+        					<button type="button" class="put" id="put" onClick="location.href='../payment/CartAction.jsp?cNum=<%= cNum %>&uId=<%=uId%>&nowPage=<%=nowPage%>'">담기</button>
         				</td>
         				<!-- 결제페이지 이동 -->
         			</tr>
@@ -197,7 +197,7 @@ session.setAttribute("bean", bean);
         		<table>
         			<tr>
         				<td>
-        				<img src="/Proj_OnedayClass/fileupload/classfileupload/<%=cFileName%>" alt="상세정보"
+        				<img src="/Proj_OnedayClass/fileUpload/classfileupload/<%=cFileName%>" alt="상세정보"
         	 			width ="1000">
         				</td>
         			</tr>
