@@ -48,10 +48,7 @@ $(function () {
             );
     
         }
-        
-    
-    
-    
+
         // 마우스를 올리면(mouseover) 슬라이드 멈춤
         $("div#slide").mouseover(function () {
             // setInterval 중지방법
@@ -110,3 +107,24 @@ $(function () {
 		$("#detailedContent").css({"display" : "none"});
     });*/
     
+    
+//////////////////////////////ad page 메인 메뉴/////////////////////////
+	$("#adMainLi").mouseover(function(){
+        $(".mainAdMenu #subAdMenu").stop().slideDown(200);
+    });
+
+    $("#adMainLi").mouseout(function(){
+        $(".mainAdMenu #subAdMenu").stop().slideUp(100);
+    });
+    
+//////////////////////////////ad page 메인 메뉴 끝/////////////////////////    
+function setClassName() {
+			document.getElementById('ex').classList.add('active');
+		}
+		
+/////////////////////삭제/////////////////////////////
+$("#memDrop").click(function(){
+     if(window.confirm("정말 삭제하시겠습니까 ? ")){
+        location.href="/Proj_OnedayClass/sign/Member_Del.jsp";
+        }
+});
