@@ -65,7 +65,6 @@ function movePage(p1) {    // 페이지 이동
 
 	let param = "ClassList.jsp?nowPage="+p1;	    
 	location.href= param;
-
 }
 
 
@@ -104,7 +103,6 @@ $(function(){
 		let url ="/Proj_OnedayClass/classBBS/ClassApproval.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
-		location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
 	});
 	
 	////// 클래스 수정 //////
@@ -115,7 +113,6 @@ $(function(){
 		let url ="/Proj_OnedayClass/classBBS/ClassUpdate.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
-		location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
 	});
 	
 	////// 클래스 삭제 //////
@@ -126,7 +123,9 @@ $(function(){
 		let url ="/Proj_OnedayClass/classBBS/ClassDelete.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
-		location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
+		
+		
+		
 	});
 ///////////// ClassRead.jsp 버튼 기능 ////////////////
 
@@ -134,11 +133,23 @@ $(function(){
 	$("#updateBtn").click(function(){
 
 		let cTitle = $("#cTitle").val().trim();
+		let cContent = $("#cContent").val().trim();
+		let cMaxStu = $("#cMaxStu").val().trim();
+		let cOnoff = $("#cOnoff").val().trim();
 
 		if (cTitle == "") {
-			alert("제목은 필수입력입니다.");
+			alert("제목을 입력하세요.");
 			$("#cTitle").focus();
-		}  else {
+		}else if(cContent==""){
+			alert("내용을 입력하세요");
+			$("#cContent").focus();
+		}else if(cMaxStu==""){
+			alert("수강인원을 설정해주세요.");
+			$("#cMaxStu").focus();
+		}else if(cOnoff==""){
+			alert("수업유형을 선택하세요");
+			$("#cOnoff").focus();
+		}else {
 			$("#updateFrm").submit();
 		}
 	

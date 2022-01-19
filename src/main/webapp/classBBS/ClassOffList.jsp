@@ -17,6 +17,7 @@ pagePerBlock => 5
 totalPage => 20
 totalBlock => 4  (20/5 => 4)
 */
+
 int nowPage = 1; // 현재 (사용자가 보고 있는) 페이지 번호
 int nowBlock = 1; // 현재 (사용자가 보고 있는) 블럭
 int start = 0; // DB에서 데이터를 불러올 때 시작하는 인덱스 번호
@@ -24,21 +25,13 @@ int end = 9; // 시작하는 인덱스 번호부터 반환하는(=출력하는) 
 // select * from T/N where... order by ... limit start, end;
 int listSize = 0; // 1페이지에서 보여주는 데이터 수
 //출력할 데이터의 개수 = 데이터 1개는 가로줄 1개
+
 String uId = (String) session.getAttribute("idKey");
 String uName = (String) session.getAttribute("nameKey");
 String uLevel = (String) session.getAttribute("levelKey");
-//str1= 관리자, str2는 강사
-String str1 = "3";
-String str2 = "2";
 
-String cCategory1 = "1";
-String cCategory2 = "2";
-String cCategory3 = "3";
-String cCategory4 = "4";
-String cCategory5 = "5";
-String cCategory6 = "6";
-String cCategory7 = "7";
 String cCategorySel = ""; // DB의 카테고리
+String offline = "Y"; //온오프라인여부
 
 if (request.getParameter("cCategorySel") != null) {
 	cCategorySel = request.getParameter("cCategorySel");
@@ -147,7 +140,7 @@ Vector<ClassBean> vList = null;
 							int cLikes = bean.getcLikes();
 							//좋아요
 							
-							if (cStatus == 2 && cOnoff.equals("Y")) {
+							if (cStatus == 2 && offline.equals(cOnoff)) {
 						%>
 							<div class="swiper-slide" onclick="read('<%=cNum%>', '<%=nowPage%>')">
 							<div>
@@ -156,7 +149,7 @@ Vector<ClassBean> vList = null;
 									alt='이미지' width='310'></a>
 							</div>
 							
-							<div>
+							<div class="letter">
 							<%
 								if (cCategory.equals("1")) {
 									cCategory = "핸드 메이드";
@@ -178,7 +171,7 @@ Vector<ClassBean> vList = null;
 								%><%=cCategory%>
 							</div>
 							
-							<div>
+							<div class="titleletter">
 								<%=cTitle%>
 							</div>
 						</div>
@@ -240,7 +233,7 @@ Vector<ClassBean> vList = null;
 									String cOnoff = bean.getcOnoff();
 									//클래스 on(N), off(Y) 여부
 									
-									if (cStatus == 2 && cOnoff.equals("Y")) {
+									if (cStatus == 2 && offline.equals(cOnoff)) {
 								%>
 								<td onclick="read('<%=cNum%>', '<%=nowPage%>')">
 									<!-- 1 -->
@@ -251,7 +244,7 @@ Vector<ClassBean> vList = null;
 										</a>
 									</div>
 
-									<div>
+									<div class="letter">
 										<%
 										if (cCategory.equals("1")) {
 											cCategory = "핸드 메이드";
@@ -274,7 +267,7 @@ Vector<ClassBean> vList = null;
 										<%=cCategory%>
 									</div>
 
-									<div>
+									<div class="titleletter">
 										<%=cTitle%>
 									</div>
 								</td>

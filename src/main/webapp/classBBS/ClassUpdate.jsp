@@ -132,7 +132,7 @@ String str2 = "2";
                         	<td>
 	                        	<label>
 	                        		오프라인 클래스
-	                        	 <input type="radio" name="cOnoff" id="cOnoff" value="Y">
+	                        	 <input type="radio" name="cOnoff" id="cOnoff" value="Y" checked>
 	                        	 	온라인 클래스
 	                        	 <input type="radio" name="cOnoff" id="cOnoff" value="N">
 	                        	 </label>
