@@ -3,11 +3,6 @@
 @import url(style.css);
 
 
-div#wrap {
-
-}
-
-
 /*///////////////// 템플릿 시작 ////////////////////*/
 #wrap>main#main {
 	padding: 20px;
