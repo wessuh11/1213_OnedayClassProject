@@ -35,18 +35,17 @@ nav#gnb {
 }
 
 nav#gnb ul {
-    width: 1000px;
     justify-content: center;
     align-items: center;
-    margin: 0 auto;
 }
 
 nav#gnb ul li {
     padding: 40px;
+
     display: inline-block;
 }
 
-nav#gnb ul li.active  {
+nav#gnb ul li.active {
     border-bottom: 3px solid #000;
 }
 
@@ -60,7 +59,9 @@ nav#gnb ul li:hover a {
 div#slide {    /* 이미지 1개의 크기를 적용 */
     width: 780px;
     height: 350px;
+
     margin: 20px auto;
+
     overflow: hidden; 
          /* 부모요소 영역보다 더 큰 자식요소의 
          범람한 외부영역을 숨겨줌*/
@@ -83,6 +84,7 @@ div#shuttleFrame {    /* 이미지 전체의 폭 */
 }
 
 #slide a span {
+
     color: #000;
     font-size: 24px;
     font-weight: bold;
@@ -120,24 +122,14 @@ div#arrowRight {
     right: 0;
 }
 /* 슬라이드쇼 방향키 끝 */
+
 /* div#slide 끝 */
 
-/* 디테일 페이지 시작 */
-div#detail{
-    width: 1000px;
-    height: 500px;
-    text-align: center;
-    margin: 0 auto;
-    border: 1px solid #000;
-}
-
-/* 디테일 페이지 종료 */
-
 /* footer#footer 시작 */
+
 footer#footer {
-    width: 1000px;
+    width: 100%;
     margin: 0 auto;
-    /* border: 1px solid #000; */
 }
 
 /* div#footerTop 시작 */

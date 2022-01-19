@@ -17,7 +17,7 @@ String uId = (String)session.getAttribute("idKey");
 </head>
 <body>
 
-   		<jsp:include page="../Header.jsp" />
+   		<jsp:include page="../include/Header.jsp" />
    
         <!-- 회원가입시작 -->
         <div id="signup">
@@ -119,7 +119,7 @@ String uId = (String)session.getAttribute("idKey");
                 </form>
             </div>
 
-       		<jsp:include page="../Footer.jsp" />
+       		<jsp:include page="../include/Footer.jsp" />
        
     </div>
 </body>

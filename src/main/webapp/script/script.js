@@ -104,6 +104,21 @@ $(function () {
         // $("#detailedContent").stop().slideDown(800);
 		$("#detailedContent").css({"display" : "block"});
     });
+    
+  
+////////////////////////////회원탈퇴 버튼 시작/////////////////////////////////////
+
+$("#memDrop").click(function(){
+        if(window.confirm("정말 삭제하시겠습니까 ?")){
+
+        location.href="/Proj_OnedayClass/sign/Member_Del.jsp";
+
+        } 
+    });
+        
+            
+////////////////////////////회원탈퇴 버튼 끝/////////////////////////////////////
+        
 
     /*$("#onlineBtn").click(function(){
         // $("#detailedContent").stop().slideUp(500);

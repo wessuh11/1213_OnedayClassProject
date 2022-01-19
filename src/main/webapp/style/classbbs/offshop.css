@@ -184,7 +184,7 @@ div#goodsPart {
     height: 200px;
 }
 
-#Gallerybbs  main#galleryListArea {
+#Gallerybbs  main#galleryListArea3 {
     margin-bottom: 40px;
     flex-wrap: wrap;
     margin-bottom: 0px;
@@ -192,18 +192,18 @@ div#goodsPart {
 }
 
 /* table.goodsTbl 상품 출력용 테이블 시작 */
-#Gallerybbs  main#galleryListArea>table {
+#Gallerybbs  main#galleryListArea3>table {
     text-align: center;
     /* border: 1px solid #000; */
     flex: 1;
 }
 
-#Gallerybbs  main#galleryListArea>table td {
+#Gallerybbs  main#galleryListArea3>table td {
     color: #5f4a38;
     padding: 3px 0;
 }
 
-#Gallerybbs  #galleryListArea>table td.goodsDesc {
+#Gallerybbs  #galleryListArea3>table td.goodsDesc3 {
     /* 상품설명 */  
     color: rgba(95, 74, 56, 0.68);  
     font-size: 12px;
@@ -242,25 +242,25 @@ height: 600px;
     /* border: 1px solid #000; */
 }
 
-#Gallerybbs  main#galleryListArea2 {
+#Gallerybbs  main#galleryListArea4 {
     margin-bottom: 40px;
     flex-wrap: wrap;
 }
 
 /* table.goodsTbl 상품 출력용 테이블 시작 */
-#Gallerybbs  main#galleryListArea2>table {
+#Gallerybbs  main#galleryListArea4>table {
     text-align: center;
     /* border: 1px solid #000; */
     flex: 1;
 }
 
-#Gallerybbs  main#galleryListArea2>table td {
+#Gallerybbs  main#galleryListArea4>table td {
     color: #5f4a38;
     padding: 3px 0;
 }
 
 
-#Gallerybbs  #galleryListArea2>table td.goodsDesc2 {
+#Gallerybbs  #galleryListArea4>table td.goodsDesc4 {
     /* 상품설명 */  
     color: rgba(95, 74, 56, 0.68);  
     font-size: 12px;
@@ -330,3 +330,38 @@ footer#footer {
 
 /* div#footerBottom 끝 */
 /* footer#footer 끝 */
+
+/*///////////////// 리스트 List.jsp  페이징 시작 ////////////////////*/
+main.list td#pagingTd span {
+	width: 30px;
+	height: 30px;
+	font-weight: 12px;
+	text-align: center;
+	line-height: 30px;
+	
+	margin: 10px 2px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+
+
+main.list td#pagingTd span:hover {
+	color: #aaa;
+}
+
+main.list td#pagingTd span.nowPageNum {
+	font-size: 16px;
+	font-weight: bold;
+	background-color: rgba(136, 136, 136, 0.1);
+	cursor: default;
+}
+
+main.list td#pagingTd span.moveBlockArea {
+	width: 30px;
+	height: 30px;
+	font-size: 12px;
+	margin: 0 6px;
+	display: inline-block;
+}
+/*///////////////// 리스트 List.jsp  페이징 끝 ////////////////////*/

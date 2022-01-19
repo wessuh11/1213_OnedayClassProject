@@ -21,7 +21,7 @@ String uLevel = (String) session.getAttribute("levelKey");
 <body>
 
 	<div id="wrap">
-			<jsp:include page="../Header.jsp" />
+			<jsp:include page="../include/Header.jsp" />
 	
 
 	
@@ -76,7 +76,7 @@ String uLevel = (String) session.getAttribute("levelKey");
             </div>
         </main>
 		
-			<jsp:include page="../Footer.jsp" />
+			<jsp:include page="../include/Footer.jsp" />
 		
 	</div>
 	<!-- div#wrap -->

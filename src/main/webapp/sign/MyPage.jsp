@@ -21,7 +21,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 <body>  
 	<div id="wrap">
 	
-     		<jsp:include page="../Header.jsp" />
+     		<jsp:include page="../include/Header.jsp" />
 
 
         <div id="pageMenu">
@@ -69,7 +69,7 @@ String uLevel = (String)session.getAttribute("levelKey");
                         <div id="subMenu2" class="subContainer">
                             <ul class="subMenu flex-container">
                                 <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Mod.jsp" id="memModBtn">회원 정보 수정</a></li>
-                                <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Del.jsp" id="memDrop">회원 탈퇴</a></li>
+                                <li class="subMenuLi"><a href="#" id="memDrop">회원 탈퇴</a></li>
                             </ul>
                         </div>
                     </li>
@@ -176,7 +176,7 @@ String uLevel = (String)session.getAttribute("levelKey");
             </div>
         </main>
 
-		<jsp:include page="../Footer.jsp" />
+		<jsp:include page="../include/Footer.jsp" />
 
     </div>
 

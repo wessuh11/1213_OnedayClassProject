@@ -36,7 +36,7 @@ Vector<MemberBean> vList = mMgr.modifyMember(sessionUId);
 
 </head>
 <body>
-			<jsp:include page="../Header.jsp" />
+			<jsp:include page="../include/Header.jsp" />
 	
         
         <div id="mod">

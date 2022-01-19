@@ -16,7 +16,7 @@ String uLevel = (String)session.getAttribute("levelKey");
     <link rel="stylesheet" href="/Proj_OnedayClass/style/sign.css">
 </head>
 <body>
-		<jsp:include page="../Header.jsp" />
+		<jsp:include page="../include/Header.jsp" />
 	
         <!-- 로그인시작 -->
         <div id="signin">
@@ -47,7 +47,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 		</form>
         </div>
         <!-- 로그인끝 -->
-    		<jsp:include page="../Footer.jsp" />
+    		<jsp:include page="../include/Footer.jsp" />
        
     </div>
 	<!-- div#wrap -->
