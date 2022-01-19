@@ -65,7 +65,7 @@ if (request.getParameter("nowPage") != null) {
 3페이지    80~71
 */
 
-totalRecord = bMgr.getTotalCount(keyField, keyWord);   
+totalRecord = bMgr.getTotalCount();
 // 전체 데이터 수 반환
 
 totalPage = (int)Math.ceil((double)totalRecord/numPerPage);
@@ -140,7 +140,7 @@ Vector<RvBoardBean> vList = null;
 	
 			
 			<%
-			vList = bMgr.getBoardList(keyField, keyWord, start, end, uId);  // DB에서 데이터 불러오기
+			vList = bMgr.getBoardList(start, end, uId);  // DB에서 데이터 불러오기
 			listSize = vList.size();			
 			
 				if (vList.isEmpty()) {
@@ -262,7 +262,6 @@ Vector<RvBoardBean> vList = null;
 							<% } // End If%>		 	
 					<% }  // End For%>
 					<!-- 페이지 나누기용 페이지 번호 출력 끝  -->	
-					
 				
 				<% if (totalBlock>nowBlock) { // 다음 블럭이 남아 있다면  %>
 							<span  class="moveBlockArea" onclick="moveBlock('<%=nowBlock+1%>', '<%=pagePerBlock%>')">
@@ -272,15 +271,11 @@ Vector<RvBoardBean> vList = null;
 				<% } else { %>
 				            <span class="moveBlockArea"></span>
 				<% } %>
-				
-					
-					
+			
 				<%
 				}  // End if#01_totalPage
 				%>						
-						
-						
-						
+			
 						</td>
 						
 					<%-- 	 <td colspan="3">
@@ -315,16 +310,11 @@ Vector<RvBoardBean> vList = null;
 						
 						</td> 
 						--%>
-					</tr>
-					
-					
+					</tr>				
 				</tbody>
-			</table>
-		
-		
-		
+			</table>	
 		</main>  
-
+		
   	 <%@include file="../include/Footer.jsp"%>	
 	</div>       	
 	
