@@ -96,8 +96,7 @@ String uLevel = (String)session.getAttribute("levelKey");
                         	<!-- cContent -->
 	                        <td class="req">클래스 설명</td>
 	                        <td>
-	                        	<textarea name="cContent" id="cContent" cols="80" rows="10"></textarea>
-	                        	<input type="hidden" name="contentType" value="<%=cContent%>">
+	                        	<textarea name="cContent" id="cContent" cols="80" rows="10" wrap="hard"><%=cContent%></textarea>
 	                        </td>
                         </tr>
                         <tr>
@@ -121,7 +120,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 	                        <td class="req">수강인원</td>
 	                        <td>
 	                                <input type="text" class="umem" name="cMaxStu" id="cMaxStu" size="10"
-	                                placeholder="인원 수">
+	                                placeholder="인원 수"  value="<%=cMaxStu%>">
 	                        </td>
                         </tr>
                         <tr>
@@ -147,14 +146,14 @@ String uLevel = (String)session.getAttribute("levelKey");
                         <tr>
                             <td class="button" id="btnAreaTd"  colspan = "2">
                                 <button type="button" id="updateBtn" class="classbutton">클래스 수정하기</button>
-                                <button type="button" id="backBtn" class="classbutton">돌아가기</button>
+                                <button type="button" id="updatebackBtn" class="classbutton">돌아가기</button>
                             </td>
                         </tr>
                     </tbody>
-                </table>              
+                </table>
+                <input type="hidden" name="nowPage" value="<%=nowPage%>" id="nowPage">
+				<input type="hidden" name="cNum" value="<%=numParam%>" id="cNum">              
                 </form>
-         		<input type="hidden" name="nowPage" value="<%=nowPage%>" id="nowPage">
-				<input type="hidden" name="cNum" value="<%=numParam%>" id="cNum">
 		
             </div>
             <!-- ClassUpdate 종료 -->

@@ -137,20 +137,13 @@ $(function(){
 		let cTitle = $("#cTitle").val().trim();
 		let cContent = $("#cContent").val().trim();
 		let cMaxStu = $("#cMaxStu").val().trim();
-		let cOnoff = $("#cOnoff").val().trim();
 
-		if (cTitle == "") {
+		if (cTitle == ""){
 			alert("제목을 입력하세요.");
 			$("#cTitle").focus();
-		}else if(cContent==""){
-			alert("내용을 입력하세요");
-			$("#cContent").focus();
 		}else if(cMaxStu==""){
 			alert("수강인원을 설정해주세요.");
 			$("#cMaxStu").focus();
-		}else if(cOnoff==""){
-			alert("수업유형을 선택하세요");
-			$("#cOnoff").focus();
 		}else {
 			$("#updateFrm").submit();
 		}

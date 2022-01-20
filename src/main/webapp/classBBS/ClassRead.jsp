@@ -64,7 +64,7 @@ session.setAttribute("bean", bean);
         	 	<tr>
         	 		<td class="thumimg">
         	 			<img src="/Proj_OnedayClass/fileUpload/classfileupload/<%=cThumbName%>" alt="썸네일"
-        	 			width ="490px" height = "345px">
+        	 			width ="490" height ="350">
         	 		</td>
         	 	</tr>
         	 	</table>
@@ -96,16 +96,13 @@ session.setAttribute("bean", bean);
       					 %><%= cCategory %>] <%= cTeacher %></td>
         			</tr>
         			<tr>
-        				<td colspan ="2" class="cTitle"><%= cTitle	%></td>
+        				<td colspan ="2" class="cTitle"><%= cTitle %></td>
         			</tr>
         			<tr>
         				<td colspan ="2" class="cContent"><%= cContent %></td>
         			</tr>
         			<tr>
-        				<td colspan ="2" class="cPrice">수강료 : <%= cPrice %> 원</td>
-        			</tr>
-        			<tr>
-        				<td colspan ="2" class="cDelivery">배송비 : <%= cDelivery %> 원</td>
+        				<td colspan ="2" class="cPrice">수강료 : <%= cPrice %> 원 /  배송비 : <%= cDelivery %> 원</td>
         			</tr>
         			<tr>
         				<td colspan ="2" class="persons"> 인원수 : <%= cApplyStu %> / <%= cMaxStu %></td>
@@ -180,9 +177,9 @@ session.setAttribute("bean", bean);
 	    
 	    <div id="boardmenu">
 	    	 <ul class="flex-container">
-                    <li><a href="#">상세</a></li>
-                    <li id="reviewcall"><a href="#">리뷰</a></li>
-                    <li id="qnacall"><a href="#">문의</a></li>
+                    <li><a href="#">Details</a></li>
+                    <li id="reviewcall"><a href="#">Review</a></li>
+                    <li id="qnacall"><a href="#">Q&amp;A</a></li>
               </ul>
 	    </div>
 	    <!-- div#boardmenu -->
@@ -198,7 +195,7 @@ session.setAttribute("bean", bean);
         			<tr>
         				<td>
         				<img src="/Proj_OnedayClass/fileUpload/classfileupload/<%=cFileName%>" alt="상세정보"
-        	 			width ="1000">
+        	 			width ="100%">
         				</td>
         			</tr>
         		</table>
