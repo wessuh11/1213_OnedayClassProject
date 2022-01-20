@@ -197,7 +197,7 @@ session.setAttribute("bean", bean);
         		<table>
         			<tr>
         				<td>
-        				<img src="/Proj_OnedayClass/fileupload/classfileupload/<%=cFileName%>" alt="상세정보"
+        				<img src="/Proj_OnedayClass/fileUpload/classfileupload/<%=cFileName%>" alt="상세정보"
         	 			width ="1000">
         				</td>
         			</tr>

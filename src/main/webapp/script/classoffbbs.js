@@ -135,15 +135,27 @@ $(function(){
 	$("#updateBtn").click(function(){
 
 		let cTitle = $("#cTitle").val().trim();
+		let cContent = $("#cContent").val().trim();
+		let cMaxStu = $("#cMaxStu").val().trim();
+		let cOnoff = $("#cOnoff").val().trim();
 
 		if (cTitle == "") {
-			alert("제목은 필수입력입니다.");
+			alert("제목을 입력하세요.");
 			$("#cTitle").focus();
-		}  else {
+		}else if(cContent==""){
+			alert("내용을 입력하세요");
+			$("#cContent").focus();
+		}else if(cMaxStu==""){
+			alert("수강인원을 설정해주세요.");
+			$("#cMaxStu").focus();
+		}else if(cOnoff==""){
+			alert("수업유형을 선택하세요");
+			$("#cOnoff").focus();
+		}else {
 			$("#updateFrm").submit();
 		}
 	
-	});	
+	});
 //////////////// Update.jsp 에서 게시글 수정 끝 //////////////////
 //////////////// 페이징기능떄문에 하나 더 만듬 //////////////////
 

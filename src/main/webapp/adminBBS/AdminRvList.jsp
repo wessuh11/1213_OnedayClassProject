@@ -102,7 +102,7 @@ Vector<RvBoardBean> vList = null;
 		
 		<main id="main" class="list">   
 		
-		<h1>Review</h1>
+		<h1>Review 게시판</h1>
 			<%
 				String prnType = "";
 				if (keyWord.equals("null") || keyWord.equals("")) {

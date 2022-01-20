@@ -15,6 +15,11 @@
 	margin-left: 40px;
 }
 
+#main h1{
+	text-align: center;
+	color: #888;
+}
+
 
 /*///////////////// 템플릿 끝 ////////////////////*/
 
@@ -36,7 +41,10 @@ main.list table#boardList {
 
 main.list th {
 	padding: 8px 2px;
-	background-color: rgb(255, 128, 128)
+}
+
+table#boardList th{
+	background-color: rgb(136, 136, 136, 0.2);
 }
 
 

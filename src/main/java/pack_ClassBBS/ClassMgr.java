@@ -31,7 +31,7 @@ public class ClassMgr {
 	// "D:/GTH/silsp/EZ_Project/Proj_OnedayClass/src/main/webapp/fileupload/classfileupload/thumbnail";
 
 	private static String encType = "UTF-8";
-	private static int maxSize = 5 * 1024 * 1024;
+	private static int maxSize = 10 * 1024 * 1024;
 	// 파일크기 : 5MB
 
 	public ClassMgr() {
@@ -154,7 +154,7 @@ public class ClassMgr {
 ///////////////////////////////////////////////////////////////	
 ///////////////  On&off Class.jsp 추천리스트 ///////////////
 //////////////////////////////////////////////////////////////
-	public Vector<ClassBean> getBoardLike(String cCategorySel, int start, int end) {
+	public Vector<ClassBean> getBoardLike(String cCategorySel, String onoff, int start, int end) {
 
 		Vector<ClassBean> vList = new Vector<>();
 		Connection objConn = null;
@@ -167,18 +167,20 @@ public class ClassMgr {
 
 			if (cCategorySel.equals("null") || cCategorySel.equals("")) {
 				// 카테고리 메뉴 선택 안했을시, desc 정렬
-				sql = "select * from classbbs where cStatus<3 " + "order by cLikes desc limit ?, ?";
+				sql = "select * from classbbs where cStatus<3 AND cOnoff = ? order by cLikes desc limit ?, ?";
 				objPstmt = objConn.prepareStatement(sql);
-				objPstmt.setInt(1, start);
-				objPstmt.setInt(2, end);
+				objPstmt.setString(1, onoff);
+				objPstmt.setInt(2, start);
+				objPstmt.setInt(3, end);
 			} else {
 				// 카테고리 메뉴 클릭 시
-				sql = "select * from classbbs " + "where cCategory =? AND cStatus<3 "
+				sql = "select * from classbbs where cCategory =? AND cStatus<3 AND cOnoff = ? "
 						+ "order by cLikes desc limit ?, ?";
 				objPstmt = objConn.prepareStatement(sql);
 				objPstmt.setString(1, cCategorySel);
-				objPstmt.setInt(2, start);
-				objPstmt.setInt(3, end);
+				objPstmt.setString(2, onoff);
+				objPstmt.setInt(3, start);
+				objPstmt.setInt(4, end);
 			}
 			objRs = objPstmt.executeQuery();
 
@@ -210,9 +212,9 @@ public class ClassMgr {
 	
 	
 /////////////////////////////////////////////////////////////
-///////////////  On&off Class.jsp 일반 시작///////////////
+///////////////  ClassOnList.jsp 일반 시작///////////////
 ////////////////////////////////////////////////////////////
-	public Vector<ClassBean> getBoardList(String cCategorySel, int start, int end) {
+	public Vector<ClassBean> getBoardList(String cCategorySel, String onoff, int start, int end) {
 
 		Vector<ClassBean> vList = new Vector<>();
 		Connection objConn = null;
@@ -225,17 +227,19 @@ public class ClassMgr {
 
 			if (cCategorySel.equals("null") || cCategorySel.equals("")) {
 				// 카테고리 메뉴 선택 안했을시
-				sql = "select * from classbbs where cStatus<3 " + "order by cNum asc limit ?, ?";
+				sql = "select * from classbbs where cStatus<3 AND cOnoff = ? order by cNum asc limit ?, ?";
 				objPstmt = objConn.prepareStatement(sql);
-				objPstmt.setInt(1, start);
-				objPstmt.setInt(2, end);
-			} else {
-				// 카테고리 메뉴 클릭 시
-				sql = "select * from classbbs " + "where cCategory = ? AND cStatus<3 " + "order by cNum asc limit ?, ?";
-				objPstmt = objConn.prepareStatement(sql);
-				objPstmt.setString(1, cCategorySel);
+				objPstmt.setString(1, onoff);
 				objPstmt.setInt(2, start);
 				objPstmt.setInt(3, end);
+			} else {
+				// 카테고리 메뉴 클릭 시
+				sql = "select * from classbbs where cCategory = ? AND cStatus<3 AND cOnoff = ? order by cNum asc limit ?, ?";
+				objPstmt = objConn.prepareStatement(sql);
+				objPstmt.setString(1, cCategorySel);
+				objPstmt.setString(2, onoff);
+				objPstmt.setInt(3, start);
+				objPstmt.setInt(4, end);
 			}
 			objRs = objPstmt.executeQuery();
 
@@ -515,7 +519,7 @@ public class ClassMgr {
 
 		try {
 			objConn = pool.getConnection(); // DB연동
-			sql = "update classbbs set cTeacher=?, cCategory=?, cTitle=?, cContent=?, cPrice=?, cDelivery=?, cMaxStu=?, cOnoff=?, cArea=?";
+			sql = "update classbbs set cTeacher=?, cCategory=?, cTitle=?, cContent=?, cPrice=?, cDelivery=?, cMaxStu=?, cOnoff=?, cArea=? where cNum=?";
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setString(1, bean.getcTeacher());
 			objPstmt.setString(2, bean.getcCategory());
@@ -526,6 +530,8 @@ public class ClassMgr {
 			objPstmt.setInt(7, bean.getcMaxStu());
 			objPstmt.setString(8, bean.getcOnoff());
 			objPstmt.setString(9, bean.getcArea());
+			objPstmt.setInt(10, bean.getcNum());
+			
 
 			exeCnt = objPstmt.executeUpdate();
 

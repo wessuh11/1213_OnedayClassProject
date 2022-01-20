@@ -70,7 +70,7 @@ Vector<BoardBean> vList = null;
 		
 	        <!-- header#header -->
 		<main id="main" class="list">
-			<h1>Q&A 페이지</h1>
+			<h1>Q&A 게시판</h1>
 			<%
 			String prnType = "";
 			if (keyWord.equals("null") || keyWord.equals("")) {
