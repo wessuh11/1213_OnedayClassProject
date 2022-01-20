@@ -1,7 +1,7 @@
-<%@page import="pack_Member.MemberBean"%>
-<%@page import="java.util.Vector"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="pack_Member.MemberBean"%>
+<%@page import="java.util.Vector"%>
 <jsp:useBean  id="mMgr"   class="pack_Member.MemberMgr"  scope="page" />
     
 <%

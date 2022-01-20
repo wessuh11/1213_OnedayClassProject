@@ -43,8 +43,6 @@ totalPage = (int) Math.ceil((double) totalRecord / numPerPage);
 nowBlock = (int) Math.ceil((double) nowPage / pagePerBlock);
 totalBlock = (int) Math.ceil((double) totalPage / pagePerBlock);
 
-totalRecord = bMgr.getTotalCount(cCategorySel);
-
 Vector<ClassBean> vList = null;
 %>
 
