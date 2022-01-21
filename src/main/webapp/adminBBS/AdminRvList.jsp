@@ -102,7 +102,7 @@ Vector<RvBoardBean> vList = null;
 		
 		<main id="main" class="list">   
 		
-		<h1>Review</h1>
+		<h1>Review 게시판</h1>
 			<%
 				String prnType = "";
 				if (keyWord.equals("null") || keyWord.equals("")) {
@@ -182,7 +182,7 @@ Vector<RvBoardBean> vList = null;
 						}else
 						{
 							%>
-							<td><img src='../fileUpload/<%=rFileName %>' width="70" height="40"/></td>
+							<td><img src='/Proj_OnedayClass/fileUpload/reviewbbs/<%=rFileName %>' width="70" height="40"/></td>
 						<%} %>
 						<td><%=rTitle %></td>						
 						<td><%=rUid %></td>

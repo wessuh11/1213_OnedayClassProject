@@ -107,7 +107,7 @@ session.setAttribute("bean", bean);
 						<td colspan="4" id="readContentTd"><pre><%=rContent %></pre>
 						<br><br><br>
 							<center>
-							<img src='../fileUpload/<%=rFileName %>' /></td>
+							<img src='/Proj_OnedayClass/fileUpload/reviewbbs/<%=rFileName %>' />
 							</center>
 					</tr>					
 				</tbody>

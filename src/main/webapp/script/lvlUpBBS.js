@@ -158,11 +158,8 @@ $(function(){
 	});
 	//////////////// Read.jsp 에서 게시글 삭제버튼 끝 //////////////////
 	
-	
-	
 	//////////////// Read.jsp 에서 게시글 수정버튼 시작 //////////////////
-	$("td.read>button#lvlModBtn").click(function(){
-	
+	$("button#lvlModBtn").click(function(){
 		let nowPage = $("input#nowPage").val().trim();
 		let lvlNum = $("input#lvlNum").val().trim();
 				
