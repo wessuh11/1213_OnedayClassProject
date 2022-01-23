@@ -159,30 +159,41 @@ $(function(){
 	});
 	//////////////// 리스트페이지 이동 끝 //////////////////
 	
-	//////////////// 리스트페이지 검색 시작 //////////////////
-	$("button#searchBtn").click(function(){
-		let keyWord = $("#keyWord").val().trim();
-		if (keyWord=="") {
-			alert("검색어를 입력해주세요.");
-			$("#keyWord").focus();			
-		} else {
-			let p1 = $("#nowPage").val().trim();
-			let keyField = $("#keyField").val();
-			
-			let param = "/Proj_OnedayClass/qnaBBS/QnaList.jsp?nowPage=" + p1;		    
-		    param += "&keyField="+keyField;
-	     	param += "&keyWord="+keyWord;
+//////////////// 리스트페이지 검색 시작 //////////////////
+   $("button#searchBtn").click(function(event){
+      fnSearch(event);
+   });
+   
+   function fnSearch(event) {
+      let keyWord = $("#keyWord").val().trim();
+      if (keyWord=="") {
+         alert("검색어를 입력해주세요.");
+         $("#keyWord").focus();         
+      } else {
+         event.preventDefault();
+         let p1 = $("#nowPage").val().trim();
+         let keyField = $("#keyField").val();
+         
+         let param = "/Proj_OnedayClass/qnaBBS/QnaList.jsp?nowPage=" + p1;          
+          param += "&keyField="+keyField;
+           param += "&keyWord="+keyWord;
 
-			$.ajax({
-			    url : param,      // 컨트롤러에서 대기중인 URL 주소이다.
-			    type : "GET",            // HTTP method type(GET, POST) 형식이다.
-			}).done(function(qnaList){
-				$("#tblArea").html(qnaList);
-			});
-		}
-		
-	});	
-	//////////////// 리스트페이지 검색 끝 //////////////////
+         $.ajax({
+             url : param,      // 컨트롤러에서 대기중인 URL 주소이다.
+             type : "GET",            // HTTP method type(GET, POST) 형식이다.
+         }).done(function(qnaList){
+            $("#tblArea").html(qnaList);
+         });
+      }
+   }
+   
+   // 엔터 이벤트 적용 시작
+   $("input#keyWord").keyup(function(event){
+      let code = event.keyCode;
+      if(code == 13) fnSearch(event);
+   });
+   // 엔터 이벤트 적용 끝   
+   //////////////// 리스트페이지 검색 끝 //////////////////
 	
 	
 	

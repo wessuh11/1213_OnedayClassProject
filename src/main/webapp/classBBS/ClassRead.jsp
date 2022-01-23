@@ -120,16 +120,16 @@ session.setAttribute("bean", bean);
         		<% } else { %>
         		<table>
         			<tr>
-        			    <td>
-        			    	<button type="button" class="like" id="likeBtn" onClick="location.href='ClassLikeAction.jsp?cNum=<%= cNum %>&uId=<%=uId%>'">♥</button>
-        			    </td>
-        				<td>
-        					<button type="button" class="buy" id="buy">클래스 신청하기</button>
-        				</td>
-        				<td>
-        					<button type="button" class="put" id="put" onClick="location.href='장바구니?cNum=<%= cNum %>&uId=<%=uId%>'">담기</button>
-        				</td>
-        				<!-- 결제페이지 이동 -->
+                      <td>
+                        <button type="button" class="like" id="likeBtn" onClick="location.href='ClassLikeAction.jsp?cNum=<%= cNum %>&uId=<%=uId%>'">♥</button>
+                     </td>
+                    <td>
+                       <button type="button" class="buy" id="buy">클래스 신청하기</button>
+                    </td>
+                    <td>
+                       <button type="button" class="put" id="put" onClick="location.href='../payment/CartAction.jsp?cNum=<%= cNum %>&uId=<%=uId%>&nowPage=<%=nowPage%>'">담기</button>
+                    </td>
+                    <!-- 결제페이지 이동 -->
         			</tr>
         		</table>
         		<%} %>
