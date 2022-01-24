@@ -36,7 +36,6 @@ String nowPage = request.getParameter("nowPage");
 		
 		<main id="main" class="post">   <!-- 본문영역 html 템플릿 시작 -->
 		<div id="postwrap">
-				<h1>Review</h1>
 			<h2>글쓰기</h2>
 			
 			<form name="postFrm" action="RvPostProc.jsp"
@@ -75,10 +74,12 @@ String nowPage = request.getParameter("nowPage");
 							</td>
 						</tr>
 						<tr>
+							<td>
 									<input type="hidden" name="contentType"
 										value="HTML">									
 									<input type="hidden" name="contentType"
-										value="TEXT" checked>						
+										value="TEXT" checked>													
+							</td>
 						</tr>
 					</tbody>
 					<tfoot>

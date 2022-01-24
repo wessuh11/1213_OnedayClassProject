@@ -131,10 +131,11 @@ String str2 = "2";
 							<input type="hidden" name="lvlSns" value="<%=lvlSns%>">
 							<input type="hidden" name="lvlUid" value="<%=lvlUid%>">
 							<button type="button" id="RjBtn" class="butcs">등업 거절</button>
-							<%} else {%></form>
+							</form>
+							<%} else {%>
 							<button type="button" id="lvlModBtn" class="butcs">수 정</button>
 							<%} %>
-							<button type="button" id="delBtn" class="butcs">삭 제</button>
+							<button type="button" id="delBtn" class="butcs">삭 제</button>	
 						</td>
 					</tr>
 				</tfoot>

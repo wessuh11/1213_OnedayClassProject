@@ -31,7 +31,7 @@ String uName = (String) session.getAttribute("nameKey");
 String uLevel = (String) session.getAttribute("levelKey");
 
 String cCategorySel = ""; // DB의 카테고리
-String offline = "Y"; //온오프라인여부
+String onoff = "Y"; //온오프라인여부
 
 if (request.getParameter("cCategorySel") != null) {
 	cCategorySel = request.getParameter("cCategorySel");
@@ -107,7 +107,7 @@ Vector<ClassBean> vList = null;
 			<!-- main#galleryListArea 추천 게시물 시작 -->
 			<main id="galleryListArea">
 					<%
-					vList = bMgr.getBoardLike(cCategorySel, start, end);
+					vList = bMgr.getBoardLike(cCategorySel, onoff, start, end);
 					listSize = vList.size();
 					%>
 					<div class="swiper-container">
@@ -140,7 +140,7 @@ Vector<ClassBean> vList = null;
 							int cLikes = bean.getcLikes();
 							//좋아요
 							
-							if (cStatus == 2 && offline.equals(cOnoff)) {
+							if (cStatus == 2) {
 						%>
 							<div class="swiper-slide" onclick="read('<%=cNum%>', '<%=nowPage%>')">
 							<div>
@@ -198,10 +198,10 @@ Vector<ClassBean> vList = null;
 
 			<div id="BasicList">
 				<!-- main#galleryListArea 시작 -->
-				<main id="galleryListArea2">
-					<table class="goodsTbl2">
+				<main id="galleryListArea">
+					<table class="goodsTbl">
 						<%
-						vList = bMgr.getBoardList(cCategorySel, start, end);
+						vList = bMgr.getBoardList(cCategorySel, onoff, start, end);
 						listSize = vList.size();
 						%>
 						<tbody>
@@ -233,7 +233,7 @@ Vector<ClassBean> vList = null;
 									String cOnoff = bean.getcOnoff();
 									//클래스 on(N), off(Y) 여부
 									
-									if (cStatus == 2 && offline.equals(cOnoff)) {
+									if (cStatus == 2) {
 								%>
 								<td onclick="read('<%=cNum%>', '<%=nowPage%>')">
 									<!-- 1 -->

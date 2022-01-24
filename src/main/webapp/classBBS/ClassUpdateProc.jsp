@@ -23,7 +23,7 @@ String nowPage = request.getParameter("nowPage");
 
 String upUid = upBean.getcUid();   
 // 사용자가 Update.jsp에서 로그인된 아이디
-String cUid = bean.getcUid();   
+String realDBUid = bean.getcUid();   
 // DB에서 불러온 실제 작성자 아이디(세션에 저장되어 있었음)
 
 %>
@@ -34,17 +34,17 @@ String cUid = bean.getcUid();
 <%    
 int exeCnt = 0;
 
-if(upUid.equals(cUid)) {    // 사용자 아이디와 작성자 아이디가 일치할경우
+if(upUid.equals(realDBUid)) {    // 사용자 아이디와 작성자 아이디가 일치할경우
 	exeCnt = bMgr.updateBoard(upBean);
 	
-	if (exeCnt > 0) {
+		if (exeCnt > 0) {
 		exeCnt = bMgr.updateBoard(upBean);
 		String url = "ClassList.jsp?cNum="+nowPage;
-
+		
 %>
 	 <script>
 		 alert("수정되었습니다.");
-	 	location.href="<%=url%>";
+		 location.href="<%=url%>";
 	 </script>
 <%		
 	} else {
@@ -57,6 +57,8 @@ if(upUid.equals(cUid)) {    // 사용자 아이디와 작성자 아이디가 일
 	}
 }
 %>
+
+
 
 
             

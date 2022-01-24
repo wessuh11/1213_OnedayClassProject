@@ -18,7 +18,7 @@ table {
 th, td {
     padding: 15px 6px;
     font-weight: bold;
-    border: 1px solid #000;
+    /* border: 1px solid #000; */
 }
 td:first-child {
     text-align: left;

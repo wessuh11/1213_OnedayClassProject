@@ -73,7 +73,6 @@ session.setAttribute("rvBean", bean);
 		
 		
 		<main id="main" class="read">   
-				<h1>Review</h1>
 		
 			<!--  뷰페이지 내용 출력 시작 -->
 		<div id="readwrap">
@@ -112,7 +111,7 @@ session.setAttribute("rvBean", bean);
 						<td></td>
 						<%}else { %>
 							<center>
-							<img src='../fileUpload/Rvbbs/<%=rFileName %>' /></td>
+							<img src="/Proj_OnedayClass/fileUpload/reviewbbs/<%=rFileName %>" />
 							</center>
 						<%} %>	
 					</tr>					
@@ -150,7 +149,10 @@ session.setAttribute("rvBean", bean);
 								} else {	
 								 %>
 								 								 
-								<button type="button" id="likeBtn" onClick="location.href='RvLikeAction.jsp?rNum=<%= rNum %>&uId=<%=uId%>'">추천하기</button>
+								<button type="button" id="RvlikeBtn">추천하기</button>
+								
+<%-- 	<button type="button" id="likeBtn" onClick="location.href=
+'RvLikeAction.jsp?rNum=<%= rNum %>&uId=<%=uId%>'">추천하기</button> --%>														
 							<%	 }%>														
 								
 							

@@ -69,6 +69,7 @@ Vector<ClassBean> vList = null;
 	
 									int cNum = bean.getcNum();
 									String cTitle = bean.getcTitle();
+									String cUid = bean.getcUid();
 									int cPrice = bean.getcPrice();
 									int cDelivery = bean.getcDelivery();
 									int cMaxStu = bean.getcMaxStu();
@@ -82,13 +83,14 @@ Vector<ClassBean> vList = null;
 									<td><%=cPrice %>원</td>
 									<td>
 										<input type="hidden" id="cNum<%=i %>" name="cNum<%=i %>" value="<%=cNum %>">
+										<input type="hidden" id="cUid<%=i %>" name="cUid<%=i %>" value="<%=cUid %>">
 										<input type="hidden" id="cTitle<%=i %>" name="cTitle<%=i %>" value="<%=cTitle %>">
 										<input type="hidden" id="cPrice<%=i %>" name="cPrice<%=i %>" value="<%=cPrice %>">
 										<input type="hidden" id="availStu<%=i %>" name="availStu<%=i %>" value="<%=availStu %>">
 										
 										<span class="btnminus" onclick="btnMinus(<%=i%>)">-</span>
-										<input type="text" name="pNum<%=i %>" id="pNum<%=i %>" size="2" 
-										maxlength="4" class="p_num" value="1" max="<%=availStu%>" min="1">
+										<input type="text" name="pQty<%=i %>" id="pQty<%=i %>" size="2" 
+										maxlength="4" class="pQty" value="1" max="<%=availStu%>" min="1">
 										<span class="btnplus" onclick="btnPlus(<%=i%>)">+</span>
 								 	</td>
 									<td>

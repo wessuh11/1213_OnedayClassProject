@@ -135,15 +135,20 @@ $(function(){
 	$("#updateBtn").click(function(){
 
 		let cTitle = $("#cTitle").val().trim();
+		let cContent = $("#cContent").val().trim();
+		let cMaxStu = $("#cMaxStu").val().trim();
 
-		if (cTitle == "") {
-			alert("제목은 필수입력입니다.");
+		if (cTitle == ""){
+			alert("제목을 입력하세요.");
 			$("#cTitle").focus();
-		}  else {
+		}else if(cMaxStu==""){
+			alert("수강인원을 설정해주세요.");
+			$("#cMaxStu").focus();
+		}else {
 			$("#updateFrm").submit();
 		}
 	
-	});	
+	});
 //////////////// Update.jsp 에서 게시글 수정 끝 //////////////////
 //////////////// 페이징기능떄문에 하나 더 만듬 //////////////////
 

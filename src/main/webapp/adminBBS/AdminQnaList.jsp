@@ -70,7 +70,7 @@ Vector<BoardBean> vList = null;
 		
 	        <!-- header#header -->
 		<main id="main" class="list">
-			<h1>Q&A 페이지</h1>
+			<h1>Q&A 게시판</h1>
 			<%
 			String prnType = "";
 			if (keyWord.equals("null") || keyWord.equals("")) {
@@ -98,7 +98,7 @@ Vector<BoardBean> vList = null;
 				<tbody>
 
 					<%
-					vList = bMgr.getBoardList(keyField, keyWord, start, end); // DB에서 데이터 불러오기
+					vList = bMgr.getBoardList(keyField, keyWord, start, end, uId); // DB에서 데이터 불러오기
 					listSize = vList.size();
 
 					if (vList.isEmpty()) {

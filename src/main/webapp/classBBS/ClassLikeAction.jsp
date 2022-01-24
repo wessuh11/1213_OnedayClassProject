@@ -28,7 +28,7 @@ int result = bMgr.UpdateLike(LikeBean);
 if(result == 0){
 %>
 		<script>
-			alert("이미 추천함");
+			alert("이미 찜하신 강의입니다.");
 			history.back();
 		</script>
 <%	
@@ -37,7 +37,7 @@ else{
 	
 	%>
 	<script>
-			alert("추천성공"); 
+			alert("찜완료^_^"); 
 			//location.href = history.back(-1);
 			<%
 			

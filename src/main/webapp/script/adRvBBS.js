@@ -122,14 +122,9 @@ $(function(){
 			
 		let nowPage = $("input#nowPage").val().trim();
 		let rNum = $("input#rNum").val().trim();
-				
-		let p3 = $("#pKeyField").val().trim();  // p3 : keyField
-	    let p4 = $("#pKeyWord").val().trim();  // p4 : keyWord
 	    
 	let url = "/Proj_OnedayClass/adminBBS/AdminRvDelete.jsp?";
 			url += "rNum="+rNum+"&nowPage="+nowPage;
-			url += "&keyField="+p3;
-			url += "&keyWord="+p4;
 		location.href=url;
 		}
 	});

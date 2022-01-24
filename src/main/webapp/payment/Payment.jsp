@@ -51,7 +51,7 @@ int totalPay = Integer.parseInt((String)request.getParameter("totalPayVal"));
 		<main id="main" class="flex-container">
 
         <div id="frmSide">
-			<form name="recipientFrm" id="recipientFrm" action="PaymentProc.jsp" method="get">
+			<form name="recipientFrm" id="recipientFrm" action="PaymentCompl.jsp" method="post">
 				<table id="recipientTbl">
 					<caption><hr><h3>수령인 정보</h3></caption>
 					<tbody>
@@ -137,23 +137,26 @@ int totalPay = Integer.parseInt((String)request.getParameter("totalPayVal"));
 
 					<%
 						for (int i = 0; i < listSize; i++) {
-
+							
 							int cNum = Integer.parseInt(request.getParameter("cNum"+i));
 							String cTitle = (String)request.getParameter("cTitle"+i);
+							String cUid = (String)request.getParameter("cUid"+i);
 							int cPrice = Integer.parseInt((String)request.getParameter("cPrice"+i));
-							int pNum = Integer.parseInt((String)request.getParameter("pNum"+i));
+							int pQty = Integer.parseInt((String)request.getParameter("pQty"+i));
 							int res = Integer.parseInt((String)request.getParameter("resVal"+i));
 					%>
 					<tr>
 						<td><%=cTitle %></td>
 						<td><%=cPrice %>원</td>
-						<td><%=pNum %></td>
+						<td><%=pQty %></td>
 						<td>
 							<span id="res<%=i %>"><%=res %></span>원
-							<input type="hidden" id="cNum<%=i %>" value="<%=cNum %>">
-							<input type="hidden" id="cPrice<%=i %>" value="<%=cPrice %>">
-							<input type="hidden" id="pNum<%=i %>" value="<%=pNum %>">
-							<input type="hidden" id="res<%=i %>" value="<%=res %>">
+							<input type="hidden" id="cNum<%=i %>" name="cNum<%=i %>" value="<%=cNum %>">
+							<input type="hidden" id="cUid<%=i %>" name="cUid<%=i %>" value="<%=cUid %>">
+							<input type="hidden" id="cTitle<%=i %>" name="cTitle<%=i %>" value="<%=cTitle %>">
+							<input type="hidden" id="cPrice<%=i %>" name="cPrice<%=i %>" value="<%=cPrice %>">
+							<input type="hidden" id="pQty<%=i %>" name="pQty<%=i %>" value="<%=pQty %>">
+							<input type="hidden" id="res<%=i %>" name="res<%=i %>" value="<%=res %>">
 						</td>
 					</tr>
 					<%
@@ -161,7 +164,11 @@ int totalPay = Integer.parseInt((String)request.getParameter("totalPayVal"));
 					%>
 					</tbody>							
 				</table>
-				
+				<input type="hidden" name="uId" id="uId" value="<%=uId%>">
+				<input type="hidden" name="listSize" id="listSize" value="<%=listSize%>">
+				<input type="hidden" name="totalPriceVal" id="totalPriceVal" value="<%=totalPrice %>">
+				<input type="hidden" name="totalDeliVal" id="totalDeliVal" value="<%=totalDeli %>">
+				<input type="hidden" name="totalPayVal" id="totalPayVal" value="<%=totalPay %>">
 			</form>
 			<!-- document.recipientFrm -->
         </div>
@@ -190,11 +197,13 @@ int totalPay = Integer.parseInt((String)request.getParameter("totalPayVal"));
 					
 					<tr>
 						<td>총계 :</td>
-						<td><span id="totalPay"><%=totalPay %></span>원</td>
+						<td>
+							<span id="totalPay"><%=totalPay %></span>원
+						</td>
 					</tr>
 					<tr>					
 						<td>
-							<button id="btnpay">결제하기</button>
+							<button id="kakaoBtn"><img src="/Proj_OnedayClass/img/payment_icon_yellow_medium.png" alt="카카오페이"></button>
 						</td>
 					</tr>
 				</tbody>
@@ -210,9 +219,9 @@ int totalPay = Integer.parseInt((String)request.getParameter("totalPayVal"));
 	
 	
     <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
-	<script src="/Proj_OnedayClass/script/script.js"></script>
-	<script src="/Proj_OnedayClass/script/member.js"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	<script src="/Proj_OnedayClass/script/payment.js"></script>
 	
 </body>
 </html>   
