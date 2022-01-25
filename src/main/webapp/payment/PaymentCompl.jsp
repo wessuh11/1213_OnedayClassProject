@@ -31,6 +31,8 @@ if (execnt>0) {
 		
 		bean.setuId(uId);
 		bean.setcNum(Integer.parseInt((String)request.getParameter("cNum"+i)));
+		bean.setcUid((String)request.getParameter("cUid"+i));
+		bean.setcTitle((String)request.getParameter("cTitle"+i));
 		bean.setpNum(pNum);
 		bean.setpQty(Integer.parseInt((String)request.getParameter("pQty"+i)));
 	

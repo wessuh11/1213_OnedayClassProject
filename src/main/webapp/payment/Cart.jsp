@@ -69,6 +69,7 @@ Vector<ClassBean> vList = null;
 	
 									int cNum = bean.getcNum();
 									String cTitle = bean.getcTitle();
+									String cUid = bean.getcUid();
 									int cPrice = bean.getcPrice();
 									int cDelivery = bean.getcDelivery();
 									int cMaxStu = bean.getcMaxStu();
@@ -82,6 +83,7 @@ Vector<ClassBean> vList = null;
 									<td><%=cPrice %>원</td>
 									<td>
 										<input type="hidden" id="cNum<%=i %>" name="cNum<%=i %>" value="<%=cNum %>">
+										<input type="hidden" id="cUid<%=i %>" name="cUid<%=i %>" value="<%=cUid %>">
 										<input type="hidden" id="cTitle<%=i %>" name="cTitle<%=i %>" value="<%=cTitle %>">
 										<input type="hidden" id="cPrice<%=i %>" name="cPrice<%=i %>" value="<%=cPrice %>">
 										<input type="hidden" id="availStu<%=i %>" name="availStu<%=i %>" value="<%=availStu %>">

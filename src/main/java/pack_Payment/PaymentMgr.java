@@ -177,7 +177,7 @@ public class PaymentMgr {
 		try {
 			objConn = pool.getConnection(); // DB연동
 
-			sql = "select cartList.cNum, classBBS.cTitle, ";
+			sql = "select cartList.cNum, classBBS.cUid, classBBS.cTitle, ";
 			sql += "classBBS.cPrice, classBBS.cDelivery, ";
 			sql += "classBBS.cMaxStu, classBBS.cApplyStu ";
 			sql += "from cartList left join classBBS ";
@@ -192,6 +192,7 @@ public class PaymentMgr {
 				ClassBean bean = new ClassBean();
 				bean.setcNum(objRs.getInt("cNum"));
 				bean.setcTitle(objRs.getString("cTitle"));
+				bean.setcUid(objRs.getString("cUid"));
 				bean.setcPrice(objRs.getInt("cPrice"));
 				bean.setcDelivery(objRs.getInt("cDelivery"));
 				bean.setcMaxStu(objRs.getInt("cMaxStu"));
@@ -292,14 +293,16 @@ public class PaymentMgr {
 		try {
 			objConn = pool.getConnection();
 			sql = "insert into payComplete ";
-			sql += "(uId, cNum, pNum, pQty, payDate) ";
-			sql += "values (?, ?, ?, ?, now())";
+			sql += "(uId, cNum, cUid, cTitle, pNum, pQty, payDate) ";
+			sql += "values (?, ?, ?, ?, ?, ?, now())";
 			
 			objPstmt = objConn.prepareStatement(sql);
 			objPstmt.setString(1, bean.getuId());
 			objPstmt.setInt(2, bean.getcNum());
-			objPstmt.setInt(3, bean.getpNum());
-			objPstmt.setInt(4, bean.getpQty());
+			objPstmt.setString(3, bean.getcUid());
+			objPstmt.setString(4, bean.getcTitle());
+			objPstmt.setInt(5, bean.getpNum());
+			objPstmt.setInt(6, bean.getpQty());
 			execnt = objPstmt.executeUpdate();
 			
 		} catch (SQLException e) {
@@ -335,7 +338,7 @@ objConn = pool.getConnection(); // DB연동
 	sql += "from payComplete left join classBBS ";
 	sql += "on payComplete.cNum = classBBS.cNum ";
 	sql += "where payComplete.uId=? ";
-	sql += "order by qRef desc limit ?, ?";
+	sql += "order by payComplete.pNum desc limit ?, ?";
 	objPstmt = objConn.prepareStatement(sql);
 	objPstmt.setString(1, uId);
 	objPstmt.setInt(2, start);
@@ -364,9 +367,9 @@ return vList;
 ///////////////  결제 리스트 출력(학생) 끝    ///////////////
 
 ///////////////  결제 리스트 출력(선생) 시작    ///////////////
-public Vector<ClassBean> getTeacherPayList(int start, int end, String uId) {
+public Vector<PaymentBean> getTeacherPayList(int start, int end, String uId) {
 
-Vector<ClassBean> vList = new Vector<>();
+Vector<PaymentBean> vList = new Vector<>();
 Connection objConn = null;
 PreparedStatement objPstmt = null;
 ResultSet objRs = null;
@@ -375,12 +378,12 @@ String sql = null;
 try {
 objConn = pool.getConnection(); // DB연동
 
-sql = "select classBBS.cCategory, classBBS.cTitle, classBBS.cPrice, ";
-sql += "classBBS.cDelivery, payComplete.pQty, payComplete.payDate ";
-sql += "from payComplete left join classBBS ";
-sql += "on payComplete.cNum = classBBS.cNum ";
-sql += "where payComplete.uId=? ";
-sql += "order by qRef desc limit ?, ?";
+sql = "select payComplete.cTitle, payComplete.uId, paymentInfo.rEmail, ";
+sql += "payComplete.pQty, payComplete.payDate ";
+sql += "from payComplete left join paymentInfo ";
+sql += "on payComplete.pNum = paymentInfo.pNum ";
+sql += "where payComplete.cUid = ? ";
+sql += "order by payComplete.pNum desc limit ?, ?";
 objPstmt = objConn.prepareStatement(sql);
 objPstmt.setString(1, uId);
 objPstmt.setInt(2, start);
@@ -389,17 +392,16 @@ objPstmt.setInt(3, end);
 objRs = objPstmt.executeQuery();
 
 while (objRs.next()) {
-ClassBean bean = new ClassBean();
-bean.setcCategory(objRs.getString("cCategory"));
+PaymentBean bean = new PaymentBean();
 bean.setcTitle(objRs.getString("cTitle"));
-bean.setcPrice(objRs.getInt("cPrice"));
-bean.setcDelivery(objRs.getInt("cDelivery"));
-bean.setcApplyStu(objRs.getInt("pQty"));
-bean.setcRegDate(objRs.getString("payDate"));
+bean.setuId(objRs.getString("uId"));
+bean.setrEmail(objRs.getString("rEmail"));
+bean.setpQty(objRs.getInt("pQty"));
+bean.setPayDate(objRs.getString("payDate"));
 vList.add(bean);
 }
 } catch (Exception e) {
-System.out.println("SQL이슈9 : " + e.getMessage());
+System.out.println("SQL이슈10 : " + e.getMessage());
 } finally {
 pool.freeConnection(objConn, objPstmt, objRs);
 }
@@ -422,7 +424,7 @@ objConn = pool.getConnection(); // DB연동
 
 sql = "select count(*) ";
 sql += "from payComplete left join classBBS ";
-sql += "on cartList.cNum = classBBS.cNum ";
+sql += "on payComplete.cNum = classBBS.cNum ";
 sql += "where classBBS.cUid=?";
 objPstmt = objConn.prepareStatement(sql);
 objPstmt.setString(1, uId);
@@ -433,7 +435,7 @@ totalCnt = objRs.getInt(1);
 }
 
 } catch (Exception e) {
-System.out.println("SQL이슈10 : " + e.getMessage());
+System.out.println("SQL이슈11 : " + e.getMessage());
 } finally {
 pool.freeConnection(objConn, objPstmt, objRs);
 }
@@ -465,7 +467,7 @@ totalCnt = objRs.getInt(1);
 }
 
 } catch (Exception e) {
-System.out.println("SQL이슈11 : " + e.getMessage());
+System.out.println("SQL이슈12 : " + e.getMessage());
 } finally {
 pool.freeConnection(objConn, objPstmt, objRs);
 }

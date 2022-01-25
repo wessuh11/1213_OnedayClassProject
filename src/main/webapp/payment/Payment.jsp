@@ -137,9 +137,10 @@ int totalPay = Integer.parseInt((String)request.getParameter("totalPayVal"));
 
 					<%
 						for (int i = 0; i < listSize; i++) {
-
+							
 							int cNum = Integer.parseInt(request.getParameter("cNum"+i));
 							String cTitle = (String)request.getParameter("cTitle"+i);
+							String cUid = (String)request.getParameter("cUid"+i);
 							int cPrice = Integer.parseInt((String)request.getParameter("cPrice"+i));
 							int pQty = Integer.parseInt((String)request.getParameter("pQty"+i));
 							int res = Integer.parseInt((String)request.getParameter("resVal"+i));
@@ -151,6 +152,8 @@ int totalPay = Integer.parseInt((String)request.getParameter("totalPayVal"));
 						<td>
 							<span id="res<%=i %>"><%=res %></span>원
 							<input type="hidden" id="cNum<%=i %>" name="cNum<%=i %>" value="<%=cNum %>">
+							<input type="hidden" id="cUid<%=i %>" name="cUid<%=i %>" value="<%=cUid %>">
+							<input type="hidden" id="cTitle<%=i %>" name="cTitle<%=i %>" value="<%=cTitle %>">
 							<input type="hidden" id="cPrice<%=i %>" name="cPrice<%=i %>" value="<%=cPrice %>">
 							<input type="hidden" id="pQty<%=i %>" name="pQty<%=i %>" value="<%=pQty %>">
 							<input type="hidden" id="res<%=i %>" name="res<%=i %>" value="<%=res %>">
