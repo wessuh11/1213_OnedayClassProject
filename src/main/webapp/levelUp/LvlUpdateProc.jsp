@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% request.setCharacterEncoding("UTF-8"); %>
-<!--
-<jsp:useBean id="bean" class="pack_LevelUpBBS.BoardMgr" scope="session" />
- Read.jsp에서 DB 에서 자료를 반환하여 session을 만들 때 세션이름을 "bean"으로,
-       세션에 저장되는 값을 DB에서 반환된 자료를 setter로 저장한 BoardBean 객체를
-       생성했었음 -->         
+   
        
 <jsp:useBean id="upBean" class="pack_LevelUpBBS.BoardBean" scope="page" />
 <!--  Update.jsp에서 form 요소의 하위요소에 입력된 값들을 전달받아서

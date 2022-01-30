@@ -99,7 +99,7 @@ String str2 = "2";
 						</tr>
 						<tr>
 							<td colspan="2" id="btnAreaTd" class="update">
-								<button type="button" id="lvlModBtn" class="butcs">수정하기</button>
+								<button type="button" id="lvleModBtn" class="butcs">수정하기</button>
 								<button type="reset" class="butcs">다시쓰기</button>
 								<button type="button" id="backBtn" class="butcs">뒤 로</button>							
 							</td>

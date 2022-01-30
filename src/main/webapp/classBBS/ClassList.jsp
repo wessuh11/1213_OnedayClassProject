@@ -68,6 +68,7 @@ Vector<ClassBean> vList = null;
 		<main id="main" class="list">
 			<!-- DB 데이터 가져오기 -->
 			<table id="boardList">
+				<h1>클래스 관리 리스트</h1>
 				<%
 				if(uLevel.equals("3")){
 				vList = bMgr.getBoardadmin(start, end);

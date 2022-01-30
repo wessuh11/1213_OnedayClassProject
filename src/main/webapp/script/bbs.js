@@ -265,6 +265,43 @@ $(function(){
 		}); 
 	});
 	//////////////// Read.jsp 에서 게시글 수정버튼 끝 //////////////////
+
+	//////////////// Read.jsp 에서 게시글 추천하기 시작 //////////////////
+		$("button#RvlikeBtn").click(function(){
+			
+			let nowPage = $("input#nowPage").val().trim();
+				let rNum = $("#rNum").val();
+				let uId = $("#uId").val();
+
+                    
+
+                let param = "/Proj_OnedayClass/reviewBBS/RvRead.jsp?";
+				param += "rNum="+rNum;
+				param += "&uId="+uId;
+				param += "&nowPage="+nowPage;
+	     
+	    $.ajax({
+                type: "POST",
+                url: "/Proj_OnedayClass/reviewBBS/RvLikeAction.jsp?rNum="+rNum+"&uId="+uId,
+                success: function (url) {
+						alert(url);
+    					console.log(url);
+                    $.ajax({
+                        url : param,      // 컨트롤러에서 대기중인 URL 주소이다.
+                        type : "GET",            // HTTP method type(GET, POST) 형식이다.
+                    }).done(function(RvRead){
+                        $("#tblArea").html(RvRead);
+                    }); 
+                },
+                error: function (e) {
+                    console.log("ERROR : ", e);
+                    $("#RvlikeBtn").prop("disabled", false);
+                			alert("이미 추천함");
+
+                 }
+            });
+            });
+	//////////////// Read.jsp 에서 게시글 추천하기 끝 //////////////////
 	
 	/*/////////////// Read.jsp 에서 답변글 버튼 시작 //////////////////	
 	

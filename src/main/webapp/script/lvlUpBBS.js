@@ -258,7 +258,7 @@ $(function(){
 	
 	
 	//////////////// Update.jsp 에서 게시글 수정 시작 //////////////////
-	$("td.update>button#lvlModBtn").click(function(){
+	$("button#lvleModBtn").click(function(){
 		let lvlUid = $("#lvlUid").val().trim();
 		let lvlTitle = $("#lvlTitle").val().trim();
 		let lvlName = $("#lvlName").val().trim();
@@ -284,4 +284,3 @@ $(function(){
 	});	
 	//////////////// Update.jsp 에서 게시글 수정 끝 //////////////////
 });
-
