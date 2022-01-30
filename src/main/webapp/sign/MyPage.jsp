@@ -75,7 +75,7 @@ String uLevel = (String)session.getAttribute("levelKey");
                     <li id="mainLi3" class="mainLi" >           
                         <a href="#" class=" subMenuLila">내 정보 관리</a>
                         <div id="subMenu3" class="subContainer">
-                            <ul class="subMenu flex-container">
+                            <ul id="subMenuUl"class="subMenu flex-container">
                     <%if (uLevel.equals("1")) {%>
                                 <li class="subMenuLi"><a href="/Proj_OnedayClass/sign/Member_Mod.jsp" id="memModBtn">회원 정보 수정</a></li>
                                 <li class="subMenuLi"><a href="/Proj_OnedayClass/levelUp/LvlUpPost.jsp" id="">등업 신청</a></li>

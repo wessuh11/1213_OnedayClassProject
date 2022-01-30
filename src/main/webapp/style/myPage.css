@@ -72,6 +72,7 @@ main#main {
     width: 100%;
     padding: 10px 0;
     border: 1px solid #000;
+    border-collapse: collapse;
 
     display: inline-block;
     cursor: pointer;
@@ -103,6 +104,10 @@ main#main {
 
 #main #mainNav #mainMenu .mainLi .subContainer .subMenu li.subMenuLi:first-child{
     border-right: 1px solid #000;
+}
+#main #mainNav #mainMenu .mainLi .subContainer #subMenuUl li.subMenuLi:nth-child(2){
+    border-right: 1px solid #000;
+    border-collapse: collapse;
 }
 .subMenuLila {
   	 border-right: 1px solid #000;
