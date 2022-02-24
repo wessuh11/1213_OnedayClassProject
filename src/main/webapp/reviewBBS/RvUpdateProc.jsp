@@ -34,7 +34,7 @@ String keyWord = request.getParameter("keyWord");
 <jsp:useBean id="bMgr" class="pack_reviewBBS.RvBoardMgr" scope="page" />
 <!-- id="bMgr" 유즈빈은 bMgr.updateBoard(upBean) 실행용도
        => 실제 게시글이 DB와 연동하여 수정됨 -->
-아니 근데 그 리드 게시판에서 
+
 <%
 String newTitle = request.getParameter("rTitle");
 String newContent = request.getParameter("rContent");

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
 <% request.setCharacterEncoding("UTF-8"); %>
-<jsp:useBean id="cartBean" class="pack_Payment.CartBean" scope="page" />    
+<jsp:useBean id="cartBean" class="pack_Payment.PaymentBean" scope="page" />    
 <jsp:useBean id="pMgr" class="pack_Payment.PaymentMgr" scope="page" />
 <%
 String uId = (String)request.getParameter("uId");

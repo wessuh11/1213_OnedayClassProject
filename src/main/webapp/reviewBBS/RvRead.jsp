@@ -149,7 +149,10 @@ session.setAttribute("rvBean", bean);
 								} else {	
 								 %>
 								 								 
-								<button type="button" id="likeBtn" onClick="location.href='RvLikeAction.jsp?rNum=<%= rNum %>&uId=<%=uId%>'">추천하기</button>
+								<button type="button" id="RvlikeBtn">추천하기</button>
+								
+<%-- 	<button type="button" id="likeBtn" onClick="location.href=
+'RvLikeAction.jsp?rNum=<%= rNum %>&uId=<%=uId%>'">추천하기</button> --%>														
 							<%	 }%>														
 								
 							

@@ -38,25 +38,27 @@ String uLevel = (String)session.getAttribute("levelKey");
 						<tr>
 							<td class="req">아이디</td>  <!-- td.req 필수입력 -->
 							<td>
-								<%=uId%>
+								<span class=postuId><%=uId%></span>
 								<input type="hidden" name="qUid" id="qUid" value="<%=uId%>">
 								<input type="hidden" name="cNum" id="cNum" value="<%=cNum%>">
 							</td>
 						</tr>
 						<tr>
 							<td class="req">공개유무</td>
-							<td>
+							<td>							
+							<span class=postuId>
 								공개 <input type="radio" name="qStatus"
 									value="2" checked>									
 								비공개 <input type="radio" name="qStatus"
 									value="1">											
+							</span>
 							</td>
 						</tr>
 						<tr>
 							<td class="req">문의 제목</td> <!-- td.req 필수입력 -->
 							<td>
 								<input type="text" name="qTitle"
-								maxlength="50" id="qTitle">
+								maxlength="50" size="60" id="qTitle">
 							</td>
 						</tr>
 						<tr>

@@ -74,10 +74,12 @@ String nowPage = request.getParameter("nowPage");
 							</td>
 						</tr>
 						<tr>
+							<td>
 									<input type="hidden" name="contentType"
 										value="HTML">									
 									<input type="hidden" name="contentType"
-										value="TEXT" checked>						
+										value="TEXT" checked>													
+							</td>
 						</tr>
 					</tbody>
 					<tfoot>

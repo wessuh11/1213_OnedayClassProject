@@ -36,7 +36,7 @@ main.post table tbody td {
 }
 main.post table tbody td:first-child {
 	width: 100px;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	text-align: right;
 }
 
@@ -46,7 +46,6 @@ main.post table tfoot td hr {
 }
 main.post table tfoot td {
 	width: 100%;
-	text-align: center;
 	padding: 4px 0;
 }
 

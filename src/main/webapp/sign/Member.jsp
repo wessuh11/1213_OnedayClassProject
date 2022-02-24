@@ -132,7 +132,6 @@ String uId = (String)session.getAttribute("idKey");
     <!-- div#wrap -->
 </body>
     <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
-	<script src="/Proj_OnedayClass/script/script.js"></script>
     <script src="/Proj_OnedayClass/script/member.js"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </html>

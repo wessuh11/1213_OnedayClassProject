@@ -123,7 +123,7 @@ public class BoardMgr {
 ///////////////////////////////////////////////////////////////////
 
 ///////////////  게시판 리스트 출력(List.jsp) 시작    ///////////////
-	public Vector<BoardBean> getBoardList(String keyField, String keyWord, int start, int end) {
+	public Vector<BoardBean> getBoardList(String keyField, String keyWord, int start, int end, String uId) {
 
 		Vector<BoardBean> vList = new Vector<>();
 		Connection objConn = null;
@@ -133,7 +133,25 @@ public class BoardMgr {
 
 		try {
 			objConn = pool.getConnection(); // DB연동
-
+			if (uId.equals("admin"))  {
+				if (keyWord.equals("null") || keyWord.equals("")) {
+					// 검색어가 없을 경우
+					sql = "select * from qnaBBS where qStatus<=3 "
+							+ "order by qRef desc, qPos asc limit ?, ?";
+					objPstmt = objConn.prepareStatement(sql);
+					objPstmt.setInt(1, start);
+					objPstmt.setInt(2, end);
+				} else {
+					// 검색어가 있을 경우
+					sql = "select * from qnaBBS "
+							+ "where " + keyField + " like ? AND qStatus<=3 "
+							+ "order by qRef desc, qPos asc limit ?, ?";
+					objPstmt = objConn.prepareStatement(sql);
+					objPstmt.setString(1, "%" + keyWord + "%");
+					objPstmt.setInt(2, start);
+					objPstmt.setInt(3, end);
+					}
+			} else {
 			if (keyWord.equals("null") || keyWord.equals("")) {
 				// 검색어가 없을 경우
 				sql = "select * from qnaBBS where qStatus<3 "
@@ -150,8 +168,8 @@ public class BoardMgr {
 				objPstmt.setString(1, "%" + keyWord + "%");
 				objPstmt.setInt(2, start);
 				objPstmt.setInt(3, end);
+				}
 			}
-
 			objRs = objPstmt.executeQuery();
 
 			while (objRs.next()) {

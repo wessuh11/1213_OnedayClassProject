@@ -83,13 +83,6 @@ function moveBlock(p1, p2) {    // 블럭 이동
 
 ///////////// ClassRead.jsp 버튼 기능 ////////////////
 $(function(){
-	/////////// 좋아요 ////////////
-	/*
-	$("#like").click(function(){
-		let url = "";
-		location.href=url;
-	});
-	*/
 	//////// 구매하기 이동 ///////
 	$("#update").click(function(){
 		let url = "";
@@ -103,10 +96,9 @@ $(function(){
 		let url ="/Proj_OnedayClass/classBBS/ClassApproval.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
-		//location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
 	});
 	
-	////// 클래스 수정 //////
+	////// 클래스 수정페이지 가기//////
 	$("button#classmodbtn").click(function(){
 	    let nowPage = $("input#nowPage").val().trim();
 		let cNum = $("input#cNum").val().trim();
@@ -114,9 +106,9 @@ $(function(){
 		let url ="/Proj_OnedayClass/classBBS/ClassUpdate.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
-		//location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
-		
 	});
+	
+	///// 클래스 수정 버튼 /////
 	
 	////// 클래스 삭제 //////
 	$("button#delBtn").click(function(){
@@ -126,7 +118,7 @@ $(function(){
 		let url ="/Proj_OnedayClass/classBBS/ClassDelete.jsp?";
 		     url += "cNum="+cNum+"&nowPage="+nowPage;
 		location.href = url;
-		//location.href = "/Proj_OnedayClass/classBBS/ClassList.jsp?";
+		
 	});
 ///////////// ClassRead.jsp 버튼 기능 ////////////////
 
@@ -134,18 +126,31 @@ $(function(){
 	$("#updateBtn").click(function(){
 
 		let cTitle = $("#cTitle").val().trim();
+		let cContent = $("#cContent").val().trim();
+		let cMaxStu = $("#cMaxStu").val().trim();
+		let cOnoff = $("#cOnoff").val().trim();
 
 		if (cTitle == "") {
-			alert("제목은 필수입력입니다.");
+			alert("제목을 입력하세요.");
 			$("#cTitle").focus();
-		}  else {
+		}else if(cContent==""){
+			alert("내용을 입력하세요");
+			$("#cContent").focus();
+		}else if(cMaxStu==""){
+			alert("수강인원을 설정해주세요.");
+			$("#cMaxStu").focus();
+		}else if(cOnoff==""){
+			alert("수업유형을 선택하세요");
+			$("#cOnoff").focus();
+		}else {
 			$("#updateFrm").submit();
 		}
 	
-	});	
+	});
+	
+	$("#updatebackBtn").click(function(){
+		history.back();
+	});
 //////////////// Update.jsp 에서 게시글 수정 끝 //////////////////
-
-
-
 
 });
