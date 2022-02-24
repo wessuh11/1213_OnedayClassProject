@@ -15,7 +15,7 @@ if (session.getAttribute("cartCntKey") != null) {
 %>    
    <header id="header" class="flex-container">
             <div id="headerLogo">
-                <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" width="75%" alt="로고"></a>
+                <a href="/Proj_OnedayClass/Index.jsp"><img src="/Proj_OnedayClass/img/logo.png" alt="로고"></a>
             </div>
             <!-- div#headerLogo -->
             <div id="headerRight">

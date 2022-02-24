@@ -9,6 +9,10 @@ header#header {
     align-items: center;
 } 
 
+#header #headerLogo img {
+	width: 40%;
+}
+
 #header #headerRight ul>li:nth-child(2n) {
     width: 2px;
     height: 20px;

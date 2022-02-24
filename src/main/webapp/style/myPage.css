@@ -177,7 +177,6 @@ main#main {
 .list  th:nth-child(6),
 .list  td:nth-child(6)  {
     width: 108px;
-    padding-left: 28px;
     padding-right: 28px;
 }
 

@@ -44,8 +44,8 @@ String uLevel = (String)session.getAttribute("levelKey");
         <main id="main">
             <nav id="mainNav">
                 <ul id="mainMenu" class="flex-container">
-                    <li id="mainLi1" class="mainLi">
         <%if (uLevel.equals("1")) {%>
+                    <li id="mainLi1" class="mainLi payList">
                         <span>주문 내역</span>
                         <div id="subMenu1"  class="subContainer">
                             <ul class="subMenu flex-container">         
@@ -54,6 +54,7 @@ String uLevel = (String)session.getAttribute("levelKey");
 							</ul>
 						</div>                      
          <% } else { %>
+         			<li id="mainLi1" class="mainLi">
                         <span>클래스 관리</span>
                         <div id="subMenu1"  class="subContainer">
                             <ul class="subMenu flex-container">           
@@ -62,8 +63,8 @@ String uLevel = (String)session.getAttribute("levelKey");
 							</ul>
                         </div>    
                       </li>     
-                      <li id="mainLi2" class="mainLi">
-                      <a href="#">수강 결제 내역</a>
+                      <li id="mainLi2" class="mainLi payList">
+                      	<a href="#">수강 결제 내역</a>
                         <div id="subMenu2"  class="subContainer">
                             <ul class="subMenu flex-container">
                                 <li class="subMenuLi"><a href="#" id="onlineBtn" id="onlineBtn">온라인</a></li>
@@ -71,7 +72,7 @@ String uLevel = (String)session.getAttribute("levelKey");
                             </ul>
                         </div>             
         <% } %>  
-        		</li>                        
+        			</li>                        
                     <li id="mainLi3" class="mainLi" >           
                         <a href="#" class=" subMenuLila">내 정보 관리</a>
                         <div id="subMenu3" class="subContainer">
@@ -100,7 +101,7 @@ String uLevel = (String)session.getAttribute("levelKey");
     <script src="/Proj_OnedayClass/script/jquery-3.6.0.min.js"></script>
     <script src="/Proj_OnedayClass/script/script.js"></script>
     <script>
-    $("#mainLi1").click(function(){
+    $(".payList").click(function(){
     	$.ajax({
 			url : "/Proj_OnedayClass/payment/PayList.jsp",      // 컨트롤러에서 대기중인 URL 주소이다.
 			type : "GET",            // HTTP method type(GET, POST) 형식이다.
@@ -108,6 +109,6 @@ String uLevel = (String)session.getAttribute("levelKey");
 			$("#detailedContent").html(payList);
 		});
     });
-    </script>
+     </script>
 </body>
 </html>
