@@ -196,7 +196,7 @@ Vector<PaymentBean> vList1 = null;
 					<% } %>
 							<tr>
 								<!-- 페이징 시작 -->
-								<td colspan="2" id="pagingTd">
+								<td colspan="6" id="pagingTd">
 									<%
 									int pageStart = (nowBlock - 1) * pagePerBlock + 1;
 									int pageEnd = (nowBlock < totalBlock) ? pageStart + pagePerBlock - 1 : totalPage;
